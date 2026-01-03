@@ -5,6 +5,8 @@ id: tools-storage
 
 Browse, edit, and manage all your app's persisted data. See every key-value pair across all storage backends in real-time.
 
+<!-- ::storage-demo -->
+
 ## Supported Backends
 
 <!-- ::storage-backends-grid -->
@@ -15,7 +17,7 @@ Browse, edit, and manage all your app's persisted data. See every key-value pair
 
 ## Installation
 
-<!-- ::PM npm="npm install @react-buoy/storage" yarn="yarn add @react-buoy/storage" pnpm="pnpm add @react-buoy/storage" bun="bun add @react-buoy/storage" -->
+<!-- ::PM npm="npm install @buoy-gg/storage" yarn="yarn add @buoy-gg/storage" pnpm="pnpm add @buoy-gg/storage" bun="bun add @buoy-gg/storage" -->
 
 That's it. The Storage Explorer auto-detects installed backends and appears in your FloatingDevTools menu.
 

@@ -5,6 +5,8 @@ id: tools-network
 
 See every API call your app makes. Request, response, headers, timing, errors â€” all in real-time with zero configuration.
 
+<!-- ::network-demo -->
+
 ## Supported Clients
 
 <!-- ::client-badges-grid -->
@@ -15,7 +17,7 @@ See every API call your app makes. Request, response, headers, timing, errors â€
 
 ## Installation
 
-<!-- ::PM npm="npm install @react-buoy/network" yarn="yarn add @react-buoy/network" pnpm="pnpm add @react-buoy/network" bun="bun add @react-buoy/network" -->
+<!-- ::PM npm="npm install @buoy-gg/network" yarn="yarn add @buoy-gg/network" pnpm="pnpm add @buoy-gg/network" bun="bun add @buoy-gg/network" -->
 
 That's it. The Network Monitor auto-detects and appears in your FloatingDevTools menu.
 

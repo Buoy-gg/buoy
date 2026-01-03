@@ -5,6 +5,8 @@ id: tools-routes
 
 See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
 
+<!-- ::routes-demo -->
+
 ## Supported Libraries
 
 <!-- ::nav-libraries-grid -->
@@ -15,7 +17,7 @@ See every route in your app and track navigation in real-time. Browse your sitem
 
 ## Installation
 
-<!-- ::PM npm="npm install @react-buoy/route-events" yarn="yarn add @react-buoy/route-events" pnpm="pnpm add @react-buoy/route-events" bun="bun add @react-buoy/route-events" -->
+<!-- ::PM npm="npm install @buoy-gg/route-events" yarn="yarn add @buoy-gg/route-events" pnpm="pnpm add @buoy-gg/route-events" bun="bun add @buoy-gg/route-events" -->
 
 That's it. The Route Inspector auto-detects your navigation setup and appears in your FloatingDevTools menu.
 

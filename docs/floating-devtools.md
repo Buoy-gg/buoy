@@ -8,7 +8,7 @@ The `FloatingDevTools` component is the entry point for React Buoy. It renders a
 ## Basic Usage
 
 ```tsx
-import { FloatingDevTools } from "@react-buoy/core";
+import { FloatingDevTools } from "@buoy-gg/core";
 
 function App() {
   return (
@@ -34,10 +34,10 @@ Common values: `"local"`, `"dev"`, `"staging"`, `"qa"`, `"production"`
 
 ## How Tools Auto-Register
 
-When you install a Buoy tool package (like `@react-buoy/network` or `@react-buoy/storage`), it automatically registers itself with the floating menu. No imports, no configuration, no wiring.
+When you install a Buoy tool package (like `@buoy-gg/network` or `@buoy-gg/storage`), it automatically registers itself with the floating menu. No imports, no configuration, no wiring.
 
 ```bash
-npm install @react-buoy/network
+npm install @buoy-gg/network
 ```
 
 The Network tool now appears in your menu. That's the magic of Buoy.
@@ -47,7 +47,7 @@ The Network tool now appears in your menu. That's the magic of Buoy.
 Need something specific to your app? Add your own tools:
 
 ```tsx
-import { FloatingDevTools } from "@react-buoy/core";
+import { FloatingDevTools } from "@buoy-gg/core";
 
 const FeatureFlagTool = () => (
   <View>

@@ -5,6 +5,8 @@ id: tools-highlight-updates
 
 See exactly WHY your components re-render. Visual overlays show renders in real-time, and tapping any badge reveals the cause—mount, state change, prop change, or parent re-render.
 
+<!-- ::highlight-demo -->
+
 ## Render Causes
 
 <!-- ::render-causes-grid -->
@@ -15,7 +17,7 @@ See exactly WHY your components re-render. Visual overlays show renders in real-
 
 ## Installation
 
-<!-- ::PM npm="npm install @react-buoy/highlight-updates" yarn="yarn add @react-buoy/highlight-updates" pnpm="pnpm add @react-buoy/highlight-updates" bun="bun add @react-buoy/highlight-updates" -->
+<!-- ::PM npm="npm install @buoy-gg/highlight-updates" yarn="yarn add @buoy-gg/highlight-updates" pnpm="pnpm add @buoy-gg/highlight-updates" bun="bun add @buoy-gg/highlight-updates" -->
 
 That's it. Highlight Updates appears in your FloatingDevTools menu.
 

@@ -5,9 +5,11 @@ id: tools-env
 
 The Environment Inspector tool lets you view and validate environment variables in your React Native app. It automatically discovers `EXPO_PUBLIC_` prefixed variables and provides validation, type detection, and health monitoring.
 
+<!-- ::env-demo -->
+
 ## Installation
 
-<!-- ::PM npm="npm install @react-buoy/env" yarn="yarn add @react-buoy/env" pnpm="pnpm add @react-buoy/env" bun="bun add @react-buoy/env" -->
+<!-- ::PM npm="npm install @buoy-gg/env" yarn="yarn add @buoy-gg/env" pnpm="pnpm add @buoy-gg/env" bun="bun add @buoy-gg/env" -->
 
 After installation, the Environment Inspector will be auto-detected and appear in your FloatingDevTools menu.
 
@@ -16,7 +18,7 @@ After installation, the Environment Inspector will be auto-detected and appear i
 For more control, use `createEnvTool` with the `envVar` builder to define required variables and validation rules:
 
 ```tsx
-import { createEnvTool, envVar } from "@react-buoy/env";
+import { createEnvTool, envVar } from "@buoy-gg/env";
 
 const envTool = createEnvTool({
   requiredEnvVars: [

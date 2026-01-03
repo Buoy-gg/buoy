@@ -7,14 +7,14 @@ From zero to debugging in under 2 minutes.
 
 ## 1. Install the core
 
-<!-- ::pm npm="npm install @react-buoy/core" yarn="yarn add @react-buoy/core" pnpm="pnpm add @react-buoy/core" bun="bun add @react-buoy/core" -->
+<!-- ::pm npm="npm install @buoy-gg/core" yarn="yarn add @buoy-gg/core" pnpm="pnpm add @buoy-gg/core" bun="bun add @buoy-gg/core" -->
 
 ## 2. Add to your app
 
 Drop `FloatingDevTools` at the root of your app:
 
 ```tsx
-import { FloatingDevTools } from "@react-buoy/core";
+import { FloatingDevTools } from "@buoy-gg/core";
 
 export default function App() {
   return (
@@ -32,7 +32,7 @@ A floating button appears in the corner of your app. Tap it to open the menu.
 
 Install any tool package — it automatically appears in the menu. No wiring, no config.
 
-<!-- ::pm npm="npm install @react-buoy/network" yarn="yarn add @react-buoy/network" pnpm="pnpm add @react-buoy/network" bun="bun add @react-buoy/network" -->
+<!-- ::pm npm="npm install @buoy-gg/network" yarn="yarn add @buoy-gg/network" pnpm="pnpm add @buoy-gg/network" bun="bun add @buoy-gg/network" -->
 
 That's it. Open the menu, tap Network, and you're watching every API call in real-time.
 
@@ -47,7 +47,7 @@ Install what you need. Skip what you don't.
 Only show devtools to specific users — admins, QA, internal team members, or whoever your business needs:
 
 ```tsx
-import { FloatingDevTools } from "@react-buoy/core";
+import { FloatingDevTools } from "@buoy-gg/core";
 
 export default function App() {
   const { user } = useAuth();

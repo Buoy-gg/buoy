@@ -80,7 +80,7 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 ## Quick Start
 
 ```tsx
-import { FloatingDevTools } from "@react-buoy/core";
+import { FloatingDevTools } from "@buoy-gg/core";
 
 export default function App() {
   return (

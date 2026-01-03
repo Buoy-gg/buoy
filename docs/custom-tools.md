@@ -8,7 +8,7 @@ React Buoy is fully extensible. You can add any React component as a custom debu
 ## Basic Custom Tool
 
 ```tsx
-import { FloatingDevTools } from "@react-buoy/core";
+import { FloatingDevTools } from "@buoy-gg/core";
 import { View, Text, Button } from "react-native";
 
 const CacheDebugger = () => {

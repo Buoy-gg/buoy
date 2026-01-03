@@ -5,9 +5,11 @@ id: tools-react-query
 
 Full TanStack Query inspection for React Native. Browse queries, view cached data, simulate states, and debug your data fetching in real-time.
 
+<!-- ::query-demo -->
+
 ## Installation
 
-<!-- ::PM npm="npm install @react-buoy/react-query" yarn="yarn add @react-buoy/react-query" pnpm="pnpm add @react-buoy/react-query" bun="bun add @react-buoy/react-query" -->
+<!-- ::PM npm="npm install @buoy-gg/react-query" yarn="yarn add @buoy-gg/react-query" pnpm="pnpm add @buoy-gg/react-query" bun="bun add @buoy-gg/react-query" -->
 
 That's it. The React Query DevTools auto-detects your QueryClient and appears in your FloatingDevTools menu.
 
