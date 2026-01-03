@@ -1,0 +1,51 @@
+name: Create Release
+
+on:
+  repository_dispatch:
+    types: [npm-release]
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.event.client_payload.version }}
+          name: Release v${{ github.event.client_payload.version }}
+          body: |
+            ## @buoy-gg packages v${{ github.event.client_payload.version }}
+
+            All packages have been published to npm:
+
+            ```bash
+            npm install @buoy-gg/core@${{ github.event.client_payload.version }}
+            ```
+
+            ### Packages Updated
+            - `@buoy-gg/core`
+            - `@buoy-gg/floating-tools-core`
+            - `@buoy-gg/floating-tools-react`
+            - `@buoy-gg/shared-ui`
+            - `@buoy-gg/react-query`
+            - `@buoy-gg/network`
+            - `@buoy-gg/storage`
+            - `@buoy-gg/env`
+            - `@buoy-gg/highlight-updates`
+            - `@buoy-gg/debug-borders`
+            - `@buoy-gg/route-events`
+            - `@buoy-gg/bottom-sheet`
+            - `@buoy-gg/benchmark`
+            - `@buoy-gg/license`
+
+            ### Links
+            - [npm packages](https://www.npmjs.com/org/buoy-gg)
+            - [Documentation](https://buoy.gg)
+          draft: false
+          prerelease: false
