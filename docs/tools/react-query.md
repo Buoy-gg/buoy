@@ -3,6 +3,8 @@ title: React Query DevTools
 id: tools-react-query
 ---
 
+<!-- ::platform-badge platform="both" -->
+
 Full TanStack Query inspection for React Native. Browse queries, view cached data, simulate states, and debug your data fetching in real-time.
 
 <!-- ::query-demo -->

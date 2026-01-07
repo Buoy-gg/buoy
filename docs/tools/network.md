@@ -3,6 +3,8 @@ title: Network Monitor
 id: tools-network
 ---
 
+<!-- ::platform-badge platform="both" -->
+
 See every API call your app makes. Request, response, headers, timing, errors — all in real-time with zero configuration.
 
 <!-- ::network-demo -->

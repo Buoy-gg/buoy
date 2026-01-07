@@ -3,6 +3,8 @@ title: Storage Explorer
 id: tools-storage
 ---
 
+<!-- ::platform-badge platform="both" -->
+
 Browse, edit, and manage all your app's persisted data. See every key-value pair across all storage backends in real-time.
 
 <!-- ::storage-demo -->

@@ -3,6 +3,8 @@ title: Environment Inspector
 id: tools-env
 ---
 
+<!-- ::platform-badge platform="both" -->
+
 The Environment Inspector tool lets you view and validate environment variables in your React Native app. It automatically discovers `EXPO_PUBLIC_` prefixed variables and provides validation, type detection, and health monitoring.
 
 <!-- ::env-demo -->

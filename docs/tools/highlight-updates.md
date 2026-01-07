@@ -3,6 +3,8 @@ title: Highlight Updates
 id: tools-highlight-updates
 ---
 
+<!-- ::platform-badge platform="both" -->
+
 See exactly WHY your components re-render. Visual overlays show renders in real-time, and tapping any badge reveals the cause—mount, state change, prop change, or parent re-render.
 
 <!-- ::highlight-demo -->

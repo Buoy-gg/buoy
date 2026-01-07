@@ -3,6 +3,8 @@ title: Route Inspector
 id: tools-routes
 ---
 
+<!-- ::platform-badge platform="expo-only" -->
+
 See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
 
 <!-- ::routes-demo -->
