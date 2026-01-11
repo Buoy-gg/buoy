@@ -44,6 +44,10 @@
           "to": "tools/env"
         },
         {
+          "label": "Events Timeline",
+          "to": "tools/events"
+        },
+        {
           "label": "Network Monitor",
           "to": "tools/network"
         },
