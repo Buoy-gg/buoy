@@ -69,6 +69,8 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 | **Route Events** | Track navigation changes and browse your route structure |
 | **React Query** | Inspect query cache, trigger refetches, simulate offline mode |
 | **Render Highlighter** | Spot unnecessary re-renders as they happen |
+| **Redux DevTools** | Inspect Redux state, actions, and time-travel debugging |
+| **Events Timeline** | Unified timeline across all tools with LLM-ready export |
 
 ## Why Buoy
 
