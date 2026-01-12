@@ -11,7 +11,7 @@
 
 **See the bug. Reproduce it. Fix it in seconds.**
 
-On-device devtools for React Native — network, storage, env, routes, query cache — available to your whole team in dev, staging, and production.
+On-device devtools for React Native — network, storage, env, routes, query cache, Redux — available to your whole team in dev, staging, and production.
 
 - **Zero config**: install → appears
 - **QA/support can reproduce & export**
@@ -62,11 +62,13 @@ That's it — installed tools automatically appear in the floating menu.
 | Routes      | `@buoy-gg/route-events`      | Track navigation changes and browse routes        |
 | Profiler    | `@buoy-gg/debug-borders`     | See re-renders, track counts, debug performance   |
 | Highlights  | `@buoy-gg/highlight-updates` | Visual component re-render tracking               |
+| Redux       | `@buoy-gg/redux`             | Inspect state, actions, diffs, and time-travel    |
+| Events      | `@buoy-gg/events`            | Unified timeline across all tools with LLM export |
 
 Install any tool and it auto-appears in the menu:
 
 ```bash
-npm i @buoy-gg/{core,env,network,storage,react-query,route-events,debug-borders,highlight-updates}
+npm i @buoy-gg/{core,env,network,storage,react-query,route-events,debug-borders,highlight-updates,redux,events}
 ```
 
 > Full tool docs + screenshots: [buoy.gg/docs/tools](https://buoy.gg/buoy/latest/docs/overview)
