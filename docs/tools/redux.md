@@ -13,26 +13,9 @@ Full Redux Toolkit inspection for React Native. Monitor actions, explore state c
 
 <!-- ::PM npm="npm install @buoy-gg/redux" yarn="yarn add @buoy-gg/redux" pnpm="pnpm add @buoy-gg/redux" bun="bun add @buoy-gg/redux" -->
 
-## Setup
-
-Add the middleware and reducer wrapper to your Redux store:
-
-```tsx
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { buoyReduxMiddleware, withBuoyDevTools } from '@buoy-gg/redux';
-
-const rootReducer = combineReducers({
-  // your reducers
-});
-
-const store = configureStore({
-  reducer: withBuoyDevTools(rootReducer), // Enable time-travel
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(buoyReduxMiddleware),
-});
-```
-
 That's it. The Redux DevTools auto-detects your store and appears in your FloatingDevTools menu.
+
+> **Zero config required** — Just install the package. Your existing Redux store works as-is with no middleware or wrapper needed.
 
 ---
 
@@ -46,6 +29,7 @@ BUOY brings the power of Redux DevTools to mobile — with features designed for
 | **Works in production** | ✅ | ❌ |
 | **QA/support can use it** | ✅ | ❌ |
 | **No desktop app required** | ✅ | ❌ |
+| **Zero configuration** | ✅ | ❌ |
 | Action logging | ✅ | ✅ |
 | State inspection | ✅ | ✅ |
 | State diff view | ✅ | ✅ |
@@ -101,15 +85,7 @@ Jump to any point in your app's history:
 - **Replay Action** — Re-dispatch any action to test how your reducers respond
 - **Async Timeline** — Visual timeline showing the full lifecycle of async operations
 
-```tsx
-// Time-travel is enabled automatically when you use withBuoyDevTools
-import { withBuoyDevTools } from '@buoy-gg/redux';
-
-const store = configureStore({
-  reducer: withBuoyDevTools(rootReducer),
-  // ...
-});
-```
+> **Note:** For full time-travel support (jumping to past states), add the optional reducer wrapper. See [Advanced Configuration](#advanced-configuration) below.
 
 ---
 
@@ -152,18 +128,35 @@ Download your complete action history as JSON for sharing with teammates or crea
 
 ---
 
-## Configuration
+## Advanced Configuration
 
-Customize the middleware for your needs:
+For most apps, zero-config is all you need. But if you want more control:
+
+### Enable Full Time-Travel
+
+To enable jumping to past states (not just viewing them), wrap your reducer:
 
 ```tsx
-import { createBuoyReduxMiddleware } from '@buoy-gg/redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { withBuoyDevTools } from '@buoy-gg/redux';
+
+const store = configureStore({
+  reducer: withBuoyDevTools(rootReducer),
+});
+```
+
+### Custom Middleware Options
+
+For fine-grained control over what gets captured:
+
+```tsx
+import { createBuoyReduxMiddleware, withBuoyDevTools } from '@buoy-gg/redux';
 
 const customMiddleware = createBuoyReduxMiddleware({
   maxActions: 500,           // History size (default: 200)
   ignoreActions: [           // Actions to skip
-    '@@redux/INIT',
     'persist/PERSIST',
+    'persist/REHYDRATE',
   ],
 });
 
@@ -174,6 +167,8 @@ const store = configureStore({
 });
 ```
 
+> **When to use manual middleware:** Only if you need to ignore specific actions or increase history size. The auto-instrumentation handles everything else.
+
 ---
 
 ## API Reference
@@ -182,17 +177,22 @@ const store = configureStore({
 
 ```tsx
 import {
-  // Middleware
-  buoyReduxMiddleware,        // Default middleware
-  createBuoyReduxMiddleware,  // Configurable middleware
+  // Auto-instrumentation (used internally, rarely needed)
+  instrumentStore,
+  isStoreInstrumented,
 
-  // Time-travel
-  withBuoyDevTools,           // Reducer wrapper for time-travel
-  jumpToState,                // Programmatic state restoration
-  replayAction,               // Programmatic action replay
+  // Manual middleware (optional, for advanced config)
+  buoyReduxMiddleware,
+  createBuoyReduxMiddleware,
 
-  // Store access
-  reduxActionStore,           // Direct access to action history
+  // Time-travel (optional)
+  withBuoyDevTools,
+  jumpToState,
+  replayAction,
+
+  // Hooks
+  useReduxActions,
+  useAutoInstrumentRedux,
 
   // History adapter (for custom integrations)
   reduxHistoryAdapter,
