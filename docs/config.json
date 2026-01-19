@@ -70,6 +70,10 @@
         {
           "label": "Redux DevTools",
           "to": "tools/redux"
+        },
+        {
+          "label": "Impersonate Tool",
+          "to": "tools/impersonate"
         }
       ]
     }
