@@ -79,8 +79,8 @@ Automatically clear stale data when switching users:
 | AsyncStorage | Clear app data (preserves `@buoy/*` keys) | ❌ Off |
 | MMKV | Clear MMKV storage (preserves `@buoy/*` keys) | ❌ Off |
 
-### Status Banner
-Optional banner component shows when impersonation is active, making it impossible to forget you're viewing as another user.
+### Floating Banner
+A floating banner automatically appears when impersonation is active, making it impossible to forget you're viewing as another user. The banner can be toggled on/off in Settings.
 
 ---
 
@@ -141,6 +141,7 @@ const impersonateTool = createImpersonateTool({
 
   defaults: {
     headerKey: 'x-admin-impersonate',  // Custom header name
+    showBanner: true,                   // Show floating banner (default: true)
     dataNukeSettings: {
       reactQuery: true,
       redux: false,      // Don't clear Redux by default
@@ -172,32 +173,23 @@ const impersonateTool = createImpersonateTool({
 
 ---
 
-## Status Banner
+## Floating Banner
 
-Show a persistent banner when impersonation is active:
+The impersonate tool automatically shows a floating banner at the top of the screen when impersonation is active. The banner displays:
+
+- The impersonated user's name/email
+- A quick "Stop" button to end impersonation
+
+**No setup required** — the banner appears automatically. Users can toggle it off in the Settings tab, or you can set the default via `defaults.showBanner`:
 
 ```tsx
-import { createImpersonateTool } from '@buoy-gg/impersonate';
-
 const impersonateTool = createImpersonateTool({
   onSearchUsers: searchUsers,
+  defaults: {
+    showBanner: false,  // Disable banner by default
+  },
 });
-
-function App() {
-  return (
-    <>
-      {/* Banner at top of app */}
-      <impersonateTool.Banner />
-
-      <YourApp />
-
-      <FloatingDevTools tools={[impersonateTool]} />
-    </>
-  );
-}
 ```
-
-The banner shows the impersonated user and provides a quick "Stop" button.
 
 ---
 
@@ -222,6 +214,7 @@ interface ImpersonateToolConfig {
   // Developer defaults (optional)
   defaults?: {
     headerKey?: string;           // Default: 'x-impersonate-user-id'
+    showBanner?: boolean;         // Default: true
     dataNukeSettings?: {
       reactQuery?: boolean;       // Default: true
       redux?: boolean;            // Default: true
