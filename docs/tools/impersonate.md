@@ -64,10 +64,10 @@ Your backend checks for this header and returns data for the specified user inst
 ## Features
 
 ### User Search
-Search for users by email, name, or ID. Results display in a clean card format showing user details and metadata.
+Search for users by email, name, or ID. Results display in a clean card format showing user details and metadata. When viewing an active impersonation, the card shows a power button to stop directly from the search results.
 
 ### Impersonation History
-Quick-switch between recently impersonated users. History persists across app restarts (up to 10 users).
+Quick-switch between recently impersonated users. History persists across app restarts (up to 10 users). Each history entry shows when the user was last impersonated (e.g., "5m ago", "2h ago").
 
 ### Data Clearing
 Automatically clear stale data when switching users:
@@ -177,8 +177,23 @@ const impersonateTool = createImpersonateTool({
 
 The impersonate tool automatically shows a floating banner at the top of the screen when impersonation is active. The banner displays:
 
-- The impersonated user's name/email
-- A quick "Stop" button to end impersonation
+- The impersonated user's avatar and name
+- A **power toggle button** to pause/resume impersonation
+- An **X button** to stop impersonation completely
+
+### Banner Controls
+
+| Control | Action |
+|---------|--------|
+| Tap user area | Opens the impersonate modal |
+| Power button (green) | Pause impersonation — headers stop being injected |
+| Power button (red) | Resume impersonation — headers start being injected again |
+| X button | Stop impersonation completely |
+
+### Pause vs Stop
+
+- **Pause**: Temporarily stops injecting headers. The session remains active and can be resumed instantly. Useful for quick A/B testing between impersonated and normal views.
+- **Stop**: Ends the impersonation session completely. Triggers data clearing based on your settings.
 
 **No setup required** — the banner appears automatically. Users can toggle it off in the Settings tab, or you can set the default via `defaults.showBanner`:
 
