@@ -69,15 +69,17 @@ Search for users by email, name, or ID. Results display in a clean card format s
 ### Impersonation History
 Quick-switch between recently impersonated users. History persists across app restarts (up to 10 users). Each history entry shows when the user was last impersonated (e.g., "5m ago", "2h ago").
 
-### Data Clearing
+### Data Clearing (Auto-Detected)
 Automatically clear stale data when switching users:
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| React Query | Clear query cache and cancel pending queries | ✅ On |
-| Redux | Reset Redux store to initial state | ✅ On |
-| AsyncStorage | Clear app data (preserves `@buoy/*` keys) | ❌ Off |
-| MMKV | Clear MMKV storage (preserves `@buoy/*` keys) | ❌ Off |
+| Option | Description | Auto-Detected | Default |
+|--------|-------------|:-------------:|---------|
+| React Query | Clear query cache and cancel pending queries | ✅ | On |
+| Redux | Reset Redux store to initial state | ✅ | On |
+| AsyncStorage | Clear app data (preserves `@buoy/*` keys) | ❌ | Off |
+| MMKV | Clear MMKV storage (preserves `@buoy/*` keys) | ❌ | Off |
+
+> **Zero-config for React Query & Redux** — The tool automatically detects if your app uses `@tanstack/react-query` or `react-redux` and clears them when switching users. No callbacks needed.
 
 ### Floating Banner
 A floating banner automatically appears when impersonation is active, making it impossible to forget you're viewing as another user. The banner can be toggled on/off in Settings.
@@ -100,19 +102,17 @@ interface User {
 }
 ```
 
-### Optional: Data Clearing Callbacks
+### Data Clearing Callbacks
 
-Integrate with your app's state management:
+**React Query and Redux are auto-detected** — you don't need to provide callbacks for these. The tool automatically:
+- Uses `useQueryClient()` to clear React Query cache
+- Uses `useStore()` to dispatch a reset action to Redux
+
+For AsyncStorage and MMKV, you can provide callbacks:
 
 ```tsx
 const impersonateTool = createImpersonateTool({
   onSearchUsers: searchUsers,
-
-  // Clear React Query cache
-  onClearReactQuery: () => queryClient.clear(),
-
-  // Reset Redux store
-  onClearRedux: () => store.dispatch({ type: 'RESET' }),
 
   // Clear AsyncStorage (filter out keys you want to keep)
   onClearAsyncStorage: async () => {
@@ -128,6 +128,8 @@ const impersonateTool = createImpersonateTool({
   },
 });
 ```
+
+> **Override auto-detection** — If you provide a callback for React Query or Redux, your callback is used instead of auto-detection. This is useful if you need custom reset logic.
 
 ---
 
@@ -220,11 +222,12 @@ interface ImpersonateToolConfig {
   // Required
   onSearchUsers: (query: string) => Promise<User[]>;
 
-  // Data clearing callbacks (optional)
+  // Data clearing callbacks
+  // React Query & Redux are auto-detected — only provide if you need custom logic
   onClearReactQuery?: () => void | Promise<void>;
   onClearRedux?: () => void | Promise<void>;
-  onClearAsyncStorage?: () => void | Promise<void>;
-  onClearMMKV?: () => void | Promise<void>;
+  onClearAsyncStorage?: () => void | Promise<void>;  // Required for AsyncStorage
+  onClearMMKV?: () => void | Promise<void>;          // Required for MMKV
 
   // Developer defaults (optional)
   defaults?: {

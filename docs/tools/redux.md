@@ -169,6 +169,8 @@ const store = configureStore({
 
 > **When to use manual middleware:** Only if you need to ignore specific actions or increase history size. The auto-instrumentation handles everything else.
 
+> **No conflicts:** If you configure middleware manually, the auto-instrumentation automatically detects this and defers to your configuration. You'll never get duplicate action entries.
+
 ---
 
 ## API Reference
