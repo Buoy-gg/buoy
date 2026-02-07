@@ -28,7 +28,21 @@ export default function App() {
 
 A floating button appears in the corner of your app. Tap it to open the menu.
 
-## 3. Add tools
+## 3. Register your license key
+
+Every Buoy user needs a license key — including free plans. Add `Buoy.init()` at the top of your app before rendering any components:
+
+```tsx
+import { Buoy } from "@buoy-gg/core";
+
+Buoy.init({
+  licenseKey: "YOUR_LICENSE_KEY",
+});
+```
+
+Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+
+## 4. Add tools
 
 Install any tool package — it automatically appears in the menu. No wiring, no config.
 

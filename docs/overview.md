@@ -82,7 +82,12 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 ## Quick Start
 
 ```tsx
-import { FloatingDevTools } from "@buoy-gg/core";
+import { Buoy, FloatingDevTools } from "@buoy-gg/core";
+
+// Register your license key (required for all plans)
+Buoy.init({
+  licenseKey: "YOUR_LICENSE_KEY",
+});
 
 export default function App() {
   return (
@@ -94,7 +99,7 @@ export default function App() {
 }
 ```
 
-Install any tool package and it automatically appears in the menu. No configuration needed.
+Install any tool package and it automatically appears in the menu. No configuration needed. Get your license key at [buoy.gg/pricing](https://buoy.gg/pricing).
 
 ## Build Your Own Tools
 
