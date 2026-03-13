@@ -1,0 +1,75 @@
+{
+  "name": "@react-buoy/core",
+  "version": "1.5.8",
+  "description": "Floating dev tools launcher and AppHost",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/module/index.d.ts",
+  "react-native": "src/index.tsx",
+  "source": "src/index.tsx",
+  "exports": {
+    ".": {
+      "types": "./lib/typescript/module/index.d.ts",
+      "react-native": "./src/index.tsx",
+      "import": "./lib/module/index.js",
+      "require": "./lib/commonjs/index.js",
+      "default": "./lib/commonjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "@react-buoy/shared-ui": "1.5.8"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "commonjs",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      "typescript"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-native": "^0.73.0",
+    "typescript": "~5.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LovesWorking/react-native-buoy.git",
+    "directory": "packages/devtools-floating-menu"
+  },
+  "bugs": {
+    "url": "https://github.com/LovesWorking/react-native-buoy/issues"
+  },
+  "homepage": "https://github.com/LovesWorking/react-native-buoy/tree/main/packages/devtools-floating-menu#readme",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "scripts": {
+    "build": "bob build",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf lib",
+    "test": "pnpm run typecheck"
+  }
+}

@@ -55,6 +55,9 @@ interface CustomTool {
 
   /** Optional description shown in menu */
   description?: string;
+
+  /** Enable in dial/floating row by default (before user configures preferences) */
+  enabledByDefault?: boolean;
 }
 ```
 
@@ -81,6 +84,37 @@ interface CustomTool {
       component: AnalyticsDebugger,
       icon: "📊",
       description: "Event tracking",
+    },
+  ]}
+/>
+```
+
+## Default-Enabled Tools
+
+By default, all tools start disabled in the dial and floating row until the user
+enables them via the settings modal. Use `enabledByDefault: true` to have a tool
+appear in the dial and floating row immediately, without requiring manual setup.
+
+Once the user has toggled a tool in the settings modal, their preference is
+persisted and always takes precedence over `enabledByDefault`.
+
+```tsx
+<FloatingDevTools
+  environment="local"
+  customTools={[
+    {
+      name: "Auth",
+      component: AuthDebugger,
+      icon: "🔐",
+      description: "View auth state",
+      enabledByDefault: true, // Appears in the dial immediately
+    },
+    {
+      name: "Feature Flags",
+      component: FeatureFlagViewer,
+      icon: "🚩",
+      description: "Toggle features",
+      // Not enabled by default — user must opt in via settings
     },
   ]}
 />

@@ -105,6 +105,31 @@ function App() {
 
 See [Custom Tools](./custom-tools) for more details on building your own debugging tools.
 
+## Default-Enabled Tools
+
+By default, all tools (both built-in and custom) are disabled in the dial and floating row
+until the user enables them via the settings modal. To have a tool appear immediately without
+requiring setup, set `enabledByDefault: true` on the `InstalledApp` config:
+
+```tsx
+<FloatingDevTools
+  environment="qa"
+  customTools={[
+    {
+      name: "Flags",
+      component: FeatureFlagTool,
+      icon: "🚩",
+      enabledByDefault: true, // Visible in dial on first launch
+    },
+  ]}
+/>
+```
+
+User preferences (persisted via AsyncStorage) always take precedence. Once a user
+explicitly toggles a tool in the settings modal, `enabledByDefault` is no longer consulted.
+
+Built-in tool packages can also opt into this by exporting their preset with `enabledByDefault: true`.
+
 ## Draggable Button
 
 The floating button can be dragged anywhere on screen. It remembers its position between sessions, so it stays where your team likes it.
