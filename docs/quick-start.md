@@ -11,7 +11,7 @@ From zero to debugging in under 2 minutes.
 
 ## 2. Add to your app
 
-Drop `FloatingDevTools` at the root of your app:
+Drop `FloatingDevTools` at the root of your app with your license key:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
@@ -20,7 +20,7 @@ export default function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools environment="local" />
+      <FloatingDevTools environment="local" licenseKey="YOUR_LICENSE_KEY" />
     </>
   );
 }
@@ -28,27 +28,38 @@ export default function App() {
 
 A floating button appears in the corner of your app. Tap it to open the menu.
 
-## 3. Register your license key
-
-Every Buoy user needs a license key — including free plans. Add `Buoy.init()` at the top of your app before rendering any components:
-
-```tsx
-import { Buoy } from "@buoy-gg/core";
-
-Buoy.init({
-  licenseKey: "YOUR_LICENSE_KEY",
-});
-```
-
 Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
 
-## 4. Add tools
+## 3. Add tools
 
 Install any tool package — it automatically appears in the menu. No wiring, no config.
 
 <!-- ::pm npm="npm install @buoy-gg/network" yarn="yarn add @buoy-gg/network" pnpm="pnpm add @buoy-gg/network" bun="bun add @buoy-gg/network" -->
 
 That's it. Open the menu, tap Network, and you're watching every API call in real-time.
+
+### Zustand stores
+
+If you use Zustand, pass your stores directly via `zustandStores`:
+
+```tsx
+import { FloatingDevTools } from "@buoy-gg/core";
+import { useAuthStore } from "./stores/auth";
+import { useCartStore } from "./stores/cart";
+
+const stores = {
+  authStore: useAuthStore,
+  cartStore: useCartStore,
+};
+
+return (
+  <FloatingDevTools
+    environment="local"
+    licenseKey="YOUR_LICENSE_KEY"
+    zustandStores={stores}
+  />
+);
+```
 
 ## Available tools
 
@@ -78,6 +89,7 @@ export default function App() {
       {showDevTools && (
         <FloatingDevTools
           environment={__DEV__ ? "local" : "production"}
+          licenseKey="YOUR_LICENSE_KEY"
           userRole={user?.role}
         />
       )}

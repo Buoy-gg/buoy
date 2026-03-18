@@ -56,10 +56,6 @@
           "to": "tools/storage"
         },
         {
-          "label": "React Query DevTools",
-          "to": "tools/react-query"
-        },
-        {
           "label": "Route Inspector",
           "to": "tools/routes"
         },
@@ -68,8 +64,16 @@
           "to": "tools/highlight-updates"
         },
         {
+          "label": "React Query DevTools",
+          "to": "tools/react-query"
+        },
+        {
           "label": "Redux DevTools",
           "to": "tools/redux"
+        },
+        {
+          "label": "Zustand DevTools",
+          "to": "tools/zustand"
         },
         {
           "label": "Impersonate Tool",
