@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools environment="qa" />
+      <FloatingDevTools />
     </>
   );
 }
@@ -38,7 +38,7 @@ function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools environment="qa" />
+      <FloatingDevTools />
     </>
   );
 }
@@ -56,13 +56,15 @@ Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
 
 ## Environment Badge
 
-The floating button displays your current environment, helping your team instantly know where they are:
+The floating button automatically displays your current environment based on `NODE_ENV`, helping your team instantly know where they are. No configuration needed.
+
+You can override it explicitly if your environment name doesn't match `NODE_ENV`:
 
 ```tsx
 <FloatingDevTools environment="qa" />
 ```
 
-Common values: `"local"`, `"dev"`, `"staging"`, `"qa"`, `"production"`
+Supported values: `"local"`, `"dev"`, `"staging"`, `"qa"`, `"prod"`
 
 ## How Tools Auto-Register
 
@@ -90,7 +92,6 @@ const FeatureFlagTool = () => (
 function App() {
   return (
     <FloatingDevTools
-      environment="qa"
       customTools={[
         {
           name: "Flags",

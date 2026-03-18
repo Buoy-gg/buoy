@@ -93,7 +93,7 @@ export default function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools environment="local" />
+      <FloatingDevTools />
     </>
   );
 }

@@ -41,7 +41,7 @@ export default function App() {
   return (
     <>
       {/* Your app */}
-      <FloatingDevTools environment="production" />
+      <FloatingDevTools />
     </>
   );
 }

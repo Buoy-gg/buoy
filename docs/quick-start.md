@@ -20,7 +20,7 @@ export default function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools environment="local" licenseKey="YOUR_LICENSE_KEY" />
+      <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
     </>
   );
 }
@@ -54,7 +54,6 @@ const stores = {
 
 return (
   <FloatingDevTools
-    environment="local"
     licenseKey="YOUR_LICENSE_KEY"
     zustandStores={stores}
   />
@@ -88,7 +87,6 @@ export default function App() {
       <YourApp />
       {showDevTools && (
         <FloatingDevTools
-          environment={__DEV__ ? "local" : "production"}
           licenseKey="YOUR_LICENSE_KEY"
           userRole={user?.role}
         />
