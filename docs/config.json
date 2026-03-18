@@ -76,6 +76,10 @@
           "to": "tools/zustand"
         },
         {
+          "label": "Jotai DevTools",
+          "to": "tools/jotai"
+        },
+        {
           "label": "Impersonate Tool",
           "to": "tools/impersonate"
         }

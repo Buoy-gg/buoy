@@ -60,6 +60,24 @@ return (
 );
 ```
 
+### Jotai atoms
+
+If you use Jotai, call `watchAtoms` once at module scope with your store and a named map of atoms:
+
+```tsx
+import { getDefaultStore } from "jotai";
+import { watchAtoms } from "@buoy-gg/jotai";
+import { authAtom } from "./atoms/auth";
+import { cartAtom } from "./atoms/cart";
+
+watchAtoms(getDefaultStore(), {
+  authAtom,
+  cartAtom,
+});
+```
+
+No wrappers, no middleware. Registered atoms automatically appear in the Jotai tool inside your FloatingDevTools menu.
+
 ## Available tools
 
 <!-- ::tools-table -->
