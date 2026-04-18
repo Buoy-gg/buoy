@@ -49,6 +49,6 @@ When a state change causes a render, Highlight Updates shows you the **before an
 
 ## What's Next
 
+- [Image Overlay](./image-overlay) — Overlay design mockups on your running app
 - [Environment Inspector](./env) — View and search environment variables
 - [Network Monitor](./network) — See every API call your app makes
-- [React Query DevTools](./react-query) — Inspect query cache and simulate states

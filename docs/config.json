@@ -82,6 +82,10 @@
         {
           "label": "Impersonate Tool",
           "to": "tools/impersonate"
+        },
+        {
+          "label": "Image Overlay",
+          "to": "tools/image-overlay"
         }
       ]
     }

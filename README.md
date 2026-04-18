@@ -65,6 +65,7 @@ That's it — installed tools automatically appear in the floating menu.
 | Redux       | `@buoy-gg/redux`             | Inspect state, actions, diffs, and time-travel    |
 | Jotai       | `@buoy-gg/jotai`             | Atom inspector with live values, diffs, and history |
 | Events      | `@buoy-gg/events`            | Unified timeline across all tools with LLM export |
+| Image Overlay | `@buoy-gg/image-overlay`   | Overlay design mockups on your app for pixel-perfect comparison |
 
 Install any tool and it auto-appears in the menu:
 

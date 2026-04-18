@@ -70,7 +70,10 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 | **React Query** | Inspect query cache, trigger refetches, simulate offline mode |
 | **Render Highlighter** | Spot unnecessary re-renders as they happen |
 | **Redux DevTools** | Inspect Redux state, actions, and time-travel debugging |
+| **Zustand DevTools** | Monitor Zustand store state, diffs, and changes in real-time |
+| **Jotai DevTools** | Inspect Jotai atom state, live values, diffs, and history |
 | **Events Timeline** | Unified timeline across all tools with LLM-ready export |
+| **Image Overlay** | Overlay design mockups on your app for pixel-perfect comparison |
 
 ## Why Buoy
 
@@ -82,18 +85,13 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 ## Quick Start
 
 ```tsx
-import { Buoy, FloatingDevTools } from "@buoy-gg/core";
-
-// Register your license key (required for all plans)
-Buoy.init({
-  licenseKey: "YOUR_LICENSE_KEY",
-});
+import { FloatingDevTools } from "@buoy-gg/core";
 
 export default function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools />
+      <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
     </>
   );
 }

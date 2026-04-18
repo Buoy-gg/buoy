@@ -14,45 +14,13 @@ function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools />
+      <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
     </>
   );
 }
 ```
 
-That's it. Any Buoy tool packages you've installed will automatically appear in the menu.
-
-## Register Your License Key
-
-A license key is required for all plans. Call `Buoy.init()` before rendering `FloatingDevTools`:
-
-```tsx
-import { Buoy, FloatingDevTools } from "@buoy-gg/core";
-
-// Register your license key
-Buoy.init({
-  licenseKey: "YOUR_LICENSE_KEY",
-});
-
-function App() {
-  return (
-    <>
-      <YourApp />
-      <FloatingDevTools />
-    </>
-  );
-}
-```
-
-You can also use the async variant if you need to wait for validation to complete:
-
-```tsx
-await Buoy.initAsync({
-  licenseKey: "YOUR_LICENSE_KEY",
-});
-```
-
-Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+That's it. Pass your license key as a prop and any Buoy tool packages you've installed will automatically appear in the menu. Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
 
 ## Environment Badge
 
