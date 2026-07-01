@@ -7,6 +7,8 @@ id: tools-perf-monitor
 
 Measure and prove performance on a real device. Bench tracks UI FPS, JS FPS, CPU, memory, and jank in real time, records runs you can save and compare, and can benchmark a matrix of variants to tell you which implementation is actually faster.
 
+<!-- ::perf-monitor-demo -->
+
 ## Installation
 
 Bench relies on native peers. Install the package with **Reanimated** and **Worklets** (required), plus the **performance toolkit** and **Nitro modules** that power true native UI-thread metrics:
@@ -23,7 +25,7 @@ Once installed, Bench appears in the floating menu. On [Buoy Desktop](../desktop
 
 - **Live HUD** — Watch UI FPS, JS FPS, CPU, and memory update in real time as you navigate.
 - **Record runs** — Capture a session, save it, and keep a library of recordings.
-- **Compare** — Diff two runs head-to-head (avg and p95 for FPS/CPU/memory, plus jank) to prove a change made things faster.
+- **Compare** — Long-press to select two or more saved runs and see them side-by-side in the same bar-chart report batches get (duration, memory, JS FPS, CPU) to prove a change made things faster.
 - **Batch benchmarks** — Run the same flow across several variants and get a ranked report with per-metric leaders and at-risk flags.
 
 ---
