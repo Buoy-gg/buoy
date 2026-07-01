@@ -116,4 +116,6 @@ const AuthDebugger = () => {
 ## Next Steps
 
 - [FloatingDevTools](./floating-devtools) — Core component reference
+- [Buoy Desktop](./desktop) — The full desktop dashboard
+- [AI / MCP Server](./mcp) — Drive your app from your AI editor
 - [Quick Start](./quick-start) — Full setup walkthrough

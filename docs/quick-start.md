@@ -3,7 +3,7 @@ title: Quick Start
 id: quick-start
 ---
 
-From zero to debugging in under 2 minutes.
+Get the in-app menu running in under 2 minutes — then reach the same tools from your desktop or your AI agent.
 
 ## 1. Install the core
 
@@ -116,7 +116,22 @@ export default function App() {
 
 Or keep it available for everyone — your QA and support teams will thank you.
 
+## Take it further
+
+The tools you just installed aren't only in the floating menu — reach the same live app two more ways:
+
+- **[Buoy Desktop](./desktop)** — mirror every tool to a full dashboard on macOS, Windows, or Linux, with a live performance HUD and multi-device switching.
+- **[AI / MCP Server](./mcp)** — let Claude Code, Cursor, or any MCP editor inspect and control your running app. One command to wire it up:
+
+```bash
+npx -y @buoy-gg/mcp@latest init
+```
+
+Both are Buoy Pro features and connect to the same app you just set up.
+
 ## What's next
 
 - [FloatingDevTools](./floating-devtools) — Core component reference
+- [Buoy Desktop](./desktop) — The full desktop dashboard
+- [AI / MCP Server](./mcp) — Drive your app from your AI editor
 - [Custom Tools](./custom-tools) — Build your own debugging tools

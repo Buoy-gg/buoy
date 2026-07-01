@@ -78,7 +78,18 @@ See [Custom Tools](./custom-tools) for more details on building your own debuggi
 
 The floating button can be dragged anywhere on screen. It remembers its position between sessions, so it stays where your team likes it.
 
+## Beyond the in-app menu
+
+`FloatingDevTools` is also the source of truth for Buoy's other surfaces. The same tools you see in the menu sync out over a local broker, so once this is set up you can — with no extra code — also:
+
+- open the [Buoy Desktop](./desktop) dashboard and inspect the same live app on a full screen, or
+- point an AI agent at your app with the [MCP server](./mcp).
+
+Just connect either one to your running app.
+
 ## Next Steps
 
 - [Custom Tools](./custom-tools) — Build team-specific debugging tools
+- [Buoy Desktop](./desktop) — Inspect the same app on a full dashboard
+- [AI / MCP Server](./mcp) — Drive your app from your AI editor
 - [Quick Start](./quick-start) — Full setup walkthrough

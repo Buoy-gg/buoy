@@ -37,6 +37,24 @@
       ]
     },
     {
+      "label": "Desktop App",
+      "children": [
+        {
+          "label": "Buoy Desktop",
+          "to": "desktop"
+        }
+      ]
+    },
+    {
+      "label": "AI Automation",
+      "children": [
+        {
+          "label": "AI / MCP Server",
+          "to": "mcp"
+        }
+      ]
+    },
+    {
       "label": "Available Tools",
       "children": [
         {
@@ -46,6 +64,10 @@
         {
           "label": "Events Timeline",
           "to": "tools/events"
+        },
+        {
+          "label": "Console",
+          "to": "tools/console"
         },
         {
           "label": "Network Monitor",
@@ -62,6 +84,10 @@
         {
           "label": "Highlight Updates",
           "to": "tools/highlight-updates"
+        },
+        {
+          "label": "Bench",
+          "to": "tools/perf-monitor"
         },
         {
           "label": "React Query DevTools",

@@ -3,9 +3,15 @@ title: Overview
 id: overview
 ---
 
-Buoy is a floating dev tools menu for React Native. It turns **hours into seconds** for developers, QA, and product teams on tasks like regression testing, bug reproduction, and environment validation.
+Buoy is a complete devtools platform for React Native. It turns **hours into seconds** for developers, QA, and product teams on tasks like regression testing, bug reproduction, performance work, and environment validation.
 
-One floating button. Every tool your team needs. Works in dev, staging, and production.
+**One devtools engine, three ways to reach your running app:**
+
+- **On your phone** — a zero-config floating menu inside your app, in dev, staging, and production.
+- **On your desktop** — Buoy Desktop, a full dashboard for macOS, Windows & Linux that mirrors every tool with a live performance HUD (Pro).
+- **Through your AI** — the [MCP server](./mcp) lets Claude Code, Cursor, or any MCP editor inspect and control your live app (Pro).
+
+Install once. Reach every tool from wherever you work.
 
 ## Who It's For
 
@@ -65,19 +71,22 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 | **Network** | See every API call — request, response, timing, errors |
 | **Storage** | Browse and edit AsyncStorage & MMKV in real-time |
 | **Environment** | Validate env vars with type checking and required field validation |
-| **Debug Borders** | Tap any element to see its testID, accessibility label, and styles |
-| **Route Events** | Track navigation changes and browse your route structure |
+| **Console** | A Chrome-DevTools-style console for every `console.*` log on the device |
+| **Bench** | Benchmark FPS, CPU, memory & jank — record runs and compare them |
 | **React Query** | Inspect query cache, trigger refetches, simulate offline mode |
-| **Render Highlighter** | Spot unnecessary re-renders as they happen |
 | **Redux DevTools** | Inspect Redux state, actions, and time-travel debugging |
 | **Zustand DevTools** | Monitor Zustand store state, diffs, and changes in real-time |
 | **Jotai DevTools** | Inspect Jotai atom state, live values, diffs, and history |
+| **Route Events** | Track navigation changes and browse your route structure |
 | **Events Timeline** | Unified timeline across all tools with LLM-ready export |
+| **Render Highlighter** | Spot unnecessary re-renders as they happen |
+| **Impersonate** | Switch user role or impersonate any user to debug their exact state |
 | **Image Overlay** | Overlay design mockups on your app for pixel-perfect comparison |
 
 ## Why Buoy
 
 - **Zero config** — Install a package, it appears in the menu. No wiring.
+- **Three ways in** — The same tools on your phone, on your desktop, and through your AI agent.
 - **Works everywhere** — Dev, staging, production. Same tools for everyone.
 - **Modular** — Only install what you need. Each tool is a separate package.
 - **Team-friendly** — Onboard new devs in minutes with consistent debugging.
@@ -107,5 +116,6 @@ Need something specific to your app? Drop in any React component as a custom too
 
 - [Installation](./installation) — Add Buoy to your project
 - [Quick Start](./quick-start) — Full setup in 2 minutes
+- [AI / MCP Server](./mcp) — Let AI agents drive your running app
 - [Custom Tools](./custom-tools) — Build your own debugging tools
 - [Tools Reference](./tools/network) — Detailed docs for each tool
