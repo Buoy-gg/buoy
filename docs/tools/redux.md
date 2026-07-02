@@ -1,6 +1,7 @@
 ---
 title: Redux DevTools
 id: tools-redux
+description: "Redux DevTools for React Native — monitor dispatched actions, inspect state changes, and time-travel debug your store live on the device, no Flipper needed."
 ---
 
 <!-- ::platform-badge platform="both" -->

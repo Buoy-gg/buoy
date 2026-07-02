@@ -1,6 +1,7 @@
 ---
 title: Console
 id: tools-console
+description: "Capture every console.log, warn, and error from your React Native app in a Chrome DevTools-style panel — filterable, on-device, no cable or Flipper needed."
 ---
 
 <!-- ::platform-badge platform="both" -->

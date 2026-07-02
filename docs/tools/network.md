@@ -1,6 +1,7 @@
 ---
 title: Network Monitor
 id: tools-network
+description: "Inspect every HTTP request your React Native app makes — URLs, headers, timing, and errors — live on the device, no Flipper or proxy required."
 ---
 
 <!-- ::platform-badge platform="both" -->

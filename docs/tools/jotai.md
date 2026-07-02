@@ -1,6 +1,7 @@
 ---
 title: Jotai DevTools
 id: tools-jotai
+description: "Inspect Jotai atoms in your React Native app — watch state changes, browse live atom values, and explore value diffs in real time, right on the device."
 ---
 
 <!-- ::platform-badge platform="both" -->

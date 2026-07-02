@@ -1,6 +1,7 @@
 ---
 title: Custom Tools
 id: custom-tools
+description: "Extend React Buoy with your own debugging tools — register any React component in your React Native app's floating devtools menu in just a few lines."
 ---
 
 React Buoy is fully extensible. You can add any React component as a custom debugging tool.

@@ -1,6 +1,7 @@
 ---
 title: Impersonate Tool
 id: tools-impersonate
+description: "Test your React Native app as any user by injecting impersonation headers into every network request — no logging out or switching accounts required."
 ---
 
 <!-- ::platform-badge platform="both" -->

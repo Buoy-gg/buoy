@@ -1,6 +1,7 @@
 ---
 title: Installation
 id: installation
+description: "Step-by-step guide to installing React Buoy devtools in a React Native or Expo app — requirements, core package setup, and picking your first tools."
 ---
 
 Get Buoy running in your React Native app in minutes.

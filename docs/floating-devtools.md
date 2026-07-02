@@ -1,6 +1,7 @@
 ---
 title: FloatingDevTools
 id: floating-devtools
+description: "API reference for FloatingDevTools, the draggable floating button that opens React Buoy's in-app debugging menu in your React Native or Expo app."
 ---
 
 The `FloatingDevTools` component is the entry point for React Buoy. It renders a draggable floating button that opens a menu containing all your installed debugging tools.

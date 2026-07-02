@@ -1,6 +1,7 @@
 ---
 title: Highlight Updates
 id: tools-highlight-updates
+description: "See why your React Native components re-render — visual overlays highlight every render and reveal the cause: mount, state, props, or parent updates."
 ---
 
 <!-- ::platform-badge platform="both" -->

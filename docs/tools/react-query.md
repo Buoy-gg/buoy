@@ -1,6 +1,7 @@
 ---
 title: React Query DevTools
 id: tools-react-query
+description: "Full TanStack Query devtools for React Native — browse queries, inspect cached data, simulate loading and error states, and debug fetching on-device."
 ---
 
 <!-- ::platform-badge platform="both" -->

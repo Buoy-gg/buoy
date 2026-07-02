@@ -1,6 +1,7 @@
 ---
 title: Zustand DevTools
 id: tools-zustand
+description: "Zustand devtools for React Native — watch store state changes, explore diffs, jump back to any previous state, and reset stores live on your device."
 ---
 
 <!-- ::platform-badge platform="both" -->

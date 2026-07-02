@@ -1,6 +1,7 @@
 ---
 title: AI / MCP Server
 id: mcp
+description: "Let AI agents like Claude Code and Cursor read your React Native app's live network, state, and storage — and tap through the UI — via the Buoy MCP server."
 ---
 
 Drive your Buoy dev tools from an AI coding assistant. The Buoy MCP server lets Claude Code, Cursor, and other MCP clients read your app's live runtime — network requests, state (Redux/Zustand/Jotai), React Query, storage, routes, console — and take actions, run performance benchmarks, drive the UI by tapping through it, and even screenshot a specific on-screen component, all against your running app.

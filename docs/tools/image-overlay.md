@@ -1,6 +1,7 @@
 ---
 title: Image Overlay
 id: tools-image-overlay
+description: "Overlay design mockups on your running React Native app and tweak opacity, scale, and position to nail pixel-perfect UI without leaving the simulator."
 ---
 
 <!-- ::platform-badge platform="both" -->

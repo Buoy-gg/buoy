@@ -1,6 +1,7 @@
 ---
 title: Quick Start
 id: quick-start
+description: "Get React Buoy's floating in-app devtools menu running in your React Native or Expo app in minutes, then reach the same tools from desktop or an AI agent."
 ---
 
 Get the in-app menu running in under 2 minutes — then reach the same tools from your desktop or your AI agent.

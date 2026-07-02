@@ -1,6 +1,7 @@
 ---
 title: Overview
 id: overview
+description: "Meet React Buoy, the in-app devtools platform for React Native — debug network, state, storage, and performance from your phone, desktop, or AI agent."
 ---
 
 Buoy is a complete devtools platform for React Native. It turns **hours into seconds** for developers, QA, and product teams on tasks like regression testing, bug reproduction, performance work, and environment validation.

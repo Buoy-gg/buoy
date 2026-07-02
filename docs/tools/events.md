@@ -1,6 +1,7 @@
 ---
 title: Events Timeline
 id: tools-events
+description: "Watch network requests, storage writes, Redux actions, and React Query events in one chronological timeline to debug complex React Native user flows."
 ---
 
 <!-- ::platform-badge platform="both" -->

@@ -1,6 +1,7 @@
 ---
 title: Bench
 id: tools-perf-monitor
+description: "Benchmark React Native performance on a real device — track UI/JS FPS, CPU, memory, and jank, record runs, and compare variants to prove what's faster."
 ---
 
 <!-- ::platform-badge platform="both" -->
@@ -27,6 +28,19 @@ Once installed, Bench appears in the floating menu. On [Buoy Desktop](../desktop
 - **Record runs** — Capture a session, save it, and keep a library of recordings.
 - **Compare** — Long-press to select two or more saved runs and see them side-by-side in the same bar-chart report batches get (duration, memory, JS FPS, CPU) to prove a change made things faster.
 - **Batch benchmarks** — Run the same flow across several variants and get a ranked report with per-metric leaders and at-risk flags.
+- **Render capture** — See *why* a run was slow: every recording also captures per-component render counts and durations (React-profiler-style), so reports show the top re-rendering components next to the FPS numbers.
+
+---
+
+## Render Capture
+
+With [`@buoy-gg/highlight-updates`](./highlight-updates) installed, every recording — manual or batch — also captures **which components rendered, how many times, and how long they took** (self time, React DevTools profiler convention). Batch reports gain a *Top re-renderers* section per case, single-run reports get a *Render commits* block, and the MCP `run_benchmark_batch` ranking includes the heaviest components per case — so instead of "case B dropped to 41 JS FPS" you get "case B dropped to 41 JS FPS **because `ProductList` rendered 47× costing 312ms**".
+
+A few things to know:
+
+- Requires a **dev build** (the React DevTools hook and profiling timers aren't present in release builds). Without them the run simply has no render data — nothing breaks.
+- Capture walks committed fibers on the JS thread, adding a small overhead per commit. It's applied **uniformly to every case** in a batch, so relative comparisons stay fair — but for absolute FPS measurements you can turn it off with the **Capture renders** toggle in Automate settings, or `captureRenders: false` on `run_benchmark_batch`.
+- Buoy's own devtools UI (the HUD, floating menu, etc.) is excluded from results automatically.
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Environment Inspector
 id: tools-env
+description: "View and validate your React Native app's environment variables on-device — auto-discovers EXPO_PUBLIC_ vars with type detection and health monitoring."
 ---
 
 <!-- ::platform-badge platform="both" -->

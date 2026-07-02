@@ -1,6 +1,7 @@
 ---
 title: Storage Explorer
 id: tools-storage
+description: "Browse and edit every key-value pair your React Native app persists — AsyncStorage, MMKV, and SecureStore in one explorer with real-time updates."
 ---
 
 <!-- ::platform-badge platform="both" -->
