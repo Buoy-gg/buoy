@@ -20,6 +20,25 @@ These ship native code, so rebuild the app with a custom **dev build** (`expo pr
 
 Once installed, Bench appears in the floating menu. On [Buoy Desktop](../desktop) it also renders as a live HUD you can watch while you use the app.
 
+### Web
+
+Bench also runs in the browser — Expo web, Electron, or any React DOM app — with **no native modules and no dev build**. On web the HUD samples browser APIs instead:
+
+- **FPS** — main-thread frame rate (`requestAnimationFrame`). On web there's a single thread, so JS FPS and UI FPS read the same value.
+- **BUSY** — replaces the CPU row: the % of recent time the main thread was blocked by [long tasks](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming) (>50ms). This is the "why does it feel janky" number.
+- **JS heap** — `performance.memory` (Chromium-based browsers; the row hides elsewhere).
+
+React Native Web apps get this automatically. Plain React apps need the standard one-line bundler alias (`react-native` → `react-native-web`) and can render the HUD directly:
+
+```tsx
+import { PerfMonitorOverlay, PerfMonitorController } from "@buoy-gg/perf-monitor";
+
+// anywhere in your tree
+<PerfMonitorOverlay />
+// toggle it
+PerfMonitorController.toggle();
+```
+
 ---
 
 ## What You Can Do

@@ -14,7 +14,7 @@ Buoy Desktop is a native dashboard for macOS, Windows, and Linux that mirrors yo
 
 ## Install
 
-Download Buoy Desktop from [buoy.gg](https://buoy.gg/pricing). It auto-updates, so you stay on the latest build.
+Download Buoy Desktop for macOS, Windows, or Linux from the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). It auto-updates, so you stay on the latest build. A [Buoy Pro license](https://buoy.gg/pricing) unlocks it — or use it free any weekend, when Pro unlocks for everyone.
 
 ## Connect your app
 

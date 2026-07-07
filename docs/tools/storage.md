@@ -24,6 +24,24 @@ Browse, edit, and manage all your app's persisted data. See every key-value pair
 
 That's it. The Storage Explorer auto-detects installed backends and appears in your FloatingDevTools menu.
 
+### SecureStore setup
+
+Expo SecureStore (iOS Keychain / Android KeyStore) has no key-listing API, so register the keys you want visible — pass the module in, no extra dependency needed:
+
+```typescript
+import * as SecureStore from "expo-secure-store";
+import { registerSecureStoreKeys } from "@buoy-gg/storage";
+
+registerSecureStoreKeys(SecureStore, [
+  "auth.accessToken",
+  { key: "session", keychainService: "com.myapp.auth" },
+  // Biometric-protected keys are listed but never auto-read (no surprise Face ID prompts)
+  { key: "pin", requireAuthentication: true },
+]);
+```
+
+> MMKV instances need the same one-time registration — see the [package README](https://github.com/LovesWorking/react-native-buoy/tree/main/packages/storage#mmkv-setup) for details.
+
 ---
 
 ## What You Can Do

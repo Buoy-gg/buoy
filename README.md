@@ -71,7 +71,7 @@ That's it — installed tools automatically appear in the floating menu. Free in
 | [Env](https://buoy.gg/buoy/latest/docs/tools/env)                               | `@buoy-gg/env`                | Environment variables, validated with type checking                |
 | [Query](https://buoy.gg/buoy/latest/docs/tools/react-query)                     | `@buoy-gg/react-query`        | TanStack Query cache inspection, refetch & mutation testing        |
 | [Routes](https://buoy.gg/buoy/latest/docs/tools/routes)                         | `@buoy-gg/route-events`       | Navigation events, the live stack, and jump-to-any-screen          |
-| [Renders](https://www.npmjs.com/package/@buoy-gg/debug-borders)                 | `@buoy-gg/debug-borders`      | See re-renders as they happen — counts, causes, culprits           |
+| [Debug Borders](https://buoy.gg/buoy/latest/docs/tools/debug-borders)           | `@buoy-gg/debug-borders`      | Visualize layout with colored borders — tap any element to inspect testIDs & styles |
 | [Highlight Updates](https://buoy.gg/buoy/latest/docs/tools/highlight-updates)   | `@buoy-gg/highlight-updates`  | Visual overlays on every render, with the cause: mount, state, props, or parent |
 | [Bench](https://buoy.gg/buoy/latest/docs/tools/perf-monitor)                    | `@buoy-gg/perf-monitor`       | FPS, CPU, memory & jank — record runs and compare them             |
 | [Events](https://buoy.gg/buoy/latest/docs/tools/events)                         | `@buoy-gg/events`             | One timeline across every tool, with LLM-ready export              |
