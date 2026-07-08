@@ -52,6 +52,12 @@ registerSecureStoreKeys(SecureStore, [
 
 ## Smart Features
 
+**Inline value previews** — Short values show right on the card (`number · 42`, `string · "en"`), and booleans get a color-coded true/false badge. No need to expand to see simple values.
+
+**Pin to top** — Pin the keys you're watching so they stay at the top of the list. Pins persist across sessions.
+
+**Hide from list** — One tap filters noisy keys out of the browser (from the expanded card or bulk selection). Non-destructive — unhide any time from the filters panel.
+
 **JSON formatting** — Values that are valid JSON are automatically pretty-printed for readability.
 
 **Live events** — Watch storage changes happen in real-time as your app reads and writes data.

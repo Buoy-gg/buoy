@@ -27,6 +27,7 @@ Bench also runs in the browser — Expo web, Electron, or any React DOM app — 
 - **FPS** — main-thread frame rate (`requestAnimationFrame`). On web there's a single thread, so JS FPS and UI FPS read the same value.
 - **BUSY** — replaces the CPU row: the % of recent time the main thread was blocked by [long tasks](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming) (>50ms). This is the "why does it feel janky" number.
 - **JS heap** — `performance.memory` (Chromium-based browsers; the row hides elsewhere).
+- **PAGES** — the full HUD ranks your slowest routes by average FPS while each was active (browser-history route tracking — works with React Router, Next, hash routers, or plain `pushState`). Watch it while you click around to see exactly which pages are slow.
 
 React Native Web apps get this automatically. Plain React apps need the standard one-line bundler alias (`react-native` → `react-native-web`) and can render the HUD directly:
 
@@ -58,8 +59,9 @@ With [`@buoy-gg/highlight-updates`](./highlight-updates) installed, every record
 A few things to know:
 
 - Requires a **dev build** (the React DevTools hook and profiling timers aren't present in release builds). Without them the run simply has no render data — nothing breaks.
-- Capture walks committed fibers on the JS thread, adding a small overhead per commit. It's applied **uniformly to every case** in a batch, so relative comparisons stay fair — but for absolute FPS measurements you can turn it off with the **Capture renders** toggle in Automate settings, or `captureRenders: false` on `run_benchmark_batch`.
-- Buoy's own devtools UI (the HUD, floating menu, etc.) is excluded from results automatically.
+- Capture walks committed fibers on the JS thread, adding a small overhead per commit. It's applied **uniformly to every case** in a batch, so relative comparisons stay fair — but for absolute FPS measurements you can turn it off: the **Capture render commits** toggle in the tool's Settings covers manual recordings, the **Capture renders** toggle in Automate settings covers batches, and `captureRenders: false` works on `run_benchmark_batch`.
+- Buoy's own devtools UI (the HUD, floating menu, etc.) is excluded from results automatically, and React Native framework wrappers (`View`, `Text`, `Animated(View)`, Touchable internals, VirtualizedList cells, …) are folded into the run totals instead of cluttering the component list — the rows you see are your components.
+- Want to *watch* the renders as they happen? Turn on **Show live render highlights** in the tool's Settings (off by default) — while a recording is running, the [Render Highlighter](./highlight-updates)'s bounding boxes flash in real time, then the overlay returns to whatever state it was in. The boxes themselves cost real frame time, so leave this off when you care about the numbers.
 
 ---
 
