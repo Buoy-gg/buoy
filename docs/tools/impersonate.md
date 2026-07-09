@@ -20,7 +20,7 @@ Unlike other Buoy tools, the Impersonate tool requires configuration because it 
 
 ```tsx
 import { createImpersonateTool } from '@buoy-gg/impersonate';
-import { FloatingDevTools } from '@buoy-gg/dev-tools';
+import { FloatingDevTools } from '@buoy-gg/core';
 
 const impersonateTool = createImpersonateTool({
   // Required: How to search for users

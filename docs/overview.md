@@ -9,7 +9,7 @@ Buoy is a complete devtools platform for React Native. It turns **hours into sec
 **One devtools engine, three ways to reach your running app:**
 
 - **On your phone** — a zero-config floating menu inside your app, in dev, staging, and production.
-- **On your desktop** — Buoy Desktop, a full dashboard for macOS, Windows & Linux that mirrors every tool with a live performance HUD (Pro).
+- **On your desktop** — Buoy Desktop, a free dashboard for macOS, Windows & Linux that mirrors your tools with a live performance HUD.
 - **Through your AI** — the [MCP server](./mcp) lets Claude Code, Cursor, or any MCP editor inspect and control your live app (Pro).
 
 Install once. Reach every tool from wherever you work.

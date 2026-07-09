@@ -1,10 +1,10 @@
 ---
 title: Route Inspector
 id: tools-routes
-description: "Browse every Expo Router route in your app, jump to any screen, and watch navigation events in real time to debug React Native navigation issues fast."
+description: "Browse every route in your app — Expo Router or React Navigation — jump to any screen, and watch navigation events in real time to debug React Native navigation issues fast."
 ---
 
-<!-- ::platform-badge platform="expo-only" -->
+<!-- ::platform-badge platform="both" -->
 
 See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
 

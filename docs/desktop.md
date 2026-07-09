@@ -8,13 +8,12 @@ Buoy Desktop is a native dashboard for macOS, Windows, and Linux that mirrors yo
 
 ## Requirements
 
-- **Buoy Pro** — Desktop is a Pro feature.
 - **A running app** with Buoy devtools installed and open on a device or simulator.
 - The app and the desktop dashboard on the **same machine or local network**.
 
 ## Install
 
-Download Buoy Desktop for macOS, Windows, or Linux from the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). It auto-updates, so you stay on the latest build. A [Buoy Pro license](https://buoy.gg/pricing) unlocks it — or use it free any weekend, when Pro unlocks for everyone.
+Download Buoy Desktop for macOS, Windows, or Linux from the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). It auto-updates, so you stay on the latest build. Buoy Desktop is free to use — a [Buoy Pro license](https://buoy.gg/pricing) unlocks full history and unlimited capture, and every weekend Pro unlocks for everyone.
 
 ## Connect your app
 

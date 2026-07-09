@@ -12,7 +12,7 @@ Get the in-app menu running in under 2 minutes — then reach the same tools fro
 
 ## 2. Add to your app
 
-Drop `FloatingDevTools` at the root of your app with your license key:
+Drop `FloatingDevTools` at the root of your app:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
@@ -21,7 +21,7 @@ export default function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
+      <FloatingDevTools />
     </>
   );
 }
@@ -29,7 +29,7 @@ export default function App() {
 
 A floating button appears in the corner of your app. Tap it to open the menu.
 
-Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+Every tool is free — no key needed. A `licenseKey` prop unlocks [Pro](https://buoy.gg/pricing): production builds, the MCP server, and unlimited capture.
 
 ## 3. Add tools
 
@@ -54,10 +54,7 @@ const stores = {
 };
 
 return (
-  <FloatingDevTools
-    licenseKey="YOUR_LICENSE_KEY"
-    zustandStores={stores}
-  />
+  <FloatingDevTools zustandStores={stores} />
 );
 ```
 
@@ -128,7 +125,7 @@ The tools you just installed aren't only in the floating menu — reach the same
 npx -y @buoy-gg/mcp@latest init
 ```
 
-Both are Buoy Pro features and connect to the same app you just set up.
+Buoy Desktop is free to use; the MCP server is a Pro feature. Both connect to the same app you just set up.
 
 ## What's next
 
