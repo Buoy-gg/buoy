@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/redux",
+  "version": "6.0.1",
+  "description": "Redux DevTools inside your React Native app — action log, state diffs & time travel with zero store changes. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/redux",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "redux",
+    "state-management",
+    "actions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/redux"
+  }
+}

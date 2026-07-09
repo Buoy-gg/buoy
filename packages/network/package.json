@@ -1,0 +1,21 @@
+{
+  "name": "@buoy-gg/network",
+  "version": "6.0.1",
+  "description": "In-app network inspector for React Native — requests, responses, timing & errors live, with GraphQL operation parsing. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/network",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "network-inspector",
+    "http",
+    "graphql",
+    "api-debugging"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/network"
+  }
+}

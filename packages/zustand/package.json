@@ -1,0 +1,19 @@
+{
+  "name": "@buoy-gg/zustand",
+  "version": "6.0.1",
+  "description": "Zustand devtools inside your React Native app — state diffs, jump-to-state & one-tap store reset, no middleware. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/zustand",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "zustand",
+    "state-management"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/zustand"
+  }
+}

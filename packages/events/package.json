@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/events",
+  "version": "6.0.1",
+  "description": "One timeline across every Buoy devtool, with LLM-ready export presets. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/events",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "event-timeline",
+    "touch-events",
+    "app-events"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/events"
+  }
+}

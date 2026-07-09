@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/impersonate",
+  "version": "6.0.1",
+  "description": "Test your React Native app as any user, role, or flag combo — without logging out or rebuilding. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/impersonate",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "user-impersonation",
+    "auth-testing",
+    "qa"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/impersonate"
+  }
+}

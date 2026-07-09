@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/image-overlay",
+  "version": "6.0.1",
+  "description": "Pin your Figma mockup on top of the running app — pixel-perfect UI comparison without leaving the simulator. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/image-overlay",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "design-overlay",
+    "pixel-perfect",
+    "ui-review"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/image-overlay"
+  }
+}

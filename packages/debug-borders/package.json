@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/debug-borders",
+  "version": "6.0.1",
+  "description": "Layout debugging borders for React Native — depth-colored, touch-through, tap any label to inspect testIDs & styles. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "layout-debugging",
+    "borders",
+    "ui-debugging"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/debug-borders"
+  }
+}

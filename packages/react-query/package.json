@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/react-query",
+  "version": "6.0.1",
+  "description": "TanStack Query devtools inside your React Native app — cache inspection, refetch & invalidate, offline toggle. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/react-query",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "react-query",
+    "tanstack-query",
+    "cache-inspector"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/react-query"
+  }
+}

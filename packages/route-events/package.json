@@ -1,0 +1,21 @@
+{
+  "name": "@buoy-gg/route-events",
+  "version": "6.0.1",
+  "description": "Navigation devtool for React Native — live stack, full sitemap, jump to any screen. Expo Router & React Navigation. Part of Buoy devtools.",
+  "homepage": "https://buoy.gg/tools/routes",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "navigation",
+    "expo-router",
+    "react-navigation",
+    "routes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/route-events"
+  }
+}

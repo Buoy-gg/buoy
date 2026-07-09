@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/core",
+  "version": "6.0.1",
+  "description": "Buoy devtools for React Native — a floating in-app dev menu; every tool streams live to your phone, desktop, and AI agent.",
+  "homepage": "https://buoy.gg",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "floating-menu",
+    "developer-menu",
+    "in-app-devtools"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/devtools-floating-menu"
+  }
+}

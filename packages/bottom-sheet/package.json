@@ -1,0 +1,20 @@
+{
+  "name": "@buoy-gg/bottom-sheet",
+  "version": "6.0.1",
+  "description": "High-performance bottom sheet & floating window component for React Native — 60 FPS native-driver animations, fully customizable.",
+  "homepage": "https://buoy.gg",
+  "keywords": [
+    "react-native",
+    "expo",
+    "devtools",
+    "debugging",
+    "bottom-sheet",
+    "modal",
+    "ui-components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/bottom-sheet"
+  }
+}
