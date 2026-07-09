@@ -8,6 +8,8 @@
     "expo",
     "devtools",
     "debugging",
+    "react-native-devtools",
+    "flipper-alternative",
     "mcp",
     "model-context-protocol",
     "ai-agents",

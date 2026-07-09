@@ -8,6 +8,8 @@
     "expo",
     "devtools",
     "debugging",
+    "react-native-devtools",
+    "flipper-alternative",
     "floating-menu",
     "developer-menu",
     "in-app-devtools"

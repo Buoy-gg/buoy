@@ -8,6 +8,8 @@
     "expo",
     "devtools",
     "debugging",
+    "react-native-devtools",
+    "flipper-alternative",
     "user-impersonation",
     "auth-testing",
     "qa"

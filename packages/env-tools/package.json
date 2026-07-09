@@ -8,6 +8,8 @@
     "expo",
     "devtools",
     "debugging",
+    "react-native-devtools",
+    "flipper-alternative",
     "environment-variables",
     "config",
     "app-env"
