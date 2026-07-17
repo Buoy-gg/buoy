@@ -131,6 +131,7 @@ One command wires the Buoy MCP server into Claude Code, Cursor, and VS Code — 
 
 Every tool, full screen. [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) is free for macOS, Windows & Linux:
 
+- Zero-config connect — devices find your machine automatically, physical phones included
 - Full-screen panels for Network, Console, Storage, and every state tool
 - Live UI/JS FPS · CPU · memory HUD
 - Remote actions — dispatch, navigate, invalidate, from the keyboard
@@ -170,6 +171,12 @@ Buoy inverts the model: the tools live in the app itself, so they go wherever th
 ```
 
 That one line is the whole production story: internal builds and flagged users get the full toolkit; everyone else gets nothing.
+
+Want the session without any on-device UI at all — field builds, kiosk devices, apps handed to non-developers? Headless mode keeps every tool syncing to Buoy Desktop and MCP while rendering nothing on the device:
+
+```tsx
+<FloatingDevTools headless />
+```
 
 ---
 

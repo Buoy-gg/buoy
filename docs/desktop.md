@@ -17,12 +17,21 @@ Download Buoy Desktop for macOS, Windows, or Linux from the [GitHub releases pag
 
 ## Connect your app
 
-Buoy tools sync to a local broker on **port 42831**. Point your app's sync at the desktop:
+Buoy tools sync to a local broker on **port 42831** — and the connection is **automatic**. The app derives the broker address from the Metro dev server that served the bundle, so simulators, emulators, and physical devices on the same Wi-Fi all find your machine with zero config.
 
-- **Simulator / emulator** — `http://localhost:42831` (Android emulator: `http://10.0.2.2:42831`).
-- **Physical device** — `http://<your-computer-ip>:42831`, on the same Wi-Fi network.
+Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects. If no device appears, the dashboard shows a troubleshooting panel with your machine's exact URLs and a test you can run from the phone's browser.
 
-Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects.
+Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
+
+- **Expo tunnel mode** — the derived host is the tunnel domain, which has no broker; pass your machine's LAN IP explicitly.
+- **Android over USB** — run `adb reverse tcp:42831 tcp:42831` and pass `socketURL: "http://localhost:42831"`.
+- **Broker on another machine** — pass that machine's `http://<ip>:42831`.
+
+```tsx
+<FloatingDevTools externalSync={{ socketURL: "http://192.168.1.20:42831" }} />
+```
+
+> **Just installed a @buoy-gg package?** Restart Metro with `--clear` — Metro caches the "optional package missing" resolution, and a plain reload never picks the new package up.
 
 ## What Desktop adds
 
@@ -31,6 +40,7 @@ Launch Buoy Desktop first; it starts the broker and auto-detects connected devic
 - **Multi-device** — Switch between every connected simulator and physical device.
 - **Remote actions** — Edit storage, dispatch Redux, refetch queries, and navigate the app from your desk.
 - **Screenshot tool** — Capture a region or a specific component from the iOS Simulator.
+- **Built-in troubleshooting** — A "no devices" panel shows your machine's exact URLs with a phone-browser test; the Diagnostics console streams the broker's own connection log (handshakes, disconnect reasons, version mismatches — replayed even if they happened before you opened it); offline devices are removable and age out after a day.
 
 ## How it works
 

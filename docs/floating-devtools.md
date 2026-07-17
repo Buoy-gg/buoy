@@ -86,7 +86,17 @@ The floating button can be dragged anywhere on screen. It remembers its position
 - open the [Buoy Desktop](./desktop) dashboard and inspect the same live app on a full screen, or
 - point an AI agent at your app with the [MCP server](./mcp).
 
-Just connect either one to your running app.
+Just connect either one to your running app. The broker address is derived automatically from the Metro dev server that served the bundle, so physical devices reach your machine with zero config; pass `socketURL` in the `externalSync` prop only for tunnels, `adb reverse` USB setups, or a broker on another machine. The current sync target and connection state show up in the menu's Settings tab under **DESKTOP SYNC**.
+
+## Headless (sync-only) mode
+
+For builds that ship to non-developers — field or associate builds where the desktop dashboard is the only debugging surface — mount the tools with no on-device UI at all:
+
+```tsx
+<FloatingDevTools headless />
+```
+
+`headless` keeps every tool's sync adapter and route tracking running (so Buoy Desktop and the MCP server see the full session) but renders no floating button, dial, or overlays. Desktop sync stays dev-build-only; `requireLicense` is ignored in headless mode since there is no UI to gate.
 
 ## Next Steps
 

@@ -125,7 +125,7 @@ The tools you just installed aren't only in the floating menu — reach the same
 npx -y @buoy-gg/mcp@latest init
 ```
 
-Buoy Desktop is free to use; the MCP server is a Pro feature. Both connect to the same app you just set up.
+Buoy Desktop is free to use; the MCP server is a Pro feature. Both connect to the same app you just set up — automatically, with no URLs to configure (physical devices included).
 
 ## What's next
 

@@ -63,7 +63,7 @@ npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,
 Every tool runs inside your app's process. The phone, the desktop, and your agent all see the same session, live.
 
 - **On the phone** — tap the floating menu. Works on any device, no cable, no desktop app, no Metro.
-- **On your desktop** — [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) (free) mirrors the tools to full-screen panels on macOS, Windows & Linux, with a live FPS / CPU / memory HUD and remote control of the device.
+- **On your desktop** — [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) (free) mirrors the tools to full-screen panels on macOS, Windows & Linux, with a live FPS / CPU / memory HUD and remote control of the device. Devices connect automatically — physical phones included, no URLs to configure.
 - **Through your agent** — the [Buoy MCP server](https://buoy.gg/buoy/latest/docs/mcp) gives Claude Code, Cursor, or any MCP editor structured tool calls into the running app: read live state, tap real buttons, run benchmarks on a physical device.
 
 ## Free vs Pro
@@ -87,6 +87,12 @@ Everything runs in your app's process. The broker that mirrors the session to de
 ```
 
 That one line is the whole production story: internal builds and flagged users get the full toolkit; everyone else gets nothing.
+
+Need the session with **no on-device UI at all** — field builds or devices handed to non-developers? Headless mode keeps every tool syncing to Buoy Desktop and MCP while rendering nothing on the device:
+
+```tsx
+<FloatingDevTools headless />
+```
 
 ## Links
 

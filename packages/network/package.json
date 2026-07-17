@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/network",
-  "version": "6.0.1",
+  "version": "7.0.0",
   "description": "In-app network inspector for React Native — requests, responses, timing & errors live, with GraphQL operation parsing. Part of Buoy devtools.",
   "homepage": "https://buoy.gg/tools/network",
   "keywords": [
