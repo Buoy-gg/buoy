@@ -47,6 +47,8 @@ Every navigation is tracked with:
 - **Timestamp** — When it happened
 - **Duration** — Time since previous navigation
 
+Tap any event to open its **detail page** — the full route template, from/to paths, timing, segments, and params, all copyable, plus a **Go to route** action to jump straight there. This matches how events open in the Events tool.
+
 ---
 
 ## What's Next

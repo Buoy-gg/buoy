@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/mcp",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "MCP server for Buoy devtools — lets any LLM copilot drive Buoy tools (perf-monitor benchmarks, etc.) over the devtool sync protocol",
   "homepage": "https://buoy.gg",
   "keywords": [

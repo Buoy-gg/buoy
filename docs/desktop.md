@@ -24,7 +24,7 @@ Launch Buoy Desktop first; it starts the broker and auto-detects connected devic
 Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
 
 - **Expo tunnel mode** — the derived host is the tunnel domain, which has no broker; pass your machine's LAN IP explicitly.
-- **Android over USB** — run `adb reverse tcp:42831 tcp:42831` and pass `socketURL: "http://localhost:42831"`.
+- **Android over USB** — just run `adb reverse tcp:42831 tcp:42831` once per cable session; no `socketURL` needed (the derived `localhost` is kept as-is on physical devices — the `10.0.2.2` rewrite only applies to emulators).
 - **Broker on another machine** — pass that machine's `http://<ip>:42831`.
 
 ```tsx

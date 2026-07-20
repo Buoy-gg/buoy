@@ -64,7 +64,7 @@ Buoy is built to survive locked-down corporate React Native apps:
 
 - **After installing a new `@buoy-gg` package, restart Metro with `--clear`.** Metro caches the "optional package missing" resolution — a plain reload never picks the new package up. This is the single most common "I installed it and nothing happened" cause.
 - **`unstable_enablePackageExports: false` works.** Big monorepos often disable Metro's package-exports resolution for legacy dependencies; Buoy's packages ship legacy resolution shims so they resolve either way.
-- **Physical devices work zero-config.** The desktop-sync broker address is derived from the Metro host, so devices on the same Wi-Fi find your machine automatically; `socketURL` overrides it for tunnels or `adb reverse` USB setups.
+- **Physical devices work zero-config.** The desktop-sync broker address is derived from the Metro host, so devices on the same Wi-Fi find your machine automatically. Android over USB needs one command — `adb reverse tcp:42831 tcp:42831` — and `socketURL` overrides everything for tunnels or a broker on another machine.
 - **Scoped registries** — all packages live under the `@buoy-gg` scope, so a `.npmrc` scope rule (`@buoy-gg:registry=…`) is all a proxy registry needs.
 - **No on-device UI for end users** — pass `headless` to `FloatingDevTools` for builds where only the desktop dashboard should see the session. See [FloatingDevTools](./floating-devtools).
 
