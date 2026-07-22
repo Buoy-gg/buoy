@@ -74,6 +74,8 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 | **Environment** | Validate env vars with type checking and required field validation |
 | **Console** | A Chrome-DevTools-style console for every `console.*` log on the device |
 | **Bench** | Benchmark FPS, CPU, memory & jank — record runs and compare them |
+| **JS Top** | Live Task Manager for the JS thread — see which timers, Promises & callbacks eat your JS FPS |
+| **Images** | Every image load with cache verdict, timing, oversize audit & failure diagnosis |
 | **React Query** | Inspect query cache, trigger refetches, simulate offline mode |
 | **Redux DevTools** | Inspect Redux state, actions, and time-travel debugging |
 | **Zustand DevTools** | Monitor Zustand store state, diffs, and changes in real-time |

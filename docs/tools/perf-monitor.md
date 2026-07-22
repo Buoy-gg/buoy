@@ -50,6 +50,10 @@ PerfMonitorController.toggle();
 - **Batch benchmarks** — Run the same flow across several variants and get a ranked report with per-metric leaders and at-risk flags.
 - **Render capture** — See *why* a run was slow: every recording also captures per-component render counts and durations (React-profiler-style), so reports show the top re-rendering components next to the FPS numbers.
 
+### Stall reconstruction
+
+The sampler runs on the JS thread, so it physically can't take samples *while* the JS thread is blocked. Instead of silently skipping those moments (which would make stalls invisible in recordings and on the desktop dashboard's live HUD), the monitor detects the gap when sampling resumes and backfills it with reconstructed `0 JS FPS` samples — so history sparklines, live sync, and saved reports all show the stall. Reconstructed samples are marked `synthetic` in report JSON, counted in the report's stats, and never fabricated across app backgrounding. One consequence worth knowing: recordings made before this behavior existed under-report JS stalls, so a stall-heavy run recorded today will (honestly) score worse than the same behavior recorded on an older version.
+
 ---
 
 ## Render Capture

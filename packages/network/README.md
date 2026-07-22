@@ -50,6 +50,8 @@ The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-
 
 Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for everyone.
 
+> 🎯 **Flutter (beta):** Buoy is now available for Flutter — `flutter pub add buoy`. The network inspector ships first, streaming to the same desktop dashboard and MCP server. [Details →](https://buoy.gg/flutter)
+
 ---
 
 📚 [Full docs](https://buoy.gg/buoy/latest/docs/tools/network) · [All Buoy tools](https://github.com/Buoy-gg/buoy)

@@ -61,6 +61,7 @@ Ask your assistant to start with `list_devices` to see connected devices and the
 - **Take actions** — dispatch Redux actions, set Zustand/Jotai state, invalidate React Query caches, navigate routes, edit storage, and more via `call_action` or the tool-specific wrappers.
 - **Drive the UI** — `describe_screen` and `tap_element` let the agent read what's on screen and interact with it, no screenshots (see below).
 - **Benchmark performance** — `run_benchmark_batch` and the perf-monitor tools.
+- **Profile the JS thread** — `get_js_thread_top` returns a live "Task Manager" of which timers, Promise chains & callbacks eat JS-thread time (with freeze attribution); `get_js_thread_origin_detail` drills into one origin's scheduling site and stats.
 - **Screenshot a component** — `screenshot_component` locates a component by testID/name in the iOS Simulator and returns a tight, cropped image.
 
 A good starting prompt: **"buoy optimize"** kicks off a guided performance pass using the bundled skill.

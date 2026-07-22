@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/events",
-  "version": "7.0.1",
+  "version": "7.0.3",
   "description": "One timeline across every Buoy devtool, with LLM-ready export presets. Part of Buoy devtools.",
   "homepage": "https://buoy.gg/tools/events",
   "keywords": [

@@ -15,6 +15,8 @@ Buoy is a floating dev menu that ships inside your React Native app — every re
 
 **Every tool is free. Pro unlocks production builds, MCP & unlimited capture.**
 
+**🎯 Now in beta: [Buoy for Flutter](https://github.com/Buoy-gg/Buoy-Flutter)** — `flutter pub add buoy`. The network inspector ships first, streaming to the same desktop dashboard and MCP server. [Vote for the next Flutter tool →](https://buoy.gg/roadmap)
+
 ![Buoy demo — the floating dev menu in action](https://github.com/user-attachments/assets/a732d6a3-9963-49e3-b0f1-0d974a0a74d7)
 
 </div>
@@ -73,6 +75,8 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 | [Debug Borders](https://buoy.gg/buoy/latest/docs/tools/debug-borders) | `@buoy-gg/debug-borders` | Depth-colored layout borders (touch-through) — tap any label for testID, a11y props & computed styles |
 | [Highlight Updates](https://buoy.gg/buoy/latest/docs/tools/highlight-updates) | `@buoy-gg/highlight-updates` | Every render, with the cause: mount, state, props, or parent — down to the exact `useState` before → after |
 | [Bench](https://buoy.gg/buoy/latest/docs/tools/perf-monitor) | `@buoy-gg/perf-monitor` | UI/JS FPS, CPU, memory & jank on a real device — batch benchmarks return a ranked report |
+| [JS Top](https://buoy.gg/buoy/latest/docs/tools/js-top) | `@buoy-gg/js-top` | Task Manager for the JS thread — a live ranked table of which timers, Promise chains & callbacks eat your JS FPS |
+| [Images](https://buoy.gg/buoy/latest/docs/tools/images) | `@buoy-gg/images` | Every image load with cache verdict (memory/disk/network), timing, oversize & wasted-memory audit, and failure diagnosis |
 | [Events](https://buoy.gg/buoy/latest/docs/tools/events) | `@buoy-gg/events` | One timeline across every tool, with LLM export presets: Markdown for agents, Bug Report, Errors Only |
 | [Console](https://buoy.gg/buoy/latest/docs/tools/console) | `@buoy-gg/console` | Chrome-DevTools console on device — read logs from a release build with no cable and no Metro |
 | [Redux](https://buoy.gg/buoy/latest/docs/tools/redux) | `@buoy-gg/redux` | Inspect, dispatch & time travel — flags actions that blow the 16ms frame budget |
@@ -84,7 +88,7 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 Grab everything in one line:
 
 ```bash
-npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,highlight-updates,perf-monitor,events,console,redux,zustand,jotai,impersonate,image-overlay}
+npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,highlight-updates,perf-monitor,js-top,images,events,console,redux,zustand,jotai,impersonate,image-overlay}
 ```
 
 <details>

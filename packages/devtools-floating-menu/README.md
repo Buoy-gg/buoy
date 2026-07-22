@@ -101,6 +101,8 @@ Need the session with **no on-device UI at all** — field builds or devices han
 - [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop)
 - [Pricing](https://buoy.gg/pricing)
 
+> 🎯 **Flutter (beta):** Buoy is now available for Flutter — `flutter pub add buoy`. The network inspector ships first, streaming to the same desktop dashboard and MCP server. [Details →](https://buoy.gg/flutter)
+
 ## License
 
 Proprietary software. © Buoy LLC. All rights reserved. See the [Terms of Service](https://buoy.gg/terms).

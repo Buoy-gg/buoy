@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/storage",
-  "version": "7.0.1",
+  "version": "7.0.3",
   "description": "Browse & edit AsyncStorage, MMKV & SecureStore inside your React Native app, with change history. Part of Buoy devtools.",
   "homepage": "https://buoy.gg/tools/storage",
   "keywords": [

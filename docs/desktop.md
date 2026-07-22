@@ -4,6 +4,15 @@ id: desktop
 description: "Mirror your React Native app's Buoy devtools to a full-size desktop dashboard — live performance HUD, multi-device switching, and remote control included."
 ---
 
+<p>
+  <a href="https://github.com/Buoy-gg/Buoy-Desktop/releases/latest" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:10px;background:#10B981;color:#ffffff;font-weight:600;font-size:16px;text-decoration:none;box-shadow:0 8px 24px rgba(16,185,129,0.25);">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+    Download Buoy Desktop
+  </a>
+  <br/>
+  <span style="font-size:12px;opacity:0.7;">Free download · macOS · Windows · Linux · auto-updates</span>
+</p>
+
 Buoy Desktop is a native dashboard for macOS, Windows, and Linux that mirrors your on-device Buoy tools to a full-size window in real time. Same tools as the floating menu — with dramatically more room — plus a live performance HUD, multi-device switching, and remote control over the running app.
 
 ## Requirements
