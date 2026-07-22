@@ -24,36 +24,25 @@ Or just the network tool: `flutter pub add buoy_network`.
 
 ## Wire it up
 
+One widget — wrap your app via `MaterialApp.builder`:
+
 ```dart
 import 'package:buoy/buoy.dart';
-import 'package:flutter/foundation.dart';
 
-void main() {
-  if (kDebugMode) {
-    // Capture ALL dart:io HTTP traffic (package:http, dio, Image.network).
-    BuoyHttpOverrides.install();
-
-    // Stream to Buoy Desktop (auto-connects on simulators/emulators).
-    BuoySyncClient(
-      deviceName: 'My App',
-      deviceId: 'my-app',
-      platform: Platform.isIOS ? 'ios' : 'android',
-      tools: {'network': networkSyncAdapter},
-    ).connect();
-
-    // Keep the in-app panel live even when desktop isn't watching.
-    NetworkEventStore.instance.subscribe(() {});
-  }
-  runApp(const MyApp());
-}
+MaterialApp(
+  builder: (context, child) => BuoyDevTools(
+    deviceName: 'My App',
+    child: child ?? const SizedBox.shrink(),
+  ),
+)
 ```
 
-Mount the in-app panel by wrapping your app with `BuoyDevTools` (via `MaterialApp.builder`) and registering a `BuoyTool` with `NetworkModal` — full wiring in the [package example](https://pub.dev/packages/buoy_network/example).
+That's the whole setup. Every installed Buoy tool self-registers on mount: HTTP capture (`HttpOverrides`), the floating in-app menu, the live desktop connection, and the MCP server. Optional props: `licenseKey` for Pro, `socketUrl` for physical devices, `deviceId` to pin the device identity, and `tools` for your own custom tools.
 
 ## Devices
 
 - **iOS Simulator / Android Emulator** — connects to Buoy Desktop automatically (`localhost` / `10.0.2.2`).
-- **Physical devices** — pass your computer's LAN IP: `BuoySyncClient(socketUrl: 'http://192.168.1.x:42831', …)`. iOS will show the Local Network permission prompt on first connect — tap Allow.
+- **Physical devices** — pass your computer's LAN IP via the widget: `BuoyDevTools(socketUrl: 'http://192.168.1.x:42831', …)`. iOS will show the Local Network permission prompt on first connect — tap Allow.
 
 ## What gets captured
 
