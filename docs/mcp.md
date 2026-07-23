@@ -27,6 +27,18 @@ Then restart your editor (or reconnect the MCP server) and open your app with Bu
 
 The config it writes launches the server via `npx -y @buoy-gg/mcp@latest`, so **every editor restart re-resolves the newest published version** — you don't get pinned to a stale copy.
 
+### Corporate / private npm registries
+
+If your machine's `.npmrc` points npm at a private registry that isn't reachable (common on work laptops, e.g. off-VPN), `npx @latest` would hang trying to download the package on every editor launch. `init` probes that registry first and, when it's unreachable, automatically installs a **pinned local copy** from public npm and writes a `node <path>` config instead — taking the network off the startup path entirely. You can also force the behavior:
+
+```bash
+npx -y @buoy-gg/mcp@latest init --local             # always install locally, no network on startup
+npx -y @buoy-gg/mcp@latest init --npx               # always use the auto-updating npx entry
+npx -y @buoy-gg/mcp@latest init --registry <url>    # registry the local install pulls from
+```
+
+To update a local install later, re-run `init`.
+
 ## Updating
 
 Because the default config uses `@latest`, you're normally always current. To force a refresh (or update the installed skill), re-run:

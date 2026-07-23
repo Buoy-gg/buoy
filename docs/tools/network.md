@@ -14,7 +14,7 @@ See every API call your app makes. Request, response, headers, timing, errors �
 
 <!-- ::client-badges-grid -->
 
-> **Also on Flutter (beta):** the network inspector is the first Buoy tool available for Flutter — one hook captures `package:http`, dio, and image loads, streaming to the same desktop dashboard. See [Buoy for Flutter](../flutter).
+> **Also on Flutter (beta):** the network inspector is part of the full Buoy for Flutter suite — one hook captures `package:http`, dio, and image loads, streaming to the same desktop dashboard. See [Buoy for Flutter](../flutter) for the whole suite (network, storage, console, env, routes, images, Riverpod, events, and more).
 
 > **GraphQL gets special treatment** — Operation names are extracted from queries, mutations, and subscriptions, then displayed with variables using arrow notation: `GetUser › 123`. No more guessing which `/graphql` request is which.
 

@@ -15,7 +15,7 @@ Buoy is a floating dev menu that ships inside your React Native app — every re
 
 **Every tool is free. Pro unlocks production builds, MCP & unlimited capture.**
 
-**🎯 Now in beta: [Buoy for Flutter](https://github.com/Buoy-gg/Buoy-Flutter)** — `flutter pub add buoy`. The network inspector ships first, streaming to the same desktop dashboard and MCP server. [Vote for the next Flutter tool →](https://buoy.gg/roadmap)
+**🎯 Now in beta: [Buoy for Flutter](https://github.com/Buoy-gg/Buoy-Flutter)** — `flutter pub add buoy`, wrap your app in one `BuoyDevTools` widget, and get the full suite: network, storage, console, env, routes, images, impersonate, image overlay, an events timeline, a Riverpod inspector, and a live perf HUD — all on the same desktop dashboard and MCP server. [Details →](https://buoy.gg/flutter)
 
 ![Buoy demo — the floating dev menu in action](https://github.com/user-attachments/assets/a732d6a3-9963-49e3-b0f1-0d974a0a74d7)
 

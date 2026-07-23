@@ -18,6 +18,20 @@ One command, non-destructive:
 
 The config it writes launches the server via `npx -y @buoy-gg/mcp@latest`, so every editor restart re-resolves the newest published version — you never get pinned to a stale copy. Restart your editor, open your app with Buoy running, and start with `list_devices`.
 
+### Corporate / private npm registries
+
+If your machine's `.npmrc` points npm at a private registry that isn't reachable (a common setup on work laptops, e.g. off-VPN), `npx @latest` would hang trying to download the package on every editor launch — so `init` probes that registry first and, when it's unreachable, automatically installs a **pinned local copy** (from public npm) and writes a `node <path>` config instead. That takes the network off the startup path entirely.
+
+You can also force it:
+
+```bash
+npx -y @buoy-gg/mcp@latest init --local                 # always install locally, no network on startup
+npx -y @buoy-gg/mcp@latest init --npx                    # always use the auto-updating npx entry
+npx -y @buoy-gg/mcp@latest init --registry <url>         # registry the local install pulls from
+```
+
+To update a local install later, just re-run `init`.
+
 ## What your agent can do
 
 **Read the runtime**

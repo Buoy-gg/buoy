@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/react-query",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "description": "TanStack Query devtools inside your React Native app — cache inspection, refetch & invalidate, offline toggle. Part of Buoy devtools.",
   "homepage": "https://buoy.gg/tools/react-query",
   "keywords": [
