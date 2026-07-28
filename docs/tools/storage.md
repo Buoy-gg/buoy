@@ -42,6 +42,8 @@ registerSecureStoreKeys(SecureStore, [
 
 > MMKV instances need the same one-time registration — see the [package README](https://github.com/LovesWorking/react-native-buoy/tree/main/packages/storage#mmkv-setup) for details.
 
+Registered values are re-read every few seconds while the browser is open, so a secure write shows up without reopening the tool. AsyncStorage and MMKV writes are picked up the moment they happen; the keychain gets a poll instead because it has no change notification of any kind.
+
 ---
 
 ## What You Can Do
@@ -51,6 +53,10 @@ registerSecureStoreKeys(SecureStore, [
 ---
 
 ## Smart Features
+
+**Edit values in place** — Expand a key and hit *Edit value* to write a new one straight to the device. Types are preserved: an MMKV number stays a number, a boolean only accepts `true`/`false`, and a key holding JSON has to stay valid JSON — so you can't silently turn an object into a quoted string. Buffers, read-only MMKV instances, and biometric-protected SecureStore keys say why they can't be edited instead of offering a broken field.
+
+**Edit arrays and objects without typing JSON** — Tap any node in the value tree and its actions appear alongside the key's other buttons: arrays get append, duplicate, reorder and remove; objects get add-key, duplicate and remove; scalars get a text field, with booleans as a two-way toggle. Editing a fifty-item array by hand-writing the whole blob is exactly the thing this avoids — the raw text editor is still there when you'd rather paste.
 
 **Inline value previews** — Short values show right on the card (`number · 42`, `string · "en"`), and booleans get a color-coded true/false badge. No need to expand to see simple values.
 

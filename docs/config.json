@@ -8,40 +8,60 @@
   "sections": [
     {
       "label": "Getting Started",
-      "children": [
+      "children": [],
+      "frameworks": [
         {
-          "label": "Overview",
-          "to": "overview"
+          "label": "react",
+          "children": [
+            {
+              "label": "Overview",
+              "to": "overview"
+            },
+            {
+              "label": "Quick Start",
+              "to": "quick-start"
+            },
+            {
+              "label": "Installation",
+              "to": "installation"
+            }
+          ]
         },
         {
-          "label": "Quick Start",
-          "to": "quick-start"
-        },
-        {
-          "label": "Installation",
-          "to": "installation"
-        }
-      ]
-    },
-    {
-      "label": "Flutter (Beta)",
-      "children": [
-        {
-          "label": "Buoy for Flutter",
-          "to": "flutter"
+          "label": "flutter",
+          "children": [
+            {
+              "label": "Overview & Install",
+              "to": "flutter"
+            },
+            {
+              "label": "Devices",
+              "to": "flutter#devices"
+            },
+            {
+              "label": "Packages",
+              "to": "flutter#packages"
+            }
+          ]
         }
       ]
     },
     {
       "label": "Fundamentals",
-      "children": [
+      "children": [],
+      "frameworks": [
         {
-          "label": "FloatingDevTools",
-          "to": "floating-devtools"
-        },
-        {
-          "label": "Custom Tools",
-          "to": "custom-tools"
+          "label": "react",
+          "children": [
+            {
+              "label": "FloatingDevTools",
+              "to": "floating-devtools"
+            },
+            {
+              "label": "Custom Tools",
+              "to": "custom-tools"
+            }
+          ]
         }
       ]
     },
@@ -65,74 +85,129 @@
     },
     {
       "label": "Available Tools",
-      "children": [
+      "children": [],
+      "frameworks": [
         {
-          "label": "Environment Inspector",
-          "to": "tools/env"
+          "label": "react",
+          "children": [
+            {
+              "label": "Environment Inspector",
+              "to": "tools/env"
+            },
+            {
+              "label": "Events Timeline",
+              "to": "tools/events"
+            },
+            {
+              "label": "Console",
+              "to": "tools/console"
+            },
+            {
+              "label": "Network Monitor",
+              "to": "tools/network"
+            },
+            {
+              "label": "Storage Explorer",
+              "to": "tools/storage"
+            },
+            {
+              "label": "Route Inspector",
+              "to": "tools/routes"
+            },
+            {
+              "label": "Debug Borders",
+              "to": "tools/debug-borders"
+            },
+            {
+              "label": "Highlight Updates",
+              "to": "tools/highlight-updates"
+            },
+            {
+              "label": "Bench",
+              "to": "tools/perf-monitor"
+            },
+            {
+              "label": "JS Top",
+              "to": "tools/js-top"
+            },
+            {
+              "label": "React Query DevTools",
+              "to": "tools/react-query"
+            },
+            {
+              "label": "Redux DevTools",
+              "to": "tools/redux"
+            },
+            {
+              "label": "Zustand DevTools",
+              "to": "tools/zustand"
+            },
+            {
+              "label": "Jotai DevTools",
+              "to": "tools/jotai"
+            },
+            {
+              "label": "Images",
+              "to": "tools/images"
+            },
+            {
+              "label": "Impersonate Tool",
+              "to": "tools/impersonate"
+            },
+            {
+              "label": "Image Overlay",
+              "to": "tools/image-overlay"
+            }
+          ]
         },
         {
-          "label": "Events Timeline",
-          "to": "tools/events"
-        },
-        {
-          "label": "Console",
-          "to": "tools/console"
-        },
-        {
-          "label": "Network Monitor",
-          "to": "tools/network"
-        },
-        {
-          "label": "Storage Explorer",
-          "to": "tools/storage"
-        },
-        {
-          "label": "Route Inspector",
-          "to": "tools/routes"
-        },
-        {
-          "label": "Debug Borders",
-          "to": "tools/debug-borders"
-        },
-        {
-          "label": "Highlight Updates",
-          "to": "tools/highlight-updates"
-        },
-        {
-          "label": "Bench",
-          "to": "tools/perf-monitor"
-        },
-        {
-          "label": "JS Top",
-          "to": "tools/js-top"
-        },
-        {
-          "label": "React Query DevTools",
-          "to": "tools/react-query"
-        },
-        {
-          "label": "Redux DevTools",
-          "to": "tools/redux"
-        },
-        {
-          "label": "Zustand DevTools",
-          "to": "tools/zustand"
-        },
-        {
-          "label": "Jotai DevTools",
-          "to": "tools/jotai"
-        },
-        {
-          "label": "Images",
-          "to": "tools/images"
-        },
-        {
-          "label": "Impersonate Tool",
-          "to": "tools/impersonate"
-        },
-        {
-          "label": "Image Overlay",
-          "to": "tools/image-overlay"
+          "label": "flutter",
+          "children": [
+            {
+              "label": "Environment Inspector",
+              "to": "flutter/tools/env"
+            },
+            {
+              "label": "Events Timeline",
+              "to": "flutter/tools/events"
+            },
+            {
+              "label": "Console",
+              "to": "flutter/tools/console"
+            },
+            {
+              "label": "Network Monitor",
+              "to": "flutter/tools/network"
+            },
+            {
+              "label": "Storage Explorer",
+              "to": "flutter/tools/storage"
+            },
+            {
+              "label": "Route Inspector",
+              "to": "flutter/tools/routes"
+            },
+            {
+              "label": "Perf Monitor",
+              "to": "flutter/tools/perf-monitor"
+            },
+            {
+              "label": "Riverpod Inspector",
+              "to": "flutter/tools/riverpod"
+            },
+            {
+              "label": "Images",
+              "to": "flutter/tools/images"
+            },
+            {
+              "label": "Impersonate Tool",
+              "to": "flutter/tools/impersonate"
+            },
+            {
+              "label": "Image Overlay",
+              "to": "flutter/tools/image-overlay"
+            }
+          ]
         }
       ]
     }

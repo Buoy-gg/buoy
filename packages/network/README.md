@@ -39,8 +39,9 @@ Want a different label or color? Build the tool with `createNetworkTool({ name, 
 - **GraphQL gets special treatment** — operation names are extracted from queries, mutations, and subscriptions and shown with variables in arrow notation: `GetUser › 123`. No more guessing which `/graphql` request is which.
 - **Full request detail** — request/response headers, payloads, HTTP status, and duration for every call, with status-colored rows.
 - **Filter and search** — narrow by status code, HTTP method, or URL pattern; search captured events; pause/resume capture; clear history.
+- **Pin the one that failed** — pin a request to hold it at the top of the list (ignoring your filters), or save it to a separate favorites list. Both keep a full snapshot, so it survives Clear, the 500-request cap, and an app restart. Long-press a row, or use the buttons in the request detail header.
 - **Ignore the noise** — a shared ignored-domains/URL filter (`useIgnoredPatterns`) hides endpoints you never want to see, shared with the Events tool.
-- **Hooks for custom UIs** — `useNetworkEvents`, `useNetworkEventList`, and `useNetworkBadgeCounts` expose the capture stream with narrow per-consumer subscriptions.
+- **Hooks for custom UIs** — `useNetworkEvents`, `useNetworkEventList`, `useNetworkBadgeCounts`, and `useNetworkSaved` expose the capture stream with narrow per-consumer subscriptions.
 
 ## Desktop & AI
 

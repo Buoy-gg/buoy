@@ -38,11 +38,14 @@ To update a local install later, just re-run `init`.
 
 - `get_events` — one timeline across every tool: network, state changes, renders, routes, storage writes — in token-friendly summaries
 - `get_console` — read the app's console logs, even from a release build
+- `get_network_requests` — HTTP requests *with their ids* (which `get_events` omits), marked 📌 pinned / 🔖 saved; `flagged:"any"` reads the requests you kept
+- `network_action` — pin or save a request. Pinned requests survive Clear, the history cap and restarts, so it doubles as a handoff: pin the broken call and ask your agent about "the pinned request", or let it pin what it wants you to see
 
 **Drive the UI**
 
 - `describe_screen` — walks the live React tree into an accessibility-style element list with labels, testIDs, control values, and tap points
 - `tap_element` — presses real JS handlers: tap a button, flip a switch, move a slider, type into a field. No screenshots, no pixel coordinates, works on physical devices. Off-screen targets are scrolled into view first.
+- `reload_app` — restarts the JS bundle (Expo Go, dev client, or RN CLI) and waits for the app to come back, for changes Fast Refresh missed or a clean-slate startup. Ships with `@buoy-gg/core` — no extra package needed.
 
 **Change state**
 

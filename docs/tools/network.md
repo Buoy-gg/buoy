@@ -42,6 +42,30 @@ For every request:
 
 ---
 
+## Pin & Save
+
+A failed request has a short life. The list holds the last 500, Clear wipes it, and a reload starts over — so the one call you actually needed is usually gone by the time you go back for it. Two ways to keep it:
+
+**Pin** — hoists the request into a `PINNED` section at the top of the list. Pins ignore your filters and your search, so a pinned request never disappears while you narrow the list around it. A pin is a full snapshot, not a bookmark: it survives Clear, survives being pushed out past the 500-request cap, and survives an app restart.
+
+**Save** — files the request in a separate **Saved** list (the bookmark button in the toolbar), out of the live stream. Same durability, with its own search and export.
+
+The two are independent — a request can be pinned, saved, both, or neither.
+
+**How to use them**
+
+- Open a request and use the **pin** or **bookmark** button in the detail header.
+- Or **long-press a row** to pin it. In the Saved list, long-press removes.
+- Pinned and saved rows carry a small glyph so you can tell at a glance.
+
+A request pinned while it is still in flight keeps updating — you get its real status and response, not a frozen "Pending".
+
+**On the desktop dashboard** pins and saves are the same list as on the device: toggling one on the dashboard performs it on the device, so both surfaces always agree. Large response bodies are kept intact because the save happens on the device itself.
+
+**Limits.** Up to 25 pins. The Saved list keeps 5 on the free tier and 50 on Pro. Very large request/response bodies are truncated in a saved snapshot so the stored history stays small — everything else about the request is kept.
+
+---
+
 ## What's Next
 
 - [Storage Inspector](./storage) — Browse and edit AsyncStorage & MMKV

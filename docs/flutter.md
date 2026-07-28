@@ -39,7 +39,7 @@ MaterialApp(
 
 That's the whole setup. Every installed Buoy tool self-registers on mount: capture, the floating in-app menu, the live desktop connection, and the MCP server. Optional props: `licenseKey` for Pro, `socketUrl` for physical devices, `deviceId` to pin the device identity, and `tools` for your own custom tools.
 
-A few tools take **one extra line** to opt a widget, provider, or your entry point in — noted in each tool's section below.
+A few tools take **one extra line** to opt a widget, provider, or your entry point in — noted on each tool's page.
 
 ## Devices
 
@@ -48,73 +48,21 @@ A few tools take **one extra line** to opt a widget, provider, or your entry poi
 
 ## Tools
 
-### Network
+Eleven tools ship for Flutter today, each device-verified and each with its own page — same layout as the React Native docs:
 
-Every HTTP request in one hook — no per-client setup. Captures `package:http`, dio, `Image.network`/`NetworkImage`, `cached_network_image`, and GraphQL clients, with headers, bodies, timing, status, and errors.
-
-Everything riding `dart:io`'s `HttpClient` is captured automatically:
-
-| Captured | Notes |
+| Tool | What it does |
 | --- | --- |
-| `package:http` | default `IOClient` |
-| dio | attributed as `dio` in the panel |
-| `Image.network` / `NetworkImage` | Flutter's own image loading |
-| `cached_network_image` | cache misses / revalidations |
-| graphql_flutter / ferry | tag with `X-Request-Client: graphql` for operation names |
-
-Known gaps (documented): `cupertino_http` / `cronet_http` native clients, gRPC (raw sockets), secondary isolates, Flutter web.
-
-### Storage
-
-Browse and edit every key your app persists (shared_preferences and friends) live, with an event stream of every write and diffs of what changed.
-
-### Console
-
-Every `print`, `debugPrint`, and `log` call in a filterable DevTools-style panel, on the device, in any build.
-
-> **Flutter note:** to catch logs emitted before your first frame, wrap your entry point — run `runApp` inside the Buoy console zone in `main()` so capture starts before any log fires.
-
-### Env
-
-The config values your app actually resolved, validated against the types and shapes you expect, with a health score.
-
-### Routes
-
-Your [go_router](https://pub.dev/packages/go_router) sitemap and live navigation stack with params — tap any route to jump straight to it.
-
-> **Flutter note:** register your router once so Buoy can read the sitemap and drive navigation: `registerBuoyRoutes(router: yourRouter)`.
-
-### Images
-
-Every image load with cache verdicts and oversize audits, so slow and stale images stop hiding.
-
-> **Flutter note:** wrap the widgets you want tracked in `BuoyImage(...)` (a thin wrapper over your image widget).
-
-### Impersonate
-
-Inject impersonation headers into every outgoing request to test as any user — no logout, no rebuild. Your backend decides what the headers mean.
-
-### Image Overlay
-
-Pin a design mockup over the running app to nail pixel-perfect UI — free placement, or locked to a specific component.
-
-> **Flutter note:** wrap a widget in `BuoyImageTarget(...)` to make it selectable for component-match mode.
-
-### Events Timeline
-
-Network, storage, state, and navigation activity merged into one chronological, LLM-ready stream — export it and hand an AI the full story of what happened.
-
-### Riverpod Inspector
-
-Watch every provider's live value and each state change over time — the Flutter analog of the React Native Jotai atom inspector.
-
-> **Flutter note:** add the Buoy observer to your `ProviderScope`: `ProviderScope(observers: [BuoyProviderObserver()], child: ...)`.
-
-### Perf Monitor
-
-A live on-device HUD showing UI/JS FPS, CPU, and memory while you use the app, streamed to the desktop.
-
-> Benchmarking and batch reports (recorded, comparable runs) are **coming soon** on Flutter — today the perf tool is a live HUD with live metrics.
+| [Network Monitor](./flutter/tools/network) | Every HTTP request — `package:http`, dio, image loads, GraphQL — with headers, bodies, timing, and errors |
+| [Storage Explorer](./flutter/tools/storage) | Browse and edit every persisted key live, with an event stream of every write |
+| [Console](./flutter/tools/console) | Every `print`, `debugPrint`, and `log` call in a DevTools-style panel, in any build |
+| [Environment Inspector](./flutter/tools/env) | The config values your app actually resolved, validated with a health score |
+| [Route Inspector](./flutter/tools/routes) | Your go_router sitemap and live navigation stack — tap any route to jump there |
+| [Images](./flutter/tools/images) | Every image load with cache verdicts, oversize audits, and failure diagnosis |
+| [Impersonate Tool](./flutter/tools/impersonate) | Inject impersonation headers to test as any user — no logout, no rebuild |
+| [Image Overlay](./flutter/tools/image-overlay) | Pin a design mockup over the running app for pixel-perfect UI |
+| [Events Timeline](./flutter/tools/events) | Network, storage, state, and navigation merged into one LLM-ready stream |
+| [Riverpod Inspector](./flutter/tools/riverpod) | Every provider's live value and each state change, with diffs |
+| [Perf Monitor](./flutter/tools/perf-monitor) | A live on-device HUD with FPS, jank, CPU, and memory |
 
 ## Desktop & MCP
 
