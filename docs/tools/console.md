@@ -12,24 +12,24 @@ A Chrome-DevTools-style console for your React Native app. Buoy Console captures
 
 <!-- ::PM npm="npm install @buoy-gg/console" yarn="yarn add @buoy-gg/console" pnpm="pnpm add @buoy-gg/console" bun="bun add @buoy-gg/console" -->
 
-Pass the Console preset to `FloatingDevTools`, and mount `ConsoleRoot` once near the app root so capture starts at launch — logs emitted before you open the tool are retained:
+That's it. The Console tool auto-appears in your `FloatingDevTools` menu, and capture starts automatically at app launch — logs emitted before you open the tool are retained:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
-import { consoleToolPreset, ConsoleRoot } from "@buoy-gg/console";
 
 export default function App() {
   return (
     <>
       {/* your app */}
-      <ConsoleRoot />
-      <FloatingDevTools apps={[consoleToolPreset]} />
+      <FloatingDevTools />  {/* Console tool auto-detected, capture auto-starts */}
     </>
   );
 }
 ```
 
 It patches `console.*` directly, so logs from your own code and your dependencies are captured — no logger integration or Babel plugin required.
+
+> **Upgrading?** Older versions required mounting `<ConsoleRoot />` manually and passing `consoleToolPreset` via `apps`. Both are automatic now; existing manual wiring is harmless and can be deleted.
 
 ---
 

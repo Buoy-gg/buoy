@@ -14,7 +14,7 @@ npm install @buoy-gg/core @buoy-gg/redux
 
 ## Quick start
 
-Zero config. Your existing store works as-is — no middleware, no wrapper. The tool auto-instruments the store when `FloatingDevTools` mounts.
+Zero config. Your existing store works as-is — no middleware, no wrapper. Buoy hooks the store at creation via the official Redux DevTools integration point (which Redux Toolkit enables by default), so actions are captured from your app's very first dispatch — including everything dispatched inside thunks and RTK Query.
 
 ```tsx
 import { configureStore } from '@reduxjs/toolkit';
@@ -33,9 +33,28 @@ export default function App() {
 }
 ```
 
+### How capture works (and how to guarantee full capture)
+
+Buoy binds to your store the earliest way available, in this order:
+
+1. **Store-creation hook (default, full capture)** — importing `@buoy-gg/redux` claims the Redux DevTools global that RTK checks by default. If the package loads before your store module, Buoy is inside the store from creation: every action (thunk-internal, RTK Query) is captured and time travel is real. To **guarantee** this ordering, make it the first import of your app entry:
+
+   ```tsx
+   // index.js — first line
+   import '@buoy-gg/redux';
+   ```
+
+2. **Middleware (explicit full capture)** — one line if you prefer being explicit:
+
+   ```tsx
+   middleware: (getDefault) => getDefault().concat(buoyReduxMiddleware),
+   ```
+
+3. **Startup fallback** — if your store was created before Buoy loaded, `FloatingDevTools` binds it automatically at app mount. Top-level dispatches are captured from startup; actions dispatched *inside* thunks/middleware aren't visible to this mode (the tool tells you when it's in it).
+
 ### Optional: full time travel
 
-To jump back to past states (not just view them), wrap your reducer:
+Time travel works out of the box on path 1. On the middleware path, wrap your reducer:
 
 ```tsx
 import { withBuoyDevTools } from '@buoy-gg/redux';

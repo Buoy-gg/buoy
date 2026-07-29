@@ -14,24 +14,24 @@ npm install @buoy-gg/core @buoy-gg/console
 
 ## Quick start
 
-Pass the preset to the floating menu, and mount `ConsoleRoot` once near the app root so capture starts at startup — logs emitted before you open the tool are retained:
+Zero config. Install the package and the Console tool auto-appears in the floating menu, with capture starting at app launch — logs emitted before you open the tool are retained:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
-import { consoleToolPreset, ConsoleRoot } from "@buoy-gg/console";
 
 export default function App() {
   return (
     <>
       {/* your app */}
-      <ConsoleRoot />
-      <FloatingDevTools apps={[consoleToolPreset]} />
+      <FloatingDevTools />  {/* Console tool auto-detected, capture auto-starts */}
     </>
   );
 }
 ```
 
 That's the whole setup — it patches `console.*` directly, so no logger integration or Babel plugin is required.
+
+> Upgrading? Older versions required mounting `<ConsoleRoot />` manually. That's automatic now; an existing manual mount is harmless (capture install is idempotent) and can be deleted.
 
 ## What you get
 

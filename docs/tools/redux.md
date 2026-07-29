@@ -16,7 +16,9 @@ Full Redux Toolkit inspection for React Native. Monitor actions, explore state c
 
 That's it. The Redux DevTools auto-detects your store and appears in your FloatingDevTools menu.
 
-> **Zero config required** — Just install the package. Your existing Redux store works as-is with no middleware or wrapper needed.
+> **Zero config required** — Just install the package. Your existing Redux store works as-is with no middleware or wrapper needed. Buoy hooks the store at creation via the official Redux DevTools integration point (Redux Toolkit enables it by default), so actions are captured from your app's very first dispatch — including thunk-internal and RTK Query actions — with no UI interaction required.
+
+> **Guarantee full capture** — the store-creation hook needs `@buoy-gg/redux` to load before your store module. That's usually automatic; to make it a guarantee, put `import '@buoy-gg/redux';` as the **first import of your app entry**. If Buoy loads too late, it still binds your store automatically at app mount (top-level dispatches only — the tool tells you when it's in that mode).
 
 ---
 
@@ -168,7 +170,7 @@ const store = configureStore({
 });
 ```
 
-> **When to use manual middleware:** Only if you need to ignore specific actions or increase history size. The auto-instrumentation handles everything else.
+> **When to use manual middleware:** If you need to ignore specific actions, increase history size, or you simply prefer explicit wiring — the middleware path is also a guaranteed-full-capture alternative to the import-order note above. Everything (action log, desktop sync, MCP `get_redux_state`/`redux_dispatch`) works the same on either path.
 
 > **No conflicts:** If you configure middleware manually, the auto-instrumentation automatically detects this and defers to your configuration. You'll never get duplicate action entries.
 
