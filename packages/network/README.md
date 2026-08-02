@@ -40,6 +40,7 @@ Want a different label or color? Build the tool with `createNetworkTool({ name, 
 - **Full request detail** — request/response headers, payloads, HTTP status, and duration for every call, with status-colored rows.
 - **Filter and search** — narrow by status code, HTTP method, or URL pattern; search captured events; pause/resume capture; clear history.
 - **Pin the one that failed** — pin a request to hold it at the top of the list (ignoring your filters), or save it to a separate favorites list. Both keep a full snapshot, so it survives Clear, the 500-request cap, and an app restart. Long-press a row, or use the buttons in the request detail header.
+- **Step between requests** — the detail view has a Previous/Next footer that walks exactly what the list was showing (same pins, filters, and search — or your Saved list), so comparing two calls doesn't mean going back and finding your place.
 - **Ignore the noise** — a shared ignored-domains/URL filter (`useIgnoredPatterns`) hides endpoints you never want to see, shared with the Events tool.
 - **Hooks for custom UIs** — `useNetworkEvents`, `useNetworkEventList`, `useNetworkBadgeCounts`, and `useNetworkSaved` expose the capture stream with narrow per-consumer subscriptions.
 

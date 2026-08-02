@@ -42,6 +42,16 @@ For every request:
 
 ---
 
+## Stepping Between Requests
+
+Open a request and the detail view gets a **Previous / Next** footer, so comparing two calls no longer means going back to the list and finding your place again.
+
+It steps through exactly what the list was showing — the same pinned rows first, the same filters, the same search. Narrow the list to failures, open one, and Next walks you through the failures only; the counter reads `REQUEST 4 OF 11`, not "4 of everything captured". Requests arriving while you read re-scope it live. Opened from the **Saved** list, it steps through your saves (and their search) instead.
+
+Both lists are newest-first, so **Previous** moves toward the newer request — the same direction as scrolling up.
+
+---
+
 ## Pin & Save
 
 A failed request has a short life. The list holds the last 500, Clear wipes it, and a reload starts over — so the one call you actually needed is usually gone by the time you go back for it. Two ways to keep it:

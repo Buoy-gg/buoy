@@ -35,6 +35,7 @@ Events Timeline automatically aggregates from all installed Buoy tools. No addit
 
 - **One interleaved timeline** — newest-first, across all installed source tools.
 - **Per-source filters** — toggle a source on/off with live subscriber + event counts.
+- **Header search** — tap the magnifying glass and filter as you type; matches an event's title, its subtitle (status, duration, host, key), and the full URL of network events. Stacks with the source filters.
 - **Real detail views** — a network event opens the same detail page the Network tool shows, including the shared ignore-domain / ignore-URL toggles that hide matches from both lists.
 - **Capture toggle + export** — pause capture, and copy as markdown, JSON, plaintext, or a mermaid diagram.
 

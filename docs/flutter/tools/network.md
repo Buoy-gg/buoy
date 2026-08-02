@@ -57,6 +57,16 @@ For every request:
 
 ---
 
+## Stepping Between Requests
+
+Open a request and the detail view gets a **Previous / Next** footer, so comparing two calls no longer means going back to the list and finding your place again.
+
+It steps through exactly what the list was showing — the same filters, the same search. Narrow the list to failures, open one, and Next walks you through the failures only; the counter reads `REQUEST 4 OF 11`, not "4 of everything captured". Requests arriving while you read re-scope it live.
+
+The list is newest-first, so **Previous** moves toward the newer request — the same direction as scrolling up.
+
+---
+
 ## Known Gaps
 
 Documented and on the roadmap: `cupertino_http` / `cronet_http` native clients, gRPC (raw sockets), secondary isolates, and Flutter web.

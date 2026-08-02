@@ -36,7 +36,7 @@ That's it. The EVENTS tool appears in the menu and automatically captures from e
 - **Correlation badges** — related events are linked: a React Query fetch start → success pair shows as "1/2" so you can trace the full lifecycle
 - **LLM export presets** — copy the timeline as Markdown tuned for AI agents, a Bug Report with timestamps and error details, machine-readable JSON, or Errors Only
 - **Smart formatting** — nested JSON parsed, verbose fields stripped, and Redux events show only the state that actually changed
-- **Filter and search** — narrow by source, status, or text before you export
+- **Filter and search** — source badges narrow the timeline, and header search filters it live as you type (matches titles, subtitles, and full network URLs — they stack, so filter to Network then search the failing endpoint)
 - **`useUnifiedEvents` hook** — consume the merged event stream in your own components
 
 ## Desktop & AI

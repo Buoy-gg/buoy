@@ -32,6 +32,14 @@ Events Timeline automatically captures from all installed BUOY tools. No additio
 
 ---
 
+## Search
+
+Tap the magnifying glass in the header to filter the timeline as you type. Matches an event's title, its subtitle (status, duration, host, key), and the full URL of network events — so you can search a host, an action type, a storage key, or a query string value.
+
+> Search stacks with the source badges — filter to Network, then search for the failing endpoint.
+
+---
+
 ## LLM Export
 
 Copy your event timeline in formats optimized for AI assistants. Reproduce a bug, export, and paste into Claude or ChatGPT with your question.
