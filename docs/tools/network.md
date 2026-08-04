@@ -78,6 +78,54 @@ A request pinned while it is still in flight keeps updating — you get its real
 
 ---
 
+## Override Responses
+
+Chrome DevTools has **Local Overrides** — serve different bytes for a request without touching the server. Buoy has the same idea on device, and goes further: Chrome can't change a status code (override a body there and it forces `200`), and it has no way to simulate latency or a dead connection. Those are the things you actually need on mobile.
+
+Open any request and tap **Override** in the header. That takes you to the rule, prefilled from the request you were looking at — its endpoint, its method, its status, its real response body — so you're never starting from a blank field.
+
+Pick what the app should get instead:
+
+| | What the app sees |
+|---|---|
+| **Server error 500 / Unauthorized 401 / Not found 404** | That status, with a JSON error body — does your error UI appear? |
+| **Forbidden 403 / Rate limited 429 / Unavailable 503 / Bad request 400** | The rest of the failures worth forcing |
+| **Success 200** | A 200 with a body you choose — swap in an empty list and check the empty state |
+| **Offline** | The exact failure a real dead connection produces |
+| **Timeout** | A genuine timeout event, not a generic error |
+| **Real response** | Don't change the answer, just make it late |
+| **Custom** | Any other status code |
+
+The header button lights up while a rule covers the request you're looking at, and tapping it again opens that rule rather than stacking a second one the first would shadow.
+
+### Editing the body
+
+A request's **Response Body** is read-only — that view answers "what came back". Every edit lives in the rule itself, so there's one place to look and one place to change.
+
+Open a rule's **Response body** and it's an editor and a preview at once: a string renders *as* its input, a number gets steppers, a boolean gets a toggle, every row has a delete. Typing into what you're reading is the edit. It's the same explorer as the [React Query](./react-query) tool, so if you've edited cached query data in Buoy you already know it.
+
+**Edit all** replaces the whole body — it opens an empty field rather than prefilling one, because a real response is routinely hundreds of KB and you only reach for it when you mean to paste something new.
+
+A rule built from a request matches its **endpoint**, not the exact URL — the query string becomes a wildcard. That matters more than it sounds: plenty of clients cache-bust with a timestamp or carry a request id, and pinning the exact URL would give you a rule that silently never fires again.
+
+**Rules survive a reload.** That's the point: force an endpoint to 500, restart the app, and watch what your boot path does with it.
+
+**Matching** uses `*` globs against the whole URL, the same syntax as Chrome's `applyTo` field. An exact URL works as-is; `*/v1/users*` matches that path on any host. Rules are an ordered list and the first enabled match wins.
+
+The method is part of the **match**, not the target. Picking `POST` means "when the app POSTs here, hand it this response" — overrides always replace what the app *receives*, and never touch the body you send. Mutation responses are worth forcing for exactly that reason: make a checkout POST return 500, or a PATCH come back with a validation error.
+
+**It says so, loudly.** Overridden requests are hoisted into an `OVERRIDDEN` strip at the top of the list, rows carry a flask glyph, and the toolbar button lights up with a count.
+
+**And it lets go.** Rules surviving a reload is the point — but a body your app can't render would otherwise re-break it on every launch, with the controls to undo it locked inside an app that no longer draws. So if overrides sit armed and untouched across three launches, they pause themselves: `Overrides paused — they'd been on for 3 launches`, with one tap to turn them back on. Force-a-500-and-restart still works; a wedge can't outlive it.
+
+**Safety.** Overrides only run in development builds, never touch Buoy's own licence traffic, and skip `OPTIONS` preflights. One master switch turns everything off without losing your rules.
+
+**From the dashboard and from AI.** Rules live on the device, but you can author them from the desktop dashboard, and the `network_override` MCP tool lets an agent force a state and then check what the app rendered — "make this endpoint 500 and tell me what the user sees."
+
+**Limits.** Free is one override at a time — a new one replaces the live one rather than being refused. Pro runs up to 50. Status codes must be 200–599 (for connection-level failures use **Offline**, which is what a real one looks like). Requests made with `expo/fetch` imported directly, and binary `arraybuffer` downloads, are not overridden.
+
+---
+
 ## What's Next
 
 - [Storage Inspector](./storage) — Browse and edit AsyncStorage & MMKV

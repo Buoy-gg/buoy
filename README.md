@@ -188,7 +188,7 @@ Want the session without any on-device UI at all — field builds, kiosk devices
 
 Every tool is **free** — no key, no signup, no time limit.
 
-**Pro** unlocks production builds, the MCP server, and unlimited capture — **$29/seat/month or $290/year**, with a 14-day trial. Activate with one prop:
+**Pro** unlocks production builds, the MCP server, and unlimited capture — **$29/seat/month or $290/year**, with a 14-day trial. Limited-time annual sales show up at [buoy.gg/pricing](https://buoy.gg/pricing). Activate with one prop:
 
 ```tsx
 <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
