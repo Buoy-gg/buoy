@@ -41,9 +41,9 @@ It wraps your `ImageProvider`, measures the rendered box for the oversize audit,
 
 ---
 
-## Audit images from your AI
+## Desktop & AI
 
-With the [MCP server](../../mcp), an agent can list every load with `get_images`, reload or retry with `image_action`, and flip failure simulations with `set_image_simulation`.
+The same live registry streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) — the full tool (list, detail, simulations, mass actions) on a big screen. And with the [MCP server](../../mcp), an agent can list every load with `get_images`, reload or retry with `image_action`, and flip failure simulations with `set_image_simulation`.
 
 ---
 

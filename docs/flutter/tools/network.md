@@ -67,6 +67,30 @@ The list is newest-first, so **Previous** moves toward the newer request — the
 
 ---
 
+## Override Responses
+
+Chrome DevTools has **Local Overrides** — serve different bytes for a request without touching the server. Buoy has the same idea on device, and goes further: Chrome can't change a status code (override a body there and it forces `200`), and it has no way to simulate latency or a dead connection. Those are the things you actually need on mobile.
+
+Open any request and tap **Override** in the header. That takes you to the rule, prefilled from the request you were looking at — its endpoint, its method, its status, its real response body — so you're never starting from a blank field.
+
+Pick an outcome from one grid: `500`, `401`, `404`, `403`, `429`, `503`, `400`, `200`, **Offline**, **Timeout**, **Real response**, or a custom status. Set a delay. Choose whether it fires always, once, N times, or **every other request** — that last one is how you test retry logic, because a rule that's always on or always off can't reach those paths.
+
+**It works with every client the tool captures.** Overrides are applied at the same `HttpOverrides` layer as capture, so dio, `package:http` and raw `HttpClient` all see them. A forced failure arrives as a `SocketException`, which dio reports as `DioExceptionType.connectionError` — or `connectionTimeout` for a Timeout rule — exactly as a real network failure would.
+
+**A delay behaves like a slow server, not a slow connection.** The wait is applied while the response is being received, so a 10s delay against a 5s `receiveTimeout` produces a receive timeout — the failure you were trying to reproduce.
+
+**Rules survive a reload**, which is the point: force an endpoint to 500, restart, and watch what your boot path does.
+
+**And it lets go.** A body your app can't render would otherwise re-break it on every launch, with the controls to undo it locked inside an app that no longer draws. So if overrides sit armed and untouched across three launches, they pause themselves, with one tap to turn them back on.
+
+Overridden requests pin to the top of the list under an **OVERRIDDEN** heading and carry a flask mark next to their status — a 500 you invented has to be distinguishable from a 500 your backend returned.
+
+**Safety.** Overrides only run in debug builds, never touch Buoy's own licence traffic, and skip `OPTIONS` preflights. One master switch turns everything off without losing your rules.
+
+Rules can also be driven from Buoy Desktop and from the `network_override` MCP tool — same rules, same device.
+
+---
+
 ## Known Gaps
 
 Documented and on the roadmap: `cupertino_http` / `cronet_http` native clients, gRPC (raw sockets), secondary isolates, and Flutter web.

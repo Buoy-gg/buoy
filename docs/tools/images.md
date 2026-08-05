@@ -41,6 +41,9 @@ import { imagesToolPreset } from "@buoy-gg/images";
 - **Catch upscaled (blurry) sources too** — a 50px thumbnail stretched into a 300pt hero gets flagged the other way.
 - **Track decoded memory** — estimated decoded-bitmap bytes per image and totaled across mounted images, so you catch ballooning before the OOM crash.
 - **Diagnose failures** — every `onError` is captured with the error message; on iOS, RN core also gives you the HTTP status code and response headers.
+- **Act on any image** — hard reload (bypass caches + refetch), retry, or flash a red border on the on-screen image to locate it visually.
+- **Simulate the bad day** — force an error, an endless loading state, or a blank on any mounted image; swap its source URL in place; or flip app-wide modes: **Offline** (network images fail, bundled assets still load), **Cold** (every load bypasses caches like first launch), and Chrome-style **blank images**. Mass actions apply any of these to everything on screen at once.
+- **Prove the savings** — re-encode an oversized source at its displayed size as WebP *on the device*, get the real byte savings, and preview the optimized file in place before you touch your CDN.
 - **Clear caches** — expo-image memory and disk caches, one tap from the detail view.
 
 ## How it works
@@ -55,6 +58,10 @@ Buoy's own UI (like the thumbnails inside the tool) is excluded from capture —
 - Cache classification for RN core images uses `Image.queryCache`, which reflects the cache *after* the load — combined with whether network progress events fired, the verdict distinguishes a fresh download from a cache hit.
 - Decoded-memory numbers are estimates (`width × height × 4` bytes) — the same math the platforms use for RGBA bitmaps.
 
+## Desktop & AI
+
+The same live registry streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) — the full tool (list, detail, simulations, mass actions) on a big screen — and to your editor's AI agent via the MCP server: `get_images` audits a screen's images in one call, `image_action` drives per-image reloads/overrides (including the on-device savings re-encode), and `set_image_simulation` flips the app-wide modes.
+
 ## What's Next
 
-Cache explorer (browse the actual disk cache directories with sizes and ages), per-screen waste reports, an X-ray overlay mode (badges on every on-screen image), desktop dashboard mirroring, and MCP tools so your AI agent can audit a screen's images in one call.
+Cache explorer (browse the actual disk cache directories with sizes and ages), per-screen waste reports, and an X-ray overlay mode (badges on every on-screen image).
