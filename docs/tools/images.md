@@ -10,6 +10,8 @@ Images not loading? Loading slow? Stale avatars that never update? Memory balloo
 
 The Images tool is the visibility layer: every image your app loads — React Native's `<Image>` and `expo-image` — appears in a live registry with where it came from (memory cache / disk cache / network), how long it took, how big it decoded, and exactly why it failed. Pure JavaScript — works in Expo Go and release builds.
 
+<!-- ::images-demo -->
+
 ## Installation
 
 <!-- ::PM npm="npm install @buoy-gg/images" yarn="yarn add @buoy-gg/images" pnpm="pnpm add @buoy-gg/images" bun="bun add @buoy-gg/images" -->
