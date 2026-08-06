@@ -22,13 +22,19 @@ Add the register import as the **first line** of your app entry file (`index.js`
 import "@buoy-gg/images/register";
 ```
 
-Then the IMAGES tool appears in your floating menu:
+Then the IMAGES tool appears in your floating menu automatically — auto-discovery finds the installed package, no registration needed:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
-import { imagesToolPreset } from "@buoy-gg/images";
 
-<FloatingDevTools apps={[imagesToolPreset]} />
+export default function App() {
+  return (
+    <>
+      <YourApp />
+      <FloatingDevTools />
+    </>
+  );
+}
 ```
 
 > **Why first?** RN core's `<Image>` instrumentation uses React Native's official component-decorator hook, which must be installed before the Image module first evaluates. expo-image capture has no timing constraint — it works whenever the tool loads. If the import is missing or too late, the tool tells you exactly what to fix instead of sitting silently empty.

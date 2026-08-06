@@ -16,13 +16,19 @@ The Assets tool is that inventory, live in your app: every bundled asset — ima
 
 <!-- ::PM npm="npm install @buoy-gg/assets" yarn="yarn add @buoy-gg/assets" pnpm="pnpm add @buoy-gg/assets" bun="bun add @buoy-gg/assets" -->
 
-That's it — no register import, no config. The ASSETS tool appears in your floating menu:
+That's it — no register import, no config, no registration. Auto-discovery finds the installed package and the ASSETS tool appears in your floating menu:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
-import { assetsToolPreset } from "@buoy-gg/assets";
 
-<FloatingDevTools apps={[assetsToolPreset]} />
+export default function App() {
+  return (
+    <>
+      <YourApp />
+      <FloatingDevTools />
+    </>
+  );
+}
 ```
 
 > **Why zero-config?** Asset ids in React Native's runtime registry are contiguous, so the tool enumerates everything registered since app start the moment it opens — nothing needs to load early. Live updates stream in as lazily-required assets register later.
