@@ -151,6 +151,10 @@
               "to": "tools/images"
             },
             {
+              "label": "Assets",
+              "to": "tools/assets"
+            },
+            {
               "label": "Impersonate Tool",
               "to": "tools/impersonate"
             },
