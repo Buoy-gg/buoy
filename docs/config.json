@@ -111,6 +111,10 @@
               "to": "tools/storage"
             },
             {
+              "label": "Time Machine",
+              "to": "tools/time-machine"
+            },
+            {
               "label": "Route Inspector",
               "to": "tools/routes"
             },

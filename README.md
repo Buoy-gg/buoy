@@ -63,12 +63,13 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 
 ---
 
-## 🧰 The 15 tools
+## 🧰 The 19 tools
 
 | Tool | Package | What it does |
 | --- | --- | --- |
 | [Network](https://buoy.gg/buoy/latest/docs/tools/network) | `@buoy-gg/network` | Every request, response, timing & error — GraphQL operations extracted and shown as `GetUser › 123` |
 | [Storage](https://buoy.gg/buoy/latest/docs/tools/storage) | `@buoy-gg/storage` | Browse & edit AsyncStorage, MMKV & SecureStore with change history — biometric keys listed, never auto-read |
+| [Time Machine](https://buoy.gg/buoy/latest/docs/tools/time-machine) | `@buoy-gg/time-machine` | Snapshot storage, Redux, Zustand, Jotai & the query cache as restore points — jump back in one tap, or wipe to fresh install |
 | [Env](https://buoy.gg/buoy/latest/docs/tools/env) | `@buoy-gg/env` | Auto-discovers `EXPO_PUBLIC_` vars, validates types, scores config health 0–100% |
 | [Query](https://buoy.gg/buoy/latest/docs/tools/react-query) | `@buoy-gg/react-query` | TanStack Query cache — refetch, invalidate, simulate loading & error states, one-tap offline |
 | [Routes](https://buoy.gg/buoy/latest/docs/tools/routes) | `@buoy-gg/route-events` | Navigation events, the live stack, and the full sitemap — jump to any screen |
