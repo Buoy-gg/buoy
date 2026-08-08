@@ -1,5 +1,6 @@
 ---
 title: Assets
+seoTitle: "Assets — setup, config & API"
 id: tools-assets
 description: "See every asset shipped in your app — bundled images, fonts, video and audio with real byte sizes, scale-variant coverage, duplicate detection, and shipped-but-never-loaded auditing. Zero configuration."
 ---
@@ -57,3 +58,7 @@ Three layers, each degrading gracefully:
 3. **Expo enrichment (when present):** loaded font families and the expo-updates embedded-asset map, read through guarded globals — no extra dependencies for bare RN apps.
 
 **Honest limits:** `.json` files (including Lottie) compile into the JS bundle as source modules, so they never reach the asset registry — they're visible in dev via the bundle graph only. Native-only resources (app icons, splash screens) live outside the JS bundle entirely and aren't listed.
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Assets page on buoy.gg](https://buoy.gg/tools/assets).*

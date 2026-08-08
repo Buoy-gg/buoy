@@ -1,5 +1,6 @@
 ---
 title: Impersonate Tool
+seoTitle: "Impersonate Tool — setup, config & API"
 id: tools-impersonate
 description: "Test your React Native app as any user by injecting impersonation headers into every network request — no logging out or switching accounts required."
 ---
@@ -281,3 +282,7 @@ function impersonateMiddleware(req, res, next) {
 - [Network Monitor](./network) — See the impersonation headers in your requests
 - [Redux DevTools](./redux) — Watch state changes when switching users
 - [Storage Explorer](./storage) — Inspect persisted user data
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Impersonate page on buoy.gg](https://buoy.gg/tools/impersonate).*

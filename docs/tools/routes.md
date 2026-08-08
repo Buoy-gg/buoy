@@ -1,5 +1,6 @@
 ---
 title: Route Inspector
+seoTitle: "Route Inspector — setup, config & API"
 id: tools-routes
 description: "Browse every route in your app — Expo Router or React Navigation — jump to any screen, and watch navigation events in real time to debug React Native navigation issues fast."
 ---
@@ -56,3 +57,7 @@ Tap any event to open its **detail page** — the full route template, from/to p
 - [Network Monitor](./network) — See every API call your app makes
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
 - [React Query DevTools](./react-query) — Inspect query cache and simulate states
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Route Inspector page on buoy.gg](https://buoy.gg/tools/routes).*

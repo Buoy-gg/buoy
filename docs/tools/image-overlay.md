@@ -1,5 +1,6 @@
 ---
 title: Image Overlay
+seoTitle: "Image Overlay — setup, config & API"
 id: tools-image-overlay
 description: "Overlay design mockups on your running React Native app and tweak opacity, scale, and position to nail pixel-perfect UI without leaving the simulator."
 ---
@@ -98,3 +99,7 @@ Manually position and resize the overlay anywhere on screen. Drag to move, pinch
 - [Highlight Updates](./highlight-updates) — See exactly why components re-render
 - [Environment Inspector](./env) — View and search environment variables
 - [Network Monitor](./network) — See every API call your app makes
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Image Overlay page on buoy.gg](https://buoy.gg/tools/image-overlay).*

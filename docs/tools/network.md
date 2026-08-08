@@ -1,5 +1,6 @@
 ---
 title: Network Monitor
+seoTitle: "Network Monitor — setup, config & API"
 id: tools-network
 description: "Inspect every HTTP request your React Native app makes — URLs, headers, timing, and errors — live on the device, no Flipper or proxy required."
 ---
@@ -131,3 +132,7 @@ The method is part of the **match**, not the target. Picking `POST` means "when 
 - [Storage Inspector](./storage) — Browse and edit AsyncStorage & MMKV
 - [Environment Inspector](./env) — Validate env vars with type checking
 - [React Query](./react-query) — Inspect query cache and simulate states
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Network Inspector page on buoy.gg](https://buoy.gg/tools/network).*

@@ -1,5 +1,6 @@
 ---
 title: React Query DevTools
+seoTitle: "React Query DevTools — setup, config & API"
 id: tools-react-query
 description: "Full TanStack Query devtools for React Native — browse queries, inspect cached data, simulate loading and error states, and debug fetching on-device."
 ---
@@ -54,3 +55,7 @@ Simulate offline mode with one tap. The WiFi toggle controls React Query's `onli
 - [Network Monitor](./network) — See every API call your app makes
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
 - [Environment Inspector](./env) — Validate env vars with type checking
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [React Query DevTools page on buoy.gg](https://buoy.gg/tools/react-query).*

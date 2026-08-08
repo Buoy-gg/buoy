@@ -1,5 +1,6 @@
 ---
 title: Events Timeline
+seoTitle: "Events Timeline — setup, config & API"
 id: tools-events
 description: "Watch network requests, storage writes, Redux actions, and React Query events in one chronological timeline to debug complex React Native user flows."
 ---
@@ -65,3 +66,7 @@ Related events are linked together. React Query fetch start → success events s
 - [Network Monitor](./network) — Deep dive into API requests
 - [Redux DevTools](./redux) — State inspection and time-travel
 - [Storage Explorer](./storage) — Browse and edit persisted data
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Events Timeline page on buoy.gg](https://buoy.gg/tools/events).*

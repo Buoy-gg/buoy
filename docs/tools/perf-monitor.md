@@ -1,5 +1,6 @@
 ---
 title: Bench
+seoTitle: "Bench — setup, config & API"
 id: tools-perf-monitor
 description: "Benchmark React Native performance on a real device — track UI/JS FPS, CPU, memory, and jank, record runs, and compare variants to prove what's faster."
 ---
@@ -88,3 +89,7 @@ The only steps that stay manual are the ones a human has to eyeball — mainly c
 - [AI / MCP Server](../mcp) — Automate benchmarks with an AI agent
 - [Render Highlighter](./highlight-updates) — Find the re-renders hurting performance
 - [Events Timeline](./events) — See performance in context with everything else
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Bench — Performance Monitor page on buoy.gg](https://buoy.gg/tools/perf-monitor).*

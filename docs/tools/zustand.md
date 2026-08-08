@@ -1,5 +1,6 @@
 ---
 title: Zustand DevTools
+seoTitle: "Zustand DevTools — setup, config & API"
 id: tools-zustand
 description: "Zustand devtools for React Native — watch store state changes, explore diffs, jump back to any previous state, and reset stores live on your device."
 ---
@@ -143,3 +144,7 @@ Pause state capture when you need to focus, resume when ready.
 - [React Query DevTools](./react-query) — TanStack Query inspection
 - [Network Monitor](./network) — See every API call your app makes
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Zustand DevTools page on buoy.gg](https://buoy.gg/tools/zustand).*

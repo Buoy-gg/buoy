@@ -39,7 +39,8 @@ Each state source is captured through the Buoy tool that already watches it — 
 - **Restore in one tap** — two modes:
   - **Live restore** swaps state in place: stores are replaced, the query cache is diffed query-by-query (mounted components keep their subscriptions), storage is written back. The app stays exactly where it is.
   - **Restore + reload** restores persisted storage, then reloads the JS bundle — your in-memory stores rebuild themselves from the restored storage. The bulletproof option.
-- **Capture a fresh-install baseline** — one tap stores an *empty* restore point. Restoring it wipes all app storage and reloads: your app behaves like it was just installed, no reinstalling required.
+- **Define your own "fresh install"** — set the app up in your clean starting state (logged in, flags set, whatever "fresh" means for you), capture it, and name it. Restore is a *diff*: keys and state that aren't in the snapshot are removed, so restoring your baseline really is your baseline — later junk included. (Need a *true* zero-storage first launch? Agents can create an empty wipe-to-fresh restore point via MCP.)
+- **Preview before you restore** — tap any snapshot to see exactly what restoring it will change, item by item: what gets added, removed, overwritten — and what *can't* be applied, with the reason. Tree and split diff views per item, straight from the storage tool's diff UX.
 - **See exactly what happened** — every restore reports per-source results: applied counts, skipped items with reasons, and warnings. A partial restore is reported, never hidden.
 - **Drive it remotely** — the same snapshots work from Buoy Desktop and from AI agents via MCP (`time_machine_action`): *capture → drive the flow → restore → repeat* is one tool call per step.
 

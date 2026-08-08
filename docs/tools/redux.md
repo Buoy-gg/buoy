@@ -1,5 +1,6 @@
 ---
 title: Redux DevTools
+seoTitle: "Redux DevTools — setup, config & API"
 id: tools-redux
 description: "Redux DevTools for React Native — monitor dispatched actions, inspect state changes, and time-travel debug your store live on the device, no Flipper needed."
 ---
@@ -212,3 +213,7 @@ import {
 - [React Query DevTools](./react-query) — TanStack Query inspection
 - [Network Monitor](./network) — See every API call your app makes
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Redux DevTools page on buoy.gg](https://buoy.gg/tools/redux).*

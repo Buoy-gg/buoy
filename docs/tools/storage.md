@@ -1,5 +1,6 @@
 ---
 title: Storage Explorer
+seoTitle: "Storage Explorer — setup, config & API"
 id: tools-storage
 description: "Browse and edit every key-value pair your React Native app persists — AsyncStorage, MMKV, and SecureStore in one explorer with real-time updates."
 ---
@@ -77,3 +78,7 @@ Registered values are re-read every few seconds while the browser is open, so a 
 - [Network Monitor](./network) — See every API call your app makes
 - [Environment Inspector](./env) — Validate env vars with type checking
 - [React Query](./react-query) — Inspect query cache and simulate states
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Storage Explorer page on buoy.gg](https://buoy.gg/tools/storage).*

@@ -1,5 +1,6 @@
 ---
 title: Images
+seoTitle: "Images — setup, config & API"
 id: tools-images
 description: "Debug every image in your app — a live registry of RN <Image> and expo-image loads with cache verdicts (memory/disk/network), timings, oversize + wasted-memory auditing, and a failure log. Works in Expo Go and release builds."
 ---
@@ -73,3 +74,7 @@ The same live registry streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy
 ## What's Next
 
 Cache explorer (browse the actual disk cache directories with sizes and ages), per-screen waste reports, and an X-ray overlay mode (badges on every on-screen image).
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Images page on buoy.gg](https://buoy.gg/tools/images).*

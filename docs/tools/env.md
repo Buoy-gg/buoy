@@ -1,5 +1,6 @@
 ---
 title: Environment Inspector
+seoTitle: "Environment Inspector — setup, config & API"
 id: tools-env
 description: "View and validate your React Native app's environment variables on-device — auto-discovers EXPO_PUBLIC_ vars with type detection and health monitoring."
 ---
@@ -101,3 +102,7 @@ createEnvTool({
 Use the interactive builder below to create your environment validation config. Add variables, configure checks (type, value, description), and export the code directly.
 
 <!-- ::env-playground -->
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Environment Inspector page on buoy.gg](https://buoy.gg/tools/env).*

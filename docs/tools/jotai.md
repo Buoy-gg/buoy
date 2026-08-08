@@ -1,5 +1,6 @@
 ---
 title: Jotai DevTools
+seoTitle: "Jotai DevTools — setup, config & API"
 id: tools-jotai
 description: "Inspect Jotai atoms in your React Native app — watch state changes, browse live atom values, and explore value diffs in real time, right on the device."
 ---
@@ -131,3 +132,7 @@ Pause atom capture when you need to focus, resume when ready.
 - [Redux DevTools](./redux) — Redux action monitor with state diffing and time-travel
 - [React Query DevTools](./react-query) — TanStack Query inspection
 - [Network Monitor](./network) — See every API call your app makes
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Jotai DevTools page on buoy.gg](https://buoy.gg/tools/jotai).*

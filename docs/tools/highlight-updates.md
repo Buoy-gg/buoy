@@ -1,5 +1,6 @@
 ---
 title: Highlight Updates
+seoTitle: "Highlight Updates — setup, config & API"
 id: tools-highlight-updates
 description: "See why your React Native components re-render — visual overlays highlight every render and reveal the cause: mount, state, props, or parent updates."
 ---
@@ -53,3 +54,7 @@ When a state change causes a render, Highlight Updates shows you the **before an
 - [Image Overlay](./image-overlay) — Overlay design mockups on your running app
 - [Environment Inspector](./env) — View and search environment variables
 - [Network Monitor](./network) — See every API call your app makes
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Render Highlighter page on buoy.gg](https://buoy.gg/tools/highlight-updates).*

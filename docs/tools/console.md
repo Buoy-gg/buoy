@@ -1,5 +1,6 @@
 ---
 title: Console
+seoTitle: "Console — setup, config & API"
 id: tools-console
 description: "Capture every console.log, warn, and error from your React Native app in a Chrome DevTools-style panel — filterable, on-device, no cable or Flipper needed."
 ---
@@ -54,3 +55,7 @@ With the [MCP server](../mcp), an AI agent can read the console tail directly wi
 - [Events Timeline](./events) — Console logs alongside network, state, and route events
 - [Network Monitor](./network) — Inspect the requests behind an error
 - [AI / MCP Server](../mcp) — Let an agent read the console for you
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Console page on buoy.gg](https://buoy.gg/tools/console).*
