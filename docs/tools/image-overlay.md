@@ -9,7 +9,11 @@ description: "Overlay design mockups on your running React Native app and tweak 
 
 Overlay design mockups directly on your running app to compare against your implementation. Adjust opacity, scale, and position to get pixel-perfect results — no more switching between your design tool and the simulator.
 
-<!-- ::image-overlay-demo -->
+Below is the real tool, running here in your browser over a mock storefront:
+scan for tagged components, pin the design to the product card, watch it stay
+locked when the layout shifts, and read the padding bug off the offset slider.
+
+<!-- ::image-overlay-live-demo -->
 
 ## Installation
 

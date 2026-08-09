@@ -119,10 +119,6 @@
               "to": "tools/routes"
             },
             {
-              "label": "Debug Borders",
-              "to": "tools/debug-borders"
-            },
-            {
               "label": "Highlight Updates",
               "to": "tools/highlight-updates"
             },

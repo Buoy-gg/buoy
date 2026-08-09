@@ -9,7 +9,9 @@ description: "Full TanStack Query devtools for React Native — browse queries, 
 
 Full TanStack Query inspection for React Native. Browse queries, view cached data, simulate states, and debug your data fetching in real-time.
 
-<!-- ::query-demo -->
+The demo below is the real on-device tool on a mock QueryClient: the cache lights up, a checkout query fails, you inspect cart JSON, force a loading spinner without the network, restore it, then free-play.
+
+<!-- ::query-live-demo -->
 
 ## Installation
 

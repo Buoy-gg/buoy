@@ -9,15 +9,13 @@ description: "Inspect every HTTP request your React Native app makes — URLs, h
 
 See every API call your app makes. Request, response, headers, timing, errors — all in real-time with zero configuration.
 
-<!-- ::network-demo -->
+Don't take our word for it — this is the real tool, running right here, loaded with demo traffic. The guided tour below walks one debugging story: traffic streams in, a request fails, you inspect it, force the failure with an override, and pin the evidence. Or skip the tour and just start tapping:
+
+<!-- ::network-live-demo -->
 
 ## Supported Clients
 
 <!-- ::client-badges-grid -->
-
-> **Also on Flutter (beta):** the network inspector is part of the full Buoy for Flutter suite — one hook captures `package:http`, dio, and image loads, streaming to the same desktop dashboard. See [Buoy for Flutter](../flutter) for the whole suite (network, storage, console, env, routes, images, Riverpod, events, and more).
-
-> **GraphQL gets special treatment** — Operation names are extracted from queries, mutations, and subscriptions, then displayed with variables using arrow notation: `GetUser › 123`. No more guessing which `/graphql` request is which.
 
 ---
 

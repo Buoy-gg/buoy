@@ -9,7 +9,9 @@ description: "Watch network requests, storage writes, Redux actions, and React Q
 
 See every event across all your dev tools in one chronological timeline. Debug complex user flows by watching network requests, storage changes, Redux actions, and React Query events happen in real-time.
 
-<!-- ::events-demo -->
+Below is the real tool, running here in your browser on a mock session: a checkout streams in across six tools, `POST /v2/orders` comes back 402, the row opens the Network tool's own page, and the run becomes something you can paste into an AI.
+
+<!-- ::events-live-demo -->
 
 ## Installation
 
@@ -49,7 +51,11 @@ Copy your event timeline in formats optimized for AI assistants. Reproduce a bug
 - **LLM** — Markdown with smart formatting, strips noise
 - **Bug Report** — Includes timestamps and error details
 - **JSON** — Machine-readable for integrations
-- **Errors Only** — Just the failures
+- **Errors** — Just the failures
+- **Minimal** — Quick reference, one line per event
+- **Diagram** — Mermaid sequence diagram of the flow
+
+The export follows what's on screen: filter to a source or search the timeline first and you copy that slice, not the whole session.
 
 > **Smart formatting** — Automatically parses nested JSON, shows only changed Redux state, and removes verbose fields like image URLs.
 

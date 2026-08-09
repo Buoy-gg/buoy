@@ -9,7 +9,9 @@ description: "Inspect Jotai atoms in your React Native app — watch state chang
 
 Full Jotai atom inspection for React Native. Monitor atom state changes, explore value diffs, and browse live atom values in real-time — directly on your device.
 
-<!-- ::jotai-demo -->
+Don't take our word for it — this is the real tool on mock checkout atoms. The guided tour below walks one debugging story: atoms update as the app runs, applyPromo wipes cart.total, you read prev → next and the on-device diff, then Clear the log and the broken value is still sitting on Atoms. Or skip the tour and just start tapping:
+
+<!-- ::jotai-live-demo -->
 
 ## Installation
 

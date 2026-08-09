@@ -10,6 +10,10 @@ Every React Native developer has watched JS FPS drop and asked the same question
 
 It's pure JavaScript — no native module, no dev client, no debugger attached. It works in Expo Go and even in release builds.
 
+Watch a forgotten `setInterval ← startPolling` climb the table, match 50ms+ freezes to the callback that blocked, then Pause the ranking mid-jank:
+
+<!-- ::js-top-live-demo -->
+
 ## Installation
 
 <!-- ::PM npm="npm install @buoy-gg/js-top" yarn="yarn add @buoy-gg/js-top" pnpm="pnpm add @buoy-gg/js-top" bun="bun add @buoy-gg/js-top" -->

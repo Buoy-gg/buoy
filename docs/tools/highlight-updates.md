@@ -9,7 +9,9 @@ description: "See why your React Native components re-render — visual overlays
 
 See exactly WHY your components re-render. Visual overlays show renders in real-time, and tapping any badge reveals the cause—mount, state change, prop change, or parent re-render.
 
-<!-- ::highlight-demo -->
+Don't take our word for it — this is the real tool, running right here on mock renders. The guided tour below walks one debugging story: typing in a search box re-renders every card in the list, the 47x badge names the worst offender, the detail view names the cause — down to the exact useState before → after. Or skip the tour and just start tapping:
+
+<!-- ::highlight-live-demo -->
 
 ## Render Causes
 

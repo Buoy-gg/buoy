@@ -6,6 +6,16 @@ description: "Extend React Buoy with your own debugging tools — register any R
 
 React Buoy is fully extensible. You can add any React component as a custom debugging tool.
 
+## The component toolkit
+
+Custom tools don't start from a blank screen — `@buoy-gg/core` ships the same
+UI kit our first-party tools are built from: theme tokens, badges, buttons,
+list rows, JSON viewers, diff viewers and more. Everything below is the **real
+component rendered live** (via react-native-web) — search or filter to find
+the pieces your tool needs, then import them straight from `@buoy-gg/core`.
+
+<!-- ::toolkit-live-demo -->
+
 ## Basic Custom Tool
 
 ```tsx

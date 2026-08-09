@@ -9,6 +9,10 @@ description: "Test your React Native app as any user by injecting impersonation 
 
 Admin user impersonation for React Native. Test your app as any user by injecting impersonation headers into all network requests — without logging out or switching accounts.
 
+Search a stuck customer, become her with one tap, pause from the banner — then try it yourself:
+
+<!-- ::impersonate-live-demo -->
+
 ## Installation
 
 <!-- ::PM npm="npm install @buoy-gg/impersonate" yarn="yarn add @buoy-gg/impersonate" pnpm="pnpm add @buoy-gg/impersonate" bun="bun add @buoy-gg/impersonate" -->

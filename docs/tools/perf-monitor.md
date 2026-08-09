@@ -9,7 +9,9 @@ description: "Benchmark React Native performance on a real device — track UI/J
 
 Measure and prove performance on a real device. Bench tracks UI FPS, JS FPS, CPU, memory, and jank in real time, records runs you can save and compare, and can benchmark a matrix of variants to tell you which implementation is actually faster.
 
-<!-- ::perf-monitor-demo -->
+Walk the live tour: the HUD streams → FlatList janks → open the run for render blame → a ranked batch crowns FlashList → the library keeps the proof.
+
+<!-- ::perf-monitor-live-demo -->
 
 ## Installation
 

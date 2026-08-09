@@ -9,7 +9,9 @@ description: "Zustand devtools for React Native — watch store state changes, e
 
 Full Zustand store inspection for React Native. Monitor state changes, explore diffs, jump to any previous state, and reset stores in real-time — directly on your device.
 
-<!-- ::zustand-demo -->
+Walk a live checkout session: stores update, a payment fails, DIFF names the keys, JUMP rolls checkoutStore back, RESET empties cartStore — then free play.
+
+<!-- ::zustand-live-demo -->
 
 ## Installation
 

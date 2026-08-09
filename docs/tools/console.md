@@ -9,6 +9,10 @@ description: "Capture every console.log, warn, and error from your React Native 
 
 A Chrome-DevTools-style console for your React Native app. Buoy Console captures every `console.log`, `console.warn`, `console.error`, and `console.info` on the device and shows them in a familiar, filterable panel — on your phone, on the desktop dashboard, or through your AI agent.
 
+Don't take our word for it — this is the real tool, running right here on a mock app session. The guided tour below walks one debugging story: logs stream in, a promo warning and a 500 land, you read the error as structured data instead of one flat line, the gutter names the function behind each run, and the buffer rides out a relaunch. Or skip the tour and just start tapping:
+
+<!-- ::console-live-demo -->
+
 ## Installation
 
 <!-- ::PM npm="npm install @buoy-gg/console" yarn="yarn add @buoy-gg/console" pnpm="pnpm add @buoy-gg/console" bun="bun add @buoy-gg/console" -->

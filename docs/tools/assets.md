@@ -11,7 +11,9 @@ How many megabytes of images are you shipping? Which ones does nobody ever see? 
 
 The Assets tool is that inventory, live in your app: every bundled asset — images, fonts, video, audio — with dimensions, `@1x/@2x/@3x` scale coverage, real byte sizes, duplicate-content detection, and the one thing no build-time tool can do: which assets are **shipped but never loaded** at runtime. Pure JavaScript, zero configuration.
 
-<!-- ::assets-demo -->
+Watch the inventory fill largest-first, catch the unused megabytes, filter what no code loads, then baseline the size regression — the real tool on mock data:
+
+<!-- ::assets-live-demo -->
 
 ## Installation
 

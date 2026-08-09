@@ -9,7 +9,9 @@ description: "View and validate your React Native app's environment variables on
 
 The Environment Inspector tool lets you view and validate environment variables in your React Native app. It automatically discovers `EXPO_PUBLIC_` prefixed variables and provides validation, type detection, and health monitoring.
 
-<!-- ::env-demo -->
+Don't take our word for it — this is the real tool, running right here on a mock build. The guided tour below walks one debugging story: vars stream in as discovered, a declared contract lights up what never shipped, you read exactly what's wrong, compare two builds' health, and land the fix. Or skip the tour and just start tapping:
+
+<!-- ::env-live-demo -->
 
 ## Installation
 

@@ -9,7 +9,9 @@ description: "Browse every route in your app — Expo Router or React Navigation
 
 See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
 
-<!-- ::routes-demo -->
+Don't take our word for it — this is the real tool, running right here on mock navigations. The guided tour below walks one debugging story: hops stream in, a 38ms `/login` → `/account` flash lands, you open the Login event, the Stack still has Login MOUNTED under Account FOCUSED, Clear wipes the timeline but not the stranded screen. Or skip the tour and just start tapping:
+
+<!-- ::routes-live-demo -->
 
 ## Supported Libraries
 

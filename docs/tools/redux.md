@@ -9,7 +9,9 @@ description: "Redux DevTools for React Native — monitor dispatched actions, in
 
 Full Redux Toolkit inspection for React Native. Monitor actions, explore state changes, time-travel debug, and inspect your Redux store in real-time — directly on your device.
 
-<!-- ::redux-demo -->
+Don't take our word for it — this is the real tool, wired to a real (small) Redux store running right here. The guided tour below walks one debugging story: a checkout session dispatches, a thunk comes back declined, you read the error and the diff, jump the store back, and replay the failure. Or skip the tour and just start tapping:
+
+<!-- ::redux-live-demo -->
 
 ## Installation
 
