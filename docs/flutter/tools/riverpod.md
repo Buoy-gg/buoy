@@ -1,18 +1,19 @@
 ---
 title: Riverpod Inspector
+seoTitle: "Riverpod Inspector — setup, config & API"
 id: flutter-tools-riverpod
 description: "Inspect Riverpod providers in your Flutter app — watch state changes, browse live provider values, and explore value diffs in real time, right on the device."
 ---
 
 Full Riverpod provider inspection for Flutter. Monitor provider state changes, explore value diffs, and browse live provider values in real-time — directly on your device. It's the same inspector UI as the React Native atom inspector, reading your Riverpod providers.
 
-<!-- ::jotai-demo -->
+Don't take our word for it — this is that shared inspector UI, running here on a mock checkout session. Walk the guided tour, or skip it and start tapping:
+
+<!-- ::jotai-live-demo -->
 
 ## Installation
 
-```sh
-flutter pub add buoy_riverpod
-```
+<!-- ::pub package="buoy_riverpod" -->
 
 ---
 

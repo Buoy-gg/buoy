@@ -1,7 +1,7 @@
 ---
 title: Buoy Desktop
 id: desktop
-description: "Mirror your React Native app's Buoy devtools to a full-size desktop dashboard — live performance HUD, multi-device switching, and remote control included."
+description: "Mirror your React Native or Flutter app's Buoy devtools to a full-size desktop dashboard — live performance HUD, multi-device switching, and remote control included."
 ---
 
 <p>
@@ -15,9 +15,11 @@ description: "Mirror your React Native app's Buoy devtools to a full-size deskto
 
 Buoy Desktop is a native dashboard for macOS, Windows, and Linux that mirrors your on-device Buoy tools to a full-size window in real time. Same tools as the floating menu — with dramatically more room — plus a live performance HUD, multi-device switching, and remote control over the running app.
 
+React Native and Flutter devices speak the **same protocol**, so they show up side by side in one dashboard.
+
 ## Requirements
 
-- **A running app** with Buoy devtools installed and open on a device or simulator.
+- **A running app** with Buoy devtools installed and open on a device or simulator (React Native or Flutter).
 - The app and the desktop dashboard on the **same machine or local network**.
 
 ## Install
@@ -26,9 +28,11 @@ Download Buoy Desktop for macOS, Windows, or Linux from the [GitHub releases pag
 
 ## Connect your app
 
-Buoy tools sync to a local broker on **port 42831** — and the connection is **automatic**. The app derives the broker address from the Metro dev server that served the bundle, so simulators, emulators, and physical devices on the same Wi-Fi all find your machine with zero config.
+Buoy tools sync to a local broker on **port 42831**. Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects. If no device appears, the dashboard shows a troubleshooting panel with your machine's exact URLs and a test you can run from the phone's browser.
 
-Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects. If no device appears, the dashboard shows a troubleshooting panel with your machine's exact URLs and a test you can run from the phone's browser.
+### React Native
+
+The connection is **automatic**. The app derives the broker address from the Metro dev server that served the bundle, so simulators, emulators, and physical devices on the same Wi-Fi all find your machine with zero config.
 
 Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
 
@@ -42,13 +46,27 @@ Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
 
 > **Just installed a @buoy-gg package?** Restart Metro with `--clear` — Metro caches the "optional package missing" resolution, and a plain reload never picks the new package up.
 
+### Flutter
+
+- **iOS Simulator / Android Emulator** — connects automatically (`localhost` / `10.0.2.2`).
+- **Physical devices** — pass your computer's LAN IP:
+
+```dart
+BuoyDevTools(
+  socketUrl: 'http://192.168.1.20:42831',
+  child: child ?? const SizedBox.shrink(),
+)
+```
+
+iOS will show the Local Network permission prompt on first connect — tap Allow. After adding a new `buoy_*` package, do a **full restart** (hot reload won't pick up new registrations).
+
 ## What Desktop adds
 
-- **Full-screen tools** — Network, Storage, Console, React Query, Redux/Zustand/Jotai, Routes, Events, and more, each in a real panel.
+- **Full-screen tools** — Network, Storage, Console, Routes, Events, Env, Images, Impersonate, and more — plus React Native–only panels (React Query, Redux/Zustand/Jotai, Bench, JS Top) when those packages are installed.
 - **Live performance HUD** — Stream FPS, CPU, and memory from the device while you use it.
-- **Multi-device** — Switch between every connected simulator and physical device.
-- **Remote actions** — Edit storage, dispatch Redux, refetch queries, and navigate the app from your desk.
-- **Screenshot tool** — Capture a region or a specific component from the iOS Simulator.
+- **Multi-device** — Switch between every connected simulator and physical device (RN and Flutter mixed).
+- **Remote actions** — Edit storage, navigate routes, and drive installed tools from your desk.
+- **Screenshot tool** — Capture a region or a specific component from the iOS Simulator (React Native).
 - **Built-in troubleshooting** — A "no devices" panel shows your machine's exact URLs with a phone-browser test; the Diagnostics console streams the broker's own connection log (handshakes, disconnect reasons, version mismatches — replayed even if they happened before you opened it); offline devices are removable and age out after a day.
 
 ## How it works
@@ -58,4 +76,5 @@ The desktop app hosts the same local broker the [MCP server](./mcp) uses. Your a
 ## What's Next
 
 - [AI / MCP Server](./mcp) — Drive the same tools from your AI editor
-- [Quick Start](./quick-start) — Get Buoy into your app
+- [React Native Quick Start](./quick-start) — Get Buoy into an RN app
+- [Flutter Quick Start](./flutter/quick-start) — Get Buoy into a Flutter app

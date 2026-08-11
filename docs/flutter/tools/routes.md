@@ -1,12 +1,15 @@
 ---
 title: Route Inspector
+seoTitle: "Route Inspector — setup, config & API"
 id: flutter-tools-routes
 description: "Browse every go_router route in your Flutter app, jump to any screen, and watch navigation events in real time to debug navigation issues fast."
 ---
 
 See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
 
-<!-- ::routes-demo -->
+Don't take our word for it — this is the real tool UI, running here on mock navigations. Walk the guided tour, or skip it and start tapping:
+
+<!-- ::routes-live-demo -->
 
 ## Supported Libraries
 
@@ -16,9 +19,7 @@ Captures navigation from [`go_router`](https://pub.dev/packages/go_router) — t
 
 ## Installation
 
-```sh
-flutter pub add buoy_routes
-```
+<!-- ::pub package="buoy_routes" -->
 
 Add `BuoyRouteObserver.instance` to your router's `observers` and hand the router to `registerBuoyRoutes` so the sitemap and jump-to-route work:
 
@@ -63,3 +64,7 @@ Tap any event to open its **detail page** — the full route template, from/to p
 - [Network Monitor](./network) — See every API call your app makes
 - [Storage Explorer](./storage) — Browse and edit shared_preferences
 - [Events Timeline](./events) — Navigation alongside network and storage events
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Route Inspector page on buoy.gg](https://buoy.gg/tools/routes).*

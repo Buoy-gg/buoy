@@ -1,12 +1,15 @@
 ---
 title: Network Monitor
+seoTitle: "Network Monitor — setup, config & API"
 id: flutter-tools-network
 description: "Inspect every HTTP request your Flutter app makes — package:http, dio, and image loads with headers, bodies, timing, and errors — live on the device, no proxy required."
 ---
 
 See every API call your app makes. Request, response, headers, timing, errors — all in real-time with zero configuration.
 
-<!-- ::network-demo -->
+Don't take our word for it — this is the real tool UI, running here on mock traffic. Walk the guided tour, or skip it and start tapping:
+
+<!-- ::network-live-demo -->
 
 ## Supported Clients
 
@@ -26,11 +29,9 @@ Everything riding `dart:io`'s `HttpClient` is captured automatically:
 
 ## Installation
 
-```sh
-flutter pub add buoy_network
-```
+<!-- ::pub package="buoy_network" -->
 
-Using the [`buoy` umbrella](../../flutter)? It's already included — the Network Monitor self-registers when you wrap your app in `BuoyDevTools`. Standalone, add one call before `runApp`:
+Using the [`buoy` umbrella](../installation)? It's already included — the Network Monitor self-registers when you wrap your app in `BuoyDevTools`. Standalone, add one call before `runApp`:
 
 ```dart
 import 'package:buoy_network/buoy_network.dart';
@@ -102,3 +103,7 @@ Documented and on the roadmap: `cupertino_http` / `cronet_http` native clients, 
 - [Storage Explorer](./storage) — Browse and edit shared_preferences
 - [Environment Inspector](./env) — Validate env vars with type checking
 - [Riverpod Inspector](./riverpod) — Watch every provider's live value
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Network Inspector page on buoy.gg](https://buoy.gg/tools/network).*

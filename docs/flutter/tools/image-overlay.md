@@ -1,20 +1,21 @@
 ---
 title: Image Overlay
+seoTitle: "Image Overlay — setup, config & API"
 id: flutter-tools-image-overlay
 description: "Overlay design mockups on your running Flutter app and tweak opacity, scale, and position to nail pixel-perfect UI without leaving the simulator."
 ---
 
 Overlay design mockups directly on your running app to compare against your implementation. Adjust opacity, scale, and position to get pixel-perfect results — no more switching between your design tool and the simulator.
 
-<!-- ::image-overlay-demo -->
+Don't take our word for it — this is the real tool UI, running here over a mock storefront. Walk the guided tour, or skip it and start tapping:
+
+<!-- ::image-overlay-live-demo -->
 
 ## Installation
 
-```sh
-flutter pub add buoy_image_overlay
-```
+<!-- ::pub package="buoy_image_overlay" -->
 
-Using the [`buoy` umbrella](../../flutter)? It's already registered. Standalone:
+Using the [`buoy` umbrella](../installation)? It's already registered. Standalone:
 
 ```dart
 import 'package:buoy_image_overlay/buoy_image_overlay.dart';
@@ -67,3 +68,7 @@ Manually position and resize the overlay anywhere on screen. Drag to move, aspec
 - [Images](./images) — Every image load with cache verdicts and oversize audits
 - [Environment Inspector](./env) — Validate env vars with type checking
 - [Network Monitor](./network) — See every API call your app makes
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Image Overlay page on buoy.gg](https://buoy.gg/tools/image-overlay).*

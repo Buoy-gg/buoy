@@ -1,18 +1,19 @@
 ---
 title: Environment Inspector
+seoTitle: "Environment Inspector — setup, config & API"
 id: flutter-tools-env
 description: "View and validate your Flutter app's environment config on-device — required-variable checks, type detection, per-variable status badges, and a health score."
 ---
 
 The Environment Inspector lets you view and validate environment config in your Flutter app — required-variable checks, type detection, per-variable status badges, and a 0–100% health score.
 
-<!-- ::env-demo -->
+Don't take our word for it — this is the real tool UI, running here on a mock build. Walk the guided tour, or skip it and start tapping:
+
+<!-- ::env-live-demo -->
 
 ## Installation
 
-```sh
-flutter pub add buoy_env
-```
+<!-- ::pub package="buoy_env" -->
 
 ## Registration
 
@@ -50,6 +51,23 @@ envVar('API_KEY')
 envVar('API_KEY').exists()
 ```
 
+### Supported Types
+
+```dart
+// 'string' | 'number' | 'boolean' | 'array' | 'object' | 'url'
+```
+
+## `registerBuoyEnv` Options
+
+```dart
+registerBuoyEnv({
+  required Map<String, String?> vars,   // hand-built map (no process.env)
+  List<Object /* String | RequiredEnvVar */>? requiredEnvVars,
+});
+```
+
+Required entries can be a bare `String` (existence), `RequiredEnvVar.value(...)`, or an `envVar(...).build()`.
+
 ## Features
 
 - **Required Variable Validation** — Define which vars must exist with expected values/types
@@ -80,3 +98,7 @@ envVar('API_KEY').exists()
 - [Network Monitor](./network) — See every API call your app makes
 - [Storage Explorer](./storage) — Browse and edit shared_preferences
 - [Console](./console) — Every log call in a DevTools-style panel
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Environment Inspector page on buoy.gg](https://buoy.gg/tools/env).*

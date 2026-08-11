@@ -1,16 +1,18 @@
 ---
 title: AI / MCP Server
 id: mcp
-description: "Let AI agents like Claude Code and Cursor read your React Native app's live network, state, and storage — and tap through the UI — via the Buoy MCP server."
+description: "Let AI agents like Claude Code and Cursor read your React Native or Flutter app's live network, state, and storage — and take actions — via the Buoy MCP server."
 ---
 
-Drive your Buoy dev tools from an AI coding assistant. The Buoy MCP server lets Claude Code, Cursor, and other MCP clients read your app's live runtime — network requests, state (Redux/Zustand/Jotai), React Query, storage, routes, console — and take actions, run performance benchmarks, drive the UI by tapping through it, and even screenshot a specific on-screen component, all against your running app.
+Drive your Buoy dev tools from an AI coding assistant. The Buoy MCP server lets Claude Code, Cursor, and other MCP clients read your app's live runtime — network requests, storage, routes, console, and framework state — and take actions against your running app.
+
+Works with **React Native and Flutter** on the same broker. Some capabilities below are React Native–only today (called out inline).
 
 ## Requirements
 
 - **Buoy Pro** — the MCP is a Pro feature. `list_devices` always works, but data/action tools require a connected app on an active Buoy Pro license.
 - **Node.js 18+** on the machine running your editor.
-- **A running app** with Buoy devtools open on a device or simulator.
+- **A running app** with Buoy devtools open on a device or simulator (React Native or Flutter).
 - **macOS + Xcode** — only for the `screenshot_component` tool (it captures the iOS Simulator). Everything else is platform-agnostic.
 
 ## Install
@@ -23,7 +25,10 @@ npx -y @buoy-gg/mcp@latest init
 
 This merges a `buoy` server into your MCP config (`.mcp.json` for Claude Code, plus `.cursor/mcp.json` and `.vscode/mcp.json` when those folders exist) and drops the `buoy-optimize` skill into `.claude/skills/`. It's non-destructive — existing servers are preserved, and re-running just refreshes the Buoy entry.
 
-Then restart your editor (or reconnect the MCP server) and open your app with Buoy devtools running.
+Then restart your editor (or reconnect the MCP server) and open your app with Buoy devtools running:
+
+- **React Native** — mount `<FloatingDevTools />` (broker address is derived from Metro; physical devices usually need no config).
+- **Flutter** — mount `BuoyDevTools` (simulators auto-connect; physical devices pass `socketUrl: 'http://<lan-ip>:42831'`).
 
 The config it writes launches the server via `npx -y @buoy-gg/mcp@latest`, so **every editor restart re-resolves the newest published version** — you don't get pinned to a stale copy.
 
@@ -69,20 +74,20 @@ If you'd rather wire it by hand, add this to your MCP config:
 
 Ask your assistant to start with `list_devices` to see connected devices and the tools each exposes. From there it can:
 
-- **Inspect runtime** — `get_events` (network, state changes, renders, route changes, storage writes), `get_snapshot`, and per-tool readers.
+- **Inspect runtime** — `get_events` (network, state changes, route changes, storage writes, …), `get_snapshot`, and per-tool readers. Available sources depend on which packages the app installed (Flutter includes Riverpod; React Native includes Redux/Zustand/Jotai/React Query/renders when those packages are present).
 - **Work a single HTTP request** — `get_network_requests` lists requests *with their ids* and marks which are pinned/saved; `network_action` pins or saves one (see below).
-- **Take actions** — dispatch Redux actions, set Zustand/Jotai state, invalidate React Query caches, navigate routes, edit storage, and more via `call_action` or the tool-specific wrappers.
-- **Drive the UI** — `describe_screen` and `tap_element` let the agent read what's on screen and interact with it, no screenshots (see below).
-- **Benchmark performance** — `run_benchmark_batch` and the perf-monitor tools.
-- **Profile the JS thread** — `get_js_thread_top` returns a live "Task Manager" of which timers, Promise chains & callbacks eat JS-thread time (with freeze attribution); `get_js_thread_origin_detail` drills into one origin's scheduling site and stats.
-- **Screenshot a component** — `screenshot_component` locates a component by testID/name in the iOS Simulator and returns a tight, cropped image.
-- **Reload the app** — `reload_app` restarts the JS bundle (see below).
+- **Take actions** — navigate routes, edit storage, and more via `call_action` or the tool-specific wrappers. React Native also exposes dispatch Redux / set Zustand/Jotai / invalidate React Query when those tools are installed.
+- **Drive the UI** *(React Native)* — `describe_screen` and `tap_element` let the agent read what's on screen and interact with it, no screenshots (see below).
+- **Benchmark performance** *(React Native Bench)* — `run_benchmark_batch` and the perf-monitor tools.
+- **Profile the JS thread** *(React Native)* — `get_js_thread_top` returns a live "Task Manager" of which timers, Promise chains & callbacks eat JS-thread time (with freeze attribution); `get_js_thread_origin_detail` drills into one origin's scheduling site and stats.
+- **Screenshot a component** *(React Native / iOS Simulator)* — `screenshot_component` locates a component by testID/name and returns a tight, cropped image.
+- **Reload the app** *(React Native)* — `reload_app` restarts the JS bundle (see below).
 
-A good starting prompt: **"buoy optimize"** kicks off a guided performance pass using the bundled skill.
+A good starting prompt on React Native: **"buoy optimize"** kicks off a guided performance pass using the bundled skill.
 
-## Driving the UI
+## Driving the UI (React Native)
 
-Two tools let your agent operate the app the way a user would — **without screenshots or pixel coordinates**, so it's fast and works on physical devices too:
+Two tools let your agent operate a React Native app the way a user would — **without screenshots or pixel coordinates**, so it's fast and works on physical devices too:
 
 - **`describe_screen`** walks the live React fiber tree and returns the on-screen elements as a compact, accessibility-style list — each with its label/text, `testID`, a normalized tap point, and (for controls) its type and current value, e.g. `Switch {toggle=true}`, `Slider {slider=75}`, `TextInput {text="Ada"}`. Inactive/covered navigator screens are pruned, so you see what's actually in front of the user.
 - **`tap_element`** interacts with an element found by `testID`, `nativeTag`, or a fuzzy `query`. It invokes the element's handler directly in JS: tap a button (`onPress`), flip a switch or move a slider (`value`), or type into a field (`text`). Off-screen targets are scrolled into view first.
@@ -93,7 +98,7 @@ A typical loop is: `describe_screen` to see the options → `tap_element({ testI
 
 `get_events` is the right tool for skimming activity, but it deliberately emits no request ids — so it can't be used to act on a specific call. **`get_network_requests`** covers that: the same compact one-line-per-request style, but each row leads with the id that every network action is keyed by, and marks which requests are 📌 pinned or 🔖 saved. Narrow it with `status: "errors"`, a URL `pattern`, or `includeBodies` when you need payloads.
 
-**`network_action`** pins, saves, or clears. Because [pinned and saved requests](./tools/network) keep a full snapshot — surviving Clear, the 500-request cap, and app restarts — this works as a handoff in both directions:
+**`network_action`** pins, saves, or clears. Because pinned and saved requests ([RN](./tools/network) · [Flutter](./flutter/tools/network)) keep a full snapshot — surviving Clear, the 500-request cap, and app restarts — this works as a handoff in both directions:
 
 - **You → your agent.** Pin the request that's broken, then ask the assistant to look at "the pinned request". `get_network_requests({ flagged: "pinned" })` reads exactly what you flagged, even if it happened before the last reload.
 - **Your agent → you.** An assistant that finds a failing call can pin it, so it's waiting at the top of your Network list when you next open the tool.
@@ -105,15 +110,15 @@ network_action({ action: "pin", id: "fetch_1021" })
 
 Requests kept from an earlier run of the app come back with ids prefixed `saved:` — they're snapshots, not live requests, so they can't collide with a fresh capture.
 
-## Reloading the app
+## Reloading the app (React Native)
 
 `reload_app` restarts the app's JS bundle from your editor — the same thing as shaking the device and hitting Reload, and the same primitive [Bench](./tools/perf-monitor) uses between benchmark cases. Use it when Fast Refresh didn't pick a change up, to clear leaked in-memory state before a measurement, or to re-run app startup.
 
 In dev builds (including Expo Go and RN CLI) it uses React Native's `DevSettings.reload()`; otherwise it falls back to `expo-updates`, if your app installs it. By default the tool waits for the app to come back and reports how long the reload took, so your assistant knows when it's safe to keep going — pass `wait: false` for fire-and-forget. All in-memory state is lost, so anything the assistant read before the reload is stale.
 
-It ships with `@buoy-gg/core` itself, so it works on any app running Buoy — no particular tool package, and no extra native dependencies.
+It ships with `@buoy-gg/core` itself, so it works on any React Native app running Buoy — no particular tool package, and no extra native dependencies.
 
-## The buoy-optimize wizard
+## The buoy-optimize wizard (React Native)
 
 `init` also installs a **`buoy-optimize` skill** — a guided wizard that automates mobile performance work end to end. Whether you're shipping a new feature or fixing a screen that's janky on device, your assistant benchmarks implementation variants on the **real device** with [Bench](./tools/perf-monitor), reads the ranked results, applies the winning change, and repeats until the metrics plateau.
 
@@ -124,3 +129,12 @@ It's close to fully automated — the parts that stay manual are the ones only a
 ## How it works
 
 Buoy tools run inside your app and sync to a local broker over the external-sync protocol. The MCP server connects to that broker as a "Dashboard" client — the same role the Buoy desktop app plays — or spawns its own broker in-process when no desktop app is running, so it works standalone.
+
+React Native and Flutter devices appear together in `list_devices`.
+
+## What's Next
+
+- [Buoy Desktop](./desktop) — The full desktop dashboard on the same broker
+- [React Native Quick Start](./quick-start) — Wire MCP against an RN app
+- [Flutter Quick Start](./flutter/quick-start) — Wire MCP against a Flutter app
+- [Network Monitor](./tools/network) · [Flutter Network](./flutter/tools/network) — Pin & save for agent handoffs

@@ -31,16 +31,16 @@
           "label": "flutter",
           "children": [
             {
-              "label": "Overview & Install",
-              "to": "flutter"
+              "label": "Overview",
+              "to": "flutter/overview"
             },
             {
-              "label": "Devices",
-              "to": "flutter#devices"
+              "label": "Quick Start",
+              "to": "flutter/quick-start"
             },
             {
-              "label": "Packages",
-              "to": "flutter#packages"
+              "label": "Installation",
+              "to": "flutter/installation"
             }
           ]
         }
@@ -60,6 +60,19 @@
             {
               "label": "Custom Tools",
               "to": "custom-tools"
+            }
+          ]
+        },
+        {
+          "label": "flutter",
+          "children": [
+            {
+              "label": "BuoyDevTools",
+              "to": "flutter/buoy-devtools"
+            },
+            {
+              "label": "Custom Tools",
+              "to": "flutter/custom-tools"
             }
           ]
         }

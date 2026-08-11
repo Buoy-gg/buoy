@@ -1,16 +1,19 @@
 ---
 title: Console
+seoTitle: "Console — setup, config & API"
 id: flutter-tools-console
 description: "Capture every print, debugPrint, and log call from your Flutter app in a Chrome DevTools-style panel — filterable, on-device, in any build."
 ---
 
 A Chrome-DevTools-style console for your Flutter app. Buoy Console captures every `print`, `debugPrint`, and `log` call — plus `FlutterError` reports and uncaught async errors — and shows them in a familiar, filterable panel: on your phone, on the desktop dashboard, or through your AI agent.
 
+Don't take our word for it — this is the real tool UI, running here on a mock app session. Walk the guided tour, or skip it and start tapping:
+
+<!-- ::console-live-demo -->
+
 ## Installation
 
-```sh
-flutter pub add buoy_console
-```
+<!-- ::pub package="buoy_console" -->
 
 To capture `print`, wrap your entry point in `BuoyConsole.runZoned` (a `Zone` is the only way to observe `print` in Dart) — so capture starts before your first log fires:
 
@@ -49,3 +52,7 @@ With the [MCP server](../../mcp), an AI agent can read the console tail directly
 - [Events Timeline](./events) — Console logs alongside network, state, and route events
 - [Network Monitor](./network) — Inspect the requests behind an error
 - [AI / MCP Server](../../mcp) — Let an agent read the console for you
+
+---
+
+*Looking for an overview with screenshots and FAQs? See the [Console page on buoy.gg](https://buoy.gg/tools/console).*
