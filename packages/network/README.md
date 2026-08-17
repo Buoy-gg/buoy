@@ -36,6 +36,7 @@ Want a different label or color? Build the tool with `createNetworkTool({ name, 
 ## What you get
 
 - **Every request, zero config** — intercepts `fetch` and `XMLHttpRequest`, so fetch, axios, GraphQL clients, and gRPC-web all show up automatically.
+- **Boot requests included** — interception installs at app launch (dev builds), so module-scope fetches, session bootstrap, and your first queries are captured even though they fired before any tool or dashboard was open.
 - **GraphQL gets special treatment** — operation names are extracted from queries, mutations, and subscriptions and shown with variables in arrow notation: `GetUser › 123`. No more guessing which `/graphql` request is which.
 - **Full request detail** — request/response headers, payloads, HTTP status, and duration for every call, with status-colored rows.
 - **Filter and search** — narrow by status code, HTTP method, or URL pattern; search captured events; pause/resume capture; clear history.

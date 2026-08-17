@@ -42,6 +42,8 @@ void main() {
 }
 ```
 
+**Boot traffic is already there when you open the tool.** The HTTP hook installs at `registerBuoyNetwork()`, not when something first watches, so requests fired during startup — `main()` fetches, session bootstrap, your first screen's loads — are held and appear in the list the moment you open the panel or connect a dashboard. If nothing ever watches, nothing is retained.
+
 ---
 
 ## What You See

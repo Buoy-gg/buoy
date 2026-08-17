@@ -23,7 +23,7 @@ Don't take our word for it — this is the real tool, running right here, loaded
 
 <!-- ::PM npm="npm install @buoy-gg/network" yarn="yarn add @buoy-gg/network" pnpm="pnpm add @buoy-gg/network" bun="bun add @buoy-gg/network" -->
 
-That's it. The Network Monitor auto-detects and appears in your FloatingDevTools menu.
+That's it. The Network Monitor auto-detects and appears in your FloatingDevTools menu. In dev builds, interception installs at app launch — so boot-time traffic (module-scope fetches, session bootstrap, your first queries) is already captured when you open the tool.
 
 ---
 

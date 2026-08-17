@@ -64,11 +64,15 @@ If you'd rather wire it by hand, add this to your MCP config:
     "buoy": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@buoy-gg/mcp@latest"]
+      "args": ["-y", "@buoy-gg/mcp@latest"],
+      "env": { "BUOY_VERIFY": "auto" }
     }
   }
 }
 ```
+
+`BUOY_VERIFY` controls the reminder to check a change on the device before
+calling it fixed — see [Confirming a fix actually worked](#confirming-a-fix-actually-worked).
 
 ## Usage
 
@@ -84,6 +88,44 @@ Ask your assistant to start with `list_devices` to see connected devices and the
 - **Reload the app** *(React Native)* — `reload_app` restarts the JS bundle (see below).
 
 A good starting prompt on React Native: **"buoy optimize"** kicks off a guided performance pass using the bundled skill.
+
+## Confirming a fix actually worked
+
+The hard part of letting an agent fix things isn't the fixing — it's that
+"done" is a claim you can't check without re-testing the app yourself.
+
+Buoy closes that loop. After an edit, the agent re-runs the exact interaction
+that was broken and reports what changed:
+
+```
+measure_renders — tap "favorite-deal-2" ×5, compareToPrevious: true
+
+vs "before fix"
+- total renders: 2414 → 194 (-2220)
+- wasted: 1379 → 81 (-1298)
+- per component: DealRow 192 → 5 (-187)
+
+✅ Fewer renders than before on this interaction.
+```
+
+That catches the two ways a fix normally fails: being **incomplete** (the value
+was wrong in three places and one got corrected), and **moving the cost**
+instead of removing it — the usual outcome of re-render work, where a screen
+gets faster to type in and slower to tap.
+
+If the project has changed since anything was last checked on the device, Buoy
+says so in its tool results, naming the changed files and the call to make.
+Set `BUOY_VERIFY` in your MCP config to choose how insistent that is:
+
+| Value | Behaviour |
+|---|---|
+| `auto` *(default)* | Mentions it once per burst of edits, then gets out of the way. The agent decides whether a given change is worth a device check. |
+| `always` | Repeats until something is actually checked. |
+| `never` | Silent. |
+
+The reminder never fires when nothing has changed, and never when no device is
+connected — a doc edit doesn't need a device check, a state-management change
+does.
 
 ## Driving the UI (React Native)
 

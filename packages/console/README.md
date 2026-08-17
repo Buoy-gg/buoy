@@ -36,6 +36,7 @@ That's the whole setup — it patches `console.*` directly, so no logger integra
 ## What you get
 
 - **Everything logged, everywhere** — patches `console.*` directly, so logs from your own code *and* your dependencies are captured with no extra setup.
+- **Fatal crashes captured too** — uncaught JS errors (including fatal render crashes) are hooked from React Native's global error handler and recorded as `[FATAL]`-tagged error entries, so a crashed app's last words are in the log instead of nowhere.
 - **Live, color-coded stream** — `log`, `info`, `warn`, and `error` stream in as they happen, color-coded by level.
 - **Chrome-DevTools-style panel** — a 1:1 port of the Chrome console view: objects and arrays are formatted and expandable, just like the browser.
 - **Filter by level** — focus on just errors and warnings when you're chasing a bug.

@@ -29,6 +29,19 @@ void main() {
 
 If you never call `BuoyConsole.runZoned`, call `BuoyConsole.install()` once instead — everything except `print` (`debugPrint`, `FlutterError`, uncaught async errors) is still captured.
 
+### Crashes don't disappear
+
+An uncaught error normally takes the desktop connection down with it: the throttled snapshot never fires, and the dashboard just shows an app that stopped answering. Buoy pushes a crash entry out immediately instead, while the connection is still alive, so the app's last words are readable from the desktop dashboard and from your AI agent (`get_triage` leads with them).
+
+Crash entries are tagged so you can tell what actually happened:
+
+| Tag | Source | Meaning |
+| --- | --- | --- |
+| `[UNCAUGHT]` | `PlatformDispatcher.onError`, guarded zone | Nothing in your code handled this error. |
+| `[RENDER ERROR]` | `FlutterError.onError` | A framework/build error. Flutter fires this for errors an `ErrorWidget` then recovers from, so it is reported without claiming your app crashed. |
+
+The same crash arriving through two seams is recorded once. Two genuinely separate crashes with the same message are recorded twice — a tool whose job is "the app's last words" shouldn't quietly throw one away.
+
 ---
 
 ## What You Can Do

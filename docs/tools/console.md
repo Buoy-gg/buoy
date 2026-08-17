@@ -32,7 +32,7 @@ export default function App() {
 }
 ```
 
-It patches `console.*` directly, so logs from your own code and your dependencies are captured — no logger integration or Babel plugin required.
+It patches `console.*` directly, so logs from your own code and your dependencies are captured — no logger integration or Babel plugin required. Fatal/uncaught JS errors are captured too: the tool hooks React Native's global error handler (chaining any existing one), so a crash — even one during the app's very first render — lands in the log as a `[FATAL]`-tagged error entry instead of disappearing.
 
 > **Upgrading?** Older versions required mounting `<ConsoleRoot />` manually and passing `consoleToolPreset` via `apps`. Both are automatic now; existing manual wiring is harmless and can be deleted.
 
