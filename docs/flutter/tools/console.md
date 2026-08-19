@@ -1,6 +1,6 @@
 ---
 title: Console
-seoTitle: "Console — setup, config & API"
+seoTitle: "Flutter Console — DevTools-style logs on-device, any build"
 id: flutter-tools-console
 description: "Capture every print, debugPrint, and log call from your Flutter app in a Chrome DevTools-style panel — filterable, on-device, in any build."
 ---
@@ -68,4 +68,12 @@ With the [MCP server](../../mcp), an AI agent can read the console tail directly
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Console page on buoy.gg](https://buoy.gg/tools/console).*
+## FAQ
+
+### How do I read print and debugPrint output without a debugger attached?
+
+Wrap your entry point in `BuoyConsole.runZoned` — a `Zone` is the only way to observe `print` in Dart — and every `print`, `debugPrint`, and `log` call, plus `FlutterError` reports and uncaught async errors, appears in a filterable on-device panel in any build.
+
+### Can I read the logs from a crash?
+
+Yes. An uncaught error normally takes the desktop connection down before the throttled snapshot fires; Buoy pushes a crash entry out immediately while the connection is alive, tagged `[UNCAUGHT]` or `[RENDER ERROR]`, so the app's last words are readable from the dashboard and from an AI agent.

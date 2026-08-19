@@ -1,6 +1,6 @@
 ---
 title: Riverpod Inspector
-seoTitle: "Riverpod Inspector — setup, config & API"
+seoTitle: "Riverpod Inspector for Flutter — providers, state & diffs"
 id: flutter-tools-riverpod
 description: "Inspect Riverpod providers in your Flutter app — watch state changes, browse live provider values, and explore value diffs in real time, right on the device."
 ---
@@ -68,3 +68,15 @@ Tap any event for the detail view: full value trees and a split-screen **diff** 
 - [Events Timeline](./events) — Provider changes alongside network and route events
 - [Network Monitor](./network) — See every API call your app makes
 - [Storage Explorer](./storage) — Browse and edit persisted data
+
+---
+
+## FAQ
+
+### How do I inspect Riverpod provider state on a device?
+
+Add `buoy_riverpod`, call `registerBuoyRiverpod()`, and add `buoyRiverpodObserver` to your `ProviderScope` observers — every provider's live value, its change history, and before/after value diffs are browsable on the device. No wrappers, no middleware, no changes to existing providers.
+
+### Why do some providers show a type instead of a name?
+
+Unnamed providers fall back to their runtime type. Pass a name — `StateProvider(..., name: 'counter')` — so the list reads well.

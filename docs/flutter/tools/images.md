@@ -1,6 +1,6 @@
 ---
 title: Images
-seoTitle: "Images — setup, config & API"
+seoTitle: "Flutter Image Debugger — cache, oversize & failure audit"
 id: flutter-tools-images
 description: "Debug every image in your Flutter app — a live registry of loads with cache verdicts (memory/disk/network), timings, oversize + wasted-memory auditing, and a failure log."
 ---
@@ -69,4 +69,16 @@ The same live registry streams to [Buoy Desktop](../desktop) — the full tool (
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Images page on buoy.gg](https://buoy.gg/tools/images).*
+## FAQ
+
+### Why can't a network inspector tell me why a Flutter image is slow?
+
+Image HTTP traffic in Flutter is fetched by `dart:io` image loaders and never surfaces the layout size or cache origin an inspector needs. Buoy's registry records each load's cache verdict (memory, disk, or network), its timing, decoded size versus displayed size, and the exact reason it failed.
+
+### What do I have to change to capture image loads?
+
+Flutter has no app-wide `Image` decorator hook, so capture is opt-in per widget: use `BuoyImage(provider: ...)` in place of `Image` or `CachedNetworkImage`. It wraps your `ImageProvider` and measures the rendered box for the oversize audit.
+
+### How do I find images that waste memory?
+
+Decoded pixels are compared against the laid-out size × device pixel ratio, Lighthouse-style, with the estimated wasted decoded bytes and the dimensions you should serve instead. Tiny sources stretched into a large box are flagged the other way, as upscaled.

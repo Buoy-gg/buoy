@@ -1,6 +1,6 @@
 ---
 title: Perf Monitor
-seoTitle: "Perf Monitor — setup, config & API"
+seoTitle: "Flutter Performance Monitor — FPS, jank, CPU & memory"
 id: flutter-tools-perf-monitor
 description: "Watch your Flutter app's performance on a real device — a live HUD with FPS, jank, CPU, and memory, streaming to the Buoy Desktop dashboard. Pure Dart, no native code."
 ---
@@ -52,4 +52,16 @@ Open the **PERF** tool from the floating dial to see live metrics and toggle the
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Bench — Performance Monitor page on buoy.gg](https://buoy.gg/tools/perf-monitor).*
+## FAQ
+
+### How do I measure FPS and jank in a Flutter app on a real device?
+
+Add `buoy_perf_monitor` and call `registerBuoyPerfMonitor()` — a live on-device HUD reports build (Dart UI thread) and raster (GPU thread) frame timings from `SchedulerBinding.addTimingsCallback`, plus memory (RSS) and, on Android, CPU. It streams to Buoy Desktop so you can watch it full-size while you drive the phone.
+
+### Why does FPS show a dash when the app is idle?
+
+FPS is activity-gated. An idle Flutter app renders no frames, so the HUD shows `—` at rest rather than a fake 60.
+
+### Does it need native code?
+
+No — it's pure Dart. No native libraries, no FFI, no platform channels, and no rebuild.

@@ -1,5 +1,6 @@
 ---
 title: Quick Start
+seoTitle: "Flutter DevTools Setup — install Buoy in minutes"
 id: flutter-quick-start
 description: "Get Buoy's floating in-app devtools menu running in your Flutter app in minutes, then reach the same tools from desktop or an AI agent."
 ---
@@ -29,7 +30,7 @@ MaterialApp(
 
 A floating button appears in the corner of your app. Tap it to open the menu.
 
-Every tool is free in development — no key needed. A `licenseKey` prop unlocks [Pro](https://buoy.gg/pricing): production builds, the MCP server, and unlimited capture.
+Every tool works with no key at all — you just get a minimal event history. A free key (it comes with an account) unlocks standard access, with event history across every tool, and a Pro `licenseKey` unlocks everything: production builds, the MCP server, and unlimited events. See [pricing](https://buoy.gg/pricing).
 
 ## 3. Add tools
 
@@ -123,3 +124,15 @@ Buoy Desktop is free to use; the MCP server is a Pro feature. Both connect to th
 - [Buoy Desktop](../desktop) — The full desktop dashboard
 - [AI / MCP Server](../mcp) — Drive your app from your AI editor
 - [Custom Tools](./custom-tools) — Build your own debugging tools
+
+---
+
+## FAQ
+
+### How do I add Buoy devtools to a Flutter app?
+
+Run `flutter pub add buoy`, then wrap your app in `BuoyDevTools` via `MaterialApp.builder`. A floating button appears in the corner — tap it to open the menu. With the umbrella install, every Flutter tool is already registered.
+
+### Do I need a license key to try it?
+
+No — every tool works without one, with a minimal event history. A free key, which comes with an account, unlocks standard access, with event history across all tools. Pro unlocks everything: production builds, the MCP server, and unlimited events.

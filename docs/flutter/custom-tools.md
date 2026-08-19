@@ -1,5 +1,6 @@
 ---
 title: Custom Tools
+seoTitle: "Build Custom Flutter DevTools — your own Buoy tool"
 id: flutter-custom-tools
 description: "Extend Buoy with your own debugging tools — register any Flutter widget in your app's floating devtools menu in just a few lines."
 ---

@@ -1,6 +1,6 @@
 ---
 title: Console
-seoTitle: "Console — setup, config & API"
+seoTitle: "React Native Console — Chrome DevTools-style logs on-device"
 id: tools-console
 description: "Capture every console.log, warn, and error from your React Native app in a Chrome DevTools-style panel — filterable, on-device, no cable or Flipper needed."
 ---
@@ -62,4 +62,12 @@ With the [MCP server](../mcp), an AI agent can read the console tail directly wi
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Console page on buoy.gg](https://buoy.gg/tools/console).*
+## FAQ
+
+### How do I see console logs in a React Native production build?
+
+Install `@buoy-gg/console` — logs are captured in the app itself and viewable from the floating menu in any build, with access under your control.
+
+### Do I still need the Metro terminal or React Native DevTools?
+
+For breakpoints, yes — keep React Native DevTools. For reading logs anywhere (including devices not attached to your machine), the in-app console replaces terminal-watching.

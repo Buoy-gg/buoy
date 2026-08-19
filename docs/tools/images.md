@@ -1,6 +1,6 @@
 ---
 title: Images
-seoTitle: "Images — setup, config & API"
+seoTitle: "React Native Image Debugger — cache, oversize & failures"
 id: tools-images
 description: "Debug every image in your app — a live registry of RN <Image> and expo-image loads with cache verdicts (memory/disk/network), timings, oversize + wasted-memory auditing, and a failure log. Works in Expo Go and release builds."
 ---
@@ -79,4 +79,16 @@ Cache explorer (browse the actual disk cache directories with sizes and ages), p
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Images page on buoy.gg](https://buoy.gg/tools/images).*
+## FAQ
+
+### Why can’t my network inspector see image requests in React Native?
+
+Image fetches happen in native code (NSURLSession / Fresco), never in the JS network stack — so JS-level network devtools can’t observe them. Buoy Images hooks the image components themselves instead, capturing every load with its cache verdict and timing.
+
+### Does it work in Expo Go and release builds?
+
+Yes — capture is pure JavaScript (RN’s official component-decorator hook plus an expo-image render patch), so there’s no native module to install and it works in Expo Go, dev clients, and release builds.
+
+### How do I find images that waste memory?
+
+The registry compares each image’s decoded pixels against its rendered size × device pixel ratio and totals the estimated wasted decoded bytes — sort by the red verdicts, then use the on-device re-encode to prove what a right-sized source would save.

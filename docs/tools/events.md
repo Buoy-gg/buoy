@@ -1,6 +1,6 @@
 ---
 title: Events Timeline
-seoTitle: "Events Timeline — setup, config & API"
+seoTitle: "React Native Event Timeline — all app activity in one stream"
 id: tools-events
 description: "Watch network requests, storage writes, Redux actions, and React Query events in one chronological timeline to debug complex React Native user flows."
 ---
@@ -75,4 +75,12 @@ Related events are linked together. React Query fetch start → success events s
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Events Timeline page on buoy.gg](https://buoy.gg/tools/events).*
+## FAQ
+
+### How do I see what my React Native app did before a bug?
+
+Open the Events timeline — the interleaved history of requests, state changes, storage writes, and navigation leading up to the bug is right there, exportable as structured text.
+
+### What does "LLM-ready export" mean?
+
+The timeline exports in a compact structured format designed to paste into an AI assistant — so the model sees exactly what the app did, in order, with timestamps.

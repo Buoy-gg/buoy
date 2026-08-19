@@ -81,7 +81,7 @@ The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-
 
 ## Free vs Pro
 
-Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for everyone.
+Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for anyone holding a key — including a free one (`npx buoy login`).
 
 ---
 

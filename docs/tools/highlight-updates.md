@@ -1,6 +1,6 @@
 ---
 title: Highlight Updates
-seoTitle: "Highlight Updates — setup, config & API"
+seoTitle: "React Native Re-render Debugger — see why components render"
 id: tools-highlight-updates
 description: "See why your React Native components re-render — visual overlays highlight every render and reveal the cause: mount, state, props, or parent updates."
 ---
@@ -59,4 +59,12 @@ When a state change causes a render, Highlight Updates shows you the **before an
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Render Highlighter page on buoy.gg](https://buoy.gg/tools/highlight-updates).*
+## FAQ
+
+### How do I find unnecessary re-renders in React Native?
+
+Install `@buoy-gg/highlight-updates` and turn on highlighting — components flash as they render with counts and causes, so over-rendering components and the reason (props, state, parent) are visible immediately.
+
+### How is this different from the React DevTools profiler?
+
+The profiler records a session for later analysis on a desktop. Buoy highlights renders live on the device while you use the app — and also works in staging/production builds where the profiler can't attach.

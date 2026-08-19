@@ -49,7 +49,7 @@ export default function App() {
 That's the whole setup. A floating dev menu appears inside your app.
 
 > [!NOTE]
-> Install any tool package and it auto-appears in the menu. Most tools need zero config — a few take one line, like passing `zustandStores` or calling `watchAtoms()`. Every tool is free, no key or signup needed. Add a `licenseKey` to unlock [Pro](https://buoy.gg/pricing): production builds, the MCP server, and unlimited capture.
+> Install any tool package and it auto-appears in the menu. Most tools need zero config — a few take one line, like passing `zustandStores` or calling `watchAtoms()`. Every tool works without a key, at reduced capture. A **free key** (`npx buoy login`, no card) restores the full free tier; [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture.
 
 ---
 
@@ -186,17 +186,38 @@ Want the session without any on-device UI at all — field builds, kiosk devices
 
 ---
 
-## 💳 Every tool is free. Paid unlocks the rest.
+## 💳 Every tool is free. A free key unlocks the rest.
 
-Every tool is **free** — no key, no signup, no time limit.
+Every tool is **free**, forever, on every tier — the only thing that changes is
+how much history each one keeps.
 
-Paid plans unlock production builds, the MCP server, and unlimited capture — **Solo is $9/month ($89/year) for individuals**, and **Business is $45/seat/month** for companies, with priority support and volume pricing. Both come with a 14-day trial. Activate with one prop:
+| | How to get it | What you get |
+| --- | --- | --- |
+| **No key** | nothing to do | Every tool, with a short capture window — enough to see what each one does. |
+| **Free** | `npx buoy login` — no card, ~30 seconds | The full free tier: real history across every tool, and Pro free every weekend. |
+| **Pro** | [buoy.gg/pricing](https://buoy.gg/pricing) | Everything: production builds, the MCP server, unlimited capture. |
 
-```tsx
-<FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
+Paid plans unlock production builds, the MCP server, and unlimited capture — **Solo is $9/month ($89/year) for individuals**, and **Business is $45/seat/month** for companies, with priority support and volume pricing. Both come with a 14-day trial.
+
+Grab your key — free or paid, same command:
+
+```bash
+npx buoy login
 ```
 
-**Weekend Pass:** every Saturday and Sunday, every Pro feature inside the tools unlocks free for everyone. Not a promo — it's built into the product. Try it for real, decide on Monday.
+Run it from a project that already has `@buoy-gg/core` installed — npx resolves
+the command from your own `node_modules`. If it tries to download something
+instead, name the package: `npx --package=@buoy-gg/core buoy login`.
+
+It signs you in, writes the key to `.env.local`, and gitignores it. Then:
+
+```tsx
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+Or pass it straight in: `<FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />`
+
+**Weekend Pass:** every Saturday and Sunday, every Pro feature inside the tools unlocks free for anyone with a key — including a free one. Not a promo — it's built into the product. Run `npx buoy login`, try it for real, decide on Monday.
 
 ➡️ [buoy.gg/pricing](https://buoy.gg/pricing)
 

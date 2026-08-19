@@ -1,5 +1,6 @@
 ---
 title: BuoyDevTools
+seoTitle: "BuoyDevTools API — props, config & tool registration"
 id: flutter-buoy-devtools
 description: "API reference for BuoyDevTools, the floating button that opens Buoy's in-app debugging menu in your Flutter app."
 ---

@@ -1,6 +1,6 @@
 ---
 title: React Query DevTools
-seoTitle: "React Query DevTools — setup, config & API"
+seoTitle: "React Query DevTools for React Native — inspect the cache"
 id: tools-react-query
 description: "Full TanStack Query devtools for React Native — browse queries, inspect cached data, simulate loading and error states, and debug fetching on-device."
 ---
@@ -60,4 +60,12 @@ Simulate offline mode with one tap. The WiFi toggle controls React Query's `onli
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [React Query DevTools page on buoy.gg](https://buoy.gg/tools/react-query).*
+## FAQ
+
+### How do I use React Query devtools in React Native?
+
+The official TanStack devtools are web-only. Install `@buoy-gg/react-query` and the same capabilities — query browser, cache inspector, state simulation — run inside your app on the device.
+
+### Does it work with Expo Go?
+
+Yes. It's pure JavaScript — no native modules — so it works in Expo Go, dev builds, and production.

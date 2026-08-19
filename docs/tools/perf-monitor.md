@@ -1,6 +1,6 @@
 ---
 title: Bench
-seoTitle: "Bench — setup, config & API"
+seoTitle: "React Native Performance Benchmarking — FPS, CPU & memory"
 id: tools-perf-monitor
 description: "Benchmark React Native performance on a real device — track UI/JS FPS, CPU, memory, and jank, record runs, and compare variants to prove what's faster."
 ---
@@ -94,4 +94,12 @@ The only steps that stay manual are the ones a human has to eyeball — mainly c
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Bench — Performance Monitor page on buoy.gg](https://buoy.gg/tools/perf-monitor).*
+## FAQ
+
+### How do I measure FPS in a React Native app?
+
+Install `@buoy-gg/perf-monitor` and record a run — Bench samples both UI-thread and JS-thread FPS on the device, along with CPU and memory, and saves the run for comparison.
+
+### Can I compare performance before and after a change?
+
+Yes — runs are saved and comparable, and via the Buoy MCP server an AI agent can run benchmark batches of both variants and report which is faster.

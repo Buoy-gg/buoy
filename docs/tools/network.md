@@ -1,6 +1,6 @@
 ---
 title: Network Monitor
-seoTitle: "Network Monitor — setup, config & API"
+seoTitle: "React Native Network Inspector — debug HTTP requests on-device"
 id: tools-network
 description: "Inspect every HTTP request your React Native app makes — URLs, headers, timing, and errors — live on the device, no Flipper or proxy required."
 ---
@@ -133,4 +133,16 @@ The method is part of the **match**, not the target. Picking `POST` means "when 
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Network Inspector page on buoy.gg](https://buoy.gg/tools/network).*
+## FAQ
+
+### How do I debug network requests in React Native without Flipper?
+
+Install `@buoy-gg/network` and open the floating menu — requests appear live on the device. Flipper was deprecated in RN 0.73; Buoy needs no native SDK, proxy, or desktop app.
+
+### Does it capture Axios and GraphQL requests?
+
+Yes — fetch, Axios, and GraphQL (including operation names and variables) are captured automatically, plus gRPC-web.
+
+### Can I inspect network traffic in a production build?
+
+Yes. The inspector ships inside the app, so authorized users can open it in staging and production builds — where desktop-tethered tools can't attach.

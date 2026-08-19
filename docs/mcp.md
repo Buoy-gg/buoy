@@ -1,5 +1,6 @@
 ---
 title: AI / MCP Server
+seoTitle: "React Native MCP Server — let AI agents debug your app"
 id: mcp
 description: "Let AI agents like Claude Code and Cursor read your React Native or Flutter app's live network, state, and storage — and take actions — via the Buoy MCP server."
 ---
@@ -27,7 +28,7 @@ This merges a `buoy` server into your MCP config (`.mcp.json` for Claude Code, p
 
 Then restart your editor (or reconnect the MCP server) and open your app with Buoy devtools running:
 
-- **React Native** — mount `<FloatingDevTools />` (broker address is derived from Metro; physical devices usually need no config).
+- **React Native** — mount `<FloatingDevTools />` (broker address is derived from Metro; physical devices usually need no config). Profiling a **release build**? Sync is off there unless you opt in — see [release builds](./desktop#release-builds).
 - **Flutter** — mount `BuoyDevTools` (simulators auto-connect; physical devices pass `socketUrl: 'http://<lan-ip>:42831'`).
 
 The config it writes launches the server via `npx -y @buoy-gg/mcp@latest`, so **every editor restart re-resolves the newest published version** — you don't get pinned to a stale copy.
@@ -180,3 +181,19 @@ React Native and Flutter devices appear together in `list_devices`.
 - [React Native Quick Start](./quick-start) — Wire MCP against an RN app
 - [Flutter Quick Start](./flutter/quick-start) — Wire MCP against a Flutter app
 - [Network Monitor](./tools/network) · [Flutter Network](./flutter/tools/network) — Pin & save for agent handoffs
+
+---
+
+## FAQ
+
+### How do I let Claude Code or Cursor debug my React Native app?
+
+Run `npx -y @buoy-gg/mcp@latest init`. It merges a `buoy` server into your MCP config (`.mcp.json` for Claude Code, plus `.cursor/mcp.json` and `.vscode/mcp.json` when those folders exist) and installs the `buoy-optimize` skill. Restart your editor with the app running and Buoy devtools open, and the agent can read live network, storage, console, routes, and state — and act on them.
+
+### Do I need Buoy Pro for the MCP server?
+
+For data and actions, yes. `list_devices` always works, but the tools that read your app's runtime or drive it require a connected app on an active Buoy Pro license.
+
+### Does the MCP server work with Flutter?
+
+Yes — React Native and Flutter apps connect to the same broker and the same server. A few capabilities are React Native–only today, and those are called out inline in the docs.

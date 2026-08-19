@@ -1,6 +1,6 @@
 ---
 title: Events Timeline
-seoTitle: "Events Timeline — setup, config & API"
+seoTitle: "Flutter Event Timeline — all app activity in one stream"
 id: flutter-tools-events
 description: "Watch network requests, storage writes, state changes, and navigation in one chronological timeline to debug complex Flutter user flows."
 ---
@@ -72,4 +72,12 @@ Related events can share a `correlationId` (included in JSON / LLM exports) so y
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Events Timeline page on buoy.gg](https://buoy.gg/tools/events).*
+## FAQ
+
+### How do I see everything my Flutter app did in one timeline?
+
+Install `buoy_events` — it aggregates automatically from the Buoy tools you already have: network requests, storage writes, navigation, and Riverpod state changes, newest-first, with per-source filters and live counts. No extra setup.
+
+### Can I export the timeline?
+
+Yes — pause capture and copy the timeline as markdown, JSON, plaintext, or a mermaid diagram.

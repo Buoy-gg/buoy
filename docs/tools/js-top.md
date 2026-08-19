@@ -1,5 +1,6 @@
 ---
 title: JS Top
+seoTitle: "React Native JS Thread Profiler — what's eating JS FPS"
 id: tools-js-top
 description: "A live Task Manager for the React Native JS thread — see which timers, Promise chains, and callbacks are eating your JS FPS, ranked in real time. Works in Expo Go and release builds."
 ---
@@ -65,3 +66,19 @@ With the [MCP server](../mcp), an agent can call `get_js_thread_top` — the dev
 - [Performance Monitor](./perf-monitor) — Benchmarks, FPS/CPU/memory recording, automation
 - [Highlight Updates](./highlight-updates) — See which components re-render
 - [AI / MCP Server](../mcp) — Let an agent profile the thread for you
+
+---
+
+## FAQ
+
+### How do I find what's blocking the JS thread in React Native?
+
+Install `@buoy-gg/js-top` and open JS TOP — it ranks every task origin (`setInterval ← startPolling`, `Promise.then ← api.ts`, `requestAnimationFrame ← rafSpinLoop`) by the time it consumed, so the runaway timer or callback names itself in seconds.
+
+### Does it need a native module, dev client, or attached debugger?
+
+No. JS Top is pure JavaScript — it wraps the entry points work takes onto the thread instead of sampling, so it runs in Expo Go, dev builds, and release builds with no debugger attached.
+
+### Why is some time reported as "unattributed"?
+
+On the New Architecture, touch handlers and React commit work enter the JS thread through paths pure JavaScript can't wrap. That time is reported honestly as unattributed rather than being blamed on the wrong origin. Timers, rAF, microtasks, and Promise chains are always fully attributed.

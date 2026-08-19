@@ -1,5 +1,6 @@
 ---
 title: Quick Start
+seoTitle: "React Native DevTools Setup — install Buoy in minutes"
 id: quick-start
 description: "Get React Buoy's floating in-app devtools menu running in your React Native or Expo app in minutes, then reach the same tools from desktop or an AI agent."
 ---
@@ -29,7 +30,33 @@ export default function App() {
 
 A floating button appears in the corner of your app. Tap it to open the menu.
 
-Every tool is free — no key needed. A `licenseKey` prop unlocks [Pro](https://buoy.gg/pricing): production builds, the MCP server, and unlimited capture.
+Every tool works with no key at all, capped at about five entries each — enough
+to see what they do. A free key raises that to 25 per tool and includes Pro free
+every weekend; Pro unlocks everything: production builds, the MCP server, and
+unlimited capture. See [pricing](https://buoy.gg/pricing).
+
+Grab your key — free or paid, same command:
+
+```bash
+npx buoy login
+```
+
+> Run this from a project where `@buoy-gg/core` is installed — `npx` resolves
+> the command from your own `node_modules`. If npx tries to download something
+> instead (there is an unrelated `buoy` package on npm), name the package
+> explicitly:
+>
+> ```bash
+> npx --package=@buoy-gg/core buoy login
+> ```
+
+It signs you in, writes the key to `.env.local`, and gitignores it. Then:
+
+```tsx
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+See [Installation](./installation#get-your-key) for the details.
 
 ## 3. Add tools
 
@@ -133,3 +160,31 @@ Buoy Desktop is free to use; the MCP server is a Pro feature. Both connect to th
 - [Buoy Desktop](./desktop) — The full desktop dashboard
 - [AI / MCP Server](./mcp) — Drive your app from your AI editor
 - [Custom Tools](./custom-tools) — Build your own debugging tools
+
+---
+
+## FAQ
+
+### Do I need a license key to use React Buoy?
+
+No — every tool works without one, capped at about five entries each. A free key
+raises that to 25 per tool and includes Pro free every weekend. Pro unlocks
+everything: production builds, the MCP server, and unlimited capture.
+
+The fastest way to get either is `npx buoy login`. A free key needs no card and
+takes about thirty seconds.
+
+### Does Buoy phone home?
+
+Once a day, in development only, it sends a random install id, the Buoy version,
+your platform, and your license tier. Never your project, your app, or anything
+from the tools — that data never leaves your machine. Turn it off with
+`Buoy.init({ telemetry: false })`. Full details: [Telemetry](./telemetry).
+
+### How do I add a tool to the menu?
+
+Install the package. Auto-discovery finds it and the tool appears in the floating menu with no wiring and no config — `npm install @buoy-gg/network`, open the menu, tap Network.
+
+### Will the devtools ship to my users?
+
+The menu only renders where you mount `FloatingDevTools`, and desktop sync is off whenever `__DEV__` is false unless you opt in explicitly with a Pro license — so a shipped app never dials a broker on a customer's phone.

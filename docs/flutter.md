@@ -1,5 +1,6 @@
 ---
 title: Flutter (Beta)
+seoTitle: "Flutter DevTools by Buoy — in-app debugging for Flutter"
 id: flutter
 description: "Buoy for Flutter — overview, quick start, and installation. Same three Getting Started pages as React Native."
 ---

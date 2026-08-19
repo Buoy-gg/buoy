@@ -1,6 +1,6 @@
 ---
 title: Redux DevTools
-seoTitle: "Redux DevTools — setup, config & API"
+seoTitle: "Redux DevTools for React Native — actions, state & time travel"
 id: tools-redux
 description: "Redux DevTools for React Native — monitor dispatched actions, inspect state changes, and time-travel debug your store live on the device, no Flipper needed."
 ---
@@ -218,4 +218,12 @@ import {
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Redux DevTools page on buoy.gg](https://buoy.gg/tools/redux).*
+## FAQ
+
+### How do I use Redux DevTools in React Native without Flipper?
+
+Install `@buoy-gg/redux` — the action stream, state diffs, and time-travel controls run inside the app on the device. Flipper (deprecated since RN 0.73) is not involved.
+
+### Does time travel work on the device?
+
+Yes — JUMP restores the store to the state after any recorded action, and REPLAY re-dispatches an action, directly from the in-app panel.

@@ -1,6 +1,6 @@
 ---
 title: Environment Inspector
-seoTitle: "Environment Inspector — setup, config & API"
+seoTitle: "Flutter Environment Config Debugger — validate env on-device"
 id: flutter-tools-env
 description: "View and validate your Flutter app's environment config on-device — required-variable checks, type detection, per-variable status badges, and a health score."
 ---
@@ -101,4 +101,12 @@ Required entries can be a bare `String` (existence), `RequiredEnvVar.value(...)`
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Environment Inspector page on buoy.gg](https://buoy.gg/tools/env).*
+## FAQ
+
+### How do I check which --dart-define values my Flutter build actually got?
+
+Flutter has no enumerable `process.env`, and compile-time `--dart-define` values can't be listed at runtime — so you hand Buoy the map in `registerBuoyEnv(vars: {...})`. The inspector then shows the value each variable resolved to, with per-variable status badges and a 0–100% health score.
+
+### Can it validate types and required values?
+
+Yes — declare expectations with the `envVar` builder (`withType`, `withValue`, `withDescription`, or `exists` for a plain existence check). Supported types are string, number, boolean, array, object, and url, and anything missing or wrong is flagged.

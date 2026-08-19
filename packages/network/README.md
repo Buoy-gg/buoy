@@ -51,7 +51,7 @@ The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-
 
 ## Free vs Pro
 
-Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for everyone.
+Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for anyone holding a key — including a free one (`npx buoy login`).
 
 > 🎯 **Flutter (beta):** Buoy is now a full suite for Flutter — `flutter pub add buoy`. Network, storage, console, env, routes, images, Riverpod, events, and a live perf HUD, all streaming to the same desktop dashboard and MCP server. [Details →](https://buoy.gg/flutter)
 

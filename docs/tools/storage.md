@@ -1,6 +1,6 @@
 ---
 title: Storage Explorer
-seoTitle: "Storage Explorer — setup, config & API"
+seoTitle: "React Native AsyncStorage & MMKV Viewer — browse on-device"
 id: tools-storage
 description: "Browse and edit every key-value pair your React Native app persists — AsyncStorage, MMKV, and SecureStore in one explorer with real-time updates."
 ---
@@ -83,4 +83,12 @@ Registered values are re-read every few seconds while the browser is open, so a 
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Storage Explorer page on buoy.gg](https://buoy.gg/tools/storage).*
+## FAQ
+
+### How do I view AsyncStorage contents in Expo?
+
+Install `@buoy-gg/storage` and open the Storage tool from the floating menu — all AsyncStorage keys are browsable and editable on the device, including in Expo Go.
+
+### Does it support MMKV?
+
+Yes — AsyncStorage, MMKV, and SecureStore all appear in the same explorer, with a backend filter.

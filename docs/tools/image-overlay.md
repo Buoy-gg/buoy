@@ -1,6 +1,6 @@
 ---
 title: Image Overlay
-seoTitle: "Image Overlay — setup, config & API"
+seoTitle: "React Native Design Overlay — pixel-perfect UI against mockups"
 id: tools-image-overlay
 description: "Overlay design mockups on your running React Native app and tweak opacity, scale, and position to nail pixel-perfect UI without leaving the simulator."
 ---
@@ -106,4 +106,8 @@ Manually position and resize the overlay anywhere on screen. Drag to move, pinch
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Image Overlay page on buoy.gg](https://buoy.gg/tools/image-overlay).*
+## FAQ
+
+### How do I compare my React Native UI against a Figma design?
+
+Export the frame as an image, then load it in Image Overlay from clipboard or URL — adjust opacity over the running app and differences jump out.

@@ -60,6 +60,10 @@
             {
               "label": "Custom Tools",
               "to": "custom-tools"
+            },
+            {
+              "label": "Telemetry",
+              "to": "telemetry"
             }
           ]
         },

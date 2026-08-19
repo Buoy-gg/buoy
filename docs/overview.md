@@ -1,5 +1,6 @@
 ---
 title: Overview
+seoTitle: "React Buoy — in-app devtools for React Native & Expo"
 id: overview
 description: "Meet React Buoy, the in-app devtools platform for React Native — debug network, state, storage, and performance from your phone, desktop, or AI agent."
 ---

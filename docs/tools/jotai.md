@@ -1,6 +1,6 @@
 ---
 title: Jotai DevTools
-seoTitle: "Jotai DevTools — setup, config & API"
+seoTitle: "Jotai DevTools for React Native — atoms, diffs & event history"
 id: tools-jotai
 description: "Inspect Jotai atoms in your React Native app — watch state changes, browse live atom values, and explore value diffs in real time, right on the device."
 ---
@@ -137,4 +137,8 @@ Pause atom capture when you need to focus, resume when ready.
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Jotai DevTools page on buoy.gg](https://buoy.gg/tools/jotai).*
+## FAQ
+
+### How do I inspect Jotai atoms in React Native?
+
+Install `@buoy-gg/jotai` and register your atoms — they appear in the on-device browser with live values, write history, and diffs.

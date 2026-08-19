@@ -1,6 +1,6 @@
 ---
 title: Environment Inspector
-seoTitle: "Environment Inspector — setup, config & API"
+seoTitle: "React Native Environment Variables Debugger — validate on-device"
 id: tools-env
 description: "View and validate your React Native app's environment variables on-device — auto-discovers EXPO_PUBLIC_ vars with type detection and health monitoring."
 ---
@@ -107,4 +107,12 @@ Use the interactive builder below to create your environment validation config. 
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Environment Inspector page on buoy.gg](https://buoy.gg/tools/env).*
+## FAQ
+
+### How do I check which env vars my Expo app actually loaded?
+
+Install `@buoy-gg/env` and open the Env tool — it auto-discovers EXPO_PUBLIC_ variables and shows the value each one resolved to in the running build.
+
+### Can it tell me why an env var is wrong, not just missing?
+
+Yes — attach expected types and custom validators, and failures show the current value, expected value, and context.

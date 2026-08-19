@@ -1,5 +1,6 @@
 ---
 title: Installation
+seoTitle: "Install Flutter DevTools — buoy pub package setup guide"
 id: flutter-installation
 description: "Step-by-step guide to installing Buoy devtools in a Flutter app — requirements, umbrella or à-la-carte packages, and picking your first tools."
 ---
@@ -24,7 +25,15 @@ Each package adds a new tool to your floating menu. Install only what you need �
 
 ## Register Your License Key
 
-A license key unlocks Pro features (production builds and MCP). Pass it as a prop to `BuoyDevTools`:
+Buoy runs three ways, and a key is what moves you up:
+
+| | Key | What you get |
+| --- | --- | --- |
+| **No key** | none | Every tool works, with a minimal event history. |
+| **Free** | free key, from an account | Standard access — event history across every tool. |
+| **Pro** | paid key | Everything: production builds, the MCP server, and unlimited events. |
+
+Pass the key as a prop to `BuoyDevTools`:
 
 ```dart
 import 'package:buoy/buoy.dart';
@@ -81,3 +90,15 @@ React Query, Redux, Zustand, render highlighting, debug borders, and JS Top rema
 - [Buoy Desktop](../desktop) — The full desktop dashboard
 - [AI / MCP Server](../mcp) — Drive your app from your AI editor
 - [Custom Tools](./custom-tools) — Build your own debugging tools
+
+---
+
+## FAQ
+
+### What's the difference between the `buoy` umbrella and the individual packages?
+
+`buoy` pulls in the whole suite and registers every tool for you. The individual packages (`buoy_network`, `buoy_storage`, and the rest) let you install only what you need. Either way you mount the same `BuoyDevTools` widget.
+
+### Where do I mount BuoyDevTools in a Flutter app?
+
+In `MaterialApp.builder` (or `CupertinoApp.builder`), wrapping the `child` — the floating button then sits above every screen in the app.

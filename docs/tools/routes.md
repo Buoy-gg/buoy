@@ -1,6 +1,6 @@
 ---
 title: Route Inspector
-seoTitle: "Route Inspector — setup, config & API"
+seoTitle: "React Native Navigation Debugger — routes, stack & events"
 id: tools-routes
 description: "Browse every route in your app — Expo Router or React Navigation — jump to any screen, and watch navigation events in real time to debug React Native navigation issues fast."
 ---
@@ -62,4 +62,12 @@ Tap any event to open its **detail page** — the full route template, from/to p
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Route Inspector page on buoy.gg](https://buoy.gg/tools/routes).*
+## FAQ
+
+### How do I inspect the navigation stack in React Native?
+
+Install `@buoy-gg/route-events` and open Routes — the Stack tab shows the live stack with route names and params, updating as you navigate.
+
+### Does it work with Expo Router?
+
+Yes — it's built for Expo Router: the sitemap, stack, and event stream all reflect your file-based routes.

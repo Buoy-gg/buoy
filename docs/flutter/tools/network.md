@@ -1,6 +1,6 @@
 ---
 title: Network Monitor
-seoTitle: "Network Monitor — setup, config & API"
+seoTitle: "Flutter Network Inspector — debug http & dio requests"
 id: flutter-tools-network
 description: "Inspect every HTTP request your Flutter app makes — package:http, dio, and image loads with headers, bodies, timing, and errors — live on the device, no proxy required."
 ---
@@ -108,4 +108,16 @@ Documented and on the roadmap: `cupertino_http` / `cronet_http` native clients, 
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Network Inspector page on buoy.gg](https://buoy.gg/tools/network).*
+## FAQ
+
+### How do I inspect HTTP requests in a Flutter app without a proxy?
+
+Add `buoy_network` (or the `buoy` umbrella) and call `registerBuoyNetwork()` — everything riding `dart:io`'s `HttpClient` is captured automatically, including `package:http`, dio, `Image.network`/`NetworkImage`, and `cached_network_image`. The panel opens on the device itself, so there is no proxy or desktop tool to attach.
+
+### Does it capture dio and GraphQL requests?
+
+Yes — dio traffic is captured and attributed as `dio`, and GraphQL operation names are extracted from queries, mutations, and subscriptions and shown with their variables (`GetUser › 123`). Tag graphql_flutter or ferry requests with `X-Request-Client: graphql` to get operation names.
+
+### Are requests made during startup captured?
+
+Yes. The HTTP hook installs at `registerBuoyNetwork()` rather than when something first watches, so boot traffic — `main()` fetches, session bootstrap, your first screen's loads — is held and appears the moment you open the panel or connect a dashboard.

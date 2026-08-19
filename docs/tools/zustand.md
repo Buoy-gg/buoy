@@ -1,6 +1,6 @@
 ---
 title: Zustand DevTools
-seoTitle: "Zustand DevTools — setup, config & API"
+seoTitle: "Zustand DevTools for React Native — stores, diffs & time travel"
 id: tools-zustand
 description: "Zustand devtools for React Native — watch store state changes, explore diffs, jump back to any previous state, and reset stores live on your device."
 ---
@@ -149,4 +149,12 @@ Pause state capture when you need to focus, resume when ready.
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Zustand DevTools page on buoy.gg](https://buoy.gg/tools/zustand).*
+## FAQ
+
+### How do I debug Zustand state in React Native?
+
+Install `@buoy-gg/zustand` and register your stores — they appear in the on-device browser with live state, an update stream, and diffs. No Redux DevTools bridge or web debugger needed.
+
+### Can I see which store update caused a bug?
+
+Yes — the event stream timestamps every update with the store name and changed key, and each event has a before/after diff.

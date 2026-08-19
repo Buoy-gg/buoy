@@ -1,5 +1,6 @@
 ---
 title: Custom Tools
+seoTitle: "Build Custom React Native DevTools — your own Buoy tool"
 id: custom-tools
 description: "Extend React Buoy with your own debugging tools — register any React component in your React Native app's floating devtools menu in just a few lines."
 ---

@@ -1,5 +1,6 @@
 ---
 title: Installation
+seoTitle: "Install React Native DevTools — @buoy-gg/core setup guide"
 id: installation
 description: "Step-by-step guide to installing React Buoy devtools in a React Native or Expo app — requirements, core package setup, and picking your first tools."
 ---
@@ -24,22 +25,77 @@ Each package adds a new tool to your floating menu. Install only what you need.
 
 ## Register Your License Key
 
-A license key is required for all plans, including free. Pass it as a prop to `FloatingDevTools`:
+Buoy runs three ways, and a key is what moves you up:
+
+| | Key | What you get |
+| --- | --- | --- |
+| **No key** | none | Every tool, capped at ~5 entries each — enough to see what they do. |
+| **Free** | `npx buoy login` (no card) | 25 entries per tool, plus Pro free every weekend. |
+| **Pro** | paid key | Unlimited capture, production builds, the MCP server. |
+
+Every tool is available on every tier — the caps change, the tool list doesn't.
+
+### Get your key
+
+```bash
+npx buoy login
+```
+
+> Run this from a project where `@buoy-gg/core` is installed — `npx` resolves
+> the command from your own `node_modules`. If npx tries to download something
+> instead (there is an unrelated `buoy` package on npm), name the package
+> explicitly:
+>
+> ```bash
+> npx --package=@buoy-gg/core buoy login
+> ```
+
+Opens your browser, signs you in, and writes the key to `.env.local` (adding it
+to `.gitignore` if it isn't already). It picks the right variable name for your
+setup — `EXPO_PUBLIC_BUOY_KEY` on Expo, `BUOY_KEY` on bare React Native — which
+matters, because Expo only inlines `EXPO_PUBLIC_`-prefixed variables into the
+bundle. It works the same whether your account holds a free key or a paid one.
+
+Then read it in your app:
 
 ```tsx
-import { FloatingDevTools } from "@buoy-gg/core";
+import { Buoy, FloatingDevTools } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
 
 export default function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
+      <FloatingDevTools />
     </>
   );
 }
 ```
 
-Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+Restart your bundler with its cache cleared so the new variable is picked up:
+
+```bash
+npx expo start --clear
+```
+
+The `--clear` matters. Expo inlines `EXPO_PUBLIC_*` variables into the bundle at
+transform time, and Metro caches transforms keyed on the *source* file — so
+changing `.env.local` alone leaves the old value baked in, and a plain restart
+silently keeps using it.
+
+### Or pass it directly
+
+```tsx
+<FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
+```
+
+Fine for a solo project. On a team, prefer the env var: a key committed to a
+shared repo is shared by everyone who clones it, so it stops identifying a
+person and starts identifying a repository.
+
+Don't have a key yet? A free one comes with an account — `npx buoy login` will
+create it for you, or grab it from [buoy.gg/pricing](https://buoy.gg/pricing).
 
 ## Desktop & AI (optional)
 
@@ -75,3 +131,15 @@ Buoy is built to survive locked-down corporate React Native apps:
 - [Buoy Desktop](./desktop) — The full desktop dashboard
 - [AI / MCP Server](./mcp) — Drive your app from your AI editor
 - [Custom Tools](./custom-tools) — Build your own debugging tools
+
+---
+
+## FAQ
+
+### Which React Buoy package do I install first?
+
+`@buoy-gg/core` — it renders the floating menu. Every tool is a separate package (`@buoy-gg/network`, `@buoy-gg/storage`, and so on) that registers itself in the menu once installed, so you only ship the tools you actually use.
+
+### Do I have to configure each tool after installing it?
+
+No. Auto-discovery finds installed tool packages and adds them to the floating menu with no wiring. Only tools that need to reach into your app — passing your Zustand stores, or wiring impersonation to your user-search API — take extra props.

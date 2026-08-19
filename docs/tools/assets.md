@@ -1,6 +1,6 @@
 ---
 title: Assets
-seoTitle: "Assets — setup, config & API"
+seoTitle: "React Native Asset Inventory — sizes, duplicates & unused"
 id: tools-assets
 description: "See every asset shipped in your app — bundled images, fonts, video and audio with real byte sizes, scale-variant coverage, duplicate detection, and shipped-but-never-loaded auditing. Zero configuration."
 ---
@@ -63,4 +63,20 @@ Three layers, each degrading gracefully:
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Assets page on buoy.gg](https://buoy.gg/tools/assets).*
+## FAQ
+
+### How do I find out how big my React Native app assets are?
+
+Open the tool in a dev build — every scale variant of every bundled asset is measured from the Metro server and summed per asset, with kind totals in the header. Release builds still get decoded-memory estimates.
+
+### Can it find assets I ship but never use?
+
+Yes — in dev it fetches the full Metro bundle graph and diffs it against what actually registered at runtime, so anything bundled but never required shows up under UNUSED. Runtime knowledge is what static grep scripts are missing.
+
+### How is this different from the Images tool?
+
+Images shows what your app renders at runtime — per-load cache verdicts, timings, failures. Assets shows what your app ships in the bundle. The slow load is an Images problem; the megabytes are an Assets problem.
+
+### How do I stop asset bloat from creeping back in?
+
+Save a baseline before you start, then re-open the tool after any change — it reports added, removed and grown assets with the net byte delta, persisted across app restarts.

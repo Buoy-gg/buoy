@@ -71,7 +71,7 @@ To update a local install later, just re-run `init`.
 
 ## Pro
 
-The MCP data and action tools require [Buoy Pro](https://buoy.gg/pricing); `list_devices` always works free. And every Saturday and Sunday, Pro unlocks free for everyone — built into the product, so you can try the whole thing for real before deciding.
+The MCP data and action tools require [Buoy Pro](https://buoy.gg/pricing); `list_devices` always works free. And every Saturday and Sunday, Pro unlocks free for anyone holding a key, including a free one (`npx buoy login`) — built into the product, so you can try the whole thing for real before deciding.
 
 Everything runs over a localhost-only broker — nothing ever leaves your machine.
 

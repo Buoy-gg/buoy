@@ -1,5 +1,6 @@
 ---
 title: Overview
+seoTitle: "Buoy for Flutter — in-app devtools for Flutter apps"
 id: flutter-overview
 description: "Meet Buoy for Flutter — in-app devtools for network, state, storage, and performance from your phone, desktop, or AI agent."
 ---

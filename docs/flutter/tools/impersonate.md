@@ -1,6 +1,6 @@
 ---
 title: Impersonate Tool
-seoTitle: "Impersonate Tool — setup, config & API"
+seoTitle: "Flutter User Impersonation — test as any user, no rebuilds"
 id: flutter-tools-impersonate
 description: "Test your Flutter app as any user by injecting impersonation headers into your network requests — no logging out or switching accounts required."
 ---
@@ -121,4 +121,12 @@ Read the live map anywhere with `BuoyImpersonate.instance.impersonationHeaders`.
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Impersonate page on buoy.gg](https://buoy.gg/tools/impersonate).*
+## FAQ
+
+### How do I test a Flutter app as another user without logging out?
+
+Register `buoy_impersonate` with your user-search callback, pick a user in the tool, and attach `BuoyImpersonate.instance.impersonationHeaders` in your HTTP client — a dio interceptor, for example. The state persists across launches and mirrors live to Buoy Desktop.
+
+### Does impersonation bypass my authentication?
+
+No. Dart has no global `fetch` to patch, so you decide where the headers go, and your backend decides what impersonation means and who is allowed to use it. Buoy is the switch, not the authority.

@@ -1,6 +1,6 @@
 ---
 title: Image Overlay
-seoTitle: "Image Overlay — setup, config & API"
+seoTitle: "Flutter Design Overlay — pixel-perfect UI against mockups"
 id: flutter-tools-image-overlay
 description: "Overlay design mockups on your running Flutter app and tweak opacity, scale, and position to nail pixel-perfect UI without leaving the simulator."
 ---
@@ -71,4 +71,12 @@ Manually position and resize the overlay anywhere on screen. Drag to move, aspec
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Image Overlay page on buoy.gg](https://buoy.gg/tools/image-overlay).*
+## FAQ
+
+### How do I compare a Flutter screen against a design mockup?
+
+Register `buoy_image_overlay`, load your exported design into the tool, and overlay it on the running app — adjust opacity, scale, and position until the implementation matches, without leaving the simulator.
+
+### Can the overlay follow a specific widget?
+
+Yes — wrap the widget in `BuoyImageTarget(label: 'LoginCard')` and Component Mode pins the overlay to it, measuring its exact position and size. Auto Track re-measures the target as it moves.

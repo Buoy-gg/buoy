@@ -1,6 +1,6 @@
 ---
 title: Storage Explorer
-seoTitle: "Storage Explorer — setup, config & API"
+seoTitle: "Flutter shared_preferences Viewer — browse storage on-device"
 id: flutter-tools-storage
 description: "Browse and edit every key-value pair your Flutter app persists — shared_preferences in one explorer with real-time updates and an event stream of every write."
 ---
@@ -53,4 +53,12 @@ void main() {
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Storage Explorer page on buoy.gg](https://buoy.gg/tools/storage).*
+## FAQ
+
+### How do I view shared_preferences values in a Flutter app?
+
+Add `buoy_storage` and call `registerBuoyStorage()` — every key-value pair is browsable and editable on the device, with an event stream of every write and a diff of what changed.
+
+### Will it show writes made outside my own code?
+
+`shared_preferences` has no change stream, so Buoy watches writes made through the app *and* re-scans on an interval — changes from anywhere still show up.

@@ -1,6 +1,6 @@
 ---
 title: Impersonate Tool
-seoTitle: "Impersonate Tool — setup, config & API"
+seoTitle: "React Native User Impersonation — test as any user"
 id: tools-impersonate
 description: "Test your React Native app as any user by injecting impersonation headers into every network request — no logging out or switching accounts required."
 ---
@@ -289,4 +289,12 @@ function impersonateMiddleware(req, res, next) {
 
 ---
 
-*Looking for an overview with screenshots and FAQs? See the [Impersonate page on buoy.gg](https://buoy.gg/tools/impersonate).*
+## FAQ
+
+### How does impersonation work — does it bypass my auth?
+
+No. Buoy only attaches the headers you configure to outgoing requests. Your backend implements what impersonation means and enforces who may use it — Buoy is the on-device switch.
+
+### Can I test feature flags for different user cohorts?
+
+Yes — if your flag service keys off user identity or headers, switching the impersonated user flips the flags the app receives.

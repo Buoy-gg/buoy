@@ -1,6 +1,8 @@
 ---
 title: Debug Borders
+seoTitle: "React Native Layout Debugger — borders, testIDs & inspector"
 id: tools-debug-borders
+noindex: true
 description: "Visualize your React Native layout with colored borders and labels — tap any element to inspect its testID, styles, position, and accessibility info on-device."
 ---
 
@@ -82,3 +84,15 @@ Pass it to `FloatingDevTools` via the `apps` array and it replaces the default p
 - [Highlight Updates](./highlight-updates) — See why your components re-render
 - [Image Overlay](./image-overlay) — Overlay design mockups on your running app
 - [Bench](./perf-monitor) — Benchmark FPS, CPU, and memory on a real device
+
+---
+
+## FAQ
+
+### How do I see React Native layout boundaries on a device?
+
+Install `@buoy-gg/debug-borders` and tap the BORDERS icon to cycle modes — Borders draws depth-colored outlines on every component, and Labels narrows that to components with a `testID` or `accessibilityLabel`. The overlays are touch-through, so your app stays usable.
+
+### Can I inspect a component's styles without a desktop debugger?
+
+Yes — tap any label to inspect the component underneath on the device itself: its `testID`, styles, position, and accessibility info. Nothing has to be attached to your machine.

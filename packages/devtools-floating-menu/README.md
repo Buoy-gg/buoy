@@ -68,7 +68,7 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 
 ## Free vs Pro
 
-Every tool is **free** — no key, no signup, no time limit.
+Every tool is **free** on every tier — only how much history each keeps changes. A free key (`npx buoy login`, no card) restores the full free tier.
 
 **Pro** unlocks production builds, the MCP server, and unlimited capture. Activate with one prop:
 
@@ -76,7 +76,7 @@ Every tool is **free** — no key, no signup, no time limit.
 <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
 ```
 
-**Weekend Pass:** every Saturday and Sunday, every Pro feature unlocks free for everyone — built into the product, not a promo. Details at [buoy.gg/pricing](https://buoy.gg/pricing).
+**Weekend Pass:** every Saturday and Sunday, every Pro feature unlocks free for anyone holding a key — including a free one. Built into the product, not a promo. Details at [buoy.gg/pricing](https://buoy.gg/pricing).
 
 ## Safe in production
 

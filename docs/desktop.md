@@ -1,5 +1,6 @@
 ---
 title: Buoy Desktop
+seoTitle: "React Native Desktop DevTools Dashboard — Buoy Desktop"
 id: desktop
 description: "Mirror your React Native or Flutter app's Buoy devtools to a full-size desktop dashboard — live performance HUD, multi-device switching, and remote control included."
 ---
@@ -46,6 +47,28 @@ Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
 
 > **Just installed a @buoy-gg package?** Restart Metro with `--clear` — Metro caches the "optional package missing" resolution, and a plain reload never picks the new package up.
 
+#### Release builds
+
+A shipped app must never dial a broker on a customer's phone, so sync is **off** whenever `__DEV__` is false. To profile a release build you own — a local `--configuration Release` run, an internal TestFlight/EAS build, a field build that ships headless — opt in explicitly. It also requires a real Pro license.
+
+```tsx
+<FloatingDevTools
+  externalSync={{
+    enableInRelease: true,
+    // iOS physical devices only: there is no Metro host to derive
+    socketURL: "http://192.168.1.20:42831",
+  }}
+/>
+```
+
+There is no Metro server in a release bundle, so the broker host can't be derived and `socketURL` defaults to `http://localhost:42831`. That is already right for the iOS Simulator, the Android emulator, and Android over USB (`adb reverse tcp:42831 tcp:42831`) — pass it explicitly for a physical iOS device or a broker on another machine.
+
+Most tools work the same in a release build — network capture, storage, console, the state tools, routes, images, assets, the performance HUD, and remote actions. Three things stay off, by design and not by choice:
+
+- **Highlight Updates** (render counts, and the MCP `describe_screen` / `tap_element` / `measure_renders` calls) needs React's DevTools hook, which React only installs in dev builds.
+- **Network response overrides** stay disabled — a shipped build must not be able to mock its own responses.
+- **Reload** falls back to `expo-updates`; without that package installed, `reload_app` reports that it has no mechanism instead of reloading.
+
 ### Flutter
 
 - **iOS Simulator / Android Emulator** — connects automatically (`localhost` / `10.0.2.2`).
@@ -78,3 +101,19 @@ The desktop app hosts the same local broker the [MCP server](./mcp) uses. Your a
 - [AI / MCP Server](./mcp) — Drive the same tools from your AI editor
 - [React Native Quick Start](./quick-start) — Get Buoy into an RN app
 - [Flutter Quick Start](./flutter/quick-start) — Get Buoy into a Flutter app
+
+---
+
+## FAQ
+
+### How do I see my React Native devtools on my desktop?
+
+Download Buoy Desktop for macOS, Windows, or Linux and open your app with Buoy running. The app derives the broker address from the Metro dev server that served the bundle, so simulators, emulators, and physical devices on the same Wi-Fi connect with zero config.
+
+### Which port does Buoy Desktop use?
+
+Buoy tools sync to a local broker on port 42831. Launch Buoy Desktop first — it starts the broker and auto-detects devices. For Android over USB, run `adb reverse tcp:42831 tcp:42831` once per cable session.
+
+### Can I use it with a release build?
+
+Sync is off whenever `__DEV__` is false, so a shipped app never dials a broker on a customer's phone. To profile a release build you own — a local Release run, an internal TestFlight/EAS build — opt in explicitly; it also requires a real Pro license.

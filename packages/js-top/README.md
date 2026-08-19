@@ -3,7 +3,7 @@
   <p><b>A live Task Manager for the React Native JS thread.</b></p>
   <p>See which timers, Promise chains, and callbacks are eating your JS FPS — ranked in real time, like Activity Monitor for your app's JS thread.</p>
   <p>
-    <a href="https://buoy.gg/tools/js-top">Docs</a> ·
+    <a href="https://buoy.gg/buoy/latest/docs/tools/js-top">Docs</a> ·
     <a href="https://buoy.gg">buoy.gg</a>
   </p>
 </div>
