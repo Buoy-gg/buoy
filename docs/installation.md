@@ -101,7 +101,7 @@ create it for you, or grab it from [buoy.gg/pricing](https://buoy.gg/pricing).
 
 The packages above power the in-app floating menu. Two more surfaces connect to the same app — both Buoy Pro:
 
-- **Buoy Desktop** — a full dashboard for macOS, Windows & Linux. [Download it](https://buoy.gg/pricing) and launch it — your app finds it automatically (the broker address is derived from Metro, so physical devices work zero-config too). See [Buoy Desktop](./desktop).
+- **Buoy Desktop** — a full dashboard for macOS, Windows & Linux. Install the sync client in your app (`npm install @buoy-gg/external-sync` — it ships separately so apps that never use desktop don't carry it), then [download the app](https://buoy.gg/pricing) and launch it — your app finds it automatically (the broker address is derived from Metro, so physical devices work zero-config too). See [Buoy Desktop](./desktop).
 - **AI / MCP Server** — drive your app from Claude Code, Cursor, or any MCP editor:
 
 ```bash

@@ -21,6 +21,7 @@ React Native and Flutter devices speak the **same protocol**, so they show up si
 ## Requirements
 
 - **A running app** with Buoy devtools installed and open on a device or simulator (React Native or Flutter).
+- **React Native:** the `@buoy-gg/external-sync` package installed in the app — it's the sync client, and it ships separately from the tools (see below).
 - The app and the desktop dashboard on the **same machine or local network**.
 
 ## Install
@@ -33,7 +34,11 @@ Buoy tools sync to a local broker on **port 42831**. Launch Buoy Desktop first; 
 
 ### React Native
 
-The connection is **automatic**. The app derives the broker address from the Metro dev server that served the bundle, so simulators, emulators, and physical devices on the same Wi-Fi all find your machine with zero config.
+First, install the sync client in your app. It's a separate package on purpose — apps that never use the desktop dashboard don't carry the sync code at all:
+
+<!-- ::pm npm="npm install @buoy-gg/external-sync" yarn="yarn add @buoy-gg/external-sync" pnpm="pnpm add @buoy-gg/external-sync" bun="bun add @buoy-gg/external-sync" -->
+
+With it installed, the connection is **automatic** — no wiring, no config. `FloatingDevTools` detects the package and derives the broker address from the Metro dev server that served the bundle, so simulators, emulators, and physical devices on the same Wi-Fi all find your machine with zero config.
 
 Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
 
