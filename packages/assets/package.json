@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/assets",
-  "version": "7.0.28",
+  "version": "7.0.29",
   "description": "See every asset shipped in your React Native app — bundled images, fonts, video and audio with dimensions, scale variants, byte sizes, duplicate detection and WebP-savings audit. Part of Buoy devtools.",
   "homepage": "https://buoy.gg/tools/assets",
   "keywords": [
