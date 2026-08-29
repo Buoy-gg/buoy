@@ -9,7 +9,7 @@ description: "Inspect every HTTP request your React Native app makes — URLs, h
 
 See every API call your app makes. Request, response, headers, timing, errors — all in real-time with zero configuration.
 
-Don't take our word for it — this is the real tool, running right here, loaded with demo traffic. The guided tour below walks one debugging story: traffic streams in, a request fails, you inspect it, force the failure with an override, and pin the evidence. Or skip the tour and just start tapping:
+Traffic streams in, a request fails, you inspect it, force the failure with an override, and pin the evidence.
 
 <!-- ::network-live-demo -->
 

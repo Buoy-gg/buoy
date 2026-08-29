@@ -11,7 +11,7 @@ Testing a checkout flow means building the same state over and over: clear the c
 
 Time Machine is macOS-style restore points for your app's client state: capture **everything** — device storage (AsyncStorage, MMKV, SecureStore), Redux, Zustand, Jotai, and the React Query cache — as a named snapshot, then restore it in one tap. Set up your test state once; jump back to it as many times as you want.
 
-Don't take our word for it — this is the real tool, running right here, loaded with mock restore points. The guided tour below walks one debugging story: a checkout state gets captured, nine things drift, you open the values, see what restore can't apply and why, then restore in reload mode and watch the restore points come back with the app. Or skip the tour and just start tapping:
+A checkout state gets captured, nine things drift, you open the values, see what restore can't apply and why, then restore in reload mode and watch the restore points come back with the app.
 
 <!-- ::time-machine-live-demo -->
 

@@ -7,7 +7,7 @@ description: "Browse every go_router route in your Flutter app, jump to any scre
 
 See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
 
-Don't take our word for it — this is the real tool UI, running here on mock navigations. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::routes-live-demo -->
 

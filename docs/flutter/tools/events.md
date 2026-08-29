@@ -7,7 +7,7 @@ description: "Watch network requests, storage writes, state changes, and navigat
 
 See every event across all your dev tools in one chronological timeline. Debug complex user flows by watching network requests, storage changes, state updates, and navigation happen in real-time.
 
-Don't take our word for it — this is the real tool UI, running here on a mock session. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::events-live-demo -->
 

@@ -7,9 +7,11 @@ description: "View and validate your React Native app's environment variables on
 
 <!-- ::platform-badge platform="both" -->
 
-The Environment Inspector tool lets you view and validate environment variables in your React Native app. It automatically discovers `EXPO_PUBLIC_` prefixed variables and provides validation, type detection, and health monitoring.
+An env var bug never shows up where you look for it. The `.env` file is right, the CI secret is set, and the build still ships with `EXPO_PUBLIC_API_URL` pointing at staging — because what matters is what got inlined into the bundle, and nothing on your machine can tell you that.
 
-Don't take our word for it — this is the real tool, running right here on a mock build. The guided tour below walks one debugging story: vars stream in as discovered, a declared contract lights up what never shipped, you read exactly what's wrong, compare two builds' health, and land the fix. Or skip the tour and just start tapping:
+The Environment Inspector reads the values the running build actually resolved, on the device, and checks them against a contract you declare in code. You find out on the TestFlight build instead of from a support ticket.
+
+Vars stream in as discovered, a declared contract lights up what never shipped, you read exactly what's wrong, compare two builds' health, and land the fix.
 
 <!-- ::env-live-demo -->
 
@@ -106,6 +108,12 @@ Use the interactive builder below to create your environment validation config. 
 <!-- ::env-playground -->
 
 ---
+
+## What It Can't Do
+
+**Auto-discovery only sees `EXPO_PUBLIC_` variables.** Anything else has to be declared in your contract to appear — which is deliberate: a devtool that enumerated every value in scope would be a way to read secrets off a device.
+
+**It reads the build, not your `.env` file.** The values shown are the ones inlined into the running bundle. That is the entire point — it is how you catch a build that shipped with the wrong value — but it means editing `.env` changes nothing until you rebuild.
 
 ## FAQ
 

@@ -7,7 +7,9 @@ description: "Zustand devtools for React Native — watch store state changes, e
 
 <!-- ::platform-badge platform="both" -->
 
-Full Zustand store inspection for React Native. Monitor state changes, explore diffs, jump to any previous state, and reset stores in real-time — directly on your device.
+Zustand's appeal is that a store is just a function — which is also why nothing tells you when one changes. There is no action log to read, so a value that goes wrong halfway through a flow leaves you sprinkling `subscribe` calls and rebuilding to see them.
+
+Buoy writes the update stream you do not have: which store changed, which keys, the diff, and whether an update fired without changing anything. It tells rehydration apart from your own writes, and jumps a store back without restarting the app.
 
 Walk a live checkout session: stores update, a payment fails, DIFF names the keys, JUMP rolls checkoutStore back, RESET empties cartStore — then free play.
 
@@ -115,6 +117,17 @@ Catch performance issues before they impact users (middleware mode):
 
 ---
 
+## Editing a Store
+
+Expand a store's card on the Stores tab and tap **Edit state** — the same full-screen tree editor the Storage tool uses: tap a row to select it, double-tap to type a new value, restructure with the docked actions, then write everything in one save. Works for in-memory and persisted stores alike (a persisted store's `persist` middleware writes the disk copy itself on save — no storage detour).
+
+Saves are **merge-only**. However deep the edit, it is written as `setState({ changedTopLevelKeys }, false)`, which by construction cannot delete a top-level key and cannot touch the action functions your store keeps in state. Two things follow from that:
+
+- **A top-level key can be changed but not removed or renamed.** A zustand merge can't delete, so Remove is disabled on top-level rows, and a raw-JSON edit that drops a key is refused at save with the key named. (For a persisted store, delete the key from its saved copy in the Storage tool and tap "re-read saved value" instead.)
+- **Your actions survive, and untouched keys keep the app's value.** The save carries only what you changed — a key the app wrote while you were editing, and you didn't touch, stays the app's.
+
+A store whose state isn't a plain object, or that keeps a function nested inside a data key, says so on the card instead of offering the button. Each save lands in the change log as one ordinary recorded change.
+
 ## Features
 
 ### Search & Filter
@@ -125,6 +138,13 @@ Restore any store to a previously captured state — instantly see how your app 
 
 ### Reset Store
 Reset any store back to its initial state in one tap — no need to restart the app.
+
+### Rehydration, Told Apart
+A store behind zustand's `persist` middleware changes on its own at startup,
+when its value comes back off disk. Buoy labels that update **HYDRATE** rather
+than drawing it as an ordinary `setState` — so the one change none of your code
+made is the one you can pick out of the log, and every later write to the same
+store is still marked **PERSISTED**.
 
 ### Store Color Coding
 Each store gets a consistent color across the UI for easy visual tracking when monitoring multiple stores.
@@ -139,6 +159,12 @@ Export state data or diffs for debugging, bug reports, or test fixtures (Pro).
 Pause state capture when you need to focus, resume when ready.
 
 ---
+
+## What It Can't Do
+
+**Stores are not auto-discovered.** A Zustand store is a plain function with no registry to enumerate, so Buoy cannot find yours the way it finds a Redux store. Pass them to `FloatingDevTools` via `zustandStores`, or wrap a store with the `buoyDevTools` middleware. If nothing is registered, the tool says so rather than showing an empty list.
+
+**Action names and timing need the middleware.** The `zustandStores` route watches state and can tell you *what* changed. `buoyDevTools` sits inside the setter, so it also knows *which call* changed it. Without it you get the diff, not the label.
 
 ## What's Next
 

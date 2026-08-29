@@ -7,7 +7,7 @@ description: "Browse and edit every key-value pair your Flutter app persists —
 
 Browse, edit, and manage all your app's persisted data. See every key-value pair in real-time, with an event stream of every write and diffs of what changed.
 
-Don't take our word for it — this is the real tool UI, running here on mock storage. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::storage-live-demo -->
 

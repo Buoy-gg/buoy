@@ -7,9 +7,11 @@ description: "Redux DevTools for React Native — monitor dispatched actions, in
 
 <!-- ::platform-badge platform="both" -->
 
-Full Redux Toolkit inspection for React Native. Monitor actions, explore state changes, time-travel debug, and inspect your Redux store in real-time — directly on your device.
+The Redux DevTools extension is the reason most people can debug Redux at all — and on React Native it is the one thing you cannot have on the device where the bug is. You get a remote-debugger bridge that changes the timing you were trying to measure, or you get nothing.
 
-Don't take our word for it — this is the real tool, wired to a real (small) Redux store running right here. The guided tour below walks one debugging story: a checkout session dispatches, a thunk comes back declined, you read the error and the diff, jump the store back, and replay the failure. Or skip the tour and just start tapping:
+Buoy runs the same workflow inside the app: every dispatched action with its payload and duration, the state tree after it, a diff of exactly what changed, and JUMP to put the store back. No middleware and no wrapper — it hooks the store at creation through the official Redux DevTools integration point, so actions are captured from the very first dispatch, thunk-internal and RTK Query actions included. And it works in a TestFlight build, where the extension cannot reach.
+
+A checkout session dispatches, a thunk comes back declined, you read the error and the diff, jump the store back, and replay the failure.
 
 <!-- ::redux-live-demo -->
 
@@ -91,7 +93,7 @@ Jump to any point in your app's history:
 - **Replay Action** — Re-dispatch any action to test how your reducers respond
 - **Async Timeline** — Visual timeline showing the full lifecycle of async operations
 
-> **Note:** For full time-travel support (jumping to past states), add the optional reducer wrapper. See [Advanced Configuration](#advanced-configuration) below.
+> **Note:** Jumping to a past state needs a reducer that can serve it, which is a separate piece of wiring from action capture — middleware sits above your reducer and cannot replace what it returns. You get it automatically when `@buoy-gg/redux` is imported before your store module (Buoy becomes the store enhancer); otherwise add the reducer wrapper from [Advanced Configuration](#advanced-configuration). **The JUMP button tells you which you have**: it is disabled and labelled "Time travel not wired" when the store cannot serve a jump, rather than doing nothing when pressed.
 
 ---
 
@@ -210,6 +212,12 @@ import {
 
 ---
 
+## What It Can't Do
+
+**JUMP only reaches the 25 most recent actions.** Every retained action pins its own copy of the state tree, and on an app that replaces large slices wholesale — a store switch, a rehydration — a few dozen of those are enough to exhaust memory. Older actions keep their row, their diff summary and their payload; they just no longer have a tree to restore, so JUMP is disabled on them.
+
+**It reads the store, it doesn't replay it.** Jumping sets state directly. It does not re-run your reducers, re-fire thunks, or reissue the network calls an action originally triggered — so a jump puts the *data* back, not the side effects.
+
 ## What's Next
 
 - [React Query DevTools](./react-query) — TanStack Query inspection
@@ -227,3 +235,7 @@ Install `@buoy-gg/redux` — the action stream, state diffs, and time-travel con
 ### Does time travel work on the device?
 
 Yes — JUMP restores the store to the state after any recorded action, and REPLAY re-dispatches an action, directly from the in-app panel.
+
+REPLAY works on every setup. JUMP needs a reducer that handles the jump, which you get either by importing `@buoy-gg/redux` before your store module (Buoy becomes the store enhancer) or by wrapping your root reducer with `withBuoyDevTools`. If neither applies, the JUMP button is disabled and says so — it never silently does nothing.
+
+JUMP is also disabled on older actions whose raw state has been released. Buoy keeps the before/after state trees of the 25 most recent actions only: every retained action pins its own copy of the tree, and on an app that replaces large slices wholesale (a store switch, a rehydration) a few dozen of those are enough to exhaust memory. Older actions keep their row, their diff summary and their payload — just not a tree to restore.

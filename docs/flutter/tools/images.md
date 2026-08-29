@@ -9,7 +9,7 @@ Images not loading? Loading slow? Stale avatars that never update? Memory balloo
 
 Every image loaded through `BuoyImage` appears in a live registry with where it came from (memory cache / disk cache / network), how long it took, how big it decoded versus how big it displayed, and exactly why it failed.
 
-Don't take our word for it — this is the real tool UI, running here on a mock storefront. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::images-live-demo -->
 

@@ -9,7 +9,7 @@ description: "Browse and edit every key-value pair your React Native app persist
 
 Browse, edit, and manage all your app's persisted data. See every key-value pair across all storage backends in real-time.
 
-Don't take our word for it — this is the real tool, running right here on mock storage. The guided tour below walks one debugging story: writes stream in across three backends, a declared contract lights up a session key that never wrote, you read Missing / Wrong / Type Error, write the fix, and pin the evidence. Or skip the tour and just start tapping:
+Writes stream in across three backends, a declared contract lights up a session key that never wrote, you read Missing / Wrong / Type Error, write the fix, and pin the evidence.
 
 <!-- ::storage-live-demo -->
 

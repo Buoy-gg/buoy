@@ -9,6 +9,8 @@ Drive your Buoy dev tools from an AI coding assistant. The Buoy MCP server lets 
 
 Works with **React Native and Flutter** on the same broker. Some capabilities below are React Native–only today (called out inline).
 
+<!-- ::mcp-showcase -->
+
 ## Requirements
 
 - **Buoy Pro** — the MCP is a Pro feature. `list_devices` always works, but data/action tools require a connected app on an active Buoy Pro license.

@@ -86,6 +86,7 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 | **Events Timeline** | Unified timeline across all tools with LLM-ready export |
 | **Render Highlighter** | Spot unnecessary re-renders as they happen |
 | **Impersonate** | Switch user role or impersonate any user to debug their exact state |
+| **TV Remote** | Drive an Apple TV / Android TV D-pad from the desktop, and replay recorded navigation macros |
 | **Image Overlay** | Overlay design mockups on your app for pixel-perfect comparison |
 
 ## Why Buoy

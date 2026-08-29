@@ -43,6 +43,23 @@
               "to": "flutter/installation"
             }
           ]
+        },
+        {
+          "label": "tv",
+          "children": [
+            {
+              "label": "Overview",
+              "to": "tv/overview"
+            },
+            {
+              "label": "Quick Start",
+              "to": "tv/quick-start"
+            },
+            {
+              "label": "Installation",
+              "to": "tv/installation"
+            }
+          ]
         }
       ]
     },
@@ -77,6 +94,19 @@
             {
               "label": "Custom Tools",
               "to": "flutter/custom-tools"
+            }
+          ]
+        },
+        {
+          "label": "tv",
+          "children": [
+            {
+              "label": "FloatingDevTools",
+              "to": "floating-devtools"
+            },
+            {
+              "label": "Telemetry",
+              "to": "telemetry"
             }
           ]
         }
@@ -227,6 +257,59 @@
             {
               "label": "Image Overlay",
               "to": "flutter/tools/image-overlay"
+            }
+          ]
+        },
+        {
+          "label": "tv",
+          "children": [
+            {
+              "label": "TV Remote",
+              "to": "tools/tv-remote"
+            },
+            {
+              "label": "Focus Inspector",
+              "to": "tools/focus-inspector"
+            },
+            {
+              "label": "Network Monitor",
+              "to": "tools/network"
+            },
+            {
+              "label": "Storage Explorer",
+              "to": "tools/storage"
+            },
+            {
+              "label": "Console",
+              "to": "tools/console"
+            },
+            {
+              "label": "Environment Inspector",
+              "to": "tools/env"
+            },
+            {
+              "label": "Route Inspector",
+              "to": "tools/routes"
+            },
+            {
+              "label": "Events Timeline",
+              "to": "tools/events"
+            },
+            {
+              "label": "React Query DevTools",
+              "to": "tools/react-query"
+            },
+            {
+              "label": "Redux DevTools",
+              "to": "tools/redux"
+            },
+            {
+              "label": "Zustand DevTools",
+              "to": "tools/zustand"
+            },
+            {
+              "label": "Jotai DevTools",
+              "to": "tools/jotai"
             }
           ]
         }

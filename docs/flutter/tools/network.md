@@ -7,7 +7,7 @@ description: "Inspect every HTTP request your Flutter app makes — package:http
 
 See every API call your app makes. Request, response, headers, timing, errors — all in real-time with zero configuration.
 
-Don't take our word for it — this is the real tool UI, running here on mock traffic. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::network-live-demo -->
 

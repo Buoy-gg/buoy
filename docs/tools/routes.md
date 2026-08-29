@@ -7,9 +7,11 @@ description: "Browse every route in your app — Expo Router or React Navigation
 
 <!-- ::platform-badge platform="both" -->
 
-See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
+Navigation bugs do not throw. A user reaches a screen they should not be able to reach, back goes somewhere wrong, or a screen stays mounted underneath the one you can see and keeps firing its effects — and none of that appears in a log or a crash report.
 
-Don't take our word for it — this is the real tool, running right here on mock navigations. The guided tour below walks one debugging story: hops stream in, a 38ms `/login` → `/account` flash lands, you open the Login event, the Stack still has Login MOUNTED under Account FOCUSED, Clear wipes the timeline but not the stranded screen. Or skip the tour and just start tapping:
+The Route Inspector shows the live stack, the sitemap of every route your app declares, and a timestamped stream of every navigation with its params. It reads Expo Router and React Navigation with no configuration.
+
+Hops stream in, a 38ms `/login` → `/account` flash lands, you open the Login event, the Stack still has Login MOUNTED under Account FOCUSED, Clear wipes the timeline but not the stranded screen.
 
 <!-- ::routes-live-demo -->
 
@@ -53,6 +55,12 @@ Every navigation is tracked with:
 Tap any event to open its **detail page** — the full route template, from/to paths, timing, segments, and params, all copyable, plus a **Go to route** action to jump straight there. This matches how events open in the Events tool.
 
 ---
+
+## What It Can't Do
+
+**It knows the routes your navigator declares.** The sitemap is built from your Expo Router file tree or your React Navigation config, so a screen reached only by an imperative push with an object payload appears in the event stream, but its params are not something the sitemap can predict ahead of time.
+
+**Jumping to a route is navigation, not authorisation.** *Go to route* performs the same navigation your code would. It does not bypass a guard — which is exactly what makes it useful for testing that the guard works.
 
 ## What's Next
 

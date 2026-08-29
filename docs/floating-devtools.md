@@ -7,6 +7,8 @@ description: "API reference for FloatingDevTools, the draggable floating button 
 
 The `FloatingDevTools` component is the entry point for React Buoy. It renders a draggable floating button that opens a menu containing all your installed debugging tools.
 
+<!-- ::floating-menu-live-demo -->
+
 ## Basic Usage
 
 ```tsx

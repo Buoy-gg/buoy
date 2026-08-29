@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/js-top",
-  "version": "7.0.29",
+  "version": "7.0.31",
   "description": "Live Task Manager for the React Native JS thread — see which timers, Promises, and callbacks are eating your JS FPS, ranked in real time. Part of Buoy devtools.",
   "homepage": "https://buoy.gg/tools/js-top",
   "keywords": [

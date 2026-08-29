@@ -7,7 +7,7 @@ description: "Inspect Riverpod providers in your Flutter app — watch state cha
 
 Full Riverpod provider inspection for Flutter. Monitor provider state changes, explore value diffs, and browse live provider values in real-time — directly on your device. It's the same inspector UI as the React Native atom inspector, reading your Riverpod providers.
 
-Don't take our word for it — this is that shared inspector UI, running here on a mock checkout session. Walk the guided tour, or skip it and start tapping:
+The React Native Jotai inspector, running here on a mock session. Riverpod's inspector is the Flutter port of this same panel set — provider values and state changes in place of atoms. Walk the tour, or skip it and start tapping.
 
 <!-- ::jotai-live-demo -->
 

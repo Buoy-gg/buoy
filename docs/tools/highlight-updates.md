@@ -7,9 +7,11 @@ description: "See why your React Native components re-render — visual overlays
 
 <!-- ::platform-badge platform="both" -->
 
-See exactly WHY your components re-render. Visual overlays show renders in real-time, and tapping any badge reveals the cause—state change, prop change, or parent re-render.
+You already suspect the list is re-rendering too much. What you cannot get is *why* — and why is the only part that tells you what to change.
 
-Don't take our word for it — this is the real tool, running right here on mock renders. The guided tour below walks one debugging story: typing in a search box re-renders every card in the list, the 47x badge names the worst offender, the detail view names the cause — down to the exact useState before → after. Or skip the tour and just start tapping:
+React's profiler records a session for a desktop to analyse afterwards; it will not tell you that this card re-rendered because a parent passed a new inline object while you were typing in a search box. Highlight Updates draws the renders on the running app as they happen, counts them per component, and names the cause on each one — down to the `useState` value before and after.
+
+Typing in a search box re-renders every card in the list, the 47x badge names the worst offender, the detail view names the cause — down to the exact useState before → after.
 
 <!-- ::highlight-live-demo -->
 
@@ -50,6 +52,12 @@ Toggle between modes directly from the FloatingDevTools menu:
 When a state change causes a render, Highlight Updates shows you the **before and after values** of your hooks. See exactly which `useState` or `useReducer` value changed.
 
 ---
+
+## What It Can't Do
+
+**It needs a development build.** Render data comes from React's own DevTools hook (`__REACT_DEVTOOLS_GLOBAL_HOOK__`), which release builds do not install. Most Buoy tools run in production; this one genuinely cannot.
+
+**The overlay costs frame time.** Drawing a box and a counter over every committed component is real work on the UI thread, so the numbers tell you *which* component re-renders and *why*, not what your frame budget looks like with the overlay off. For that measurement use [Bench](./perf-monitor).
 
 ## What's Next
 

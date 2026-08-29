@@ -7,7 +7,7 @@ description: "Capture every print, debugPrint, and log call from your Flutter ap
 
 A Chrome-DevTools-style console for your Flutter app. Buoy Console captures every `print`, `debugPrint`, and `log` call — plus `FlutterError` reports and uncaught async errors — and shows them in a familiar, filterable panel: on your phone, on the desktop dashboard, or through your AI agent.
 
-Don't take our word for it — this is the real tool UI, running here on a mock app session. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::console-live-demo -->
 

@@ -7,9 +7,11 @@ description: "Inspect Jotai atoms in your React Native app — watch state chang
 
 <!-- ::platform-badge platform="both" -->
 
-Full Jotai atom inspection for React Native. Monitor atom state changes, explore value diffs, and browse live atom values in real-time — directly on your device.
+Atoms are small on purpose, which means a wrong value has usually travelled through four of them before it reaches the screen. Jotai's model gives you nothing to log — there is no store to inspect, and derived atoms recompute silently — so the usual approach is a `useEffect` that prints one atom at a time.
 
-Don't take our word for it — this is the real tool on mock checkout atoms. The guided tour below walks one debugging story: atoms update as the app runs, applyPromo wipes cart.total, you read prev → next and the on-device diff, then Clear the log and the broken value is still sitting on Atoms. Or skip the tour and just start tapping:
+Buoy registers your atoms by name and shows their live values in one list, with a write history that puts prev → next on every change. You find the atom where the value went wrong, instead of the component where you noticed.
+
+Atoms update as the app runs, applyPromo wipes cart.total, you read prev → next and the on-device diff, then Clear the log and the broken value is still sitting on Atoms.
 
 <!-- ::jotai-live-demo -->
 
@@ -127,6 +129,12 @@ Export the full atoms snapshot or event history as JSON for bug reports, test fi
 Pause atom capture when you need to focus, resume when ready.
 
 ---
+
+## What It Can't Do
+
+**Only atoms you register are visible.** Jotai has no store to enumerate — atoms are module-level values — so Buoy shows what you pass to `watchAtoms` and nothing else. An atom you forgot to register is invisible, not missing.
+
+**Derived atoms are read-only.** An atom computed from others has no setter, so Buoy captures it for inspection and refuses to write it (`Atom "…" is read-only (derived) — cannot set`). On restore, derived atoms recompute from their sources rather than being set back — which is the correct behaviour, and worth knowing before you expect a restore to pin one.
 
 ## What's Next
 

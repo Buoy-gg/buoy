@@ -7,7 +7,7 @@ description: "Overlay design mockups on your running Flutter app and tweak opaci
 
 Overlay design mockups directly on your running app to compare against your implementation. Adjust opacity, scale, and position to get pixel-perfect results — no more switching between your design tool and the simulator.
 
-Don't take our word for it — this is the real tool UI, running here over a mock storefront. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::image-overlay-live-demo -->
 

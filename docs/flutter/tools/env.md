@@ -7,7 +7,7 @@ description: "View and validate your Flutter app's environment config on-device 
 
 The Environment Inspector lets you view and validate environment config in your Flutter app — required-variable checks, type detection, per-variable status badges, and a 0–100% health score.
 
-Don't take our word for it — this is the real tool UI, running here on a mock build. Walk the guided tour, or skip it and start tapping:
+The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
 
 <!-- ::env-live-demo -->
 

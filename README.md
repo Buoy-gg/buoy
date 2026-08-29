@@ -63,13 +63,14 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 
 ---
 
-## 🧰 The 19 tools
+## 🧰 The 22 tools
 
 | Tool | Package | What it does |
 | --- | --- | --- |
 | [Network](https://buoy.gg/buoy/latest/docs/tools/network) | `@buoy-gg/network` | Every request, response, timing & error — GraphQL operations extracted and shown as `GetUser › 123` |
 | [Storage](https://buoy.gg/buoy/latest/docs/tools/storage) | `@buoy-gg/storage` | Browse & edit AsyncStorage, MMKV & SecureStore with change history — biometric keys listed, never auto-read |
 | [Time Machine](https://buoy.gg/buoy/latest/docs/tools/time-machine) | `@buoy-gg/time-machine` | Snapshot storage, Redux, Zustand, Jotai & the query cache as restore points — jump back in one tap, or wipe to fresh install |
+| Scenarios *(coming soon)* | `@buoy-gg/scenarios` | Saved one-tap app states for QA & support — override responses, write storage, impersonate & navigate in one step, with an unmissable SIMULATED banner and one-tap undo |
 | [Env](https://buoy.gg/buoy/latest/docs/tools/env) | `@buoy-gg/env` | Auto-discovers `EXPO_PUBLIC_` vars, validates types, scores config health 0–100% |
 | [Query](https://buoy.gg/buoy/latest/docs/tools/react-query) | `@buoy-gg/react-query` | TanStack Query cache — refetch, invalidate, simulate loading & error states, one-tap offline |
 | [Routes](https://buoy.gg/buoy/latest/docs/tools/routes) | `@buoy-gg/route-events` | Navigation events, the live stack, and the full sitemap — jump to any screen |
@@ -85,12 +86,14 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 | [Zustand](https://buoy.gg/buoy/latest/docs/tools/zustand) | `@buoy-gg/zustand` | State, diffs, jump-to-state, one-tap reset — no middleware needed |
 | [Jotai](https://buoy.gg/buoy/latest/docs/tools/jotai) | `@buoy-gg/jotai` | One `watchAtoms()` call, no wrappers — every event shows `prev → next`, even writes that changed nothing |
 | [Impersonate](https://buoy.gg/buoy/latest/docs/tools/impersonate) | `@buoy-gg/impersonate` | Switch users, roles & flags without rebuilding — injects `x-impersonate-user-id` into every request |
+| [TV Remote](https://buoy.gg/buoy/latest/docs/tools/tv-remote) | `@buoy-gg/tv-remote` | Press the D-pad on Apple TV & Android TV from your desktop — record navigation paths as macros and replay them across every device |
+| [Focus Inspector](https://buoy.gg/buoy/latest/docs/tools/focus-inspector) | `@buoy-gg/focus-inspector` | See what holds D-pad focus on Apple TV & Android TV — every move with its direction, plus flags for focus that gets stuck, vanishes, or is never reached |
 | [Overlay](https://buoy.gg/buoy/latest/docs/tools/image-overlay) | `@buoy-gg/image-overlay` | Pin Figma mockups pixel-perfect over the app — Component Mode tracks a tagged component through scroll & animation |
 
 Grab everything in one line:
 
 ```bash
-npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,highlight-updates,perf-monitor,js-top,images,assets,events,console,redux,zustand,jotai,impersonate,image-overlay}
+npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,highlight-updates,perf-monitor,js-top,images,assets,events,console,redux,zustand,jotai,impersonate,image-overlay,tv-remote,focus-inspector}
 ```
 
 <details>

@@ -7,7 +7,9 @@ description: "Full TanStack Query devtools for React Native — browse queries, 
 
 <!-- ::platform-badge platform="both" -->
 
-Full TanStack Query inspection for React Native. Browse queries, view cached data, simulate states, and debug your data fetching in real-time.
+React Query bugs are almost never in the request. The network tab shows a clean 200 and the screen still shows yesterday's data, because the problem is in the cache: which key it landed under, whether the query is stale, whether anything is still observing it.
+
+TanStack's own devtools answer exactly that — and they are web-only, so on React Native you are back to logging `queryClient.getQueryData` and rebuilding to read it. Buoy puts the same query browser on the device: every query with its key, state and cached data, editable in place, plus one-tap loading and error simulation.
 
 The demo below is the real on-device tool on a mock QueryClient: the cache lights up, a checkout query fails, you inspect cart JSON, force a loading spinner without the network, restore it, then free-play.
 
@@ -51,6 +53,12 @@ Track all your mutations in real-time:
 Simulate offline mode with one tap. The WiFi toggle controls React Query's `onlineManager` to pause all queries — perfect for testing offline-first features.
 
 ---
+
+## What It Can't Do
+
+**The simulated states are cache-level, not network-level.** Triggering a loading state replaces the query function with one that never resolves; it does not slow or block a real request. That is what makes it instant and repeatable — but if you want to see the actual request fail, use a [Network override](./network) instead.
+
+**Mutations are observed, not replayed.** You can read a mutation's variables, status and response, but there is no re-fire button — replaying a mutation would repeat its side effects on your real backend.
 
 ## What's Next
 
