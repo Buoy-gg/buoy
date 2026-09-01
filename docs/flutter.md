@@ -20,4 +20,6 @@ Buoy for Flutter docs now mirror the React Native Getting Started flow.
 
 ## Tools
 
-Eleven Flutter tools ship today — see [Network](./flutter/tools/network) or pick any tool from the sidebar under **Available Tools**.
+Eleven Flutter packages ship today — see [Network](./flutter/tools/network) or pick any tool from the sidebar under **Available Tools**.
+
+The [Camera](./flutter/tools/camera) is in that list too and has no package: it gives the iOS Simulator a working camera from Buoy Desktop, so `camera`-plugin screens run without a physical device.

@@ -87,6 +87,7 @@ This isn't a "nice to have." It's the difference between hours of debugging and 
 | **Render Highlighter** | Spot unnecessary re-renders as they happen |
 | **Impersonate** | Switch user role or impersonate any user to debug their exact state |
 | **TV Remote** | Drive an Apple TV / Android TV D-pad from the desktop, and replay recorded navigation macros |
+| **Camera** | Give the iOS Simulator a real camera — your Mac screen, webcam, an image, or a video, in any simulator app |
 | **Image Overlay** | Overlay design mockups on your app for pixel-perfect comparison |
 
 ## Why Buoy

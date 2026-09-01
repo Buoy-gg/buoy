@@ -88,7 +88,7 @@
           "label": "flutter",
           "children": [
             {
-              "label": "BuoyDevTools",
+              "label": "Floating DevTools",
               "to": "flutter/buoy-devtools"
             },
             {
@@ -137,6 +137,10 @@
         {
           "label": "react",
           "children": [
+            {
+              "label": "Camera",
+              "to": "tools/camera"
+            },
             {
               "label": "Environment Inspector",
               "to": "tools/env"
@@ -214,6 +218,10 @@
         {
           "label": "flutter",
           "children": [
+            {
+              "label": "Camera",
+              "to": "flutter/tools/camera"
+            },
             {
               "label": "Environment Inspector",
               "to": "flutter/tools/env"

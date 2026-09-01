@@ -56,6 +56,17 @@ To update a local install later, just re-run `init`.
 
 - `run_benchmark_batch` — runs Bench cases on a real device and returns a ranked comparison with per-component render data
 - `screenshot_component` — locates a component by testID in the iOS Simulator and returns a tight crop
+- `camera_devices` — booted simulators and the apps installed on one (where a bundle id comes from)
+- `camera_inputs` — the Mac's cameras and capturable windows (where a camera uniqueId or `window:<id>` comes from)
+- `camera_source` — gives the iOS Simulator a camera and chooses what it shows: a generated
+  barcode (QR, PDF417, Aztec, Code 128), an image, a video, the Mac camera, or this Mac's screen
+- `camera_status` — what the camera is publishing and what it is decoding right now
+- `camera_launch` — relaunch a simulator app with the camera attached
+- `camera_zero_setup` — inject into everything the simulator launches, so any launcher works
+- `camera_stop` — turn the camera off
+- `camera_diagnose` — why the camera is not working, including whether the app is reading it
+
+The `camera_*` tools need Buoy Pro, read from Buoy Desktop's entitlement — `camera_diagnose` is ungated so it can report the tier. The camera itself is free to use by hand in the desktop panel.
 - `list_devices` — see connected devices and the tools each exposes
 
 ## The buoy-optimize skill
@@ -67,7 +78,8 @@ To update a local install later, just re-run `init`.
 - **Node.js 18+** on the machine running your editor.
 - **A running app** with [`@buoy-gg/core`](https://www.npmjs.com/package/@buoy-gg/core) and the tool packages you want to drive.
 - The server connects to the local Buoy broker — or spawns its own in-process — so it works standalone, no Buoy Desktop required.
-- **macOS + Xcode** only for `screenshot_component` (it captures the iOS Simulator); everything else is platform-agnostic.
+- **macOS + Xcode** only for `screenshot_component` and the `camera_*` tools (they drive the iOS Simulator); everything else is platform-agnostic.
+- The `camera_*` tools need **no connected device** — the simulator camera is host-side and works on any booted simulator app, including ones with no Buoy integration.
 
 ## Pro
 

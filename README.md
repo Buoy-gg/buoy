@@ -22,7 +22,7 @@ Buoy is a floating dev menu that ships inside your React Native app — every re
 </div>
 
 - **One component, zero config** — drop in `<FloatingDevTools />` once; install any tool package and it appears in the menu on its own
-- **15 tools, every environment** — network, state, storage, renders, performance and more, in dev, staging, *and* production builds
+- **22 tools, every environment** — network, state, storage, renders, performance and more, in dev, staging, *and* production builds
 - **Your agent can drive it** — Claude or Cursor reads live state, taps real buttons, and benchmarks on a physical device over MCP
 
 ---
@@ -88,6 +88,7 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 | [Impersonate](https://buoy.gg/buoy/latest/docs/tools/impersonate) | `@buoy-gg/impersonate` | Switch users, roles & flags without rebuilding — injects `x-impersonate-user-id` into every request |
 | [TV Remote](https://buoy.gg/buoy/latest/docs/tools/tv-remote) | `@buoy-gg/tv-remote` | Press the D-pad on Apple TV & Android TV from your desktop — record navigation paths as macros and replay them across every device |
 | [Focus Inspector](https://buoy.gg/buoy/latest/docs/tools/focus-inspector) | `@buoy-gg/focus-inspector` | See what holds D-pad focus on Apple TV & Android TV — every move with its direction, plus flags for focus that gets stuck, vanishes, or is never reached |
+| [Camera](https://buoy.gg/buoy/latest/docs/tools/camera) | *(no package — desktop app)* | Give the iOS Simulator a real camera — point it at your Mac screen, webcam, an image or a video, and scan QR codes or driver's licences without a device |
 | [Overlay](https://buoy.gg/buoy/latest/docs/tools/image-overlay) | `@buoy-gg/image-overlay` | Pin Figma mockups pixel-perfect over the app — Component Mode tracks a tagged component through scroll & animation |
 
 Grab everything in one line:
