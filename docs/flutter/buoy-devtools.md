@@ -32,8 +32,8 @@ Mount it from `MaterialApp.builder` (or `MaterialApp.router`) so it sits above y
 |------|------|---------|-------|
 | `child` | `Widget` | required | Your app (usually the `MaterialApp` builder child) |
 | `licenseKey` | `String?` | `null` | Unlocks Pro (production + MCP) |
-| `deviceName` | `String` | `'Flutter App'` | Label in Buoy Desktop / MCP |
-| `deviceId` | `String?` | auto | Pin a stable device identity |
+| `deviceName` | `String?` | auto | Label in Buoy Desktop / MCP. Default: `'Flutter App (ios · 2c1d)'` — the app, the platform, and the last 4 of the install id |
+| `deviceId` | `String?` | auto | Leave unset: each install mints `flutter-app-ios-<8 hex>` once and keeps it. If you pin one it MUST be unique per device — two devices under one id look like one device to the broker |
 | `socketUrl` | `String?` | auto | LAN broker URL for physical devices |
 | `tools` | `List<BuoyTool>` | `[]` | Extra custom tools beyond self-registered ones |
 

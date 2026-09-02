@@ -23,7 +23,7 @@ The download button above grabs the right build for your machine automatically; 
 
 ## Connect your app
 
-Buoy tools sync to a local broker on **port 42831**. Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects. If no device appears, the dashboard shows a troubleshooting panel with your machine's exact URLs and a test you can run from the phone's browser.
+Buoy tools sync to a local broker on **port 42831**. Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects — every install of your app is its own entry, named after the app and hardware (`Acme App (iPhone 17 Pro · 2c1d)`). If no device appears, the dashboard shows a troubleshooting panel with your machine's exact URLs and a test you can run from the phone's browser.
 
 ### React Native
 

@@ -1,0 +1,19 @@
+{
+  "name": "@buoy-gg/ask-buoy",
+  "version": "7.0.33",
+  "description": "Ask Buoy - an in-app AI chat that drives every Buoy devtool, powered by your own model endpoint",
+  "homepage": "https://buoy.gg/tools/ask-buoy",
+  "keywords": [
+    "react-native",
+    "devtools",
+    "ai",
+    "chat",
+    "agent",
+    "buoy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buoy-gg/buoy.git",
+    "directory": "packages/ask-buoy"
+  }
+}

@@ -71,6 +71,7 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 | [Storage](https://buoy.gg/buoy/latest/docs/tools/storage) | `@buoy-gg/storage` | Browse & edit AsyncStorage, MMKV & SecureStore with change history — biometric keys listed, never auto-read |
 | [Time Machine](https://buoy.gg/buoy/latest/docs/tools/time-machine) | `@buoy-gg/time-machine` | Snapshot storage, Redux, Zustand, Jotai & the query cache as restore points — jump back in one tap, or wipe to fresh install |
 | Scenarios *(coming soon)* | `@buoy-gg/scenarios` | Saved one-tap app states for QA & support — override responses, write storage, impersonate & navigate in one step, with an unmissable SIMULATED banner and one-tap undo |
+| Ask Buoy *(beta)* | `@buoy-gg/ask-buoy` | An in-app AI chat that drives every Buoy tool in plain English — your QA types "make checkout fail with a 500" and it happens, on your own model endpoint, with a visible changes bar and real undo |
 | [Env](https://buoy.gg/buoy/latest/docs/tools/env) | `@buoy-gg/env` | Auto-discovers `EXPO_PUBLIC_` vars, validates types, scores config health 0–100% |
 | [Query](https://buoy.gg/buoy/latest/docs/tools/react-query) | `@buoy-gg/react-query` | TanStack Query cache — refetch, invalidate, simulate loading & error states, one-tap offline |
 | [Routes](https://buoy.gg/buoy/latest/docs/tools/routes) | `@buoy-gg/route-events` | Navigation events, the live stack, and the full sitemap — jump to any screen |

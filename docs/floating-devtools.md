@@ -89,7 +89,7 @@ The floating button can be dragged anywhere on screen. It remembers its position
 - open the [Buoy Desktop](./desktop) dashboard and inspect the same live app on a full screen, or
 - point an AI agent at your app with the [MCP server](./mcp).
 
-Just connect either one to your running app. The broker address is derived automatically from the Metro dev server that served the bundle, so physical devices reach your machine with zero config (Android over USB: run `adb reverse tcp:42831 tcp:42831` once); pass `socketURL` in the `externalSync` prop only for tunnels or a broker on another machine. The current sync target and connection state show up in the menu's Settings tab under **DESKTOP SYNC**. Sync is dev-only unless you ask for it — see [release builds](./desktop#release-builds) to profile a release build you own.
+Just connect either one to your running app. The broker address is derived automatically from the Metro dev server that served the bundle, so physical devices reach your machine with zero config (Android over USB: run `adb reverse tcp:42831 tcp:42831` once); pass `socketURL` in the `externalSync` prop only for tunnels or a broker on another machine. The current sync target and connection state show up in the menu's Settings tab under **DESKTOP SYNC**. Each install identifies itself with a per-device id minted on first connect, so a phone and a simulator (or a whole QA team) on the same build show up as separate devices; pass `deviceName`/`deviceId` in `externalSync` only to pin a label, and never the same `deviceId` on two devices. Sync is dev-only unless you ask for it — see [release builds](./desktop#release-builds) to profile a release build you own.
 
 ## Headless (sync-only) mode
 

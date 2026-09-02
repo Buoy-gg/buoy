@@ -138,6 +138,10 @@
           "label": "react",
           "children": [
             {
+              "label": "Ask Buoy",
+              "to": "tools/ask-buoy"
+            },
+            {
               "label": "Camera",
               "to": "tools/camera"
             },
