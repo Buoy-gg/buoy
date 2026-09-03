@@ -23,6 +23,8 @@ Behind the chat, an agent drives the same ~190 tool actions Buoy Desktop and the
 
 This package is the chat. The *hands* are whichever Buoy tools you already have — each one you install becomes something the agent can do.
 
+**Already running Buoy?** Upgrade every `@buoy-gg/*` package to the same version in the same command. Buoy pins `@buoy-gg/license` as an *exact* peer, so installing Ask Buoy on its own next to an older Buoy leaves an invalid dependency tree — and `npm install` exits 0 without saying so. `npm ls @buoy-gg/license` is what tells you.
+
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
 
