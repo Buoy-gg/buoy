@@ -83,6 +83,7 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 | [Assets](https://buoy.gg/buoy/latest/docs/tools/assets) | `@buoy-gg/assets` | Everything you ship — bundled images, fonts, video & audio with sizes, duplicates, and never-loaded detection |
 | [Events](https://buoy.gg/buoy/latest/docs/tools/events) | `@buoy-gg/events` | One timeline across every tool, with LLM export presets: Markdown for agents, Bug Report, Errors Only |
 | [Console](https://buoy.gg/buoy/latest/docs/tools/console) | `@buoy-gg/console` | Chrome-DevTools console on device — read logs from a release build with no cable and no Metro |
+| [Sentry](https://buoy.gg/buoy/latest/docs/tools/sentry) | `@buoy-gg/sentry` | See every envelope your app sends to Sentry, what it costs, and why an event never arrived |
 | [Redux](https://buoy.gg/buoy/latest/docs/tools/redux) | `@buoy-gg/redux` | Inspect, dispatch & time travel — flags actions that blow the 16ms frame budget |
 | [Zustand](https://buoy.gg/buoy/latest/docs/tools/zustand) | `@buoy-gg/zustand` | State, diffs, jump-to-state, one-tap reset — no middleware needed |
 | [Jotai](https://buoy.gg/buoy/latest/docs/tools/jotai) | `@buoy-gg/jotai` | One `watchAtoms()` call, no wrappers — every event shows `prev → next`, even writes that changed nothing |
@@ -95,7 +96,7 @@ Every tool runs inside your app's process. The phone, the desktop, and your agen
 Grab everything in one line:
 
 ```bash
-npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,highlight-updates,perf-monitor,js-top,images,assets,events,console,redux,zustand,jotai,impersonate,image-overlay,tv-remote,focus-inspector}
+npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,highlight-updates,perf-monitor,js-top,images,assets,events,console,sentry,redux,zustand,jotai,impersonate,image-overlay,tv-remote,focus-inspector}
 ```
 
 <details>

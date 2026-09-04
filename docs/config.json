@@ -158,6 +158,10 @@
               "to": "tools/console"
             },
             {
+              "label": "Sentry",
+              "to": "tools/sentry"
+            },
+            {
               "label": "Network Monitor",
               "to": "tools/network"
             },

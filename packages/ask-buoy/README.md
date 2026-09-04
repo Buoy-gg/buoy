@@ -19,7 +19,7 @@ import { FloatingDevTools } from "@buoy-gg/core";
   askBuoy={{
     endpoint: "https://ai.acme.com/v1/messages",
     protocol: "anthropic",          // or "openai" — Azure, Gemini-compat, most gateways
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-5",
 
     // Called before every request, so short-lived tokens work.
     // This is the whole auth story: your credential, your gateway.
@@ -37,7 +37,7 @@ The tool appears in the dial as **ASK BUOY**. This package is the chat; the *han
 - **A visible changes bar** the moment it modifies anything — "Changed this app · 2 undoable · 1 permanent" — with real undo: storage writes are pre-read so Undo restores the exact prior value.
 - **Destructive actions wait for a tap** by default; everything else auto-runs behind the bar. Tunable with `policy.requireApproval`, down to `readOnly: true` for a look-but-don't-touch support seat.
 - **Release-build honesty**: actions that can't work outside a dev build are refused with an explanation, never silently "succeed".
-- **Credential redaction** by field name and value shape before anything reaches your model; the agent's own traffic is invisible to it; the transcript is never persisted.
+- **Credential redaction** by field name and value shape before anything reaches your model; the agent's own traffic is invisible to it; the saved transcript keeps what was said but never a tool result (`persistTranscript: false` turns saving off entirely).
 
 ## Docs
 

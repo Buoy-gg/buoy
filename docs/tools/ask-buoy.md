@@ -32,7 +32,7 @@ import { FloatingDevTools } from "@buoy-gg/core";
   askBuoy={{
     endpoint: "https://ai.acme.com/v1/messages",
     protocol: "anthropic",   // or "openai" — covers Azure, Gemini-compat, most gateways
-    model: "claude-sonnet-4-5",
+    model: "claude-opus-5",
 
     // Called before every request, so short-lived tokens work.
     // This is the whole auth story: your credential, your gateway.
@@ -73,6 +73,8 @@ export default {
 ```
 
 **Already have an AI gateway?** Point `endpoint` at it. Anthropic-shaped is the default; set `protocol: "openai"` for OpenAI-shaped ones. Bedrock and Vertex need SigV4/OAuth signing, which a static header can't express — front those with a proxy like the one above.
+
+**Raise `maxTokens` on a thinking model.** Claude models reason by default, and that reasoning comes out of the same `maxTokens` budget as the answer — at the 4096 default a real multi-step turn gets cut off mid-sentence. 8192 is a sensible floor.
 
 **Use a frontier model.** In our own 20-turn evals a budget model *changed the app to answer a question* — faking an API response, inventing a user — in 4 of 20 turns. A frontier model did it zero times. The guardrails below bound the damage; model quality is the first line.
 
@@ -178,7 +180,28 @@ policy: {
 
 **SecureStore values are off by default** — they're credentials, and they'd travel to your model endpoint. Key *names* are always readable; opt into values with `secureReads: true`.
 
-It also gets out of your way: when it navigates or taps, the sheet drops to a strip for a couple of seconds so you see the app do it. Under the newest answer, **Share reply** / **Share session** hand the conversation to Slack or Jira — the only way it leaves the device, since the transcript is never written to disk.
+It also gets out of your way: when it navigates or taps, the sheet drops to a strip for a couple of seconds so you see the app do it. Every finished answer carries a **Copy** button — and so does the header — which puts the whole conversation on the clipboard as plain text, ready for Slack or a ticket.
+
+**See what it actually did.** The header's gear opens **Settings → Chat → Show agent thinking**. On, every answer grows a collapsed strip — `2 steps · 1 thought · 3.2s · 6210 tokens` — that opens into the model's reasoning and each step it ran, in the order they happened. Tap a step for what it **sent** and what it **returned**.
+
+That last part is the one that finds bugs. A step whose status is `ok` and whose result is `{"ok": false, "error": "no such key"}` looks like a working step until you can see the payload.
+
+**Copy** — the one button under every answer — takes the whole conversation as plain text, and includes the working while this is on:
+
+```text
+You: show my cart
+  [thinking]
+    I should read the bag store first.
+  [1] zustand.getStoreState — Done
+      {"storeName":"Poké Mart bag"}
+Ask Buoy: Here are the items in your cart.
+```
+
+Off by default, because the answer is what the sheet is for.
+
+Not every model reports reasoning. Claude thinks by default; most OpenAI models return none and the strip then shows the steps alone, which it says rather than looking empty.
+
+**The conversation survives a reload.** Reload the app, restart it, or crash it, and the chat is there when you come back — and so is the agent's memory of it, so "undo that" still means something. A turn the app died in comes back marked interrupted rather than blank. This is what makes the tool bearable while you iterate, and it is the only thing that survives a crash. **New conversation** deletes it.
 
 ---
 
@@ -198,7 +221,7 @@ A release build still reads storage, network, state, routes, console and crashes
 - **Nothing reaches Buoy.** Requests go from the device to *your* endpoint. Buoy runs no inference service and no proxy.
 - **Its own traffic is invisible to it**, so it can never read back its own auth headers.
 - **Credentials are stripped** from tool results by field name *and* by shape (bearer tokens, JWTs, key patterns) before anything is sent.
-- **The transcript is never persisted.** It lives for the session.
+- **The saved conversation holds no tool results.** It survives a restart (see above) under a `@react_buoy` key, capped and scrubbed for credential shapes — but only what was *said*. The payloads the agent read (storage values, response bodies, user records) are never written; it comes back knowing what it did, not what it saw. Turn the whole thing off with `persistTranscript: false` if the agent works over regulated data, since anything on disk under a Buoy key is readable by the Storage tool and, through it, by the unauthenticated broker.
 
 ### What we send to the model
 

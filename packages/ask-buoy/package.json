@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/ask-buoy",
-  "version": "7.0.33",
+  "version": "7.0.35",
   "description": "Ask Buoy - an in-app AI chat that drives every Buoy devtool, powered by your own model endpoint",
   "homepage": "https://buoy.gg/tools/ask-buoy",
   "keywords": [
