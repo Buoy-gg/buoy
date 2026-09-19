@@ -1,6 +1,7 @@
 <div align="center">
 
-# 🛟 Buoy
+# 🛟 Buoy<img width="500" height="935" alt="preview" src="https://github.com/user-attachments/assets/319712ca-e2e0-445c-9309-99c2c9490616" />
+
 
 **Devtools that live in your app. And answer to your agent.**
 
@@ -17,7 +18,7 @@ Buoy is a floating dev menu that ships inside your React Native app — every re
 
 **🎯 Now in beta: [Buoy for Flutter](https://github.com/Buoy-gg/Buoy-Flutter)** — `flutter pub add buoy`, wrap your app in one `BuoyDevTools` widget, and get the full suite: network, storage, console, env, routes, images, impersonate, image overlay, an events timeline, a Riverpod inspector, and a live perf HUD — all on the same desktop dashboard and MCP server. [Details →](https://buoy.gg/flutter)
 
-![Buoy demo — the floating dev menu in action](https://github.com/user-attachments/assets/a732d6a3-9963-49e3-b0f1-0d974a0a74d7)
+<img width="500" height="935" alt="preview" src="https://github.com/user-attachments/assets/620e7bd0-6578-4f60-9dc0-2d2606a6c249" />
 
 </div>
 
