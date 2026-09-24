@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/perf-monitor",
-  "version": "7.0.36",
-  "description": "Benchmark React Native performance on device — UI/JS FPS, CPU, memory & jank, with recorded runs you can compare. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Record and compare React Native benchmark runs using available frame-rate, CPU, memory and jank measurements.",
   "homepage": "https://buoy.gg/tools/perf-monitor",
   "keywords": [
     "react-native",

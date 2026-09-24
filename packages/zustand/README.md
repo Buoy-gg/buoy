@@ -2,15 +2,33 @@
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/zustand?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/zustand) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/zustand?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/zustand)
 
-**Zustand devtools on the device — state diffs, jump-to-state, and one-tap store reset with no middleware.**
+Inspect the Zustand stores you register with Buoy. Review changes, edit state, and restore retained snapshots.
 
-Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside your React Native app. Install it and it auto-appears in the floating menu from [`@buoy-gg/core`](https://www.npmjs.com/package/@buoy-gg/core).
+Part of [Buoy](https://github.com/Buoy-gg/buoy). Install the package, complete account setup, and follow the integration steps below.
 
 ## Install
 
 ```bash
 npm install @buoy-gg/core @buoy-gg/zustand
 ```
+
+## Before you start
+
+Use a development build with `@buoy-gg/core` and a Free or Pro Buoy account key. From your app’s directory, sign in:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+For Expo, initialize Buoy before rendering the menu:
+
+```tsx
+import { Buoy } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+The login command writes the Expo key to `.env.local`. For React Native CLI, pass the key from your app’s environment configuration; React Native does not load `.env.local` automatically. Mount `FloatingDevTools` inside the same providers as your screens and restart the development server after installation. The [Quick Start](https://buoy.gg/buoy/latest/docs/quick-start) shows the complete root component setup.
 
 ## Quick start
 
@@ -40,6 +58,10 @@ export default function App() {
 
 Prefer to wire it outside React? `watchStores({ counterStore: useCounterStore })` from `@buoy-gg/zustand` does the same thing at module scope.
 
+## Check the integration
+
+Change a value in a registered store through your app and find its diff in Buoy. Edits and resets change the real store; test with disposable data. Register the same store instances that your screens use.
+
 ## What you get
 
 - **Every state change, captured** — store name, update type (`setState`, `replace`, `persist`, `initial`), changed keys, and a diff summary
@@ -53,14 +75,18 @@ Prefer to wire it outside React? `watchStores({ counterStore: useCounterStore })
 
 ## Desktop & AI
 
-The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) (free, macOS/Windows/Linux) and to Claude Code or Cursor via the [Buoy MCP server](https://buoy.gg/buoy/latest/docs/mcp).
+To connect a React Native app to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) or MCP, install `@buoy-gg/external-sync` and follow the [Desktop connection guide](https://buoy.gg/buoy/latest/docs/desktop). Sign in to Desktop separately. [MCP setup](https://buoy.gg/buoy/latest/docs/mcp) also requires a process account and Pro access. Available remote actions depend on the tool and app integration.
 
-## Free vs Pro
+## Account and plan requirements
 
-Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for anyone holding a key — including a free one (`npx buoy login`).
+Use a Free or Pro Buoy account. History limits and paid features vary by tool; see [pricing](https://buoy.gg/pricing). Production access requires Pro where supported. Development-only hooks and actions remain unavailable in release builds.
 
 ---
 
 📚 [Full docs](https://buoy.gg/buoy/latest/docs/tools/zustand) · [All Buoy tools](https://github.com/Buoy-gg/buoy)
 
 Proprietary software. © Buoy LLC. [Terms](https://buoy.gg/terms)
+
+## Web support (unreleased)
+
+Register live stores with watchStores. The shared browser panel edits the same store objects used by the app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](https://buoy.gg/buoy/latest/docs/web-preview) for registration, dependencies, and browser boundaries.

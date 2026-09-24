@@ -2,147 +2,135 @@
 title: Network Monitor
 seoTitle: "React Native Network Inspector — debug HTTP requests on-device"
 id: tools-network
-description: "Inspect every HTTP request your React Native app makes — URLs, headers, timing, and errors — live on the device, no Flipper or proxy required."
+description: "Inspect HTTP requests from supported clients in your React Native app — URLs, headers, timing, and errors — live on the device, no Flipper or proxy required."
 ---
 
+Inspect HTTP requests on your device: URLs, headers, request and response bodies, timing, and errors. Use development-only overrides to check how your app handles failures without changing the server.
+
 <!-- ::platform-badge platform="both" -->
-
-See every API call your app makes. Request, response, headers, timing, errors — all in real-time with zero configuration.
-
-Traffic streams in, a request fails, you inspect it, force the failure with an override, and pin the evidence.
 
 <!-- ::network-live-demo -->
 
 ## Supported Clients
 
-<!-- ::client-badges-grid -->
+Capture covers requests that pass through the instrumented global `fetch` or `XMLHttpRequest` APIs. Clients using those APIs, including Axios and HTTP-based GraphQL clients, can appear in the inspector. A native client or a separately imported fetch implementation may bypass these hooks.
 
----
+<!-- ::client-badges-grid -->
 
 ## Installation
 
-<!-- ::PM npm="npm install @buoy-gg/network" yarn="yarn add @buoy-gg/network" pnpm="pnpm add @buoy-gg/network" bun="bun add @buoy-gg/network" -->
+Set up the core menu and your account using [Quick Start](../quick-start), then install Network if you have not already:
 
-That's it. The Network Monitor auto-detects and appears in your FloatingDevTools menu. In dev builds, interception installs at app launch — so boot-time traffic (module-scope fetches, session bootstrap, your first queries) is already captured when you open the tool.
+```bash
+npm install @buoy-gg/network
+```
 
----
+Restart the development server and app. Open the floating menu and select **Network**. Trigger a new request in your app, then select its row to inspect the response.
+
+In development, interception starts during app initialization. Requests made before the hook is installed or before account access is ready may be missing. An empty list can also mean that your app returned cached data instead of making a new request.
 
 ## What You See
 
-For every request:
+A captured request includes its URL, method, status, headers, timing, and available request and response data. Binary or streaming responses may not have a readable body. Inspect the row's details before assuming an empty body means the server returned nothing.
 
 <!-- ::request-fields-grid -->
 
----
-
 ## Status Colors
+
+Use the status code and error text alongside the row color to distinguish successful requests, failures, and requests still in progress.
 
 <!-- ::status-colors-grid -->
 
----
-
-## Stepping Between Requests
-
-Open a request and the detail view gets a **Previous / Next** footer, so comparing two calls no longer means going back to the list and finding your place again.
-
-It steps through exactly what the list was showing — the same pinned rows first, the same filters, the same search. Narrow the list to failures, open one, and Next walks you through the failures only; the counter reads `REQUEST 4 OF 11`, not "4 of everything captured". Requests arriving while you read re-scope it live. Opened from the **Saved** list, it steps through your saves (and their search) instead.
-
-Both lists are newest-first, so **Previous** moves toward the newer request — the same direction as scrolling up.
-
-**It keeps up when you hold it down.** Stepping stays responsive no matter how fast you tap, because the request/response body viewers wait for you to stop before they render — everything else (status, URL, timing, headers) updates on every step. Flick through twenty requests and only the one you land on parses its payload, so the counter never falls behind your thumb. Measured on a 100-request list with 64KB responses, this is the difference between ~650ms and ~15ms of work per tap.
-
----
-
-## Pin & Save
-
-A failed request has a short life. The list holds the last 500, Clear wipes it, and a reload starts over — so the one call you actually needed is usually gone by the time you go back for it. Two ways to keep it:
-
-**Pin** — hoists the request into a `PINNED` section at the top of the list. Pins ignore your filters and your search, so a pinned request never disappears while you narrow the list around it. A pin is a full snapshot, not a bookmark: it survives Clear, survives being pushed out past the 500-request cap, and survives an app restart.
-
-**Save** — files the request in a separate **Saved** list (the bookmark button in the toolbar), out of the live stream. Same durability, with its own search and export.
-
-The two are independent — a request can be pinned, saved, both, or neither.
-
-**How to use them**
-
-- Open a request and use the **pin** or **bookmark** button in the detail header.
-- Or **long-press a row** to pin it. In the Saved list, long-press removes.
-- Pinned and saved rows carry a small glyph so you can tell at a glance.
-
-A request pinned while it is still in flight keeps updating — you get its real status and response, not a frozen "Pending".
-
-**On the desktop dashboard** pins and saves are the same list as on the device: toggling one on the dashboard performs it on the device, so both surfaces always agree. Large response bodies are kept intact because the save happens on the device itself.
-
-**Limits.** Up to 25 pins. The Saved list keeps 5 on the free tier and 50 on Pro. Very large request/response bodies are truncated in a saved snapshot so the stored history stays small — everything else about the request is kept.
-
----
-
 ## Override Responses
 
-Chrome DevTools has **Local Overrides** — serve different bytes for a request without touching the server. Buoy has the same idea on device, and goes further: Chrome can't change a status code (override a body there and it forces `200`), and it has no way to simulate latency or a dead connection. Those are the things you actually need on mobile.
+To check an error state in a development build:
 
-Open any request and tap **Override** in the header. That takes you to the rule, prefilled from the request you were looking at — its endpoint, its method, its status, its real response body — so you're never starting from a blank field.
+1. Make a request and open its details.
+2. Tap **Override** and choose **Server error 500**.
+3. Trigger the same request again. Confirm that Network marks it as overridden and that your app displays the expected error state.
+4. Disable the rule or the master override switch. Trigger the request again to confirm normal behavior.
 
-Pick what the app should get instead:
+The rule starts with the selected request's endpoint, method, status, and response body. If a rule already covers that request, the button opens it.
 
-| | What the app sees |
-|---|---|
-| **Server error 500 / Unauthorized 401 / Not found 404** | That status, with a JSON error body — does your error UI appear? |
-| **Forbidden 403 / Rate limited 429 / Unavailable 503 / Bad request 400** | The rest of the failures worth forcing |
-| **Success 200** | A 200 with a body you choose — swap in an empty list and check the empty state |
-| **Offline** | The exact failure a real dead connection produces |
-| **Timeout** | A genuine timeout event, not a generic error |
-| **Real response** | Don't change the answer, just make it late |
-| **Custom** | Any other status code |
+| Mode | What happens |
+| --- | --- |
+| Status preset or Custom | Returns the configured status and body without sending the matched request to the server. Presets include 200, 400, 401, 403, 404, 429, 500, and 503. |
+| Offline | Simulates a connection failure without sending the matched request. |
+| Timeout | Simulates a timeout failure without sending the matched request. |
+| Real response | Delays the request, then sends it to the server and returns its real response. Server-side effects still happen. |
 
-The header button lights up while a rule covers the request you're looking at, and tapping it again opens that rule rather than stacking a second one the first would shadow.
+These behaviors apply when a supported request is intercepted and its rule matches. Buoy does not block traffic that bypasses its hooks. Use a test environment when exercising mutations.
 
 ### Editing the body
 
-A request's **Response Body** is read-only — that view answers "what came back". Every edit lives in the rule itself, so there's one place to look and one place to change.
+The captured **Response Body** is read-only. Change the response returned to your app in the override rule's **Response body** editor. You can edit values, add or delete fields, or use **Edit all** to paste a replacement body into an empty field.
 
-Open a rule's **Response body** and it's an editor and a preview at once: a string renders *as* its input, a number gets steppers, a boolean gets a toggle, every row has a delete. Typing into what you're reading is the edit. It's the same explorer as the [React Query](./react-query) tool, so if you've edited cached query data in Buoy you already know it.
+A rule created from a request matches its endpoint, with the query string replaced by a wildcard. Review the pattern before enabling it: requests with different query parameters can match the same rule.
 
-**Edit all** replaces the whole body — it opens an empty field rather than prefilling one, because a real response is routinely hundreds of KB and you only reach for it when you mean to paste something new.
+Patterns use `*` globs against the full URL. For example, `*/v1/users*` matches that path on any host. The first enabled rule matching the URL and method wins. Selecting `POST` matches POST requests; it does not change the request method or outgoing body.
 
-A rule built from a request matches its **endpoint**, not the exact URL — the query string becomes a wildcard. That matters more than it sounds: plenty of clients cache-bust with a timestamp or carry a request id, and pinning the exact URL would give you a rule that silently never fires again.
+Rules persist across app restarts. If they remain armed and untouched across three launches, Buoy pauses them and offers a control to resume them. The master switch disables overrides while retaining the rules.
 
-**Rules survive a reload.** That's the point: force an endpoint to 500, restart the app, and watch what your boot path does with it.
+Overridden requests appear in an `OVERRIDDEN` group and carry a flask icon. The toolbar shows an active-rule count.
 
-**Matching** uses `*` globs against the whole URL, the same syntax as Chrome's `applyTo` field. An exact URL works as-is; `*/v1/users*` matches that path on any host. Rules are an ordered list and the first enabled match wins.
+Overrides run only in development, skip `OPTIONS` preflights, and exclude Buoy's own license requests. Custom response statuses must be between 200 and 599. A directly imported `expo/fetch` can bypass the global fetch hook. Binary response handling depends on the transport and response type; verify the result in your app before relying on an override for a download.
 
-The method is part of the **match**, not the target. Picking `POST` means "when the app POSTs here, hand it this response" — overrides always replace what the app *receives*, and never touch the body you send. Mutation responses are worth forcing for exactly that reason: make a checkout POST return 500, or a PATCH come back with a validation error.
+Free access allows one active override; adding another replaces it. Pro allows up to 50. You can also manage device rules from Desktop or through the `network_override` MCP tool, subject to the connection's account and plan requirements.
 
-**It says so, loudly.** Overridden requests are hoisted into an `OVERRIDDEN` strip at the top of the list, rows carry a flask glyph, and the toolbar button lights up with a count.
+## Stepping Between Requests
 
-**And it lets go.** Rules surviving a reload is the point — but a body your app can't render would otherwise re-break it on every launch, with the controls to undo it locked inside an app that no longer draws. So if overrides sit armed and untouched across three launches, they pause themselves: `Overrides paused — they'd been on for 3 launches`, with one tap to turn them back on. Force-a-500-and-restart still works; a wedge can't outlive it.
+Use **Previous / Next** in the detail view to move through the current list. Navigation follows the same search, filters, and pinned rows as that list. New requests update the sequence while you read. In the **Saved** view, navigation follows saved requests and their search results.
 
-**Safety.** Overrides only run in development builds, never touch Buoy's own licence traffic, and skip `OPTIONS` preflights. One master switch turns everything off without losing your rules.
+Lists are newest-first, so **Previous** moves toward newer requests. Body rendering waits briefly while you step through requests; the URL, status, timing, and headers update with each step.
 
-**From the dashboard and from AI.** Rules live on the device, but you can author them from the desktop dashboard, and the `network_override` MCP tool lets an agent force a state and then check what the app rendered — "make this endpoint 500 and tell me what the user sees."
+## Pin & Save
 
-**Limits.** Free is one override at a time — a new one replaces the live one rather than being refused. Pro runs up to 50. Status codes must be 200–599 (for connection-level failures use **Offline**, which is what a real one looks like). Requests made with `expo/fetch` imported directly, and binary `arraybuffer` downloads, are not overridden.
+The live list holds up to 500 requests. Clearing it or restarting the app removes live history. Use pins or saves to retain a request you want to revisit.
 
----
+- **Pin** keeps a snapshot in the `PINNED` section above the live list. Pinned requests remain visible regardless of search and filters, and survive Clear and history eviction. Recovery after restart requires a successful storage write.
+- **Save** keeps a snapshot in the separate **Saved** list, with its own search and export.
+
+A request can be both pinned and saved. Use the pin or bookmark button in its detail header. You can also long-press a live row to pin it; long-pressing a row in Saved removes the save.
+
+A request pinned while pending continues to update as its status and response arrive. There is a maximum of 25 pins. The Saved list allows 5 entries on Free and 50 on Pro.
+
+Large bodies can be truncated in stored snapshots, and storage budgeting can remove body data. Check the snapshot before relying on it as a complete copy of the payload.
+
+Desktop changes pins and saves on the connected device. Saving there uses the device's snapshot, with the same storage limits.
+
 
 ## What's Next
 
-- [Storage Inspector](./storage) — Browse and edit AsyncStorage & MMKV
-- [Environment Inspector](./env) — Validate env vars with type checking
-- [React Query](./react-query) — Inspect query cache and simulate states
-
----
+- [Storage Inspector](./storage): inspect AsyncStorage and registered MMKV instances
+- [Environment Inspector](./env): inspect configured environment values
+- [React Query](./react-query): inspect query cache and simulate query states
 
 ## FAQ
 
 ### How do I debug network requests in React Native without Flipper?
 
-Install `@buoy-gg/network` and open the floating menu — requests appear live on the device. Flipper was deprecated in RN 0.73; Buoy needs no native SDK, proxy, or desktop app.
+Install Buoy's core and Network packages, configure your account, and open Network in the floating menu. Make a request through a supported client and inspect its row. This setup does not require Flipper, a proxy, or a desktop app.
 
 ### Does it capture Axios and GraphQL requests?
 
-Yes — fetch, Axios, and GraphQL (including operation names and variables) are captured automatically, plus gRPC-web.
+It captures requests from Axios and HTTP-based GraphQL clients when they use the instrumented fetch or XHR APIs. Supported GraphQL payloads include operation names and variables. Other transports may bypass capture.
 
 ### Can I inspect network traffic in a production build?
 
-Yes. The inspector ships inside the app, so authorized users can open it in staging and production builds — where desktop-tethered tools can't attach.
+Production access requires Pro and an app that deliberately exposes the tool to authorized users. Test capture in your target build. Response overrides remain development-only.
+
+## Network conditions (development preview)
+
+The React Native Network tool has four conditions: Normal, Offline (requests), Slow (+500 ms), and Very slow (+2000 ms). An admitted Free or Pro account can select them in a development build. Open **⋯ → Network throttling** to minimize the Network tool and show a compact floating controller. Tap the signal icon to cycle through No throttling, Slow, Very slow and Offline. Changes apply immediately; the icon and delay show the applied profile. The profile text is a label and can be dragged to move the strip. Close restores Normal and dismisses the strip. Drag the background, delay label or grip to move the strip. Buttons keep their tap actions. In React Native development builds, an open strip returns after reload at its saved position, including when hidden at the edge. Close keeps it closed across reloads. The condition resets to No throttling. Tap the grip to hide and restore. Hiding keeps conditions active.
+
+These affect new HTTP(S) calls through global fetch and React Native XHR. Offline rejects them before dispatch; latency adds a wait before dispatch. Conditions do not disconnect Wi-Fi, change NetInfo, or throttle bandwidth. Imported native transports, images and WebSockets may bypass the hooks.
+
+Pending calls retain their starting profile. Offline takes precedence over authored override rules; latency adds to their delay. During active simulation, a finite XHR timeout starts at `send()` and includes artificial waits. Normal keeps the platform's timeout semantics.
+
+Closing the panel, pausing its list, clearing requests or filtering them keeps conditions active. Select No throttling to clear them. A full JS reload or loss of account access resets them automatically. Native simulator and device validation is still pending for this preview.
+
+## Web support (unreleased)
+
+Browser fetch and XHR use the shared capture, rules, conditions, and request panels. CORS still controls which response data the page can read. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+The capture control reads “Pause network capture” while capture is enabled and “Resume network capture” while it is paused. Existing requests remain visible while capture is paused.

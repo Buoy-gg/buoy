@@ -5,15 +5,15 @@ id: flutter-tools-routes
 description: "Browse every go_router route in your Flutter app, jump to any screen, and watch navigation events in real time to debug navigation issues fast."
 ---
 
-See every route in your app and track navigation in real-time. Browse your sitemap, jump to any screen, and debug navigation issues instantly.
+Inspect the routes and navigation events exposed by your registered go_router instance. Navigate between two screens, then check the from/to paths and parameters in the timeline.
 
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::routes-live-demo -->
 
 ## Supported Libraries
 
-Captures navigation from [`go_router`](https://pub.dev/packages/go_router) — the events timeline, route sitemap, and navigation-stack view, identical to the React Native tool.
+Captures navigation from [`go_router`](https://pub.dev/packages/go_router) — the events timeline, route sitemap, and navigation-stack view, using the registered Flutter router.
 
 ---
 
@@ -24,12 +24,14 @@ Captures navigation from [`go_router`](https://pub.dev/packages/go_router) — t
 Add `BuoyRouteObserver.instance` to your router's `observers` and hand the router to `registerBuoyRoutes` so the sitemap and jump-to-route work:
 
 ```dart
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:buoy_routes/buoy_routes.dart';
 import 'package:go_router/go_router.dart';
 
 final _router = GoRouter(
   observers: [BuoyRouteObserver.instance],
-  routes: [ /* ... */ ],
+  routes: [ /* your existing GoRoute definitions */ ],
 );
 
 void main() {
@@ -39,6 +41,8 @@ void main() {
 ```
 
 ---
+
+Use this same router in `MaterialApp.router(routerConfig: _router)`. The snippet assumes your existing route definitions and `MyApp`; mount `BuoyDevTools` through the app builder as shown in [Installation](../installation). Route jumps still run your redirects and authorization checks.
 
 ## What You Can Do
 
@@ -61,7 +65,7 @@ Tap any event to open its **detail page** — the full route template, from/to p
 
 ## What's Next
 
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Storage Explorer](./storage) — Browse and edit shared_preferences
 - [Events Timeline](./events) — Navigation alongside network and storage events
 
@@ -75,4 +79,4 @@ Add `BuoyRouteObserver.instance` to your router's `observers` and pass the route
 
 ### Which routing packages are supported?
 
-`go_router` — the events timeline, route sitemap, and navigation-stack view, identical to the React Native tool.
+`go_router` — the events timeline, route sitemap, and navigation-stack view, using the registered Flutter router.

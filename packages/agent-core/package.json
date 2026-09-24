@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/agent-core",
-  "version": "7.0.36",
+  "version": "7.0.40",
   "description": "Headless agent core for Ask Buoy - the tool catalog, BYO-model providers, turn loop and effect ledger that let an LLM drive Buoy devtools",
   "homepage": "https://buoy.gg/tools/ask-buoy",
   "keywords": [

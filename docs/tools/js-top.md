@@ -7,11 +7,9 @@ description: "A live Task Manager for the React Native JS thread — see which t
 
 <!-- ::platform-badge platform="both" -->
 
-Every React Native developer has watched JS FPS drop and asked the same question: **what is eating the thread?** JS Top answers it live, like Task Manager or Activity Monitor answers it for your computer — a ranked table of task origins (`setInterval ← startPolling`, `Promise.then ← api.ts`, `requestAnimationFrame ← rafSpinLoop`) with time consumed, call counts, and share of thread busy time, updating as you watch.
+Rank the callback origins JS Top can observe by execution time and call count. Compare timers, animation callbacks, and Promise reactions while reproducing a slow interaction. Work outside the wrapped paths appears as unattributed.
 
-It's pure JavaScript — no native module, no dev client, no debugger attached. It works in Expo Go and even in release builds.
-
-Watch a forgotten `setInterval ← startPolling` climb the table, match 50ms+ freezes to the callback that blocked, then Pause the ranking mid-jank:
+The tool uses JavaScript instrumentation and can run in Expo Go. Production access requires Pro.
 
 <!-- ::js-top-live-demo -->
 
@@ -34,9 +32,9 @@ import { jsTopPreset, jsTopModalPreset } from "@buoy-gg/js-top";
 
 You can't sample a blocked JS thread from JavaScript — so JS Top doesn't sample. Instead it wraps every entry point work can take onto the thread (`setTimeout`, `setInterval`, `setImmediate`, `requestAnimationFrame`, `queueMicrotask`, Promise reactions, and legacy-bridge call-ins) and measures each callback precisely, attributing the time to *where the callback was scheduled from*.
 
-Alongside that, a calibrated high-frequency probe measures **true thread occupancy** from timer-gap inflation, and React Native's built-in `longtask` observer flags every 50ms+ block. Anything the wrappers can't see shows up honestly as an **unattributed** row — the tool never pretends to a coverage it doesn't have.
+Alongside that, a calibrated high-frequency probe measures **estimated thread occupancy** from timer-gap inflation, and React Native's built-in `longtask` observer flags every 50ms+ block. Anything the wrappers can't see shows up honestly as an **unattributed** row — the tool never pretends to a coverage it doesn't have.
 
-- **Zero overhead when closed.** The engine only runs while the tool is open (or a desktop dashboard is watching).
+- **Inactive when closed.** The engine only runs while the tool is open (or a desktop dashboard is watching).
 - **Exclusive-time accounting.** Nested callbacks never double-count; totals always add up.
 - **Blocking-task attribution.** Each 50ms+ stall is matched to the callback that overlapped it.
 
@@ -58,7 +56,7 @@ With the [MCP server](../mcp), an agent can call `get_js_thread_top` — the dev
 
 ## Coverage notes
 
-- On the New Architecture (bridgeless), touch handlers and React commit work enter the thread through paths pure JS can't wrap — that time appears as **unattributed** (the banner in the tool explains this). Timers, rAF, microtasks, and Promise chains are always fully attributed.
+- On the New Architecture (bridgeless), touch handlers and React commit work enter the thread through paths pure JS can't wrap — that time appears as **unattributed** (the banner in the tool explains this). Timers, rAF, microtasks, and Promise chains are attributed when they use the wrapped paths.
 - Hermes runs `async/await` continuations through an internal path that bypasses `.then` — async function bodies also land in unattributed.
 
 ## What's Next
@@ -73,7 +71,7 @@ With the [MCP server](../mcp), an agent can call `get_js_thread_top` — the dev
 
 ### How do I find what's blocking the JS thread in React Native?
 
-Install `@buoy-gg/js-top` and open JS TOP — it ranks every task origin (`setInterval ← startPolling`, `Promise.then ← api.ts`, `requestAnimationFrame ← rafSpinLoop`) by the time it consumed, so the runaway timer or callback names itself in seconds.
+Install `@buoy-gg/js-top` and open JS TOP — it ranks every task origin (`setInterval ← startPolling`, `Promise.then ← api.ts`, `requestAnimationFrame ← rafSpinLoop`) by the time it consumed, so the runaway timer or callback appears in the ranking when captured.
 
 ### Does it need a native module, dev client, or attached debugger?
 
@@ -81,4 +79,8 @@ No. JS Top is pure JavaScript — it wraps the entry points work takes onto the 
 
 ### Why is some time reported as "unattributed"?
 
-On the New Architecture, touch handlers and React commit work enter the JS thread through paths pure JavaScript can't wrap. That time is reported honestly as unattributed rather than being blamed on the wrong origin. Timers, rAF, microtasks, and Promise chains are always fully attributed.
+On the New Architecture, touch handlers and React commit work enter the JS thread through paths pure JavaScript can't wrap. That time is reported honestly as unattributed rather than being blamed on the wrong origin. Timers, rAF, microtasks, and Promise chains are attributed when they use the wrapped paths.
+
+## Web support (unreleased)
+
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

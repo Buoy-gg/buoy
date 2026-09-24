@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/route-events",
-  "version": "7.0.36",
-  "description": "Navigation devtool for React Native — live stack, full sitemap, jump to any screen. Expo Router & React Navigation. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Inspect reported navigation state and supported route actions in React Native apps using Expo Router or React Navigation.",
   "homepage": "https://buoy.gg/tools/routes",
   "keywords": [
     "react-native",

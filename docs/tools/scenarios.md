@@ -7,9 +7,9 @@ description: "Save the app state you just set up as a button anyone can tap. Ove
 
 <!-- ::platform-badge platform="both" -->
 
-Getting an app into a hard state is the tax on testing it. Out of stock. Expired offer, mid-checkout. Payment declined on the second card. Gold tier, ten points from the next tier. Every one of those is a Slack message to a developer, a shared test account somebody else already dirtied, or a race against a five-minute expiry window — and the states that need two people and a phone call simply don't get tested.
+Save a repeatable test setup as a scenario. Its steps can configure a network override, write storage, select an impersonated user, and navigate to a screen through installed tools.
 
-A **scenario** is that setup, saved as a button. Pick the variables, tap Run, and the running app is in the state you asked for: the request returns a 500, the storage key is written, you're impersonating the right user, and you're on the right screen. While it's active an unmissable amber banner says so, and one tap puts reality back.
+Review the step preview before running it. Deactivation removes supported active effects, but storage writes need explicit undo steps. Confirm the app's state after both activation and deactivation.
 
 ## Installation
 
@@ -73,28 +73,28 @@ Register them and they show up under **Shipped with this app**, read-only on the
 
 ```tsx
 import { createScenariosTool } from "@buoy-gg/scenarios";
-import { outOfStock, expiredOffer } from "./scenarios/qaMenu";
+import { outOfStock } from "./scenarios/qaMenu";
 
 const scenarios = createScenariosTool({
-  scenarios: [outOfStock, expiredOffer],
+  scenarios: [outOfStock],
   currentBuild: "5.4.0",   // drives the staleness badge
 });
 
 <FloatingDevTools apps={[scenarios]} />
 ```
 
-Now QA's menu is a build artifact that ships, gets reviewed in pull requests, and changes with the API it fakes — instead of living in one developer's fingers.
+Keeping definitions in code lets you review the scenario alongside changes to the API or app state it uses.
 
 ---
 
 ## What You Can Do
 
-- **Run a saved state in one tap** — pick the variables (real pickers, never free text for a URL), tap Run, and the app bends. On success the tool minimizes itself: the changed app is the confirmation.
+- **Run a saved state in one tap** — pick the variables (real pickers, never free text for a URL), tap Run, and the configured steps run. On success the tool minimizes itself: the changed app is the confirmation.
 - **See exactly what will happen before it happens** — the preview lists every step in plain English (`GET */menu/100* → respond 200, replaced body`, `Set storage @cart`, `Go to /cart`) with a durability chip on each, plus the author's expected outcome. You can write a bug report against a scenario because you can read what it did.
 - **Trust the boundary between fake and real** — while a scenario is active, an amber `▲ SIMULATED` banner shows on every screen, names the scenario, counts its changes, and carries the deactivate control. It survives app restarts alongside the overrides, and because it's a real view it lands in every screenshot and screen recording you take. There is no setting that hides it.
 - **Deactivate, and be told the truth** — one tap deletes the scenario's override rules and ends its impersonation, then reports what it could *not* reverse. Storage writes have no automatic inverse, so they're named rather than quietly left behind. Authors can supply `undoSteps` to close that gap.
 - **Survive a restart** — network overrides ride the shipped override-rule store, so the state holds through pull-to-refresh, a JS reload, and a full app relaunch. The active record is reconciled against the real rules on boot, so the banner can never claim state that isn't there.
-- **Never stack two scenarios by accident** — activation is exclusive. Running a scenario that touches an endpoint the active one already owns offers a **Swap** instead of layering, and the overlap is named. Two scenarios silently fighting over the same request is a lost afternoon, not a feature.
+- **Review overlapping scenarios** — Review preflight and any Swap prompt before activation. Running a scenario that touches an endpoint the active one already owns offers a **Swap** instead of layering, and the overlap is named. Resolve overlapping rules before continuing the test.
 - **Author from a conversation** — set the state up interactively with your AI assistant, then ask it to save that as a scenario. It arrives on the device as a **draft** (see below).
 - **Attach the state to the bug** — **Copy repro info** puts the scenario name, version, variables, build and effect list on the clipboard, formatted for a ticket. "Are you sure a scenario wasn't active?" stops being a question anyone has to ask.
 
@@ -125,7 +125,7 @@ Search reads the folder too, so typing `checkout` finds the flow before you've n
 
 A scenario saved from chat or the desktop dashboard does **not** become runnable. It lands in a **Drafts — awaiting review** section and is inert: pre-flight refuses to run it. Someone on the device opens it, reads the plain-English steps, and taps **Accept to library**.
 
-This is deliberate. A tester's device state is their chain of custody — if state can change under them mid-session, every surprising behavior becomes a suspect, including the real bugs. Review costs five seconds; not having it costs the tool's credibility.
+Device review lets the tester inspect the proposed changes before adding the scenario to the runnable library.
 
 ---
 
@@ -149,15 +149,15 @@ The durable path is the recommended path. `setQueryData` stays available because
 
 Declare them, and the run form builds itself: an `enum` renders as chips, a `boolean` as a switch, a `number` as a numeric field. Values are remembered per scenario, so a regression pass doesn't retype them.
 
-Placeholders substitute by `{{key}}` and nothing else — no expressions, no templating language. A scenario is data, never code, which is what makes it safe to commit, to share, and to accept from an AI. One rule worth knowing: a string that is *exactly* `"{{code}}"` keeps the variable's type, so `status: "{{code}}"` sends the number `500`, not the string `"500"`; embedded placeholders substitute as text.
+Placeholders substitute by `{{key}}` and nothing else — no expressions, no templating language. Scenario definitions are data, but their actions can change real app state. Review imported definitions before accepting them. One rule worth knowing: a string that is *exactly* `"{{code}}"` keeps the variable's type, so `status: "{{code}}"` sends the number `500`, not the string `"500"`; embedded placeholders substitute as text.
 
 ---
 
 ## Failure is loud
 
-Pre-flight runs before step one and collects **every** problem at once — an uninstalled tool, an action that doesn't exist, an undeclared variable, a plan limit already reached. You never bend half the world and then discover a typo in step four.
+Pre-flight runs before step one and collects **every** problem at once — an uninstalled tool, an action that doesn't exist, an undeclared variable, a plan limit already reached. Runtime failures can still leave partial changes; inspect the result before continuing.
 
-If a step still fails at runtime, the run stops there, prints the error verbatim, marks the rest skipped, and makes you choose: **Undo applied steps** (reversing exactly what landed) or **Keep**. There is no silent default, and a partially applied scenario is never recorded as active.
+If a step still fails at runtime, the run stops there, prints the error verbatim, marks the rest skipped, and makes you choose: **Undo applied steps** (attempting the available reversals) or **Keep**. There is no silent default, and a partially applied scenario is never recorded as active.
 
 ---
 
@@ -175,7 +175,7 @@ Every action is available over MCP and from Buoy Desktop, so the same named stat
 | `setFolder` | Files a saved scenario under a flow, or clears its folder |
 | `deactivate` | Reverses it and returns the honest report |
 
-Because `run` only resolves once the state is really applied, it works as a deterministic fixture: run the scenario, then drive the flow. One arrange layer, shared by the person tapping, the test suite and the agent.
+After `run` resolves, assert the expected app state before driving the flow. A completed step sequence does not establish that later requests or screen rendering succeeded.
 
 > **Not to be confused with** WireMock's "scenarios" (a stateful mock state-machine) or a Gherkin scenario (a test case). A Buoy scenario is closer to the *Given* half of a Gherkin scenario, made executable.
 
@@ -194,6 +194,10 @@ Because `run` only resolves once the state is really applied, it works as a dete
 | | Free | Pro |
 |---|---|---|
 | Scenarios saved on a device | 3 | Unlimited |
-| Active at once | 1 | 3 |
+| Active-scenario allowance | 1 | Up to 3, subject to preflight and overlap handling |
 
 Scenarios shipped in code with `defineScenario()` don't count toward the device limit.
+
+## Web support (unreleased)
+
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

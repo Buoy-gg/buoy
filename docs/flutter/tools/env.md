@@ -7,7 +7,7 @@ description: "View and validate your Flutter app's environment config on-device 
 
 The Environment Inspector lets you view and validate environment config in your Flutter app — required-variable checks, type detection, per-variable status badges, and a 0–100% health score.
 
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::env-live-demo -->
 
@@ -31,7 +31,7 @@ registerBuoyEnv(
   requiredEnvVars: [
     envVar('API_URL').withType('url').build(),
     RequiredEnvVar.value('ENVIRONMENT', 'production'),
-    'FEATURE_FLAG', // existence check
+    envVar('FEATURE_FLAG').exists(), // existence check
   ],
 );
 ```
@@ -59,14 +59,13 @@ envVar('API_KEY').exists()
 
 ## `registerBuoyEnv` Options
 
-```dart
-registerBuoyEnv({
-  required Map<String, String?> vars,   // hand-built map (no process.env)
-  List<Object /* String | RequiredEnvVar */>? requiredEnvVars,
-});
-```
+| Option | Type | Meaning |
+| --- | --- | --- |
+| `vars` | `Map<String, String>?` | Explicit runtime values to display |
+| `requiredEnvVars` | `List<RequiredEnvVar>?` | Required names, types, and expected values |
 
-Required entries can be a bare `String` (existence), `RequiredEnvVar.value(...)`, or an `envVar(...).build()`.
+
+Each required entry must be a `RequiredEnvVar`. Use `envVar(name).exists()` for an existence check, `RequiredEnvVar.value(...)` for an expected value, or the builder for type checks.
 
 ## Features
 
@@ -95,7 +94,7 @@ Required entries can be a bare `String` (existence), `RequiredEnvVar.value(...)`
 
 ## What's Next
 
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Storage Explorer](./storage) — Browse and edit shared_preferences
 - [Console](./console) — Every log call in a DevTools-style panel
 

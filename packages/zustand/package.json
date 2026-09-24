@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/zustand",
-  "version": "7.0.36",
-  "description": "Zustand devtools inside your React Native app — state diffs, jump-to-state & one-tap store reset, no middleware. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Inspect registered Zustand stores, compare captured state changes and use supported reset or state-update actions.",
   "homepage": "https://buoy.gg/tools/zustand",
   "keywords": [
     "react-native",

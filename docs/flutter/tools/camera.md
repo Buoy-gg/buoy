@@ -5,9 +5,7 @@ id: flutter-tools-camera
 description: "Give the iOS Simulator a working camera for your Flutter app. Point it at your Mac screen, your webcam, an image or a video — scan QR codes and driver's licences, test capture flows, and stop reaching for a real device."
 ---
 
-Buoy Desktop tricks the iOS Simulator into thinking it has a camera, so
-Flutter's `camera` plugin finds one and your capture and scanning screens run
-where the rest of your app already runs.
+Buoy Desktop supplies a camera feed to Flutter apps in the iOS Simulator. Choose a source on your Mac, then relaunch the app process so the camera integration loads.
 
 **iOS Simulator only.** Android emulators can already use a webcam natively, and
 this is not a physical-device tool.
@@ -54,11 +52,11 @@ licence scanner without owning a licence.
 ## What works
 
 The devices are fabricated at the AVFoundation level, below anything Dart can
-see, so what you build on top does not matter. Verified with Flutter's
+see, so compatibility depends on how the camera plugin uses AVFoundation. Verified with Flutter's
 [`camera`](https://pub.dev/packages/camera) plugin: preview, the frame stream,
 photo capture, and video recording.
 
-Plugins that go through `AVCaptureSession` — which on iOS is all of them —
+Plugins that go through `AVCaptureSession`
 should work the same way. That is an expectation, not a test result: only the
 `camera` plugin has actually been run.
 
@@ -66,13 +64,13 @@ should work the same way. That is an expectation, not a test result: only the
 
 This tool lives in [Buoy Desktop](../../desktop); there is no in-app half to it.
 And with the [MCP server](../../mcp), an agent can run a camera test end to end
-with no human in the loop: find a simulator and its apps (`camera_devices`), see
+through its supported actions: find a simulator and its apps (`camera_devices`), see
 the Mac's cameras and windows (`camera_inputs`), pick what to show
 (`camera_source`), attach it (`camera_launch`, or `camera_zero_setup` for
 everything the simulator launches), then check its own work (`camera_status`,
 `camera_diagnose`) and clean up (`camera_stop`).
 
-No device connection and no Buoy packages needed for any of that.
+No app-side Buoy package or device connection is required. MCP requires Pro. QR generation is free; Screen region and additional barcode types require Pro. See [Camera](../../tools/camera) for the shared plan and source details.
 
 ## Limits
 

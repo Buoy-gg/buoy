@@ -7,11 +7,7 @@ description: "Zustand devtools for React Native — watch store state changes, e
 
 <!-- ::platform-badge platform="both" -->
 
-Zustand's appeal is that a store is just a function — which is also why nothing tells you when one changes. There is no action log to read, so a value that goes wrong halfway through a flow leaves you sprinkling `subscribe` calls and rebuilding to see them.
-
-Buoy writes the update stream you do not have: which store changed, which keys, the diff, and whether an update fired without changing anything. It tells rehydration apart from your own writes, and jumps a store back without restarting the app.
-
-Walk a live checkout session: stores update, a payment fails, DIFF names the keys, JUMP rolls checkoutStore back, RESET empties cartStore — then free play.
+Inspect registered Zustand stores, current values, and recorded changes. Use the diff to find which keys changed, then test a retained state with Jump or restore the initial state with Reset.
 
 <!-- ::zustand-live-demo -->
 
@@ -37,7 +33,9 @@ const stores = {
   cartStore: useCartStore,
 };
 
-return <FloatingDevTools zustandStores={stores} />;
+export function DevTools() {
+  return <FloatingDevTools zustandStores={stores} />;
+}
 ```
 
 ---
@@ -170,7 +168,7 @@ Pause state capture when you need to focus, resume when ready.
 
 - [Redux DevTools](./redux) — Redux action monitor with state diffing and time-travel
 - [React Query DevTools](./react-query) — TanStack Query inspection
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
 
 ---
@@ -184,3 +182,7 @@ Install `@buoy-gg/zustand` and register your stores — they appear in the on-de
 ### Can I see which store update caused a bug?
 
 Yes — the event stream timestamps every update with the store name and changed key, and each event has a before/after diff.
+
+## Web support (unreleased)
+
+Register live stores with watchStores. The shared browser panel edits the same store objects used by the app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

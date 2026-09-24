@@ -7,7 +7,7 @@ description: "Inspect Riverpod providers in your Flutter app — watch state cha
 
 Full Riverpod provider inspection for Flutter. Monitor provider state changes, explore value diffs, and browse live provider values in real-time — directly on your device. It's the same inspector UI as the React Native atom inspector, reading your Riverpod providers.
 
-The React Native Jotai inspector, running here on a mock session. Riverpod's inspector is the Flutter port of this same panel set — provider values and state changes in place of atoms. Walk the tour, or skip it and start tapping.
+The demo uses React Native Jotai data. Flutter records providers observed by the scope you configure below; it does not discover every provider declared in the project.
 
 <!-- ::jotai-live-demo -->
 
@@ -22,6 +22,8 @@ The React Native Jotai inspector, running here on a mock session. Riverpod's ins
 Add the Buoy observer to your `ProviderScope` — no wrappers, no middleware, no modifications to existing providers:
 
 ```dart
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:buoy_riverpod/buoy_riverpod.dart';
 
 void main() {
@@ -34,6 +36,8 @@ void main() {
   );
 }
 ```
+
+Use your existing `MyApp` with `BuoyDevTools` mounted in debug mode. Change an observed provider and confirm its value and event appear. Use provider APIs compatible with your installed Riverpod version.
 
 > **Name your providers** (`StateProvider(..., name: 'counter')`) so the list reads well — unnamed providers fall back to their runtime type.
 
@@ -66,7 +70,7 @@ Tap any event for the detail view: full value trees and a split-screen **diff** 
 ## What's Next
 
 - [Events Timeline](./events) — Provider changes alongside network and route events
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Storage Explorer](./storage) — Browse and edit persisted data
 
 ---

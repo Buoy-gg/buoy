@@ -2,9 +2,9 @@
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/env?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/env) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/env?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/env)
 
-**View and validate your app's environment variables on-device — auto-discovers `EXPO_PUBLIC_` vars with type detection and a 0-100% health score.**
+Inspect the environment values available to your app at runtime and check required variables against expected types and values.
 
-Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside your React Native app. Install it and it auto-appears in the floating menu from [`@buoy-gg/core`](https://www.npmjs.com/package/@buoy-gg/core).
+Part of [Buoy](https://github.com/Buoy-gg/buoy). Install the package, complete account setup, and follow the integration steps below.
 
 ![Environment Inspector demo](https://github.com/user-attachments/assets/75651046-33a0-4257-9011-3bcc4818a964)
 
@@ -14,9 +14,27 @@ Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside yo
 npm install @buoy-gg/core @buoy-gg/env
 ```
 
+## Before you start
+
+Use a development build with `@buoy-gg/core` and a Free or Pro Buoy account key. From your app’s directory, sign in:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+For Expo, initialize Buoy before rendering the menu:
+
+```tsx
+import { Buoy } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+The login command writes the Expo key to `.env.local`. For React Native CLI, pass the key from your app’s environment configuration; React Native does not load `.env.local` automatically. Mount `FloatingDevTools` inside the same providers as your screens and restart the development server after installation. The [Quick Start](https://buoy.gg/buoy/latest/docs/quick-start) shows the complete root component setup.
+
 ## Quick start
 
-Fully automatic. Render the floating menu once — the Environment Inspector is auto-discovered as soon as this package is installed:
+After initialization, render the menu in your app root:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
@@ -47,11 +65,18 @@ const envTool = createEnvTool({
       .build(),
   ],
 });
+
+// Render this menu inside your existing app root.
+<FloatingDevTools apps={[envTool]} />;
 ```
+
+## Check the integration
+
+Open Env and check one known variable and one deliberately missing required variable. Expo statically replaces direct `process.env.EXPO_PUBLIC_NAME` references; enumerating `process.env` does not guarantee that those values are available. An empty list does not prove your app has no environment configuration.
 
 ## What you get
 
-- **Automatic discovery** — every `EXPO_PUBLIC_`-prefixed variable is collected with zero configuration.
+- **Runtime discovery** — collects enumerable `EXPO_PUBLIC_` values available at runtime. Expo’s static inlining limits what enumeration can see.
 - **Required-variable validation** — declare which vars must exist, with expected values or types: `string`, `number`, `boolean`, `array`, `object`, `url`.
 - **Type detection** — values are auto-classified (string, number, boolean, array, object, url, json).
 - **Health score** — a 0-100% health percentage with HEALTHY / WARNING / ERROR / CRITICAL states, plus counts for total, required, missing, and wrong value/type.
@@ -61,14 +86,18 @@ const envTool = createEnvTool({
 
 ## Desktop & AI
 
-The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) (free, macOS/Windows/Linux) and to Claude Code or Cursor via the [Buoy MCP server](https://buoy.gg/buoy/latest/docs/mcp).
+To connect a React Native app to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) or MCP, install `@buoy-gg/external-sync` and follow the [Desktop connection guide](https://buoy.gg/buoy/latest/docs/desktop). Sign in to Desktop separately. [MCP setup](https://buoy.gg/buoy/latest/docs/mcp) also requires a process account and Pro access. Available remote actions depend on the tool and app integration.
 
-## Free vs Pro
+## Account and plan requirements
 
-Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for anyone holding a key — including a free one (`npx buoy login`).
+Use a Free or Pro Buoy account. History limits and paid features vary by tool; see [pricing](https://buoy.gg/pricing). Production access requires Pro where supported. Development-only hooks and actions remain unavailable in release builds.
 
 ---
 
 📚 [Full docs](https://buoy.gg/buoy/latest/docs/tools/env) · [All Buoy tools](https://github.com/Buoy-gg/buoy)
 
 Proprietary software. © Buoy LLC. [Terms](https://buoy.gg/terms)
+
+## Web support (unreleased)
+
+Supply public runtime values explicitly with setRemoteEnv. The inspector cannot enumerate variables that a bundler replaced at build time. The browser build is available in this checkout and has not been published yet. See the [web setup guide](https://buoy.gg/buoy/latest/docs/web-preview) for registration, dependencies, and browser boundaries.

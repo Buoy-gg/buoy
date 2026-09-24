@@ -2,14 +2,12 @@
 title: Storage Explorer
 seoTitle: "React Native AsyncStorage & MMKV Viewer — browse on-device"
 id: tools-storage
-description: "Browse and edit every key-value pair your React Native app persists — AsyncStorage, MMKV, and SecureStore in one explorer with real-time updates."
+description: "Browse and edit supported storage in your React Native app — AsyncStorage, MMKV, and SecureStore in one explorer with real-time updates."
 ---
 
 <!-- ::platform-badge platform="both" -->
 
-Browse, edit, and manage all your app's persisted data. See every key-value pair across all storage backends in real-time.
-
-Writes stream in across three backends, a declared contract lights up a session key that never wrote, you read Missing / Wrong / Type Error, write the fix, and pin the evidence.
+Inspect and edit AsyncStorage, registered MMKV instances, and registered SecureStore keys. Use the backend filter to choose the data you want to inspect.
 
 <!-- ::storage-live-demo -->
 
@@ -17,7 +15,7 @@ Writes stream in across three backends, a declared contract lights up a session 
 
 <!-- ::storage-backends-grid -->
 
-> **Multi-instance MMKV support** — If you use multiple MMKV instances, they're all detected automatically. Switch between instances and see key counts per instance.
+> **Multi-instance MMKV support** — If you use multiple MMKV instances, register each instance explicitly. Switch between instances and see key counts per instance.
 
 ---
 
@@ -25,7 +23,7 @@ Writes stream in across three backends, a declared contract lights up a session 
 
 <!-- ::PM npm="npm install @buoy-gg/storage" yarn="yarn add @buoy-gg/storage" pnpm="pnpm add @buoy-gg/storage" bun="bun add @buoy-gg/storage" -->
 
-That's it. The Storage Explorer auto-detects installed backends and appears in your FloatingDevTools menu.
+After setting up [Buoy core](../quick-start), install this package and restart Metro. AsyncStorage can be discovered automatically; register MMKV instances and SecureStore keys below.
 
 ### SecureStore setup
 
@@ -43,7 +41,21 @@ registerSecureStoreKeys(SecureStore, [
 ]);
 ```
 
-> MMKV instances need the same one-time registration — see the [package README](https://github.com/LovesWorking/react-native-buoy/tree/main/packages/storage#mmkv-setup) for details.
+### MMKV setup
+
+Register the same instance your app reads and writes. For MMKV v4:
+
+```typescript
+import { createMMKV } from "react-native-mmkv";
+import { registerMMKVInstance } from "@buoy-gg/storage";
+
+export const storage = createMMKV({ id: "mmkv.default" });
+registerMMKVInstance("mmkv.default", storage);
+```
+
+If your app already creates this instance, add the registration beside that code instead of creating another instance. Give each registered instance a distinct name.
+
+To verify setup, write a disposable test key through your app, find it in Storage, edit it, and read it back through your app. Delete the test key when finished.
 
 Registered values are re-read every few seconds while the browser is open, so a secure write shows up without reopening the tool. AsyncStorage and MMKV writes are picked up the moment they happen; the keychain gets a poll instead because it has no change notification of any kind.
 
@@ -59,7 +71,7 @@ Registered values are re-read every few seconds while the browser is open, so a 
 
 **Edit values in place** — Expand a key and hit *Edit value* to write a new one straight to the device. Types are preserved: an MMKV number stays a number, a boolean only accepts `true`/`false`, and a key holding JSON has to stay valid JSON — so you can't silently turn an object into a quoted string. Buffers, read-only MMKV instances, and biometric-protected SecureStore keys say why they can't be edited instead of offering a broken field.
 
-**Edit arrays and objects without typing JSON** — Tap any node in the value tree and its actions appear alongside the key's other buttons: arrays get append, duplicate, reorder and remove; objects get add-key, duplicate and remove; scalars get a text field, with booleans as a two-way toggle. Editing a fifty-item array by hand-writing the whole blob is exactly the thing this avoids — the raw text editor is still there when you'd rather paste.
+**Edit arrays and objects without typing JSON** — Tap any node in the value tree and its actions appear alongside the key's other buttons: arrays get append, duplicate, reorder and remove; objects get add-key, duplicate and remove; scalars get a text field, with booleans as a two-way toggle. Use the raw text editor when you want to paste a complete value.
 
 **Inline value previews** — Short values show right on the card (`number · 42`, `string · "en"`), and booleans get a color-coded true/false badge. No need to expand to see simple values.
 
@@ -77,7 +89,7 @@ Registered values are re-read every few seconds while the browser is open, so a 
 
 ## What's Next
 
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Environment Inspector](./env) — Validate env vars with type checking
 - [React Query](./react-query) — Inspect query cache and simulate states
 
@@ -91,4 +103,8 @@ Install `@buoy-gg/storage` and open the Storage tool from the floating menu — 
 
 ### Does it support MMKV?
 
-Yes — AsyncStorage, MMKV, and SecureStore all appear in the same explorer, with a backend filter.
+Yes. Register each MMKV instance, then select it with the backend filter. SecureStore requires explicit key registration too.
+
+## Web support (unreleased)
+
+The browser uses localStorage and sessionStorage with the shared editor, event history, undo, and snapshots. Native secure storage is unavailable on web. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

@@ -2,14 +2,12 @@
 title: Images
 seoTitle: "Flutter Image Debugger — cache, oversize & failure audit"
 id: flutter-tools-images
-description: "Debug every image in your Flutter app — a live registry of loads with cache verdicts (memory/disk/network), timings, oversize + wasted-memory auditing, and a failure log."
+description: "Inspect instrumented image loads, available cache and timing data, size estimates and failures. Coverage depends on integration and platform."
 ---
 
-Images not loading? Loading slow? Stale avatars that never update? Memory ballooning? Image HTTP traffic in Flutter is fetched by `dart:io` image loaders and never surfaces the layout size or cache origin a network inspector needs — this tool is the visibility layer.
+Inspect images rendered through `BuoyImage`, including their load timing, decoded dimensions, displayed size, and available cache information. Plain Image widgets are not captured automatically.
 
-Every image loaded through `BuoyImage` appears in a live registry with where it came from (memory cache / disk cache / network), how long it took, how big it decoded versus how big it displayed, and exactly why it failed.
-
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::images-live-demo -->
 
@@ -20,14 +18,17 @@ The React Native build of this tool, running here on mock data. The Flutter port
 Flutter has no app-wide `Image` decorator hook, so capture is opt-in at the widget level — use `BuoyImage` in place of `Image` / `CachedNetworkImage`:
 
 ```dart
+import 'package:flutter/widgets.dart';
 import 'package:buoy_images/buoy_images.dart';
 
 BuoyImage(
-  provider: CachedNetworkImageProvider(url), // or NetworkImage(url), AssetImage(...)
+  provider: const NetworkImage('https://example.com/image.png'),
   width: 120,
   height: 120,
 )
 ```
+
+Replace the example URL with an image your app can load. For a standalone install, call `registerBuoyImages()` before mounting the core widget; the umbrella registers it for you.
 
 It wraps your `ImageProvider`, measures the rendered box for the oversize audit, and owns the props so reload/retry and simulations work.
 
@@ -35,8 +36,8 @@ It wraps your `ImageProvider`, measures the rendered box for the oversize audit,
 
 ## What You Can Do
 
-- **See every image load, live** — thumbnail, source URL, load time, decoded dimensions, status. Tap for the full detail view.
-- **Get cache verdicts per load** — memory, disk, or network.
+- **Inspect captured image loads** — thumbnail, source URL, load time, decoded dimensions, status. Tap for the full detail view.
+- **Inspect available cache information** — verdicts depend on the ImageProvider. A provider without disk-cache reporting cannot establish a disk-cache hit.
 - **Catch oversized sources** — decoded pixels compared against the laid-out size × device pixel ratio, Lighthouse-style, with the estimated wasted decoded memory and the exact dimensions you should serve instead.
 - **Catch upscaled (blurry) sources too** — a tiny thumbnail stretched into a large box gets flagged the other way.
 - **Track decoded memory** — estimated decoded-bitmap bytes per image and totaled, so you catch ballooning before the OOM crash.
@@ -57,7 +58,7 @@ Buoy's own UI is excluded from capture — the tool never appears in its own reg
 
 ## Desktop & AI
 
-The same live registry streams to [Buoy Desktop](../desktop) — the full tool (list, detail, simulations, mass actions) on a big screen. And with the [MCP server](../../mcp), an agent can list every load with `get_images`, reload or retry with `image_action`, and flip failure simulations with `set_image_simulation`.
+The same live registry streams to [Buoy Desktop](../../desktop) — the full tool (list, detail, simulations, mass actions) on a big screen. And with the [MCP server](../../mcp), an agent can list every load with `get_images`, reload or retry with `image_action`, and flip failure simulations with `set_image_simulation`.
 
 ---
 

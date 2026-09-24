@@ -1,34 +1,33 @@
 # @buoy-gg/bottom-sheet
 
-A high-performance, fully customizable bottom sheet / modal component for React Native. Features both bottom sheet and floating window modes with smooth 60 FPS animations powered by the native driver.
+A React Native component with bottom-sheet and floating-window modes, configurable headers and footers, and drag-to-resize gestures.
 
 ## Features
 
-- 🚀 **60 FPS Performance** - Uses native driver for all animations
 - 📱 **Dual Modes** - Bottom sheet and floating window modes
 - 🎨 **Fully Customizable** - Custom headers, themes, and styles
 - ✋ **Touch Gestures** - Drag to resize, double-tap to toggle mode, triple-tap to close
 - 🔄 **Smooth Transitions** - Spring-based animations for natural feel
 - 📐 **Smart Boundaries** - Respects safe areas and screen boundaries
-- 💾 **Zero Dependencies** - Self-contained with built-in safe area detection
+- **Dependencies** - Requires React and React Native and uses Buoy’s shared UI package
 - 🎯 **TypeScript** - Full type safety and IntelliSense support
 
 ## Installation
 
 ```bash
-npm install @buoy/bottom-sheet
+npm install @buoy-gg/bottom-sheet
 # or
-yarn add @buoy/bottom-sheet
+yarn add @buoy-gg/bottom-sheet
 # or
-pnpm add @buoy/bottom-sheet
+pnpm add @buoy-gg/bottom-sheet
 ```
 
 ## Basic Usage
 
-```typescript
+```tsx
 import React, { useState } from 'react';
 import { View, Text, Button } from 'react-native';
-import { BottomSheet } from '@buoy/bottom-sheet';
+import { BottomSheet } from '@buoy-gg/bottom-sheet';
 
 function MyComponent() {
   const [visible, setVisible] = useState(false);
@@ -54,11 +53,15 @@ function MyComponent() {
 }
 ```
 
+Open the sheet, drag its header, switch modes, and close it to check the basic integration.
+
 ## Advanced Usage
+
+These snippets reuse `visible`, its setter, and your own content or save handler from the surrounding component.
 
 ### Custom Theme
 
-```typescript
+```tsx
 <BottomSheet
   visible={visible}
   onClose={() => setVisible(false)}
@@ -76,7 +79,7 @@ function MyComponent() {
 
 ### With Footer
 
-```typescript
+```tsx
 <BottomSheet
   visible={visible}
   onClose={() => setVisible(false)}
@@ -93,7 +96,7 @@ function MyComponent() {
 
 ### Custom Header
 
-```typescript
+```tsx
 <BottomSheet
   visible={visible}
   onClose={() => setVisible(false)}
@@ -113,7 +116,7 @@ function MyComponent() {
 
 ### Floating Window Mode
 
-```typescript
+```tsx
 <BottomSheet
   visible={visible}
   onClose={() => setVisible(false)}
@@ -126,7 +129,7 @@ function MyComponent() {
 
 ### Height Control
 
-```typescript
+```tsx
 <BottomSheet
   visible={visible}
   onClose={() => setVisible(false)}
@@ -180,25 +183,19 @@ function MyComponent() {
 
 ## Performance
 
-This component is optimized for 60 FPS performance:
-
-- All animations use `useNativeDriver: true`
-- Transform-based positioning instead of layout changes
-- Interpolation for calculations on the native thread
-- Minimal JavaScript thread work during gestures
-- No state updates during drag operations
+The component uses React Native animations and gestures. Actual frame rate depends on device load, sheet contents, and your app. Profile dragging and resizing with representative content.
 
 ## TypeScript
 
 Full TypeScript support with exported types:
 
-```typescript
+```tsx
 import {
   BottomSheet,
   BottomSheetProps,
   BottomSheetMode,
   BottomSheetHeaderConfig
-} from '@buoy/bottom-sheet';
+} from '@buoy-gg/bottom-sheet';
 ```
 
 ## License

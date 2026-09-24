@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/console",
-  "version": "7.0.36",
-  "description": "Chrome DevTools-style console for React Native — captures every console.* on device, even in release builds. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Inspect captured JavaScript console messages in React Native. Capture and release-build support depend on setup and plan.",
   "homepage": "https://buoy.gg/tools/console",
   "keywords": [
     "react-native",

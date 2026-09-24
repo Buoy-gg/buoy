@@ -9,9 +9,7 @@ TV is React Native — the same packages, the same install. What changes is the 
 no touch, so Buoy mounts **headless** and renders nothing on the screen, and
 [Buoy Desktop](../desktop) becomes the whole interface.
 
-This is a **beta**. Everything in these pages is device-verified on an Apple TV 4K simulator and an
-Android TV emulator, from both an Expo TV app and a bare React Native TV app. Anything not listed
-here has not been verified on TV yet — see [Known limits](#known-limits).
+TV support is in beta. The documented target set includes Apple TV simulators and Android TV emulators. Check [Known limits](#known-limits) and test your app on its actual target hardware; these pages are not a test record for every device and build.
 
 **Two ways to reach your running TV app:**
 
@@ -24,16 +22,7 @@ There is no third way on TV: the in-app floating menu is deliberately absent.
 
 ## Why there is no floating menu on TV
 
-A bubble you cannot touch is useless — but rendering nothing is also the *correct* call, not merely
-the easy one.
-
-On Android TV, **any focusable view inside an overlay becomes a D-pad stop in the host app's focus
-order.** `pointerEvents="box-none"` gates *touch* and does nothing for the focus engine, so an
-on-device Buoy overlay would inject invisible focus stops into the very navigation it is supposed
-to be testing. A debugging tool that changes what it measures is worse than no tool.
-
-Buoy's inertness on TV was measured, not assumed: an identical press sequence produces an identical
-focus order with the tools attached and with them removed.
+TV uses D-pad navigation. A focusable debug overlay can enter that focus order and affect the behavior under test. Mount Buoy headless to keep its controls on Desktop and leave the app screen available for inspection.
 
 ## The two TV tools
 
@@ -44,8 +33,7 @@ These exist *because* of TV. Both are desktop surfaces — the packages you inst
 | [TV Remote](../tools/tv-remote) | `@buoy-gg/tv-remote` | Press the D-pad, Select, Menu, holds, media keys and typed text from Buoy Desktop; record a macro and replay it with per-step confirmation. |
 | [Focus Inspector](../tools/focus-inspector) | `@buoy-gg/focus-inspector` | Every focus move with its direction, the full focusable inventory, and flags for focus that gets **stuck**, **vanishes**, or is **never reached**. |
 
-TV bugs are the ones nobody can describe. "It gets stuck down there." "The highlight just
-disappears." "You can see that button, but you can't get to it." Both tools turn that into a record.
+Use the remote event history and focus transitions together to record the sequence leading to a focus problem.
 
 ### Presses come from your Mac, not from inside the app
 
@@ -55,11 +43,7 @@ physical remote drives. The installed package only **observes** — it reports w
 actually received, which is what tells "the app handled that press" apart from "something swallowed
 it."
 
-Nothing is synthesized in-process, deliberately. On tvOS an app can fire the JS key event without
-moving focus, or move focus without firing the event — each is half a press, and the missing half
-is the half QA cares about. On Android, directional focus for unconsumed D-pad keys is resolved
-above the Activity, so an in-process dispatch would fire JS events **without moving focus** on
-exactly the screens that are broken.
+The app package observes input events; host tools inject supported presses. A JavaScript handler call alone does not reproduce the platform focus-navigation path.
 
 ### What works where
 
@@ -76,8 +60,7 @@ built from the app's own event stream, and replay runs against emulators and sim
 
 ## The rest of the suite
 
-None of these needed TV-specific code — they are the same tools the phone examples use, verified on
-both TV platforms:
+None of these needed TV-specific code — they are the same tools the phone examples use, available for inspection through the corresponding installed packages:
 
 [Network](../tools/network) · [Storage](../tools/storage) · [Console](../tools/console) ·
 [Env](../tools/env) · [Routes](../tools/routes) · [Events](../tools/events) ·

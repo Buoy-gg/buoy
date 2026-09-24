@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/impersonate",
-  "version": "7.0.36",
-  "description": "Test your React Native app as any user, role, or flag combo — without logging out or rebuilding. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Configure impersonation headers for supported app requests. Your backend must authenticate and authorize user changes.",
   "homepage": "https://buoy.gg/tools/impersonate",
   "keywords": [
     "react-native",

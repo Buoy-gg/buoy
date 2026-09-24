@@ -5,12 +5,12 @@ id: flutter
 description: "Buoy for Flutter — overview, quick start, and installation. Same three Getting Started pages as React Native."
 ---
 
-Buoy for Flutter docs now mirror the React Native Getting Started flow.
+Buoy for Flutter provides in-app inspection tools for debug builds, with optional Desktop and MCP connections. Flutter support is in beta.
 
 ## Getting Started
 
 - [Overview](./flutter/overview) — what Buoy is and who it's for
-- [Quick Start](./flutter/quick-start) — floating menu in under 2 minutes
+- [Quick Start](./flutter/quick-start) — install and open the floating menu
 - [Installation](./flutter/installation) — packages, devices, license, Desktop & MCP
 
 ## Fundamentals
@@ -20,6 +20,8 @@ Buoy for Flutter docs now mirror the React Native Getting Started flow.
 
 ## Tools
 
-Eleven Flutter packages ship today — see [Network](./flutter/tools/network) or pick any tool from the sidebar under **Available Tools**.
+<!-- ::flutter-tools-table -->
+
+Select a tool from the table or the sidebar for its setup and supported features.
 
 The [Camera](./flutter/tools/camera) is in that list too and has no package: it gives the iOS Simulator a working camera from Buoy Desktop, so `camera`-plugin screens run without a physical device.

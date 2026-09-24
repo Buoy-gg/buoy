@@ -5,18 +5,70 @@ id: quick-start
 description: "Get React Buoy's floating in-app devtools menu running in your React Native or Expo app in minutes, then reach the same tools from desktop or an AI agent."
 ---
 
-Get the in-app menu running in under 2 minutes — then reach the same tools from your desktop or your AI agent.
+Install Buoy in a React Native or Expo app, then open Network Monitor and inspect a request your app made.
 
-## 1. Install the core
+## Before you start
 
-<!-- ::pm npm="npm install @buoy-gg/core" yarn="yarn add @buoy-gg/core" pnpm="pnpm add @buoy-gg/core" bun="bun add @buoy-gg/core" -->
+- A React Native app on 0.70 or newer, or an Expo app, with React 18 or newer.
+- A debug build. Core and Network are JavaScript only, so Expo Go works.
+- A Buoy account. Step 1 creates a free one if you don't have one yet.
 
-## 2. Add to your app
+## Let your agent do it
 
-Drop `FloatingDevTools` at the root of your app:
+Claude Code, Cursor and Codex can do the whole install. Copy the prompt, paste it into your agent and review its changes. Then do the check in step 3.
+
+<!-- ::agent-install where="docs-quick-start" -->
+
+To install by hand, follow the steps below.
+
+## 1. Install
+
+Install the core menu and Network Monitor from your app's directory:
+
+<!-- ::pm npm="npm install @buoy-gg/core @buoy-gg/network" yarn="yarn add @buoy-gg/core @buoy-gg/network" pnpm="pnpm add @buoy-gg/core @buoy-gg/network" bun="bun add @buoy-gg/core @buoy-gg/network" -->
+
+Then sign in to your Buoy account:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+The command opens your browser, writes your key to an env file and adds that file to `.gitignore`. In Expo, a free key goes to `.env.development.local` as `EXPO_PUBLIC_BUOY_KEY`. That file is only read in development, so the key never ends up in a release build. A paid key goes to `.env.local`. React Native CLI apps get `BUOY_KEY` in `.env.local`. [Installation](./installation#get-your-key) has the details.
+
+## 2. Mount the menu
+
+Pick your setup. In all three, keep `FloatingDevTools` inside the same providers as your screens, so tools such as React Query can reach them.
+
+<!-- ::start:tabs -->
+
+#### Expo Router
+
+Add Buoy to your root layout, `app/_layout.tsx` (or `src/app/_layout.tsx`). This example uses a Stack. Keep whichever navigator you already have.
 
 ```tsx
-import { FloatingDevTools } from "@buoy-gg/core";
+import { Stack } from "expo-router";
+import { Buoy, FloatingDevTools } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+
+export default function RootLayout() {
+  return (
+    <>
+      <Stack />
+      <FloatingDevTools />
+    </>
+  );
+}
+```
+
+#### Expo
+
+Render `FloatingDevTools` next to your existing `App` content, inside any providers.
+
+```tsx
+import { Buoy, FloatingDevTools } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
 
 export default function App() {
   return (
@@ -28,165 +80,79 @@ export default function App() {
 }
 ```
 
-A floating button appears in the corner of your app. Tap it to open the menu.
+#### React Native CLI
 
-Every tool works with no key at all, capped at about five entries each — enough
-to see what they do. A free key raises that to 25 per tool and includes Pro free
-every weekend; Pro unlocks everything: production builds, the MCP server, Ask Buoy, and
-unlimited capture. See [pricing](https://buoy.gg/pricing).
-
-Grab your key — free or paid, same command:
-
-```bash
-npx buoy login
-```
-
-> Run this from a project where `@buoy-gg/core` is installed — `npx` resolves
-> the command from your own `node_modules`. If npx tries to download something
-> instead (there is an unrelated `buoy` package on npm), name the package
-> explicitly:
->
-> ```bash
-> npx --package=@buoy-gg/core buoy login
-> ```
-
-It signs you in, writes the key to `.env.local`, and gitignores it. Then:
+Mount the menu in your root component. React Native doesn't load `.env.local` into `process.env` by itself, so pass `BUOY_KEY` in through the environment setup your app already uses.
 
 ```tsx
-Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
-```
+import { Buoy, FloatingDevTools } from "@buoy-gg/core";
 
-See [Installation](./installation#get-your-key) for the details.
-
-## 3. Add tools
-
-Install any tool package — it automatically appears in the menu. No wiring, no config.
-
-<!-- ::pm npm="npm install @buoy-gg/network" yarn="yarn add @buoy-gg/network" pnpm="pnpm add @buoy-gg/network" bun="bun add @buoy-gg/network" -->
-
-That's it. Open the menu, tap Network, and you're watching every API call in real-time.
-
-### Zustand stores
-
-If you use Zustand, pass your stores directly via `zustandStores`:
-
-```tsx
-import { FloatingDevTools } from "@buoy-gg/core";
-import { useAuthStore } from "./stores/auth";
-import { useCartStore } from "./stores/cart";
-
-const stores = {
-  authStore: useAuthStore,
-  cartStore: useCartStore,
-};
-
-return (
-  <FloatingDevTools zustandStores={stores} />
-);
-```
-
-### Jotai atoms
-
-If you use Jotai, call `watchAtoms` once at module scope with your store and a named map of atoms:
-
-```tsx
-import { getDefaultStore } from "jotai";
-import { watchAtoms } from "@buoy-gg/jotai";
-import { authAtom } from "./atoms/auth";
-import { cartAtom } from "./atoms/cart";
-
-watchAtoms(getDefaultStore(), {
-  authAtom,
-  cartAtom,
-});
-```
-
-No wrappers, no middleware. Registered atoms automatically appear in the Jotai tool inside your FloatingDevTools menu.
-
-## Available tools
-
-<!-- ::tools-table -->
-
-Install what you need. Skip what you don't.
-
-## Control who sees devtools
-
-Only show devtools to specific users — admins, QA, internal team members, or whoever your business needs:
-
-```tsx
-import { FloatingDevTools } from "@buoy-gg/core";
+// Read BUOY_KEY with the env loader your app already uses.
+Buoy.init({ licenseKey: yourConfiguredKey });
 
 export default function App() {
-  const { user } = useAuth();
-
-  // Only render for internal users, admins, or QA
-  const showDevTools =
-    user?.role === "admin" ||
-    user?.role === "qa" ||
-    user?.email?.endsWith("@yourcompany.com");
-
   return (
     <>
       <YourApp />
-      {showDevTools && (
-        <FloatingDevTools
-          licenseKey="YOUR_LICENSE_KEY"
-          userRole={user?.role}
-        />
-      )}
+      <FloatingDevTools />
     </>
   );
 }
 ```
 
-Or keep it available for everyone — your QA and support teams will thank you.
+<!-- ::end:tabs -->
 
-## Take it further
-
-The tools you just installed aren't only in the floating menu — reach the same live app three more ways:
-
-- **[Buoy Desktop](./desktop)** — mirror every tool to a full dashboard on macOS, Windows, or Linux, with a live performance HUD and multi-device switching.
-- **[Ask Buoy](./tools/ask-buoy)** *(beta)* — an in-app chat that drives every tool you just installed, so QA, support and product can trigger states and read app data without touching a tool or a ticket. Point it at your own model endpoint; Buoy never holds a key.
-- **[AI / MCP Server](./mcp)** — let Claude Code, Cursor, or any MCP editor inspect and control your running app. One command to wire it up:
+Restart the dev server so Metro picks up the new packages. In Expo:
 
 ```bash
-npx -y @buoy-gg/mcp@latest init
+npx expo start --clear
 ```
 
-Buoy Desktop is free to use; the MCP server and Ask Buoy are Pro features. Desktop and MCP talk to your app through one extra package — `npm install @buoy-gg/external-sync` in the app and restart Metro with `--clear` — and from there the connection is automatic, with no URLs to configure (physical devices included). Ask Buoy needs no broker at all: it runs on the device and talks only to the endpoint you give it.
+Open the app and tap the floating button. If Buoy asks you to set up an account, check that your key reached `Buoy.init`.
 
-## What's next
+## 3. See your first request
 
-- [FloatingDevTools](./floating-devtools) — Core component reference
-- [Buoy Desktop](./desktop) — The full desktop dashboard
-- [Ask Buoy](./tools/ask-buoy) — Drive every tool from an in-app chat
-- [AI / MCP Server](./mcp) — Drive your app from your AI editor
-- [Custom Tools](./custom-tools) — Build your own debugging tools
+Open **Network**, go back to your app and do something that makes an HTTP request, such as refreshing a list. Open Network again and select the request. You should see its URL, status, timing and response body.
 
----
+If the list is empty, make sure the action sent a new request and didn't read cached data. [Network Monitor](./tools/network) lists the supported capture paths and overrides.
+
+## 4. Add more tools
+
+Each tool is its own package. Install the ones you want and restart the dev server, and Buoy adds them to the menu. [Installation](./installation#available-packages) lists every package.
+
+A few tools need to be pointed at your app's data:
+
+- **Zustand:** pass the stores you want to inspect through `zustandStores`. See the [Zustand setup](./tools/zustand).
+- **Jotai:** register named atoms with `watchAtoms`, using your app's own store if it has a custom provider. See the [Jotai setup](./tools/jotai).
+
+## Control who sees devtools
+
+Render `FloatingDevTools` only for the users who should inspect your app. Use your app's existing authorization checks for internal users, QA, or support. A Buoy account key controls Buoy access; your app decides which users can reach the menu.
+
+Start in development. Before enabling access in a shipped app, review the [component reference](./floating-devtools) and your plan's production restrictions.
+
+## Next steps
+
+- [Buoy Desktop](./desktop): see your connected apps in a desktop dashboard. Desktop is free to use. React Native apps need `@buoy-gg/external-sync` to connect.
+- [AI / MCP Server](./mcp): let Claude Code, Cursor or Codex inspect and control the running app. Requires Pro.
+- [Ask Buoy](./tools/ask-buoy): an in-app assistant that runs on the model endpoint you configure. Requires Pro.
+- [Custom Tools](./custom-tools): add a tool that's specific to your app.
+- [FloatingDevTools](./floating-devtools): component options and access controls.
 
 ## FAQ
 
 ### Do I need a license key to use React Buoy?
 
-No — every tool works without one, capped at about five entries each. A free key
-raises that to 25 per tool and includes Pro free every weekend. Pro unlocks
-everything: production builds, the MCP server, Ask Buoy, and unlimited capture.
-
-The fastest way to get either is `npx buoy login`. A free key needs no card and
-takes about thirty seconds.
+Use a Free or Pro Buoy account key for this setup. Run `npx --package=@buoy-gg/core buoy login` from your app's directory. Plan limits and paid features are listed on [pricing](https://buoy.gg/pricing).
 
 ### Does Buoy phone home?
 
-Once a day, in development only, it sends a random install id, the Buoy version,
-your platform, and your license tier. Never your project, your app, or anything
-from the tools — that data never leaves your machine. Turn it off with
-`Buoy.init({ telemetry: false })`. Full details: [Telemetry](./telemetry).
+Buoy makes account and license requests. Development telemetry is described in [Telemetry](./telemetry); disable that telemetry with `Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY, telemetry: false })`. Disabling telemetry does not disable account validation or connections you configure for Desktop, MCP, or Ask Buoy.
 
 ### How do I add a tool to the menu?
 
-Install the package. Auto-discovery finds it and the tool appears in the floating menu with no wiring and no config — `npm install @buoy-gg/network`, open the menu, tap Network.
+Install its package and restart the development server. Check that tool's setup page for required integration, such as registering stores or placing the menu inside a provider.
 
 ### Will the devtools ship to my users?
 
-The menu only renders where you mount `FloatingDevTools`, and desktop sync is off whenever `__DEV__` is false unless you opt in explicitly with a Pro license — so a shipped app never dials a broker on a customer's phone.
+The menu renders where you mount `FloatingDevTools`. Control access in your app. Desktop sync is disabled by default outside development; production sync requires explicit configuration and a Pro license. See [FloatingDevTools](./floating-devtools).

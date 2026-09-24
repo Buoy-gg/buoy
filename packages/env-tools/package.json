@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/env",
-  "version": "7.0.36",
-  "description": "Environment variable devtool for React Native — auto-discovers EXPO_PUBLIC_ vars, validates types, scores config health. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Environment variable inspector for React Native with runtime-visible values, required-variable checks, and type validation.",
   "homepage": "https://buoy.gg/tools/env",
   "keywords": [
     "react-native",

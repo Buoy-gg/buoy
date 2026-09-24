@@ -5,7 +5,7 @@ id: custom-tools
 description: "Extend React Buoy with your own debugging tools — register any React component in your React Native app's floating devtools menu in just a few lines."
 ---
 
-React Buoy is fully extensible. You can add any React component as a custom debugging tool.
+Register a React component through `FloatingDevTools.apps` to add an app-specific tool. Start with the counter below, then connect the component to your own state.
 
 ## The component toolkit
 
@@ -20,18 +20,18 @@ the pieces your tool needs, then import them straight from `@buoy-gg/core`.
 ## Basic Custom Tool
 
 ```tsx
+import { useState } from "react";
 import { FloatingDevTools } from "@buoy-gg/core";
 import { View, Text, Button } from "react-native";
 
-const CacheDebugger = () => {
-  const clearCache = () => {
-    // Your cache clearing logic
-  };
+const CounterDebugger = () => {
+  const [count, setCount] = useState(0);
 
   return (
     <View>
-      <Text>Cache Status: 42 items</Text>
-      <Button title="Clear Cache" onPress={clearCache} />
+      <Text>Count: {count}</Text>
+      <Button title="Increment" onPress={() => setCount(value => value + 1)} />
+      <Button title="Reset" onPress={() => setCount(0)} />
     </View>
   );
 };
@@ -42,9 +42,9 @@ function App() {
       environment="local"
       apps={[
         {
-          id: "cache",
-          name: "Cache",
-          component: CacheDebugger,
+          id: "counter",
+          name: "Counter",
+          component: CounterDebugger,
           icon: "🗑️",
         },
       ]}
@@ -52,6 +52,8 @@ function App() {
   );
 }
 ```
+
+Open Counter, tap Increment, then Reset. The value should return to zero. Keep your existing account setup from [Quick Start](./quick-start). Later snippets use app-owned components and stores as integration examples.
 
 ## Custom Tool Schema
 
@@ -118,7 +120,7 @@ interface InstalledApp {
 
 ## Accessing App State
 
-Your custom tools can use any React hooks or context:
+Mount the menu inside the providers your tool reads. The example below assumes your app defines `useAuth`, uses QueryClientProvider, and imports View, Text, and Button from react-native:
 
 ```tsx
 import { useAuth } from "./hooks/useAuth";
@@ -166,7 +168,7 @@ apps={[
 ]}
 ```
 
-Your tool is registered under `custom:<id>`, a namespace first-party tools can never shadow.
+The sync namespace is `custom:<id>`. Validate action parameters at the adapter boundary and notify subscribers after writes. The example assumes `flagStore` implements the shown methods; only serialize data the connected client should read.
 
 ### And by Ask Buoy
 

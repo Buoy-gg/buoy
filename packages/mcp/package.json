@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/mcp",
-  "version": "7.0.36",
-  "description": "MCP server for Buoy devtools — lets any LLM copilot drive Buoy tools (perf-monitor benchmarks, etc.) over the devtool sync protocol",
+  "version": "7.0.40",
+  "description": "MCP server exposing supported Buoy inspection and action tools through the device sync protocol. Tool access requires account and Pro setup.",
   "homepage": "https://buoy.gg",
   "keywords": [
     "react-native",

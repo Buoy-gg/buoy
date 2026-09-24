@@ -5,130 +5,53 @@ id: overview
 description: "Meet React Buoy, the in-app devtools platform for React Native — debug network, state, storage, and performance from your phone, desktop, or AI agent."
 ---
 
-Buoy is a complete devtools platform for React Native. It turns **hours into seconds** for developers, QA, and product teams on tasks like regression testing, bug reproduction, performance work, and environment validation.
+Buoy puts devtools inside your React Native app. Inspect requests, storage, state and performance on the phone, in Buoy Desktop or from your coding agent.
 
-**One devtools engine, four ways to reach your running app:**
+## Start here
 
-- **On your phone** — a zero-config floating menu inside your app, in dev, staging, and production.
-- **On your desktop** — Buoy Desktop, a free dashboard for macOS, Windows & Linux that mirrors your tools with a live performance HUD.
-- **Through your AI** — the [MCP server](./mcp) lets Claude Code, Cursor, or any MCP editor inspect and control your live app (Pro).
-- **In plain English, inside the app** — [Ask Buoy](./tools/ask-buoy), a chat that drives every tool for the people on your team who don't read code (Pro, beta). Your model endpoint, not ours.
+The quickest way in is to let your coding agent install it:
 
-Install once. Reach every tool from wherever you work.
+<!-- ::agent-install where="docs-overview" -->
 
-## Who It's For
+To install by hand, follow the [Quick Start](./quick-start). It goes from install to your first captured request.
 
-<!-- ::start:Audience-Grid -->
+## Where it runs
 
-<!-- ::start:Audience title="Developers" tagline="Stop guessing. See exactly what's happening." -->
-- **Storage event history** — Watch data changes in real-time. Step forward and backward through events.
-- **Network inspector** — Every request, response, header, and error. No more console.log debugging.
-- **Reproduce anything** — Open the tools, see the exact state, and reproduce bugs locally in seconds.
+- **In your app.** A floating button opens the tools over your app, so QA and support can use them on the device that hit the bug. See [FloatingDevTools](./floating-devtools).
+- **On your desktop.** [Buoy Desktop](./desktop) shows every connected app in one window. It's free with a Buoy account.
+- **In your coding agent.** The [MCP server](./mcp) lets Claude Code, Cursor or Codex read and control the running app. Requires Pro.
+- **In a chat inside the app.** [Ask Buoy](./tools/ask-buoy) (beta) drives the other tools in plain English, on the model endpoint you configure. Requires Pro.
 
-*"Before: Bug report → Ask for details → Add console.logs → Rebuild → Try to reproduce → Guess at state → Repeat"*
+## Pick your framework
 
-*"After: Bug report → Open Buoy → See exact state → Fix"*
-<!-- ::end:Audience -->
+- **[React Native and Expo](./quick-start)** has the full tool set.
+- **[Flutter](./flutter/overview)** is in beta. It runs in debug builds only, and tool coverage differs from React Native.
+- **[TV](./tv/overview)** is in beta for Apple TV and Android TV. Nothing renders on the TV screen; the desktop dashboard is the interface.
 
-<!-- ::start:Audience title="QA" tagline="Test things that were previously untestable." -->
-- **Trigger any state** — Loading states, error states, empty states, edge cases. Now you can test them all.
-- **Edit data live** — Change values in seconds. No more waiting for database changes.
-- **Validate everything** — Storage validators flag missing keys, wrong types, and invalid values instantly.
-- **Real regression testing** — Test the app AND the API. Stale data, race conditions, permission edge cases.
+## What you can do
 
-*"Before: Need edge case → Ask dev to update DB → Wait 30+ min → Test → Need another change → Wait again → Repeat"*
+- **Inspect** requests, storage, React Query, Redux, Zustand and Jotai state, navigation, console output, image loads and re-renders.
+- **Change** the running app: edit storage, refetch queries, dispatch actions, restore a [Time Machine](./tools/time-machine) snapshot, or switch to a test user through [Impersonate](./tools/impersonate).
+- **Measure** FPS, CPU, memory and JavaScript thread time with [Bench](./tools/perf-monitor) and [JS Top](./tools/js-top).
 
-*"After: Need edge case → Edit value in Buoy → Test → Edit again → Test again → Done in seconds"*
-<!-- ::end:Audience -->
+Every tool is its own package, so you only install what you use. [Installation](./installation#available-packages) lists them all.
 
-<!-- ::start:Audience title="Customer Support" tagline="See exactly what your users see." -->
-- **Impersonation tools** — Sync as a user and see their exact state. No more "works on my machine."
-- **Copy debug data** — Grab storage state, network logs, and environment info for bug reports.
-- **Instant answers** — Is the data wrong or is it a refresh issue? Check storage. Is the API failing? Check network.
+Some tools need app integration. Impersonation needs your backend to authorize the selected user, and state tools need access to the stores you want to inspect. Buoy doesn't bypass your app's authentication.
 
-*"Before: Customer reports issue → Ask for screenshots → Ask for more info → Escalate to dev → Dev can't reproduce → Back and forth for days"*
+## For AI agents
 
-*"After: Customer reports issue → Impersonate user → See exact state → Copy debug data → Dev reproduces instantly"*
-<!-- ::end:Audience -->
+- [buoy.gg/install.md](https://buoy.gg/install.md) holds the install instructions the prompt points to.
+- [llms.txt](https://buoy.gg/llms.txt) indexes the docs, and [llms-full.txt](https://buoy.gg/llms-full.txt) has every page in one file.
+- Add `.md` to any docs URL to get the page as Markdown.
+- The [MCP server](./mcp) gives your agent tools to call against the running app.
 
-<!-- ::start:Audience title="Product & Everyone Else" tagline="Remove the friction that slows everyone down." -->
-- **Feature flags in seconds** — No more asking someone to enable a feature on your account.
-- **Skip the login dance** — Need to test as admin? As a new user? As a banned user? Just set it.
-- **Jump to any route** — Go directly to the screen you need. Validate auth checks and permissions.
+## Build your own tools
 
-*"Before: Need feature flag → Slack dev → Wait → Need admin role → Slack another dev → Wait → Log out → Log in → Navigate to screen"*
+Register any React component as a [custom tool](./custom-tools), such as a feature-flag panel or an order-state switcher. It appears in the same menu as the built-in tools.
 
-*"After: Open Buoy → Toggle flag → Set role → Jump to route → Done"*
-<!-- ::end:Audience -->
+## Next steps
 
-<!-- ::end:Audience-Grid -->
-
----
-
-This isn't a "nice to have." It's the difference between hours of debugging and coordination versus seconds. The time savings compound across your entire team.
-
-## What You Get
-
-| Tool | What It Does |
-|------|--------------|
-| **Ask Buoy** *(beta)* | An in-app AI chat that drives every other tool in plain English — on your own model endpoint, with a visible changes bar and real undo |
-| **Network** | See every API call — request, response, timing, errors |
-| **Storage** | Browse and edit AsyncStorage & MMKV in real-time |
-| **Environment** | Validate env vars with type checking and required field validation |
-| **Console** | A Chrome-DevTools-style console for every `console.*` log on the device |
-| **Sentry** | Every envelope your app sends to Sentry, what it costs in billing units, and why an event never arrived |
-| **Bench** | Benchmark FPS, CPU, memory & jank — record runs and compare them |
-| **JS Top** | Live Task Manager for the JS thread — see which timers, Promises & callbacks eat your JS FPS |
-| **Images** | Every image load with cache verdict, timing, oversize audit & failure diagnosis |
-| **Assets** | Everything you ship — bundled asset inventory with sizes, duplicates & never-loaded detection |
-| **Time Machine** | Snapshot storage, Redux, Zustand, Jotai & the query cache as restore points — jump back in one tap |
-| **React Query** | Inspect query cache, trigger refetches, simulate offline mode |
-| **Redux DevTools** | Inspect Redux state, actions, and time-travel debugging |
-| **Zustand DevTools** | Monitor Zustand store state, diffs, and changes in real-time |
-| **Jotai DevTools** | Inspect Jotai atom state, live values, diffs, and history |
-| **Route Events** | Track navigation changes and browse your route structure |
-| **Events Timeline** | Unified timeline across all tools with LLM-ready export |
-| **Render Highlighter** | Spot unnecessary re-renders as they happen |
-| **Impersonate** | Switch user role or impersonate any user to debug their exact state |
-| **TV Remote** | Drive an Apple TV / Android TV D-pad from the desktop, and replay recorded navigation macros |
-| **Focus Inspector** | Track D-pad focus on Apple TV / Android TV and flag focus that sticks, vanishes, or is never reached |
-| **Camera** | Give the iOS Simulator a real camera — your Mac screen, webcam, an image, or a video, in any simulator app |
-| **Image Overlay** | Overlay design mockups on your app for pixel-perfect comparison |
-
-## Why Buoy
-
-- **Zero config** — Install a package, it appears in the menu. No wiring.
-- **Four ways in** — The same tools on your phone, on your desktop, through your AI agent, and in the app's own chat.
-- **Works everywhere** — Dev, staging, production. Same tools for everyone.
-- **Modular** — Only install what you need. Each tool is a separate package.
-- **Team-friendly** — Onboard new devs in minutes with consistent debugging.
-
-## Quick Start
-
-```tsx
-import { FloatingDevTools } from "@buoy-gg/core";
-
-export default function App() {
-  return (
-    <>
-      <YourApp />
-      <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
-    </>
-  );
-}
-```
-
-Install any tool package and it automatically appears in the menu. No configuration needed. Get your license key at [buoy.gg/pricing](https://buoy.gg/pricing).
-
-## Build Your Own Tools
-
-Need something specific to your app? Drop in any React component as a custom tool. Build internal debugging utilities, feature flag toggles, or team-specific inspectors that integrate seamlessly with the floating menu.
-
-## Next Steps
-
-- [Installation](./installation) — Add Buoy to your project
-- [Quick Start](./quick-start) — Full setup in 2 minutes
-- [AI / MCP Server](./mcp) — Let AI agents drive your running app
-- [Ask Buoy](./tools/ask-buoy) — Put the same power in the chat, for QA, support and product
-- [Custom Tools](./custom-tools) — Build your own debugging tools
-- [Tools Reference](./tools/network) — Detailed docs for each tool
+- [Quick Start](./quick-start): install Buoy and inspect your first request
+- [Installation](./installation): packages, account keys and troubleshooting
+- [AI / MCP Server](./mcp): connect your coding agent
+- [Custom Tools](./custom-tools): build a tool for your app

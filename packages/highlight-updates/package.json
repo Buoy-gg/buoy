@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/highlight-updates",
-  "version": "7.0.36",
-  "description": "Render highlighter for React Native — see every render with its cause: mount, state, props, or parent. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Highlight observed React Native renders and inspect available render diagnostics.",
   "homepage": "https://buoy.gg/tools/highlight-updates",
   "keywords": [
     "react-native",

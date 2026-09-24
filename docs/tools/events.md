@@ -7,9 +7,9 @@ description: "Watch network requests, storage writes, Redux actions, and React Q
 
 <!-- ::platform-badge platform="both" -->
 
-See every event across all your dev tools in one chronological timeline. Debug complex user flows by watching network requests, storage changes, Redux actions, and React Query events happen in real-time.
+Read supported events from installed and configured tools in one chronological timeline. Reproduce a problem, filter to the relevant sources, and open an event for its tool-specific details.
 
-Below is the real tool, running here in your browser on a mock session: a checkout streams in across six tools, `POST /v2/orders` comes back 402, the row opens the Network tool's own page, and the run becomes something you can paste into an AI.
+The demo shows a mock checkout session. Exports contain the filtered captured events, not a complete record of everything the app did.
 
 <!-- ::events-live-demo -->
 
@@ -17,7 +17,7 @@ Below is the real tool, running here in your browser on a mock session: a checko
 
 <!-- ::PM npm="npm install @buoy-gg/events" yarn="yarn add @buoy-gg/events" pnpm="pnpm add @buoy-gg/events" bun="bun add @buoy-gg/events" -->
 
-Events Timeline automatically captures from all installed BUOY tools. No additional setup required.
+Events Timeline subscribes to supported event sources. Complete each source tool's setup first, including stores, providers, and account configuration.
 
 ---
 
@@ -69,7 +69,7 @@ Related events are linked together. React Query fetch start → success events s
 
 ## What's Next
 
-- [Network Monitor](./network) — Deep dive into API requests
+- [Network Monitor](./network) — Inspect request details
 - [Redux DevTools](./redux) — State inspection and time-travel
 - [Storage Explorer](./storage) — Browse and edit persisted data
 
@@ -84,3 +84,7 @@ Open the Events timeline — the interleaved history of requests, state changes,
 ### What does "LLM-ready export" mean?
 
 The timeline exports in a compact structured format designed to paste into an AI assistant — so the model sees exactly what the app did, in order, with timestamps.
+
+## Web support (unreleased)
+
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

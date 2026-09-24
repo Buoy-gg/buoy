@@ -12,12 +12,11 @@ and long presses — and typed text — to a connected TV app from Buoy Desktop,
 pressed as a named macro, and replays that macro against one device, or every mapped device at
 once.
 
-It exists because TV navigation regressions are the ones nobody catches: a card that used to be
-reachable with three RIGHTs now needs four, a modal traps focus, a row silently swallows UP. A
-recorded macro replays that exact path and tells you, step by step, whether the app actually
-received each press.
+Record a short navigation sequence, replay it, and inspect each event result alongside the resulting focus and screen state. Receiving a key event does not prove that the app reached the intended screen.
 
 ## Installation
+
+Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, your account key, and a working Desktop connection. Then add this tool.
 
 <!-- ::PM npm="npm install @buoy-gg/tv-remote" yarn="yarn add @buoy-gg/tv-remote" pnpm="pnpm add @buoy-gg/tv-remote" bun="bun add @buoy-gg/tv-remote" -->
 
@@ -28,7 +27,7 @@ export default function App() {
   return (
     <>
       {/* your app */}
-      <FloatingDevTools headless />  {/* TV apps run headless — no bubble */}
+      <FloatingDevTools headless licenseKey={process.env.EXPO_PUBLIC_BUOY_KEY} />  {/* TV apps run headless — no bubble */}
     </>
   );
 }
@@ -86,7 +85,7 @@ be testing.
 | Swipe / pan (touch surface) | ❌ | ❌ | — |
 | Voice / Siri | ❌ | ❌ | — |
 
-Some limits are worth stating plainly rather than discovering later:
+Replay limits:
 
 - **No media transport keys on an Apple TV simulator.** `idb ui key` speaks the HID *keyboard*
   page, which has no usages for play/pause, rewind, fast-forward, next or previous, and
@@ -139,7 +138,7 @@ into devices you didn't ask it to touch.
 (`idb ui text` / `adb shell input text`). This is the practical stand-in for the Siri remote's
 dictation, and it saves pecking out a search query on a D-pad keyboard grid one letter at a time.
 
-One caveat, and it is a real one: text travels the platform's **keyboard** path, so it reaches the
+Typed text uses a different input path: text travels the platform's **keyboard** path, so it reaches the
 native text field without ever touching the app's TV event pipe. Verified: an app with capture
 armed reports nothing at all for injected text. A text step is therefore **fire-and-wait** — the
 tool can prove it was sent, not that it was received. (Menu and Home are fire-and-wait for the same
@@ -191,7 +190,7 @@ Every step reports one of:
 | Outcome | Means |
 |---|---|
 | **ok** | Injected, and the app reported receiving it (with the round-trip time). |
-| **no-echo** | Injected, but the app never saw it. Something above it swallowed the key — a native video player holding focus, a modal, or a wedged JS thread. This is a finding, not noise. |
+| **no-echo** | Injected, but no matching app event was observed in time. Check native focus, event capture, connection state, and a blocked JS thread. |
 | **skipped-unsupported** | This target has no way to send that key (play/pause on a tvOS simulator). |
 | **inject-failed** | The injector itself failed — target offline, adb unauthorized, idb missing. |
 
@@ -245,5 +244,9 @@ sees.
 
 ### Does this need a native module?
 
-No. `@buoy-gg/tv-remote` is pure JavaScript, like every Buoy package. The shelling out happens in
+No. `@buoy-gg/tv-remote` is JavaScript. Other Buoy tools may have native dependencies. The shelling out happens in
 the desktop app.
+
+## Web support (unreleased)
+
+Browser capture observes keyboard events without consuming them. It does not reproduce a TV’s native focus behavior. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

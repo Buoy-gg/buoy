@@ -1,9 +1,8 @@
 <div align="center">
 
-# 🛟 Buoy<img width="500" height="935" alt="preview" src="https://github.com/user-attachments/assets/319712ca-e2e0-445c-9309-99c2c9490616" />
+# 🛟 Buoy
 
-
-**Devtools that live in your app. And answer to your agent.**
+Developer tools inside your React Native app.
 
 [Docs](https://buoy.gg/buoy/latest/docs/overview) · [Quick Start](#-quick-start) · [Desktop](#%EF%B8%8F-buoy-desktop) · [MCP](#-your-agent-gets-hands) · [Pricing](https://buoy.gg/pricing)
 
@@ -12,94 +11,119 @@
 [![legacy downloads](https://img.shields.io/npm/dt/react-native-react-query-devtools?style=flat-square&labelColor=1c1c1c&color=10B981&label=legacy%20downloads)](https://www.npmjs.com/package/react-native-react-query-devtools)
 [![TypeScript](https://img.shields.io/badge/TypeScript-100%25-10B981?style=flat-square&labelColor=1c1c1c)](https://www.typescriptlang.org/)
 
-Buoy is a floating dev menu that ships inside your React Native app — every request, state change, render, and frame, live on the phone, on your desktop, and in Claude or Cursor.
+Inspect captured requests, app state, storage, and performance on your device. Connect supported tools to Desktop or an AI assistant. Start with a development build and a Free or Pro Buoy account.
 
-**Every tool is free. Pro unlocks production builds, MCP & unlimited capture.**
+[Flutter setup](https://buoy.gg/buoy/latest/docs/flutter/quick-start) is available separately for debug builds.
 
-**🎯 Now in beta: [Buoy for Flutter](https://github.com/Buoy-gg/Buoy-Flutter)** — `flutter pub add buoy`, wrap your app in one `BuoyDevTools` widget, and get the full suite: network, storage, console, env, routes, images, impersonate, image overlay, an events timeline, a Riverpod inspector, and a live perf HUD — all on the same desktop dashboard and MCP server. [Details →](https://buoy.gg/flutter)
-
-<img width="500" height="935" alt="preview" src="https://github.com/user-attachments/assets/620e7bd0-6578-4f60-9dc0-2d2606a6c249" />
+![Buoy demo — the floating dev menu in action](https://github.com/user-attachments/assets/a732d6a3-9963-49e3-b0f1-0d974a0a74d7)
 
 </div>
 
-- **One component, zero config** — drop in `<FloatingDevTools />` once; install any tool package and it appears in the menu on its own
-- **24 tools, every environment** — network, state, storage, renders, performance and more, in dev, staging, *and* production builds
-- **Your agent can drive it** — Claude or Cursor reads live state, taps real buttons, and benchmarks on a physical device over MCP
 
 ---
 
 ## ⚡ Quick Start
 
-```bash
-npm install @buoy-gg/core
+**Have a coding agent?** Paste this into Claude Code, Cursor or Codex. It reads your lockfile and
+`package.json`, installs the core plus only the tools that match your app, mounts the menu below
+your providers, wires your stores, and tells you what to check on the device. It follows
+[buoy.gg/install.md](https://buoy.gg/install.md) — read it first if you like.
+
+```text
+Install Buoy, the in-app devtools for React Native and Expo, in this project.
+
+Read the full instructions first:
+  curl -fsSL https://buoy.gg/install.md
+Read the raw text, not a summary. If curl is unavailable, use any HTTP tool you have. Ask me to paste the document only if nothing can fetch it.
+
+Do the install yourself: inspect the repo, run the commands, edit the files. Do not hand me steps you can run.
+
+Work out the routine decisions from the repo: package manager, which app to target, where the menu mounts, which Buoy tools match the dependencies already installed. If Buoy is already partly installed, repair and extend it; never add a second mount, provider, or package set.
+
+When instructions conflict, follow this order: what I say here, then the document's rules about which packages exist and what needs my permission, then this project's own constraints, then the rest of the document, then your judgment.
+
+Ask me before: adding a native dependency, opening a browser or creating an account, changing what a production build does beyond what the document specifies, or anything hard to undo. Do not commit.
+
+You are not done when the packages install. Run this project's existing typecheck; add no tooling. Then report what you installed and why, what you skipped and why, every file you changed, what you verified, and the exact steps I take on the device to confirm the menu appears and captures a request.
 ```
 
-```tsx
-import { FloatingDevTools } from "@buoy-gg/core";
+**By hand:**
 
-export default function App() {
+Install from your app’s directory, then sign in:
+
+```bash
+npm install @buoy-gg/core @buoy-gg/network
+npx --package=@buoy-gg/core buoy login
+```
+
+In an Expo Router project, keep your existing navigator and providers. For example:
+
+```tsx
+import { Stack } from "expo-router";
+import { Buoy, FloatingDevTools } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+
+export default function RootLayout() {
   return (
     <>
-      {/* Your app */}
+      <Stack />
       <FloatingDevTools />
     </>
   );
 }
 ```
 
-That's the whole setup. A floating dev menu appears inside your app.
+The login command writes the Expo key to `.env.local`. Keep the navigator and menu inside your existing providers. Without Expo Router, keep your app’s root content in place of `Stack`. For React Native CLI, load the key through your app’s environment configuration and pass it to `Buoy.init`; `.env.local` is not loaded automatically.
 
-> [!NOTE]
-> Install any tool package and it auto-appears in the menu. Most tools need zero config — a few take one line, like passing `zustandStores` or calling `watchAtoms()`. Every tool works without a key, at reduced capture. A **free key** (`npx buoy login`, no card) restores the full free tier; [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, Ask Buoy, and unlimited capture.
+Restart the development server after installation. Open Buoy, complete any account prompt, and select Network. Trigger a new HTTP request in your app and check its URL and status. If no request appears, check whether the app used cached data or an unsupported transport.
+
+See the [Quick Start](https://buoy.gg/buoy/latest/docs/quick-start) for the full setup and [Installation](https://buoy.gg/buoy/latest/docs/installation) for requirements. Other tools may need store registration, provider context, or native dependencies.
 
 ---
 
 ## 🛟 One live session. Four ways in.
 
-Every tool runs inside your app's process. The phone, the desktop, your agent and the in-app chat all see the same session, live.
+Inspect configured tools in the floating menu on your device. You can also connect them to:
 
-- **📱 On the phone** — tap the floating menu. Works on any device, no cable, no desktop app, no Metro.
-- **🖥️ On your desktop** — [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) mirrors the on-device tools to full-screen panels on macOS, Windows & Linux, with a live UI/JS FPS · CPU · memory HUD and remote control of the device.
-- **🤖 Through your agent** — the [Buoy MCP server](https://buoy.gg/buoy/latest/docs/mcp) gives Claude Code, Cursor, or any MCP editor structured tool calls into the running app.
-- **💬 In plain English** — [Ask Buoy](https://buoy.gg/buoy/latest/docs/tools/ask-buoy) *(beta)* puts an AI chat inside the app that drives the same tools for QA, support and product. Your model endpoint, your key; nothing goes through Buoy.
+- [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop), for desktop panels and remote actions. React Native apps need `@buoy-gg/external-sync`; follow the [connection guide](https://buoy.gg/buoy/latest/docs/desktop) and sign in to Desktop separately.
+- [MCP](https://buoy.gg/buoy/latest/docs/mcp), for an AI editor to inspect and act on the app. Configure both process and device accounts; data and action tools require Pro.
+- [Ask Buoy](https://buoy.gg/buoy/latest/docs/tools/ask-buoy), for an in-app assistant. It requires Pro, a model endpoint you configure, and the tool integrations its tasks depend on.
+
+Supported features vary by platform, build, and installed tools. [Flutter](https://buoy.gg/buoy/latest/docs/flutter/quick-start) has a separate debug-build setup.
 
 ---
 
-## 🧰 The 24 tools
+## 🧰 Tools
 
 | Tool | Package | What it does |
 | --- | --- | --- |
-| [Network](https://buoy.gg/buoy/latest/docs/tools/network) | `@buoy-gg/network` | Every request, response, timing & error — GraphQL operations extracted and shown as `GetUser › 123` |
-| [Storage](https://buoy.gg/buoy/latest/docs/tools/storage) | `@buoy-gg/storage` | Browse & edit AsyncStorage, MMKV & SecureStore with change history — biometric keys listed, never auto-read |
-| [Time Machine](https://buoy.gg/buoy/latest/docs/tools/time-machine) | `@buoy-gg/time-machine` | Snapshot storage, Redux, Zustand, Jotai & the query cache as restore points — jump back in one tap, or wipe to fresh install |
-| Scenarios *(coming soon)* | `@buoy-gg/scenarios` | Saved one-tap app states for QA & support — override responses, write storage, impersonate & navigate in one step, with an unmissable SIMULATED banner and one-tap undo |
-| [Ask Buoy](https://buoy.gg/buoy/latest/docs/tools/ask-buoy) *(beta)* | `@buoy-gg/ask-buoy` | An in-app AI chat that drives every Buoy tool in plain English — your QA types "make checkout fail with a 500" and it happens, on your own model endpoint, with a visible changes bar and real undo |
-| [Env](https://buoy.gg/buoy/latest/docs/tools/env) | `@buoy-gg/env` | Auto-discovers `EXPO_PUBLIC_` vars, validates types, scores config health 0–100% |
-| [Query](https://buoy.gg/buoy/latest/docs/tools/react-query) | `@buoy-gg/react-query` | TanStack Query cache — refetch, invalidate, simulate loading & error states, one-tap offline |
-| [Routes](https://buoy.gg/buoy/latest/docs/tools/routes) | `@buoy-gg/route-events` | Navigation events, the live stack, and the full sitemap — jump to any screen |
-| [Debug Borders](https://buoy.gg/buoy/latest/docs/tools/debug-borders) | `@buoy-gg/debug-borders` | Depth-colored layout borders (touch-through) — tap any label for testID, a11y props & computed styles |
-| [Highlight Updates](https://buoy.gg/buoy/latest/docs/tools/highlight-updates) | `@buoy-gg/highlight-updates` | Every render, with the cause: mount, state, props, or parent — down to the exact `useState` before → after |
-| [Bench](https://buoy.gg/buoy/latest/docs/tools/perf-monitor) | `@buoy-gg/perf-monitor` | UI/JS FPS, CPU, memory & jank on a real device — batch benchmarks return a ranked report |
+| [Network](https://buoy.gg/buoy/latest/docs/tools/network) | `@buoy-gg/network` | Inspect HTTP requests captured through your React Native app’s global `fetch` and `XMLHttpRequest` hooks. Open a request to see its URL, status, headers, timing, and captured body. |
+| [Storage](https://buoy.gg/buoy/latest/docs/tools/storage) | `@buoy-gg/storage` | Browse and edit supported AsyncStorage, registered MMKV instances, and registered SecureStore keys inside your app. |
+| [Time Machine](https://buoy.gg/buoy/latest/docs/tools/time-machine) | `@buoy-gg/time-machine` | Save and restore supported client state; external side effects are not reversed. |
+| [Ask Buoy](https://buoy.gg/buoy/latest/docs/tools/ask-buoy) *(beta)* | `@buoy-gg/ask-buoy` | Use an in-app assistant with your model endpoint and configured tools. |
+| [Env](https://buoy.gg/buoy/latest/docs/tools/env) | `@buoy-gg/env` | Inspect runtime environment values and validate required variables. |
+| [Query](https://buoy.gg/buoy/latest/docs/tools/react-query) | `@buoy-gg/react-query` | Inspect the TanStack Query cache used by your app. Refetch or invalidate a query and simulate states while checking the screen that consumes it. |
+| [Routes](https://buoy.gg/buoy/latest/docs/tools/routes) | `@buoy-gg/route-events` | Inspect recorded navigation events and supported routes. |
+| [Debug Borders](https://buoy.gg/buoy/latest/docs/tools/debug-borders) | `@buoy-gg/debug-borders` | Show layout borders and component labels over your React Native app. Tap a label to inspect the component’s available properties. |
+| [Highlight Updates](https://buoy.gg/buoy/latest/docs/tools/highlight-updates) | `@buoy-gg/highlight-updates` | Highlight observed React component updates in development builds and inspect the available render details. |
+| [Bench](https://buoy.gg/buoy/latest/docs/tools/perf-monitor) | `@buoy-gg/perf-monitor` | Measure available frame-rate, CPU, and memory metrics on a device. Record comparable runs to investigate performance changes. |
 | [JS Top](https://buoy.gg/buoy/latest/docs/tools/js-top) | `@buoy-gg/js-top` | Task Manager for the JS thread — a live ranked table of which timers, Promise chains & callbacks eat your JS FPS |
-| [Images](https://buoy.gg/buoy/latest/docs/tools/images) | `@buoy-gg/images` | Every image load with cache verdict (memory/disk/network), timing, oversize & wasted-memory audit, and failure diagnosis |
-| [Assets](https://buoy.gg/buoy/latest/docs/tools/assets) | `@buoy-gg/assets` | Everything you ship — bundled images, fonts, video & audio with sizes, duplicates, and never-loaded detection |
-| [Events](https://buoy.gg/buoy/latest/docs/tools/events) | `@buoy-gg/events` | One timeline across every tool, with LLM export presets: Markdown for agents, Bug Report, Errors Only |
-| [Console](https://buoy.gg/buoy/latest/docs/tools/console) | `@buoy-gg/console` | Chrome-DevTools console on device — read logs from a release build with no cable and no Metro |
-| [Sentry](https://buoy.gg/buoy/latest/docs/tools/sentry) | `@buoy-gg/sentry` | See every envelope your app sends to Sentry, what it costs, and why an event never arrived |
-| [Redux](https://buoy.gg/buoy/latest/docs/tools/redux) | `@buoy-gg/redux` | Inspect, dispatch & time travel — flags actions that blow the 16ms frame budget |
-| [Zustand](https://buoy.gg/buoy/latest/docs/tools/zustand) | `@buoy-gg/zustand` | State, diffs, jump-to-state, one-tap reset — no middleware needed |
-| [Jotai](https://buoy.gg/buoy/latest/docs/tools/jotai) | `@buoy-gg/jotai` | One `watchAtoms()` call, no wrappers — every event shows `prev → next`, even writes that changed nothing |
-| [Impersonate](https://buoy.gg/buoy/latest/docs/tools/impersonate) | `@buoy-gg/impersonate` | Switch users, roles & flags without rebuilding — injects `x-impersonate-user-id` into every request |
-| [TV Remote](https://buoy.gg/buoy/latest/docs/tools/tv-remote) | `@buoy-gg/tv-remote` | Press the D-pad on Apple TV & Android TV from your desktop — record navigation paths as macros and replay them across every device |
-| [Focus Inspector](https://buoy.gg/buoy/latest/docs/tools/focus-inspector) | `@buoy-gg/focus-inspector` | See what holds D-pad focus on Apple TV & Android TV — every move with its direction, plus flags for focus that gets stuck, vanishes, or is never reached |
+| [Images](https://buoy.gg/buoy/latest/docs/tools/images) | `@buoy-gg/images` | Inspect image loads observed by Buoy’s supported image hooks, including timing, dimensions, and estimated decoded memory. |
+| [Assets](https://buoy.gg/buoy/latest/docs/tools/assets) | `@buoy-gg/assets` | Inspect assets visible to the runtime registry and, in development, the Metro dependency graph. Compare sizes and find possible duplicates. |
+| [Events](https://buoy.gg/buoy/latest/docs/tools/events) | `@buoy-gg/events` | Review events from configured Buoy tools in one timeline. Filter by source, inspect an event, and export a selection for debugging. |
+| [Console](https://buoy.gg/buoy/latest/docs/tools/console) | `@buoy-gg/console` | Read captured JavaScript console logs in your React Native app. Filter messages by level, search their contents, and inspect logged objects. |
+| [Sentry](https://buoy.gg/buoy/latest/docs/tools/sentry) | `@buoy-gg/sentry` | Inspect captured Sentry envelopes and diagnostic estimates. |
+| [Redux](https://buoy.gg/buoy/latest/docs/tools/redux) | `@buoy-gg/redux` | Inspect your connected Redux store, review captured actions and state changes, and dispatch actions from your device. |
+| [Zustand](https://buoy.gg/buoy/latest/docs/tools/zustand) | `@buoy-gg/zustand` | Inspect the Zustand stores you register with Buoy. Review changes, edit state, and restore retained snapshots. |
+| [Jotai](https://buoy.gg/buoy/latest/docs/tools/jotai) | `@buoy-gg/jotai` | Inspect registered Jotai atoms and their captured changes, with live values and per-atom history. |
+| [Impersonate](https://buoy.gg/buoy/latest/docs/tools/impersonate) | `@buoy-gg/impersonate` | Connect your app’s user-switching flow to Buoy so testers can switch test accounts, roles, or flags without rebuilding. |
+| [TV Remote](https://buoy.gg/buoy/latest/docs/tools/tv-remote) | `@buoy-gg/tv-remote` | Send supported TV input and replay recorded navigation sequences. |
+| [Focus Inspector](https://buoy.gg/buoy/latest/docs/tools/focus-inspector) | `@buoy-gg/focus-inspector` | Inspect observed TV focus changes and possible focus problems. |
 | [Camera](https://buoy.gg/buoy/latest/docs/tools/camera) | *(no package — desktop app)* | Give the iOS Simulator a real camera — point it at your Mac screen, webcam, an image or a video, and scan QR codes or driver's licences without a device |
-| [Overlay](https://buoy.gg/buoy/latest/docs/tools/image-overlay) | `@buoy-gg/image-overlay` | Pin Figma mockups pixel-perfect over the app — Component Mode tracks a tagged component through scroll & animation |
+| [Overlay](https://buoy.gg/buoy/latest/docs/tools/image-overlay) | `@buoy-gg/image-overlay` | Place a reference image over your app to compare spacing, alignment, and sizing on the device. |
 
-Grab everything in one line:
-
-```bash
-npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,highlight-updates,perf-monitor,js-top,images,assets,events,console,sentry,redux,zustand,jotai,impersonate,image-overlay,tv-remote,focus-inspector}
-```
+Install tools as you need them. Follow each linked guide for its peer dependencies and app integration.
 
 <details>
 <summary><strong>See them in action</strong></summary>
@@ -122,112 +146,48 @@ npm i @buoy-gg/{core,network,storage,env,react-query,route-events,debug-borders,
 
 ## 🤖 Your agent gets hands
 
+Install `@buoy-gg/external-sync` in your React Native app and complete the [MCP account and connection setup](https://buoy.gg/buoy/latest/docs/mcp). Then run:
+
 ```bash
 npx -y @buoy-gg/mcp@latest init
 ```
 
-One command wires the Buoy MCP server into Claude Code, Cursor, and VS Code — non-destructively.
+Review the generated editor configuration. Setup preserves other server entries but updates the Buoy entry and its generated skill. Reconnect your MCP client, open your app, and start with `list_devices`.
 
-**Your agent presses real UI handlers in JS, reads live app state, and benchmarks on a physical device — no screenshots, no pixel coordinates, no synthesized touches.**
-
-- **Read the runtime** — `get_events` and `get_console` stream what the app is actually doing, in token-friendly summaries
-- **Drive the UI** — `describe_screen` walks the live React tree into an accessibility-style element list with tap points; `tap_element` presses the real handler in JS. Works on physical devices.
-- **Change state** — `get_redux_state` / `redux_dispatch`, `get_zustand_state`, `get_jotai_state`, `get_react_query` / `react_query_action`, `get_storage` / `storage_action`, `get_routes` / `navigate`
-- **Measure** — `run_benchmark_batch` runs Bench cases on a real device and returns a ranked comparison; `screenshot_component` returns a tight crop of any component by testID (iOS Simulator); `list_devices` picks the target
-
-`init` also installs the **buoy-optimize** skill: a wizard that benchmarks variants on the real device, applies the winner, and repeats until metrics plateau. One real run took a Skia LED display from 28 stuttering lights to over 12,000 — no lag.
-
-📚 [AI / MCP docs](https://buoy.gg/buoy/latest/docs/mcp) · Pro feature
+Available actions include reading captured requests and state, changing supported stores, and running configured benchmarks. These actions can change your running app. UI inspection depends on React Native hooks; simulator screenshots and camera features require macOS and Xcode.
 
 ---
 
 ## 🖥️ Buoy Desktop
 
-Every tool, full screen. [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) is free for macOS, Windows & Linux:
+[Download Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest) for your platform and sign in. It displays connected tools, supports device switching, and exposes supported remote actions.
 
-- Zero-config connect — devices find your machine automatically, physical phones included
-- Full-screen panels for Network, Console, Storage, and every state tool
-- Live UI/JS FPS · CPU · memory HUD
-- Remote actions — dispatch, navigate, invalidate, from the keyboard
-- Multi-device switching and a component screenshot tool
-- Themes with animated glow, because you'll be staring at it all day
-
-📚 [Desktop docs](https://buoy.gg/buoy/latest/docs/desktop)
+React Native connections require `@buoy-gg/external-sync`. Automatic address discovery depends on your Metro setup and network; follow the [Desktop guide](https://buoy.gg/buoy/latest/docs/desktop) for physical devices, tunnels, and release builds.
 
 ---
 
 ## Why Buoy?
 
-Flipper is deprecated. What's left is shaking the device for a dev menu, `console.log` archaeology over a cable, and desktop debuggers that stop working the moment you ship a staging or production build. And when an AI agent works on your app, it's debugging blind — it can edit the code but can't see what the running app is doing.
-
-Buoy inverts the model: the tools live in the app itself, so they go wherever the app goes — the simulator, a tester's phone, production. A tiny localhost broker mirrors the same session to your desktop and your agent.
-
-|                              | Buoy | Flipper | Reactotron | RN Debugger |
-| ---------------------------- | :--: | :-----: | :--------: | :---------: |
-| On-device, no desktop app required | ✅ | ❌ | ❌ | ❌ |
-| Works in production builds   | ✅   | ❌      | ❌         | ❌          |
-| AI agent control (MCP)       | ✅   | ❌      | ❌         | ❌          |
-| QA & support can use it      | ✅   | ❌      | ❌         | ❌          |
-| Zero config setup            | ✅   | ❌      | ❌         | ❌          |
+Use Buoy when you want to inspect app behavior from the device and share that session with desktop tools or an assistant. Choose packages for your app’s libraries and verify their capture paths with a known test action.
 
 ---
 
-## Safe in production
+<a id="safe-in-production"></a>
 
-> [!IMPORTANT]
-> Everything runs in your app's process. The broker that mirrors to desktop and MCP binds to localhost only — nothing ever leaves your machine. You decide who sees the tools:
+## Production and connections
 
-```tsx
-<>
-  {/* Your app */}
-  {isInternalUser && <FloatingDevTools />}
-</>
-```
+Start with a development build. Before enabling Buoy in a shipped app, restrict access using your app’s authorization checks and review the [component reference](https://buoy.gg/buoy/latest/docs/floating-devtools). Production access requires Pro, and development-only capabilities remain unavailable.
 
-That one line is the whole production story: internal builds and flagged users get the full toolkit; everyone else gets nothing.
+Hiding the menu is not a substitute for backend authorization. Headless mode hides the on-device UI; it still requires account admission and sync configuration. Release sync is disabled by default and must be explicitly enabled.
 
-Want the session without any on-device UI at all — field builds, kiosk devices, apps handed to non-developers? Headless mode keeps every tool syncing to Buoy Desktop and MCP while rendering nothing on the device:
-
-```tsx
-<FloatingDevTools headless />
-```
+Device sessions can travel over your LAN to the configured broker. Buoy also makes account and license requests; development telemetry is described in [Telemetry](https://buoy.gg/buoy/latest/docs/telemetry). Ask Buoy sends model requests to the endpoint you configure.
 
 ---
 
-## 💳 Every tool is free. A free key unlocks the rest.
+## Account and plan requirements
 
-Every tool is **free**, forever, on every tier — the only thing that changes is
-how much history each one keeps.
+Use a Free or Pro Buoy account. History limits and paid features vary by tool; see [pricing](https://buoy.gg/pricing). Production access requires Pro where supported. Development-only hooks and actions remain unavailable in release builds.
 
-| | How to get it | What you get |
-| --- | --- | --- |
-| **No key** | nothing to do | Every tool, with a short capture window — enough to see what each one does. |
-| **Free** | `npx buoy login` — no card, ~30 seconds | The full free tier: real history across every tool, and Pro free every weekend. |
-| **Pro** | [buoy.gg/pricing](https://buoy.gg/pricing) | Everything: production builds, the MCP server, Ask Buoy, unlimited capture. |
-
-Paid plans unlock production builds, the MCP server, Ask Buoy, and unlimited capture — **Solo is $9/month ($89/year) for individuals**, and **Business is $45/seat/month** for companies, with priority support and volume pricing. Both come with a 14-day trial.
-
-Grab your key — free or paid, same command:
-
-```bash
-npx buoy login
-```
-
-Run it from a project that already has `@buoy-gg/core` installed — npx resolves
-the command from your own `node_modules`. If it tries to download something
-instead, name the package: `npx --package=@buoy-gg/core buoy login`.
-
-It signs you in, writes the key to `.env.local`, and gitignores it. Then:
-
-```tsx
-Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
-```
-
-Or pass it straight in: `<FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />`
-
-**Weekend Pass:** every Saturday and Sunday, every Pro feature inside the tools unlocks free for anyone with a key — including a free one. Not a promo — it's built into the product. Run `npx buoy login`, try it for real, decide on Monday.
-
-➡️ [buoy.gg/pricing](https://buoy.gg/pricing)
 
 ---
 
@@ -240,5 +200,3 @@ Found a bug or want a tool that doesn't exist yet? [Open an issue](https://githu
 Proprietary software. © Buoy LLC. All rights reserved. See the [Terms of Service](https://buoy.gg/terms).
 
 ---
-
-<p align="center"><sub>You read the whole README. Pro unlocks free every weekend — see you Saturday. 🛟</sub></p>

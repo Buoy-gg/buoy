@@ -2,16 +2,14 @@
 title: Ask Buoy
 seoTitle: "React Native AI Devtool — let QA and support drive your app in plain English"
 id: tools-ask-buoy
-description: "An in-app AI chat that drives every Buoy tool. Your QA tester types \"make the double burger out of stock and put it in my cart\" and it happens — on your own model endpoint, with a visible changes bar and real undo."
+description: "An in-app AI chat that uses installed Buoy tools. Your QA tester types \"make the double burger out of stock and put it in my cart\" and it happens — on your own model endpoint, with visible action results and undo for supported changes."
 ---
 
 <!-- ::platform-badge platform="both" -->
 
-> **Beta · Buoy Pro.** The API is settled and it is device-verified end to end, but this is the newest thing Buoy does and the surface may still move — pin the version if that matters to you. Ask Buoy requires a [Pro licence](https://buoy.gg/pricing); free and anonymous users see the tool and an upgrade prompt in its place.
+Ask Buoy is an in-app assistant for installed Buoy tools. It can inspect app data and run supported actions, such as editing storage or creating a development-only network override. It requires Pro and a model endpoint you configure. The feature is in beta.
 
-Your QA tester types *"make the menu request fail with a 500"* and it happens. No ticket, no dev, no knowing what a cart-item object looks like.
-
-Behind the chat, an agent drives the same 192 tool actions across 24 tools that Buoy Desktop and the MCP server use — network overrides, storage writes, cache pokes, impersonation, navigation — and answers in plain English. **The model is yours:** Buoy never holds a key and never proxies a request.
+Start with read-only access and a test build. Ask it to inspect a request, then check the tool result before enabling writes.
 
 <!-- ::ask-buoy-live-demo -->
 
@@ -21,9 +19,9 @@ Behind the chat, an agent drives the same 192 tool actions across 24 tools that 
 
 <!-- ::PM npm="npm install @buoy-gg/ask-buoy" yarn="yarn add @buoy-gg/ask-buoy" pnpm="pnpm add @buoy-gg/ask-buoy" bun="bun add @buoy-gg/ask-buoy" -->
 
-This package is the chat. The *hands* are whichever Buoy tools you already have — each one you install becomes something the agent can do.
+Install the tool packages for the actions you want Ask Buoy to use, and complete their setup first.
 
-**Already running Buoy?** Upgrade every `@buoy-gg/*` package to the same version in the same command. Buoy pins `@buoy-gg/license` as an *exact* peer, so installing Ask Buoy on its own next to an older Buoy leaves an invalid dependency tree — and `npm install` exits 0 without saying so. `npm ls @buoy-gg/license` is what tells you.
+Keep Buoy packages on compatible versions, including their exact license peer requirement. Check your dependency tree with `npm ls @buoy-gg/license` after upgrading; a successful install command alone does not establish compatibility.
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
@@ -32,10 +30,11 @@ import { FloatingDevTools } from "@buoy-gg/core";
   askBuoy={{
     endpoint: "https://ai.acme.com/v1/messages",
     protocol: "anthropic",   // or "openai" — covers Azure, Gemini-compat, most gateways
-    model: "claude-opus-5",
+    model: "YOUR_MODEL_ID",
+    policy: { readOnly: true },
 
     // Called before every request, so short-lived tokens work.
-    // This is the whole auth story: your credential, your gateway.
+    // Your gateway must validate the token and authorize the request.
     headers: async () => ({ Authorization: `Bearer ${await auth.getToken()}` }),
   }}
 />
@@ -47,36 +46,15 @@ The tool appears in the dial as **ASK BUOY**.
 
 ## Point it at a model
 
-The `endpoint` is the one thing Buoy can't invent for you.
+Use an authenticated gateway that supports the selected protocol. `headers` supplies your app's session token on each request; the gateway must validate it, authorize the user, constrain model access and request size, and preserve streaming responses. Keep the provider credential on the server.
 
-**Trying it out?** Talk to a provider directly with `apiKey`. It is compiled into your bundle in plaintext, so this is for your own simulator and nothing else.
+The installation example assumes your app defines `auth.getToken()`. Replace the endpoint and model ID with values your gateway supports. Do not expose a gateway that forwards requests without validating the caller.
 
-**Shipping it to testers?** Put a ten-line proxy in front, so the key lives on a server and your app's own session is what authorises the call:
+For a private local experiment, `apiKey` can call a provider directly, but that key is included in the app bundle. Do not distribute that build to testers.
 
-```js
-export default {
-  async fetch(request, env) {
-    // Your gate: Ask Buoy sends whatever `headers` returned, so verify the
-    // same session token the rest of your API already trusts.
-    const upstream = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": env.ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-      },
-      body: request.body,
-    });
-    return new Response(upstream.body, { status: upstream.status });
-  },
-};
-```
+`protocol: "anthropic"` uses an Anthropic-shaped API; `"openai"` uses the corresponding compatible API shape. Services requiring request signing need a gateway that performs that signing. Choose token limits and provider options for the model you actually use, then test tool calls, streaming, errors, and interrupted turns.
 
-**Already have an AI gateway?** Point `endpoint` at it. Anthropic-shaped is the default; set `protocol: "openai"` for OpenAI-shaped ones. Bedrock and Vertex need SigV4/OAuth signing, which a static header can't express — front those with a proxy like the one above.
-
-**Raise `maxTokens` on a thinking model.** Claude models reason by default, and that reasoning comes out of the same `maxTokens` budget as the answer — at the 4096 default a real multi-step turn gets cut off mid-sentence. 8192 is a sensible floor.
-
-**Use a frontier model.** In our own 20-turn evals a budget model *changed the app to answer a question* — faking an API response, inventing a user — in 4 of 20 turns. A frontier model did it zero times. The guardrails below bound the damage; model quality is the first line.
+Before enabling writes, send a harmless request such as “List the installed tools.” Check that the endpoint accepts the token, the action list is correct, and no app state changes.
 
 ### Teach it your data
 
@@ -98,13 +76,13 @@ context: {
 }
 ```
 
-Twenty minutes of this, once, is the highest-leverage thing you can give it.
+Review these definitions when your app schema changes. They guide the model but do not replace validation in the tools.
 
 **Why `types` is separate from `notes`.** Ask Buoy prefers an observed shape over anything you declare — runtime truth can't go stale, and the prompt tells it to copy the field names it finds. The digest gives it a head start where it can: for every list a **Zustand** store currently holds, it carries that list's item field names and types, so `lines[]` arrives as `{ lineId: string; itemId: string; qty: number; … }` before the agent reads anything. Values never travel — only names, types and the sketch of a shape. Redux slices and Jotai atoms are reported by name alone, so if that is where your data lives, `types` is the only way the agent learns its shape without reading an instance first.
 
 But *there is nothing to observe when the collection is empty*, which is exactly the moment someone asks for the first cart line. The digest is honest about that rather than papering over it: an empty list is reported as a list whose shape is **unknown**. A note saying `item id = 123` doesn't fill the gap either — it gives the model the id and nothing about the object it goes in, so it invents `quantity` where you have `qty`, and your app renders nothing.
 
-Declare a shape and that stops. Observed wins over declared when both exist, and the agent flags it if they disagree; when neither exists it says which shape it's unsure of instead of guessing silently. So: `types` for anything the agent may **create** — the first cart line, the first address, the first flag — and let the digest cover the rest.
+Provide types for objects the agent may create, especially empty collections. Ask Buoy is instructed to prefer observed shapes and flag disagreements; test the resulting writes rather than assuming a declaration guarantees correctness.
 
 **Don't write them by hand.** Everything these notes describe is already in your repo. Paste this into Claude Code, Cursor, Codex — any coding agent that can read the project — and have it do the first pass:
 
@@ -162,6 +140,27 @@ Output only the `context` object, ready to paste.
 
 Read what it gives you before shipping it — it is a first draft of the one input that most determines whether the agent gets your data right.
 
+### Write down your team's procedures
+
+Some tasks aren't guessable from the app: *"reproduce the pricing glitch"*, *"put this account in the expired state"*, *"set up the demo cart"*. Write them once as **procedures** and the agent follows them when someone asks:
+
+```tsx
+context: {
+  procedures: [{
+    id: "expired-subscription",
+    title: "Put the account into the expired-subscription state",
+    summary: "when asked to test what an expired or lapsed subscriber sees",
+    body: `1. Read the zustand store "account" and note subscription.status.
+2. setState { subscription: { status: "expired", renewsAt: null } } — a merge, not a replace.
+3. Navigate to /account. Done when the renew banner is showing.
+Undo puts the real status back.`,
+    requires: ["zustand", "route-events"],   // only listed when these tools are installed
+  }],
+}
+```
+
+Only the `id` and one-line `summary` ride in every prompt; the body loads when a request matches, so a long playbook costs nothing until it's needed. A tester then types **"run the expired-subscription check"** and the agent opens the procedure first and follows it — instead of asking what that means. A procedure guides; it grants nothing: every step still goes through the same policy, approval card, undo and checks as any other call.
+
 ---
 
 ## What your team can do with it
@@ -177,27 +176,33 @@ Read what it gives you before shipping it — it is a first draft of the one inp
 
 ## Nothing it changes is hidden
 
-Reads and ordinary writes run immediately — that's what makes it fast enough to be worth using. What keeps you in control is the bar at the top of the sheet, and that undo is real.
+The default policy allows reads and ordinary writes immediately and asks for destructive actions. Use read-only mode for initial setup, or require approval for every change as shown below. The changes bar records supported reversible changes and identifies changes it cannot undo.
 
 The count is honest in both directions: storage writes and query-cache edits are reversible because Buoy reads the old value *before* it writes (a cache edit the app has since refetched is left alone, and Undo says so); a state write with no captured prior value is labelled **permanent** rather than folded into a number Undo can't deliver; and one-shot actions like navigation aren't counted as changes at all. Typing **"undo that"** works too — the agent has its own undo tool wired to the same ledger as the bar.
 
 **Destructive actions wait for a tap.** Wipes and resets show an approval card describing the *effect* — "Clear all saved app data" — not the raw payload. Tune it either way:
 
 ```tsx
-policy: {
-  requireApproval: ["write", "destructive"],               // stricter: every change asks
-  requireApprovalFor: [{ toolId: "impersonate" }],         // one tool asks, without gating every write
-  allow: [{ effect: "read" }, { toolId: "impersonate" }],  // a scoped support seat
-  deny: [{ toolId: "storage", action: "clearAll" }],       // deny always beats allow
-  readOnly: true,                                          // look, never touch
-  secureReads: true,                                       // let it read SecureStore VALUES (off by default)
-  maxSteps: 12,                                            // cap model→tool→model round trips in a turn
-}
+<FloatingDevTools
+  askBuoy={{
+    endpoint: "https://ai.example.com/v1/messages",
+    model: "YOUR_MODEL_ID",
+    headers: async () => ({ Authorization: `Bearer ${await auth.getToken()}` }),
+    policy: {
+      requireApproval: ["write", "destructive"],
+      maxSteps: 12,
+    },
+  }}
+/>
 ```
 
-`allow` is the shape for a scoped seat: set it and anything matching no rule is refused, instead of enumerating denials across 192 actions.
+`policy.readOnly: true` refuses writes. For scoped access, set `allow` rules for permitted effects or tools; nonmatching calls are refused. `deny` rules take precedence. Keep these configurations separate from the approval example above.
+
+The card takes a **note** — type *"just the second line"* before **Not now** and the agent gets your words verbatim, instead of a round trip of "what would you prefer?". **Allow for this chat** approves *and* stops asking about that action for the rest of the conversation — ten storage writes are one tap, not ten. It waives the approval card only: read-only, deny lists and release-build refusals still hold. **Settings → Permissions** lists what's been waived, each with an **Ask again** button, and a new conversation forgets all of it.
 
 The card's long description is collapsed behind **Details**, so the buttons are always reachable — and a card you never answered comes back after a reload, still answerable. Tapping **Allow** then runs the change itself, through the same gate and the same undo ledger.
+
+**It checks its own work.** "The tool said ok" is not the same as "the app shows it", so after a write the agent reads the app back. The activity row says **Verified** when the requested state is really there; **Done · not yet visible** when the write landed but the outcome hasn't shown yet — an override installed that nothing has fetched through — and the agent is told what would make it show (a refresh, a visit to that screen) before it may claim anything; or **Done · check failed** when the app doesn't hold what was written, in which case it may correct *once*, with a different change, and never repeats the write or reports it as done. Tap the row for the reason. Storage writes, store and cache edits, navigation and override rules are checked today.
 
 **Or look without touching.** On a shared or support device, **Settings → Permissions → Read only** refuses every write and simulation until you turn it off — the header says **Read only** while it's on. It adds to whatever the app's `policy` already restricts and never loosens it, it takes effect on the very next call even mid-turn, and Undo still works, because putting things back is the safe direction.
 
@@ -210,6 +215,8 @@ The card's long description is collapsed behind **Details**, so the buttons are 
 **A question it asks you is always tappable.** When the agent needs a decision — your request could mean two things, or it's offering to do something you didn't quite ask for — the answer comes back as buttons, not as a sentence expecting you to type "yes". If it ever asks in prose anyway, Buoy turns that into a card for it. Typing over the card still works; it just stops being the only way.
 
 It also gets out of your way: when it navigates or taps, the sheet drops to a strip for a couple of seconds so you see the app do it. Minimize it and it keeps going — if it then needs a tap, the approval waits and its chip in the minimized dock gets a **!** badge; tap the chip and the card is there. (Closing the sheet still stops the turn.)
+
+**Big results aren't lost.** A tool result over 24,000 characters is cut for the model — but the whole thing is kept for the conversation, and the agent can read any part of it back by field, by search term or by window. So *"what did the server send for the third item?"* is answerable even when that field sits far past the cut, and *"what did that look like before you changed it?"* comes from what the agent actually saw at the time, not a fresh read of the new value. The kept copy lives in memory for the conversation only and is never written to disk.
 
 **Reading a turn.** Consecutive reads fold into one row — *Looked at Network and Storage · 3 reads* — and every write, failure, refusal and declined call stays its own row. A quiet line under each answer says how long it took and how many actions ran. Long tables say when they're cut and offer **Show all**; code stays as code.
 
@@ -234,7 +241,7 @@ Off by default, because the answer is what the sheet is for.
 
 Not every model reports reasoning. Claude thinks by default; most OpenAI models return none and the strip then shows the steps alone, which it says rather than looking empty.
 
-**The conversation survives a reload.** Reload the app, restart it, or crash it, and the chat is there when you come back — and so is the agent's memory of it, so "undo that" still means something. A turn the app died in comes back marked interrupted rather than blank, messages you had parked come back as unsent rows, and an approval you never answered comes back as a card that says it predates the restart — **Allow** re-reads what it would change and refuses if that has moved on since. In a very long session the agent's memory is trimmed before the screen is; a quiet line marks the gap when that happens. This is what makes the tool bearable while you iterate, and it is the only thing that survives a crash. **New conversation** deletes it.
+**The conversation survives a reload.** Reload the app, restart it, or crash it, and the chat is there when you come back — and so is the agent's memory of it, so "undo that" still means something. A turn the app died in comes back marked interrupted rather than blank, messages you had parked come back as unsent rows, and an approval you never answered comes back as a card that says it predates the restart — **Allow** re-reads what it would change and refuses if that has moved on since. In a very long session the agent's memory is trimmed before the screen is; a quiet line marks the gap when that happens — and the exchanges whose changes are still applied (the override you armed, the user you're impersonating) are the *last* to go, so "turn that off" keeps meaning something. This is what makes the tool bearable while you iterate, and it is the only thing that survives a crash. **New conversation** deletes it.
 
 ---
 
@@ -242,15 +249,15 @@ Not every model reports reasoning. Claude thinks by default; most OpenAI models 
 
 If the device is also connected to [Buoy Desktop](../desktop), Ask Buoy shows up there too — as a **read-only mirror**: the conversation as it streams, what the agent has changed and whether each change can be put back, and what the turn has spent in tokens. It's how you follow a tester's session from your own machine without standing over their shoulder.
 
-Two remote verbs are exposed, both in the safe direction: **Undo everything reversible**, and **reset** (which undoes first and refuses to clear if a revert fails, rather than dropping the only record of what is still applied).
+Desktop exposes two actions: **Undo everything reversible**, and **reset** (which undoes first and refuses to clear if a revert fails, rather than dropping the only record of what is still applied).
 
-There is deliberately **no composer on the desktop**. The broker has no authentication, so a remote "send" would let anyone on the network drive a mutating agent on someone else's phone. Conversations start on the device, with a person.
+Desktop has no chat composer. Start conversations on the device. Use the broker only on a trusted development network; account admission is not per-user authorization to control another device.
 
 ---
 
 ## Which build should QA run?
 
-**For the full pitch — forcing server responses, driving the screen — QA should run a development or internal build.** Some actions only work when `__DEV__` is true, and a few would otherwise *report success and do nothing*. Ask Buoy refuses those before running them and says why, and the sheet's first screen tells you which kind of build you're on.
+**Use a development build for response overrides and screen-driving actions.** An internal distribution label alone does not make `__DEV__` true. Some actions only work when `__DEV__` is true, and a few would otherwise *report success and do nothing*. Ask Buoy refuses those before running them and says why, and the sheet's first screen tells you which kind of build you're on.
 
 A release build still reads storage, network, state, routes, console and crashes, and still impersonates and navigates — which is the support persona's whole job.
 
@@ -269,15 +276,15 @@ Everything the `askBuoy` prop takes.
 | `protocol` | `"anthropic"` | The wire shape the endpoint speaks — `"anthropic"` or `"openai"`. |
 | `headers` | — | `() => Record<string,string>` (may be async), resolved **before every request** so short-lived tokens work. This is the intended auth story. |
 | `apiKey` | — | A provider key sent straight to the provider. **Dev only** — it is compiled into your bundle in plaintext. |
-| `maxTokens` | `4096` | Ceiling for one response. Raise to at least `8192` on a thinking model: reasoning bills against this same budget. |
+| `maxTokens` | `4096` | Ceiling for one response. Choose a value supported by your model and large enough for its response and reasoning requirements. |
 | `anthropicVersion` | — | The `anthropic-version` header. Ignored when `protocol` is `"openai"`. |
 | `requestOverrides` | — | Extra fields merged into every request body, last — `temperature`, a gateway's routing hints, whatever your endpoint demands that this config doesn't model. |
 | `policy` | destructive asks | What the agent may do without asking. See [above](#nothing-it-changes-is-hidden). |
-| `context` | — | `{ notes, types }` — what your data *means* and the shapes of what it may write. The highest-leverage input here. |
+| `context` | — | `{ notes, types, procedures }` — what your data *means*, the shapes of what it may write, and your team's playbooks. Keep these aligned with your app schema. |
 | `appName` | the app name | Shown in the sheet header and given to the model. |
 | `peek` | `true` | When the agent navigates or taps, the sheet drops to a strip for a couple of seconds so the user sees the app do it. Set `false` to keep the sheet fixed. |
 | `persistTranscript` | `true` | Keep the conversation across a reload, restart or crash. `false` keeps it in memory for the session and no longer. |
-| `onEvent` | — | Every engine event as it happens — tool starts and results, blocks, approvals, errors, per-request token usage with prompt-cache counters and the model id the provider actually served. Log agent activity to your own systems, meter cost per seat. Called synchronously on the JS thread: keep it cheap. Throws are swallowed so a logging bug can't take the chat down. |
+| `onEvent` | — | Every engine event as it happens — tool starts and results, outcome checks (`tool-verified`), blocks, approvals, retries, errors, per-request token usage with prompt-cache counters and the model id the provider actually served, and a `stopReason` on every `done`. Log agent activity to your own systems, meter cost per seat. Called synchronously on the JS thread: keep it cheap. Throws are swallowed so a logging bug can't take the chat down. |
 | `tools` | — | Descriptors for **your** custom tools, so the agent can drive them too. See below. |
 
 ### Let it drive your own tools
@@ -309,11 +316,11 @@ Your actions then get the same param validation, policy gates and release-build 
 
 ## Security
 
-- **No credential in the app.** `headers` is a callback you own — no key in the bundle, nothing on disk, nothing on Buoy's sync wire.
-- **Nothing reaches Buoy.** Requests go from the device to *your* endpoint. Buoy runs no inference service and no proxy.
+- **Gateway credentials.** With `headers`, your app obtains a session token and sends it to your endpoint. Keep provider keys on the gateway. Direct `apiKey` configuration embeds a provider credential in the app.
+- **Model traffic.** Conversation requests go to your configured endpoint. Buoy account validation and telemetry are separate; see [Telemetry](../telemetry).
 - **Its own traffic is invisible to it**, so it can never read back its own auth headers.
 - **Credentials are stripped** from tool results by field name *and* by shape (bearer tokens, JWTs, key patterns) before anything is sent.
-- **The saved conversation holds no tool results.** It survives a restart (see above) under a `@react_buoy` key, capped and scrubbed for credential shapes — but only what was *said*. The payloads the agent read (storage values, response bodies, user records) are never written; it comes back knowing what it did, not what it saw. Turn the whole thing off with `persistTranscript: false` if the agent works over regulated data, since anything on disk under a Buoy key is readable by the Storage tool and, through it, by the unauthenticated broker.
+- **The saved conversation holds no tool results.** It survives a restart (see above) under a `@react_buoy` key, capped and scrubbed for credential shapes — but only what was *said*. The payloads the agent read (storage values, response bodies, user records) are never written; it comes back knowing what it did, not what it saw. (The full copies it can re-read mid-conversation are held in memory, after credential redaction, and vanish with the conversation.) Turn the whole thing off with `persistTranscript: false` if the agent works over regulated data, since anything on disk under a Buoy key is readable by the Storage tool and, through it, by clients with access to your development broker. Account validation does not provide per-user device authorization.
 
 ### What we send to the model
 
@@ -321,14 +328,16 @@ Your actions then get the same param validation, policy gates and release-build 
 2. The results of tool calls it makes — state, storage values, response bodies — after the redaction above.
 3. Nothing in the background: the digest is read when the chat opens and the "right now" block when you send a message; requests happen only while a turn runs.
 
-The agent reads live app data, and some of that comes from services an attacker may influence. Prompt injection against tool-using agents is a real, unsolved class of attack. Ask Buoy bounds the blast radius — visible banner, real undo, destructive actions behind approval, and a system prompt that treats app data as data — but use `readOnly` or a tighter `requireApproval` against production data.
+The agent reads live app data, and some of that comes from services an attacker may influence. Prompt injection against tool-using agents is a real, unsolved class of attack. Ask Buoy limits available actions — visible banner, real undo, destructive actions behind approval, and a system prompt that treats app data as data — but use `readOnly` or a tighter `requireApproval` against production data.
 
 ---
 
 ## Troubleshooting
 
 - **A raw provider error on the first message** — the endpoint and `protocol` usually disagree. Ask Buoy warns when it can spot this itself.
+- **"Endpoint busy — retrying in 4s"** — a rate limit or an overloaded provider. The agent waits and asks again by itself (up to twice, and only when nothing was generated yet, so nothing ever runs twice); you don't need to do anything.
 - **"Couldn't reach your AI endpoint"** — the gateway dropped; the answer has a **Retry** button. Chronic cases are usually a corporate proxy buffering SSE.
+- **"This conversation is too large for the AI endpoint"** — the model's window is full and there was nothing older to trim. Start a new conversation, or ask a shorter question. (The agent trims older exchanges by itself first, and measures the endpoint's real token count as it goes, so this is rare on a 128k+ window.)
 - **It answers all at once instead of streaming** — React Native's built-in `fetch` has no streaming body. On Expo, `expo/fetch` as the global enables it.
 - **An action is refused as "does not work in this build"** — that's the release-build truth doing its job, not a bug.
 
@@ -338,3 +347,7 @@ The agent reads live app data, and some of that comes from services an attacker 
 - [Network overrides](./network) — the durable request faking Ask Buoy drives.
 - [Impersonate](./impersonate) — see the app as a specific user.
 - [Custom tools](../custom-tools) — register your own, and hand the agent their descriptors so it can drive them too.
+
+## Web support (unreleased)
+
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

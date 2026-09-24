@@ -5,7 +5,7 @@ id: flutter-custom-tools
 description: "Extend Buoy with your own debugging tools — register any Flutter widget in your app's floating devtools menu in just a few lines."
 ---
 
-Buoy for Flutter is fully extensible. You can add any widget as a custom debugging tool via `BuoyTool` — the same registration path first-party tools use.
+Add a custom widget with `BuoyTool`. The basic example mounts a counter so you can verify the tool opens and responds to input. Complete [Installation](./installation) first, including your account key and debug-mode widget setup.
 
 ## Basic Custom Tool
 
@@ -13,8 +13,34 @@ Buoy for Flutter is fully extensible. You can add any widget as a custom debuggi
 import 'package:buoy_core/buoy_core.dart';
 import 'package:flutter/material.dart';
 
-class CacheDebugger extends StatelessWidget {
-  const CacheDebugger({super.key});
+void main() {
+  runApp(MaterialApp(
+    builder: (context, child) => BuoyDevTools(
+      licenseKey: const String.fromEnvironment('BUOY_KEY'),
+      tools: [
+        BuoyTool(
+          id: 'counter',
+          name: 'Counter',
+          color: const Color(0xFFF87171),
+          icon: (size, color) => Icon(Icons.plus_one, size: size, color: color),
+          screenBuilder: (context) => const CounterDebugger(),
+        ),
+      ],
+      child: child ?? const SizedBox.shrink(),
+    ),
+    home: const Scaffold(body: Center(child: Text('Open the Counter tool'))),
+  ));
+}
+
+class CounterDebugger extends StatefulWidget {
+  const CounterDebugger({super.key});
+
+  @override
+  State<CounterDebugger> createState() => _CounterDebuggerState();
+}
+
+class _CounterDebuggerState extends State<CounterDebugger> {
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +49,14 @@ class CacheDebugger extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Cache Status: 42 items'),
+            Text('Count: $count'),
             FilledButton(
-              onPressed: () {
-                // Your cache clearing logic
-              },
-              child: const Text('Clear Cache'),
+              onPressed: () => setState(() => count += 1),
+              child: const Text('Increment'),
+            ),
+            FilledButton(
+              onPressed: () => setState(() => count = 0),
+              child: const Text('Reset'),
             ),
           ],
         ),
@@ -36,28 +64,13 @@ class CacheDebugger extends StatelessWidget {
     );
   }
 }
-
-// Option A — pass via BuoyDevTools
-MaterialApp(
-  builder: (context, child) => BuoyDevTools(
-    tools: [
-      BuoyTool(
-        id: 'cache',
-        name: 'Cache',
-        description: 'Inspect app cache',
-        color: const Color(0xFFF87171),
-        icon: (size, color) => Icon(Icons.delete_outline, size: size, color: color),
-        screenBuilder: (context) => const CacheDebugger(),
-      ),
-    ],
-    child: child ?? const SizedBox.shrink(),
-  ),
-)
 ```
+
+Run with `flutter run --dart-define=BUOY_KEY=YOUR_LICENSE_KEY`. Open Counter, increment it, then reset it to zero. Later sections are integration sketches for your own stores and widgets.
 
 ## Register Before Mount
 
-Or register globally (useful when the tool also syncs to Desktop / MCP):
+Register before mounting when the tool also needs a Desktop or MCP adapter. This integration sketch assumes your app defines `MyApp`, `_count`, and `_listeners`; actions must notify those listeners after changes:
 
 ```dart
 void main() {
@@ -79,7 +92,14 @@ void main() {
           _listeners.add(onChange);
           return () => _listeners.remove(onChange);
         },
-        actions: {'reset': (_) => _count = 0},
+        actions: {
+          'reset': (_) {
+            _count = 0;
+            for (final listener in List.of(_listeners)) {
+              listener();
+            }
+          },
+        },
       ),
     );
   }
@@ -128,7 +148,7 @@ BuoyDevTools(
 
 ## Accessing App State
 
-Your custom tools are normal Flutter widgets — use whatever state you already have (`Provider`, Riverpod, `InheritedWidget`, singletons):
+Keep the tool inside the providers it needs. This Riverpod example assumes your app defines `authProvider`; import ConsumerWidget and WidgetRef from flutter_riverpod and the UI widgets from flutter/material.dart:
 
 ```dart
 class AuthDebugger extends ConsumerWidget {

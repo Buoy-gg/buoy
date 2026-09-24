@@ -7,11 +7,7 @@ description: "Redux DevTools for React Native — monitor dispatched actions, in
 
 <!-- ::platform-badge platform="both" -->
 
-The Redux DevTools extension is the reason most people can debug Redux at all — and on React Native it is the one thing you cannot have on the device where the bug is. You get a remote-debugger bridge that changes the timing you were trying to measure, or you get nothing.
-
-Buoy runs the same workflow inside the app: every dispatched action with its payload and duration, the state tree after it, a diff of exactly what changed, and JUMP to put the store back. No middleware and no wrapper — it hooks the store at creation through the official Redux DevTools integration point, so actions are captured from the very first dispatch, thunk-internal and RTK Query actions included. And it works in a TestFlight build, where the extension cannot reach.
-
-A checkout session dispatches, a thunk comes back declined, you read the error and the diff, jump the store back, and replay the failure.
+Inspect captured Redux actions, their payloads, state, and diffs. Import Buoy before store creation for enhancer-based capture, or use the explicit middleware setup below. State jumps need the enhancer or reducer wrapper.
 
 <!-- ::redux-live-demo -->
 
@@ -19,9 +15,9 @@ A checkout session dispatches, a thunk comes back declined, you read the error a
 
 <!-- ::PM npm="npm install @buoy-gg/redux" yarn="yarn add @buoy-gg/redux" pnpm="pnpm add @buoy-gg/redux" bun="bun add @buoy-gg/redux" -->
 
-That's it. The Redux DevTools auto-detects your store and appears in your FloatingDevTools menu.
+Complete core setup and ensure the package loads before your store. Dispatch a test action, verify its payload and state diff, then check whether Jump is enabled.
 
-> **Zero config required** — Just install the package. Your existing Redux store works as-is with no middleware or wrapper needed. Buoy hooks the store at creation via the official Redux DevTools integration point (Redux Toolkit enables it by default), so actions are captured from your app's very first dispatch — including thunk-internal and RTK Query actions — with no UI interaction required.
+> Capture through the Redux DevTools integration point requires that integration to be enabled and Buoy to load before store creation. If either condition is missing, use the explicit middleware path below.
 
 > **Guarantee full capture** — the store-creation hook needs `@buoy-gg/redux` to load before your store module. That's usually automatic; to make it a guarantee, put `import '@buoy-gg/redux';` as the **first import of your app entry**. If Buoy loads too late, it still binds your store automatically at app mount (top-level dispatches only — the tool tells you when it's in that mode).
 
@@ -29,34 +25,9 @@ That's it. The Redux DevTools auto-detects your store and appears in your Floati
 
 ## BUOY vs Chrome Redux DevTools
 
-BUOY brings the power of Redux DevTools to mobile — with features designed for React Native workflows.
+Buoy provides an in-app action list, state inspection, diffs, and supported state jumps. A browser extension is a separate debugging surface; check its documentation for its current capabilities.
 
-| Feature | BUOY | Chrome Extension |
-|:--------|:----:|:----------------:|
-| **On-device debugging** | ✅ | ❌ |
-| **Works in production** | ✅ | ❌ |
-| **QA/support can use it** | ✅ | ❌ |
-| **No desktop app required** | ✅ | ❌ |
-| **Zero configuration** | ✅ | ❌ |
-| Action logging | ✅ | ✅ |
-| State inspection | ✅ | ✅ |
-| State diff view | ✅ | ✅ |
-| Time-travel (Jump to state) | ✅ | ✅ |
-| Action replay | ✅ | ✅ |
-| Action filtering & search | ✅ | ✅ |
-| Performance timing | ✅ | ✅ |
-| Async thunk linking | ✅ | ✅ |
-| Export history | ✅ | ✅ |
-| RTK Query support | ✅ | ✅ |
-| Skip/toggle actions | 🔜 | ✅ |
-| Dispatch custom actions | 🔜 | ✅ |
-| Import state | 🔜 | ✅ |
-| Persist across reloads | 🔜 | ✅ |
-| Stack traces | 🔜 | ✅ |
-
-> **Why on-device matters:** Debug Redux on real devices, in TestFlight, or in production. No USB cable, no desktop app, no "it works on the simulator" moments.
-
----
+Production use requires Pro and deliberate app access controls. Available capture and jump behavior depends on your store integration, as described above.
 
 ## Action List
 
@@ -138,7 +109,7 @@ Download your complete action history as JSON for sharing with teammates or crea
 
 ## Advanced Configuration
 
-For most apps, zero-config is all you need. But if you want more control:
+Use explicit configuration when you need middleware options or your store was created before Buoy loaded.
 
 ### Enable Full Time-Travel
 
@@ -221,7 +192,7 @@ import {
 ## What's Next
 
 - [React Query DevTools](./react-query) — TanStack Query inspection
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
 
 ---
@@ -230,7 +201,7 @@ import {
 
 ### How do I use Redux DevTools in React Native without Flipper?
 
-Install `@buoy-gg/redux` — the action stream, state diffs, and time-travel controls run inside the app on the device. Flipper (deprecated since RN 0.73) is not involved.
+Install `@buoy-gg/redux` — the action stream, state diffs, and time-travel controls run inside the app on the device. Flipper is not required.
 
 ### Does time travel work on the device?
 
@@ -239,3 +210,7 @@ Yes — JUMP restores the store to the state after any recorded action, and REPL
 REPLAY works on every setup. JUMP needs a reducer that handles the jump, which you get either by importing `@buoy-gg/redux` before your store module (Buoy becomes the store enhancer) or by wrapping your root reducer with `withBuoyDevTools`. If neither applies, the JUMP button is disabled and says so — it never silently does nothing.
 
 JUMP is also disabled on older actions whose raw state has been released. Buoy keeps the before/after state trees of the 25 most recent actions only: every retained action pins its own copy of the tree, and on an app that replaces large slices wholesale (a store switch, a rehydration) a few dozen of those are enough to exhaust memory. Older actions keep their row, their diff summary and their payload — just not a tree to restore.
+
+## Web support (unreleased)
+
+Use the app’s existing Redux provider. The browser host mounts capture and exposes the shared state and action panels. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

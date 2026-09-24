@@ -2,16 +2,14 @@
 title: Images
 seoTitle: "React Native Image Debugger — cache, oversize & failures"
 id: tools-images
-description: "Debug every image in your app — a live registry of RN <Image> and expo-image loads with cache verdicts (memory/disk/network), timings, oversize + wasted-memory auditing, and a failure log. Works in Expo Go and release builds."
+description: "Inspect instrumented image loads, available cache and timing data, size estimates and failures. Coverage depends on integration and platform."
 ---
 
 <!-- ::platform-badge platform="both" -->
 
-Images not loading? Loading slow? Stale avatars that never update? Memory ballooning until the app dies? React Native gives you **zero** visibility into any of it — image HTTP requests never touch the JS network stack, so even network devtools are permanently blind to them.
+Inspect captured React Native Image and expo-image loads, including timing, dimensions, errors, and cache information. Use the registry to find oversized sources and retry failed loads.
 
-The Images tool is the visibility layer: every image your app loads — React Native's `<Image>` and `expo-image` — appears in a live registry with where it came from (memory cache / disk cache / network), how long it took, how big it decoded, and exactly why it failed. Pure JavaScript — works in Expo Go and release builds.
-
-The tool below is the real thing, running in your browser on a mock storefront screen: watch the loads land, find the 4K hero decoding into a 390pt box, re-encode it on the device for real byte savings, then force a failure and undo it.
+The demo uses a mock storefront. Cache verdicts and byte data depend on the image component and platform; the coverage notes below explain the differences.
 
 <!-- ::images-live-demo -->
 
@@ -25,7 +23,7 @@ Add the register import as the **first line** of your app entry file (`index.js`
 import "@buoy-gg/images/register";
 ```
 
-Then the IMAGES tool appears in your floating menu automatically — auto-discovery finds the installed package, no registration needed:
+With core account setup complete, the installed tool appears in the floating menu. Keep your existing account initialization and providers; this example shows the menu placement:
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
@@ -46,12 +44,12 @@ export default function App() {
 
 ## What You Can Do
 
-- **See every image load, live** — thumbnail, source URL, load time, decoded dimensions, format, status. Tap for the full detail view.
+- **Inspect captured image loads** — thumbnail, source URL, load time, decoded dimensions, format, status. Tap for the full detail view.
 - **Get cache verdicts per load** — memory, disk, or network. expo-image reports it directly on every load; RN core images are classified via `Image.queryCache` right after loading.
 - **Catch oversized sources** — the tool compares decoded pixels against the laid-out size × device pixel ratio, Lighthouse-style: green within 10%, red beyond 50% — with the estimated wasted decoded memory and the exact dimensions you should serve instead.
 - **Catch upscaled (blurry) sources too** — a 50px thumbnail stretched into a 300pt hero gets flagged the other way.
 - **Track decoded memory** — estimated decoded-bitmap bytes per image and totaled across mounted images, so you catch ballooning before the OOM crash.
-- **Diagnose failures** — every `onError` is captured with the error message; on iOS, RN core also gives you the HTTP status code and response headers.
+- **Diagnose failures** — instrumented `onError` events are captured with the error message; on iOS, RN core also gives you the HTTP status code and response headers.
 - **Act on any image** — hard reload (bypass caches + refetch), retry, or flash a red border on the on-screen image to locate it visually.
 - **Simulate the bad day** — force an error, an endless loading state, or a blank on any mounted image; swap its source URL in place; or flip app-wide modes: **Offline** (network images fail, bundled assets still load), **Cold** (every load bypasses caches like first launch), and Chrome-style **blank images**. Mass actions apply any of these to everything on screen at once.
 - **Prove the savings** — re-encode an oversized source at its displayed size as WebP *on the device*, get the real byte savings, and preview the optimized file in place before you touch your CDN.
@@ -92,3 +90,7 @@ Yes — capture is pure JavaScript (RN’s official component-decorator hook plu
 ### How do I find images that waste memory?
 
 The registry compares each image’s decoded pixels against its rendered size × device pixel ratio and totals the estimated wasted decoded bytes — sort by the red verdicts, then use the on-device re-encode to prove what a right-sized source would save.
+
+## Web support (unreleased)
+
+Browser capture observes DOM images and supports shared overrides and size analysis. Savings previews use Canvas; cross-origin reads require permission from the image server. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

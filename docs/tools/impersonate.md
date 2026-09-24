@@ -7,9 +7,9 @@ description: "Test your React Native app as any user by injecting impersonation 
 
 <!-- ::platform-badge platform="both" -->
 
-Admin user impersonation for React Native. Test your app as any user by injecting impersonation headers into all network requests — without logging out or switching accounts.
+Test an authorized user's app experience by attaching an impersonation header to intercepted requests. Your backend must authenticate the operator, authorize impersonation, and interpret the header.
 
-Search a stuck customer, become her with one tap, pause from the banner — then try it yourself:
+Configure user search, select a test user, verify the header on a request to your backend, then stop impersonation and confirm it is removed.
 
 <!-- ::impersonate-live-demo -->
 
@@ -22,6 +22,8 @@ Unlike other Buoy tools, the Impersonate tool requires configuration because it 
 ---
 
 ## Quick Start
+
+The example uses your existing `api.searchUsers` client and `YourApp` component. Define those in your app, and keep the menu inside the providers needed for cache clearing.
 
 ```tsx
 import { createImpersonateTool } from '@buoy-gg/impersonate';
@@ -45,7 +47,7 @@ function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools tools={[impersonateTool]} />
+      <FloatingDevTools apps={[impersonateTool]} />
     </>
   );
 }
@@ -55,7 +57,7 @@ function App() {
 
 ## How It Works
 
-When impersonation is active, the tool automatically injects a header into **every** outgoing `fetch` and `XMLHttpRequest`:
+When impersonation is active, the tool automatically injects a header into intercepted outgoing `fetch` and `XMLHttpRequest` calls:
 
 ```
 x-impersonate-user-id: user_123
@@ -85,10 +87,10 @@ Automatically clear stale data when switching users:
 | AsyncStorage | Clear app data (preserves `@buoy/*` keys) | ❌ | Off |
 | MMKV | Clear MMKV storage (preserves `@buoy/*` keys) | ❌ | Off |
 
-> **Zero-config for React Query & Redux** — The tool automatically detects if your app uses `@tanstack/react-query` or `react-redux` and clears them when switching users. No callbacks needed.
+Place the menu inside your Query and Redux providers. Redux auto-clearing dispatches `@@RESET`; your reducer must handle it, or you must supply `onClearRedux`. Detecting a store does not guarantee that it can be reset.
 
 ### Floating Banner
-A floating banner automatically appears when impersonation is active, making it impossible to forget you're viewing as another user. The banner can be toggled on/off in Settings.
+A floating banner automatically appears when impersonation is active, showing which user is selected. The banner can be toggled on/off in Settings.
 
 ---
 
@@ -110,7 +112,7 @@ interface User {
 
 ### Data Clearing Callbacks
 
-**React Query and Redux are auto-detected** — you don't need to provide callbacks for these. The tool automatically:
+Within the corresponding providers, the tool can:
 - Uses `useQueryClient()` to clear React Query cache
 - Uses `useStore()` to dispatch a reset action to Redux
 
@@ -256,16 +258,16 @@ interface ImpersonateToolConfig {
 
 ## Backend Integration
 
-Your backend needs to check for the impersonation header and verify permissions:
+Your backend must authenticate the request before this middleware, verify impersonation permission, and check whether the target user is in the operator's allowed scope. This sketch only illustrates the header and admin check; it is not a complete authorization implementation:
 
 ```typescript
-// Express middleware example
+// Integration sketch: run after your authentication middleware.
 function impersonateMiddleware(req, res, next) {
   const impersonateUserId = req.headers['x-impersonate-user-id'];
 
   if (impersonateUserId) {
     // Verify the authenticated user has permission to impersonate
-    if (!req.user.isAdmin) {
+    if (!req.user?.isAdmin) {
       return res.status(403).json({ error: 'Impersonation not allowed' });
     }
 
@@ -298,3 +300,7 @@ No. Buoy only attaches the headers you configure to outgoing requests. Your back
 ### Can I test feature flags for different user cohorts?
 
 Yes — if your flag service keys off user identity or headers, switching the impersonated user flips the flags the app receives.
+
+## Web support (unreleased)
+
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

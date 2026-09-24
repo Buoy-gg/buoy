@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/core",
-  "version": "7.0.36",
-  "description": "Buoy devtools for React Native — a floating in-app dev menu; every tool streams live to your phone, desktop, and AI agent.",
+  "version": "7.0.40",
+  "description": "Floating developer menu and account setup for React Native. Add tool packages and configure Desktop or MCP connections separately.",
   "homepage": "https://buoy.gg",
   "keywords": [
     "react-native",

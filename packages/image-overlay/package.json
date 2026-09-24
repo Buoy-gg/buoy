@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/image-overlay",
-  "version": "7.0.36",
-  "description": "Pin your Figma mockup on top of the running app — pixel-perfect UI comparison without leaving the simulator. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Overlay a design mockup on a running React Native app and adjust opacity to compare spacing and alignment.",
   "homepage": "https://buoy.gg/tools/image-overlay",
   "keywords": [
     "react-native",

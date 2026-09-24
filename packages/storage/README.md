@@ -2,9 +2,9 @@
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/storage?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/storage) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/storage?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/storage)
 
-**Browse and edit every key-value pair your React Native app persists — AsyncStorage, MMKV, and SecureStore in one explorer with real-time updates.**
+Browse and edit supported AsyncStorage, registered MMKV instances, and registered SecureStore keys inside your app.
 
-Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside your React Native app. Install it and it auto-appears in the floating menu from [`@buoy-gg/core`](https://www.npmjs.com/package/@buoy-gg/core).
+Part of [Buoy](https://github.com/Buoy-gg/buoy). Install the package, complete account setup, and follow the integration steps below.
 
 ![Storage Explorer demo](https://github.com/user-attachments/assets/80ef1c60-d20c-4d8b-97e6-f37b21b315ea)
 
@@ -13,6 +13,24 @@ Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside yo
 ```bash
 npm install @buoy-gg/core @buoy-gg/storage
 ```
+
+## Before you start
+
+Use a development build with `@buoy-gg/core` and a Free or Pro Buoy account key. From your app’s directory, sign in:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+For Expo, initialize Buoy before rendering the menu:
+
+```tsx
+import { Buoy } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+The login command writes the Expo key to `.env.local`. For React Native CLI, pass the key from your app’s environment configuration; React Native does not load `.env.local` automatically. Mount `FloatingDevTools` inside the same providers as your screens and restart the development server after installation. The [Quick Start](https://buoy.gg/buoy/latest/docs/quick-start) shows the complete root component setup.
 
 ## Quick start
 
@@ -55,6 +73,10 @@ registerSecureStoreKeys(SecureStore, [
 ]);
 ```
 
+## Check the integration
+
+Use a disposable test key: read its value, edit it, read it from your app, then delete it. Register the MMKV instances your app actually uses and the SecureStore keys you want to inspect; those keys cannot be enumerated automatically.
+
 ## What you get
 
 - **Three backends, one explorer** — AsyncStorage, MMKV (multiple instances, including encrypted), and Expo SecureStore, with per-instance key counts and an instance switcher.
@@ -67,14 +89,18 @@ registerSecureStoreKeys(SecureStore, [
 
 ## Desktop & AI
 
-The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) (free, macOS/Windows/Linux) and to Claude Code or Cursor via the [Buoy MCP server](https://buoy.gg/buoy/latest/docs/mcp).
+To connect a React Native app to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) or MCP, install `@buoy-gg/external-sync` and follow the [Desktop connection guide](https://buoy.gg/buoy/latest/docs/desktop). Sign in to Desktop separately. [MCP setup](https://buoy.gg/buoy/latest/docs/mcp) also requires a process account and Pro access. Available remote actions depend on the tool and app integration.
 
-## Free vs Pro
+## Account and plan requirements
 
-Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for anyone holding a key — including a free one (`npx buoy login`).
+Use a Free or Pro Buoy account. History limits and paid features vary by tool; see [pricing](https://buoy.gg/pricing). Production access requires Pro where supported. Development-only hooks and actions remain unavailable in release builds.
 
 ---
 
 📚 [Full docs](https://buoy.gg/buoy/latest/docs/tools/storage) · [All Buoy tools](https://github.com/Buoy-gg/buoy)
 
 Proprietary software. © Buoy LLC. [Terms](https://buoy.gg/terms)
+
+## Web support (unreleased)
+
+The browser uses localStorage and sessionStorage with the shared editor, event history, undo, and snapshots. Native secure storage is unavailable on web. The browser build is available in this checkout and has not been published yet. See the [web setup guide](https://buoy.gg/buoy/latest/docs/web-preview) for registration, dependencies, and browser boundaries.

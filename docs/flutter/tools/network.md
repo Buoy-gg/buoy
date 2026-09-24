@@ -2,12 +2,12 @@
 title: Network Monitor
 seoTitle: "Flutter Network Inspector — debug http & dio requests"
 id: flutter-tools-network
-description: "Inspect every HTTP request your Flutter app makes — package:http, dio, and image loads with headers, bodies, timing, and errors — live on the device, no proxy required."
+description: "Inspect supported HTTP requests in your Flutter app — package:http, dio, and image loads with headers, bodies, timing, and errors — live on the device, no proxy required."
 ---
 
-See every API call your app makes. Request, response, headers, timing, errors — all in real-time with zero configuration.
+Inspect requests that use the instrumented `dart:io` HttpClient path. Open a captured request to read its status, headers, body, timing, and error details.
 
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::network-live-demo -->
 
@@ -34,6 +34,8 @@ Everything riding `dart:io`'s `HttpClient` is captured automatically:
 Using the [`buoy` umbrella](../installation)? It's already included — the Network Monitor self-registers when you wrap your app in `BuoyDevTools`. Standalone, add one call before `runApp`:
 
 ```dart
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:buoy_network/buoy_network.dart';
 
 void main() {
@@ -42,9 +44,23 @@ void main() {
 }
 ```
 
-**Boot traffic is already there when you open the tool.** The HTTP hook installs at `registerBuoyNetwork()`, not when something first watches, so requests fired during startup — `main()` fetches, session bootstrap, your first screen's loads — are held and appear in the list the moment you open the panel or connect a dashboard. If nothing ever watches, nothing is retained.
+Capture starts when `registerBuoyNetwork()` installs the hook and account access permits capture. Requests made before registration or through clients created outside the hooked path can be absent. With the umbrella, registration occurs when its widget mounts.
 
----
+Run the app in debug mode with `BuoyDevTools` mounted. Trigger a fresh HTTP request, open Network, and check its URL and status. If it is missing, check registration timing, account state, and the transport used.
+
+## Network throttling
+
+Choose Network throttling from Network’s menu. The inspector minimizes and a
+floating strip appears above the app. Tap the signal bars to cycle through
+No throttling, Slow (+500 ms), Very slow (+2000 ms), and Offline. The profile
+applies to new requests through the captured HttpClient path. Slow profiles add
+a delay; download speed stays unchanged. Offline fails requests before sending.
+
+Drag the strip by its handle or surface. Tap the handle to tuck it against the
+right edge; choose Network throttling again to reveal it. Closing the inspector
+or pausing capture leaves the profile active. Close on the strip turns throttling
+off. Restarting the app restores an open strip at its saved position, but resets
+the profile to No throttling.
 
 ## What You See
 
@@ -72,19 +88,19 @@ The list is newest-first, so **Previous** moves toward the newer request — the
 
 ## Override Responses
 
-Chrome DevTools has **Local Overrides** — serve different bytes for a request without touching the server. Buoy has the same idea on device, and goes further: Chrome can't change a status code (override a body there and it forces `200`), and it has no way to simulate latency or a dead connection. Those are the things you actually need on mobile.
+Use an override in a debug build to test how the app responds to a configured status, failure, or delay. After the test, disable the rule and repeat the request to confirm normal behavior.
 
 Open any request and tap **Override** in the header. That takes you to the rule, prefilled from the request you were looking at — its endpoint, its method, its status, its real response body — so you're never starting from a blank field.
 
 Pick an outcome from one grid: `500`, `401`, `404`, `403`, `429`, `503`, `400`, `200`, **Offline**, **Timeout**, **Real response**, or a custom status. Set a delay. Choose whether it fires always, once, N times, or **every other request** — that last one is how you test retry logic, because a rule that's always on or always off can't reach those paths.
 
-**It works with every client the tool captures.** Overrides are applied at the same `HttpOverrides` layer as capture, so dio, `package:http` and raw `HttpClient` all see them. A forced failure arrives as a `SocketException`, which dio reports as `DioExceptionType.connectionError` — or `connectionTimeout` for a Timeout rule — exactly as a real network failure would.
+**Transport coverage.** Overrides are applied at the same `HttpOverrides` layer as capture, so dio, `package:http` and raw `HttpClient` all see them. A forced failure arrives as a `SocketException`, which dio reports as `DioExceptionType.connectionError` — or `connectionTimeout` for a Timeout rule — exactly as a real network failure would.
 
 **A delay behaves like a slow server, not a slow connection.** The wait is applied while the response is being received, so a 10s delay against a 5s `receiveTimeout` produces a receive timeout — the failure you were trying to reproduce.
 
 **Rules survive a reload**, which is the point: force an endpoint to 500, restart, and watch what your boot path does.
 
-**And it lets go.** A body your app can't render would otherwise re-break it on every launch, with the controls to undo it locked inside an app that no longer draws. So if overrides sit armed and untouched across three launches, they pause themselves, with one tap to turn them back on.
+**Automatic pause.** A body your app can't render would otherwise re-break it on every launch, with the controls to undo it locked inside an app that no longer draws. So if overrides sit armed and untouched across three launches, they pause themselves, with one tap to turn them back on.
 
 Overridden requests pin to the top of the list under an **OVERRIDDEN** heading and carry a flask mark next to their status — a 500 you invented has to be distinguishable from a 500 your backend returned.
 
@@ -120,4 +136,4 @@ Yes — dio traffic is captured and attributed as `dio`, and GraphQL operation n
 
 ### Are requests made during startup captured?
 
-Yes. The HTTP hook installs at `registerBuoyNetwork()` rather than when something first watches, so boot traffic — `main()` fetches, session bootstrap, your first screen's loads — is held and appears the moment you open the panel or connect a dashboard.
+Requests made after hook installation can be captured. Register before the startup requests you need to inspect, and configure account access. Requests made before the umbrella widget mounts may precede its registration.

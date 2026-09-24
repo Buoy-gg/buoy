@@ -5,9 +5,9 @@ id: flutter-tools-storage
 description: "Browse and edit every key-value pair your Flutter app persists — shared_preferences in one explorer with real-time updates and an event stream of every write."
 ---
 
-Browse, edit, and manage all your app's persisted data. See every key-value pair in real-time, with an event stream of every write and diffs of what changed.
+Inspect shared_preferences values and supported registered backends. Edit a disposable test key, read it back through your app, and remove it after checking the integration.
 
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::storage-live-demo -->
 
@@ -16,7 +16,7 @@ The React Native build of this tool, running here on mock data. The Flutter port
 | Backend | Notes |
 | --- | --- |
 | `shared_preferences` | detected automatically, live browse + edit |
-| Secure / MMKV backends | optional — registered the same way |
+| Secure / MMKV backends | Require adapters implementing the package backend interfaces and explicit registration; they are not discovered from package installation alone |
 
 ---
 
@@ -27,6 +27,8 @@ The React Native build of this tool, running here on mock data. The Flutter port
 Using the [`buoy` umbrella](../installation)? It's already included. Standalone:
 
 ```dart
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:buoy_storage/buoy_storage.dart';
 
 void main() {
@@ -35,7 +37,7 @@ void main() {
 }
 ```
 
-> **Live monitoring** — `shared_preferences` has no change stream, so Buoy watches writes made through the app *and* re-scans on an interval, so changes from anywhere still show up.
+> **Live monitoring** — `shared_preferences` has no change stream, so Buoy watches writes made through the app *and* re-scans on an interval, so changes visible to the configured backend appear on a later scan. Polling can miss intermediate writes and does not provide an atomic cross-process history.
 
 ---
 
@@ -47,7 +49,7 @@ void main() {
 
 ## What's Next
 
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Environment Inspector](./env) — Validate env vars with type checking
 - [Events Timeline](./events) — Storage writes alongside network and route events
 
@@ -61,4 +63,4 @@ Add `buoy_storage` and call `registerBuoyStorage()` — every key-value pair is 
 
 ### Will it show writes made outside my own code?
 
-`shared_preferences` has no change stream, so Buoy watches writes made through the app *and* re-scans on an interval — changes from anywhere still show up.
+`shared_preferences` has no change stream, so Buoy watches writes made through the app *and* re-scans on an interval — changes visible to the configured backend appear on a later scan. Polling can miss intermediate writes and does not provide an atomic cross-process history.

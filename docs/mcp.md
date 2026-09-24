@@ -13,12 +13,16 @@ Works with **React Native and Flutter** on the same broker. Some capabilities be
 
 ## Requirements
 
-- **Buoy Pro** — the MCP is a Pro feature. `list_devices` always works, but data/action tools require a connected app on an active Buoy Pro license.
+- **Buoy Pro** — the MCP is a Pro feature. Configure the MCP process account as well as the device account. Data and action tools require Pro; device discovery remains subject to broker admission.
 - **Node.js 18+** on the machine running your editor.
 - **A running app** with Buoy devtools open on a device or simulator (React Native or Flutter).
-- **macOS + Xcode** — only for the `screenshot_component` tool (it captures the iOS Simulator). Everything else is platform-agnostic.
+- **macOS + Xcode** — only for the `screenshot_component` tool (it captures the iOS Simulator). Other host-driven features, such as camera and TV input, also have platform-specific requirements; check their tool pages.
 
 ## Install
+
+Run setup from the app project. Configure the MCP process with your account key through its supported environment configuration; a device key does not sign the MCP process in. Use a trusted development network for the broker.
+
+> Installed Buoy with the [agent prompt](./quick-start)? Ask the same agent for "the Desktop and MCP step" — the install instructions it followed cover `@buoy-gg/external-sync` and `npx @buoy-gg/mcp init`.
 
 One command wires the server into your editor and installs the Buoy skill:
 
@@ -26,30 +30,30 @@ One command wires the server into your editor and installs the Buoy skill:
 npx -y @buoy-gg/mcp@latest init
 ```
 
-This merges a `buoy` server into your MCP config (`.mcp.json` for Claude Code, plus `.cursor/mcp.json` and `.vscode/mcp.json` when those folders exist) and drops the `buoy-optimize` skill into `.claude/skills/`. It's non-destructive — existing servers are preserved, and re-running just refreshes the Buoy entry.
+Setup writes `.mcp.json` and `.cursor/mcp.json`, and updates `.vscode/mcp.json` when `.vscode` exists. Other server entries are preserved; rerunning replaces the Buoy entry, including customizations. It copies the bundled `buoy-optimize` skill, overwriting matching files on reruns. Save skill customizations before updating. Existing debugging-guide blocks are preserved and need separate review.
 
 Then restart your editor (or reconnect the MCP server) and open your app with Buoy devtools running:
 
-- **React Native** — mount `<FloatingDevTools />` (broker address is derived from Metro; physical devices usually need no config). Profiling a **release build**? Sync is off there unless you opt in — see [release builds](./desktop#release-builds).
-- **Flutter** — mount `BuoyDevTools` (simulators auto-connect; physical devices pass `socketUrl: 'http://<lan-ip>:42831'`).
+- **React Native** — install `@buoy-gg/external-sync`, restart Metro, and mount `<FloatingDevTools />` with your account key (broker address is derived from Metro; physical devices usually need no config). Profiling a **release build**? Sync is off there unless you opt in — see [release builds](./desktop#release-builds).
+- **Flutter** — run a debug build and mount `BuoyDevTools` with your account key (simulators auto-connect; physical devices pass `socketUrl: 'http://<lan-ip>:42831'`).
 
-The config it writes launches the server via `npx -y @buoy-gg/mcp@latest`, so **every editor restart re-resolves the newest published version** — you don't get pinned to a stale copy.
+The generated npx entry launches `@buoy-gg/mcp@latest` and may need registry access. Review package updates and verify the connected device after restarting your editor.
 
 ### Corporate / private npm registries
 
-If your machine's `.npmrc` points npm at a private registry that isn't reachable (common on work laptops, e.g. off-VPN), `npx @latest` would hang trying to download the package on every editor launch. `init` probes that registry first and, when it's unreachable, automatically installs a **pinned local copy** from public npm and writes a `node <path>` config instead — taking the network off the startup path entirely. You can also force the behavior:
+If your machine's `.npmrc` points npm at a private registry that isn't reachable (common on work laptops, e.g. off-VPN), `npx @latest` would hang trying to download the package on every editor launch. `init` probes that registry first and, when it's unreachable, automatically installs a **pinned local copy** from public npm and writes a `node <path>` config instead . Package download is removed from the local server launch path; account and broker connections can still use the network. You can also force the behavior:
 
 ```bash
-npx -y @buoy-gg/mcp@latest init --local             # always install locally, no network on startup
-npx -y @buoy-gg/mcp@latest init --npx               # always use the auto-updating npx entry
+npx -y @buoy-gg/mcp@latest init --local             # install a pinned local server
+npx -y @buoy-gg/mcp@latest init --npx               # launch through npx @latest
 npx -y @buoy-gg/mcp@latest init --registry <url>    # registry the local install pulls from
 ```
 
-To update a local install later, re-run `init`.
+To update the local server, run `npx -y @buoy-gg/mcp@latest init --local`.
 
 ## Updating
 
-Because the default config uses `@latest`, you're normally always current. To force a refresh (or update the installed skill), re-run:
+To refresh configuration, rerun setup. Matching skill files are overwritten, while existing debugging blocks are preserved. Save skill customizations and review debugging-guide updates separately:
 
 ```bash
 npx -y @buoy-gg/mcp@latest init
@@ -83,6 +87,7 @@ Ask your assistant to start with `list_devices` to see connected devices and the
 
 - **Inspect runtime** — `get_events` (network, state changes, route changes, storage writes, …), `get_snapshot`, and per-tool readers. Available sources depend on which packages the app installed (Flutter includes Riverpod; React Native includes Redux/Zustand/Jotai/React Query/renders when those packages are present).
 - **Work a single HTTP request** — `get_network_requests` lists requests *with their ids* and marks which are pinned/saved; `network_action` pins or saves one (see below).
+- **Take the app offline, or slow it down** *(React Native, development builds)* — `network_conditions` applies offline or added latency to the whole device; [response overrides](./tools/network) cover one specific URL (see below).
 - **Take actions** — navigate routes, edit storage, and more via `call_action` or the tool-specific wrappers. React Native also exposes dispatch Redux / set Zustand/Jotai / invalidate React Query when those tools are installed.
 - **Drive the UI** *(React Native)* — `describe_screen` and `tap_element` let the agent read what's on screen and interact with it, no screenshots (see below).
 - **Benchmark performance** *(React Native Bench)* — `run_benchmark_batch` and the perf-monitor tools.
@@ -94,41 +99,19 @@ A good starting prompt on React Native: **"buoy optimize"** kicks off a guided p
 
 ## Confirming a fix actually worked
 
-The hard part of letting an agent fix things isn't the fixing — it's that
-"done" is a claim you can't check without re-testing the app yourself.
+After changing app code, repeat the interaction that exposed the problem. Record the device, build, interaction, and observed result. A successful tool call is not proof that the user-visible problem is fixed.
 
-Buoy closes that loop. After an edit, the agent re-runs the exact interaction
-that was broken and reports what changed:
+For render work, compare the same interaction before and after with `measure_renders`. Check both the metrics and the UI, and repeat other affected interactions to catch regressions.
 
-```
-measure_renders — tap "favorite-deal-2" ×5, compareToPrevious: true
-
-vs "before fix"
-- total renders: 2414 → 194 (-2220)
-- wasted: 1379 → 81 (-1298)
-- per component: DealRow 192 → 5 (-187)
-
-✅ Fewer renders than before on this interaction.
-```
-
-That catches the two ways a fix normally fails: being **incomplete** (the value
-was wrong in three places and one got corrected), and **moving the cost**
-instead of removing it — the usual outcome of re-render work, where a screen
-gets faster to type in and slower to tap.
-
-If the project has changed since anything was last checked on the device, Buoy
-says so in its tool results, naming the changed files and the call to make.
-Set `BUOY_VERIFY` in your MCP config to choose how insistent that is:
+`BUOY_VERIFY` controls reminders based on selected source-file edits and tool calls. The watcher does not detect every kind of project change, and clearing a reminder does not prove correctness.
 
 | Value | Behaviour |
-|---|---|
-| `auto` *(default)* | Mentions it once per burst of edits, then gets out of the way. The agent decides whether a given change is worth a device check. |
-| `always` | Repeats until something is actually checked. |
-| `never` | Silent. |
+| --- | --- |
+| `auto` (default) | Reminds once per observed edit burst. |
+| `always` | Repeats while observed edits remain unaccounted for by the tool-call policy. |
+| `never` | Disables reminders. |
 
-The reminder never fires when nothing has changed, and never when no device is
-connected — a doc edit doesn't need a device check, a state-management change
-does.
+Report actual verification separately. Documentation-only edits generally need static checks; behavior changes need suitable behavioral evidence.
 
 ## Driving the UI (React Native)
 
@@ -143,9 +126,9 @@ A typical loop is: `describe_screen` to see the options → `tap_element({ testI
 
 `get_events` is the right tool for skimming activity, but it deliberately emits no request ids — so it can't be used to act on a specific call. **`get_network_requests`** covers that: the same compact one-line-per-request style, but each row leads with the id that every network action is keyed by, and marks which requests are 📌 pinned or 🔖 saved. Narrow it with `status: "errors"`, a URL `pattern`, or `includeBodies` when you need payloads.
 
-**`network_action`** pins, saves, or clears. Because pinned and saved requests ([RN](./tools/network) · [Flutter](./flutter/tools/network)) keep a full snapshot — surviving Clear, the 500-request cap, and app restarts — this works as a handoff in both directions:
+**`network_action`** pins, saves, or clears. Pinned and saved requests ([RN](./tools/network) · [Flutter](./flutter/tools/network)) keep a snapshot subject to storage and body-size limits. They are separate from the live list, and availability after restart depends on successful persistence. Use retained records for handoffs:
 
-- **You → your agent.** Pin the request that's broken, then ask the assistant to look at "the pinned request". `get_network_requests({ flagged: "pinned" })` reads exactly what you flagged, even if it happened before the last reload.
+- **You → your agent.** Pin the request that's broken, then ask the assistant to look at "the pinned request". `get_network_requests({ flagged: "pinned" })` reads available retained records, including earlier sessions when persistence succeeded.
 - **Your agent → you.** An assistant that finds a failing call can pin it, so it's waiting at the top of your Network list when you next open the tool.
 
 ```
@@ -155,21 +138,32 @@ network_action({ action: "pin", id: "fetch_1021" })
 
 Requests kept from an earlier run of the app come back with ids prefixed `saved:` — they're snapshots, not live requests, so they can't collide with a fresh capture.
 
+## Network conditions
+
+**`network_conditions`** reads or sets the condition the device applies to new requests: `normal`, `offline`, `slow` (+500 ms) or `verySlow` (+2000 ms). Offline rejects intercepted HTTP(S) calls before they are sent, so an agent can walk your app's error and retry paths without a proxy and without touching the server. Latency adds one wait before dispatch; it does not cap bandwidth or change what NetInfo reports.
+
+```
+network_conditions({ action: "set", profile: "offline" })
+tap_element({ testID: "checkout-submit" })
+describe_screen()                                   → the error state the app actually renders
+network_conditions({ action: "set", profile: "normal" })
+```
+
+The condition lives in memory on the device. It resets on a full JS reload and is never persisted, so an agent that sets one should clear it when it's done rather than leave the next session offline. Setting a condition needs a development build and an admitted Free or Pro account; a release build refuses anything except `normal`. This control is a development preview, and native transports that bypass global fetch and React Native XHR are not affected by it.
+
 ## Reloading the app (React Native)
 
 `reload_app` restarts the app's JS bundle from your editor — the same thing as shaking the device and hitting Reload, and the same primitive [Bench](./tools/perf-monitor) uses between benchmark cases. Use it when Fast Refresh didn't pick a change up, to clear leaked in-memory state before a measurement, or to re-run app startup.
 
-In dev builds (including Expo Go and RN CLI) it uses React Native's `DevSettings.reload()`; otherwise it falls back to `expo-updates`, if your app installs it. By default the tool waits for the app to come back and reports how long the reload took, so your assistant knows when it's safe to keep going — pass `wait: false` for fire-and-forget. All in-memory state is lost, so anything the assistant read before the reload is stale.
+In dev builds (including Expo Go and RN CLI) it uses React Native's `DevSettings.reload()`; otherwise it falls back to `expo-updates`, if your app installs it. By default the tool waits for the app to come back and reports how long the reload took, so your assistant can inspect the reconnection result — pass `wait: false` for fire-and-forget. All in-memory state is lost, so anything the assistant read before the reload is stale.
 
-It ships with `@buoy-gg/core` itself, so it works on any React Native app running Buoy — no particular tool package, and no extra native dependencies.
+It ships with `@buoy-gg/core` itself, with supported app reload mechanisms. A failed or timed-out reload requires checking the app and connection.
 
-## The buoy-optimize wizard (React Native)
+## The buoy-optimize skill (React Native)
 
-`init` also installs a **`buoy-optimize` skill** — a guided wizard that automates mobile performance work end to end. Whether you're shipping a new feature or fixing a screen that's janky on device, your assistant benchmarks implementation variants on the **real device** with [Bench](./tools/perf-monitor), reads the ranked results, applies the winning change, and repeats until the metrics plateau.
+For a new skill installation, `init` adds a workflow for investigating rendering performance with [Bench](./tools/perf-monitor) and render measurements. Rerunning setup overwrites matching skill files; save customizations first. Ask your assistant for "buoy optimize" to compare a baseline and selected variants on the target device.
 
-Measuring on-device instead of guessing is what makes it fast: optimization passes that used to take days or weeks of AI back-and-forth finish in minutes. One real run took a Skia LED display from **28 lights stuttering** to **over 12,000 lights with no lag**.
-
-It's close to fully automated — the parts that stay manual are the ones only a human can judge, like confirming the UI still renders correctly. When you're working with Skia or other GPU-drawn views, plan to glance at the screen each pass: the wizard drives the metrics, you confirm it still looks right. Kick it off with **"buoy optimize"**.
+Keep device, build mode, workload and interaction comparable. Review failures, missing metrics and visual behavior before selecting a change. Simulator measurements do not establish results on physical hardware, and a ranking is not proof that the feature works correctly.
 
 ## How it works
 
@@ -190,11 +184,11 @@ React Native and Flutter devices appear together in `list_devices`.
 
 ### How do I let Claude Code or Cursor debug my React Native app?
 
-Run `npx -y @buoy-gg/mcp@latest init`. It merges a `buoy` server into your MCP config (`.mcp.json` for Claude Code, plus `.cursor/mcp.json` and `.vscode/mcp.json` when those folders exist) and installs the `buoy-optimize` skill. Restart your editor with the app running and Buoy devtools open, and the agent can read live network, storage, console, routes, and state — and act on them.
+Run `npx -y @buoy-gg/mcp@latest init` from the app project, review the configuration changes described above, and restart the editor. Configure account access, app integrations and the broker connection, then inspect `list_devices`. Configuration alone does not establish a working app connection.
 
 ### Do I need Buoy Pro for the MCP server?
 
-For data and actions, yes. `list_devices` always works, but the tools that read your app's runtime or drive it require a connected app on an active Buoy Pro license.
+For data and actions, yes. Configure a verified account for the MCP process and the connected app. Reading runtime data and running actions require Pro.
 
 ### Does the MCP server work with Flutter?
 

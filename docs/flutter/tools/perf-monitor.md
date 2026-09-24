@@ -7,7 +7,7 @@ description: "Watch your Flutter app's performance on a real device — a live H
 
 Watch performance on a real device. The Perf Monitor is a live on-device HUD showing FPS, jank, CPU, and memory while you use the app — streamed to the [Buoy Desktop](../../desktop) dashboard so you can watch it full-size while you drive the phone.
 
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::perf-monitor-live-demo -->
 
@@ -15,9 +15,11 @@ The React Native build of this tool, running here on mock data. The Flutter port
 
 <!-- ::pub package="buoy_perf_monitor" -->
 
-Pure Dart — no native libraries, no FFI, no platform channels, no rebuild. Using the [`buoy` umbrella](../installation)? It's already registered. Standalone:
+The monitor is implemented in Dart. Restart the app after adding the package or registration. Using the [`buoy` umbrella](../installation)? It's already registered. Standalone:
 
 ```dart
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:buoy_perf_monitor/buoy_perf_monitor.dart';
 
 void main() {
@@ -32,7 +34,9 @@ Open the **PERF** tool from the floating dial to see live metrics and toggle the
 
 ## What It Measures
 
-- **FPS + jank** — from `SchedulerBinding.addTimingsCallback`: build (Dart UI thread) and raster (GPU thread) frame timings. FPS is activity-gated: an idle Flutter app renders no frames, so the HUD shows `—` at rest — honest, not a fake 60.
+Use a debug build with the widget mounted. These measurements include debug-mode overhead; do not present them as release-build performance. Repeat the same interaction when comparing changes.
+
+- **FPS + jank** — from `SchedulerBinding.addTimingsCallback`: build (Dart UI thread) and raster (GPU thread) frame timings. FPS is activity-gated: an idle Flutter app renders no frames, so the HUD shows `—` at rest — because no active frame rate is available.
 - **Memory (RSS)** — from `dart:io`'s `ProcessInfo.currentRss`, sampled continuously even while the UI is still.
 - **CPU** — from `/proc/self/stat` on Android (no pure-Dart source exists on iOS yet).
 
@@ -60,7 +64,7 @@ Add `buoy_perf_monitor` and call `registerBuoyPerfMonitor()` — a live on-devic
 
 ### Why does FPS show a dash when the app is idle?
 
-FPS is activity-gated. An idle Flutter app renders no frames, so the HUD shows `—` at rest rather than a fake 60.
+FPS is activity-gated. An idle Flutter app renders no frames, so the HUD shows `—` at rest because there are no new frames to measure.
 
 ### Does it need native code?
 

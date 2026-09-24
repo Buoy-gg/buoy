@@ -5,11 +5,13 @@ id: flutter-quick-start
 description: "Get Buoy's floating in-app devtools menu running in your Flutter app in minutes, then reach the same tools from desktop or an AI agent."
 ---
 
-Get the in-app menu running in under 2 minutes — then reach the same tools from your desktop or your AI agent.
+Open Buoy in a Flutter debug build, then inspect a request. You need a Free or Pro account key. Profile and release builds do not show the widget or start its tools.
 
 ## 1. Install the core
 
-<!-- ::pub package="buoy" -->
+```bash
+flutter pub add buoy
+```
 
 The `buoy` umbrella pulls in the whole suite. Prefer à la carte? See [Installation](./installation).
 
@@ -18,11 +20,13 @@ The `buoy` umbrella pulls in the whole suite. Prefer à la carte? See [Installat
 Wrap your app via `MaterialApp.builder` (or `CupertinoApp.builder`):
 
 ```dart
+import 'package:flutter/material.dart';
 import 'package:buoy/buoy.dart';
 
 MaterialApp(
   builder: (context, child) => BuoyDevTools(
     deviceName: 'My App',
+    licenseKey: const String.fromEnvironment('BUOY_KEY'),
     child: child ?? const SizedBox.shrink(),
   ),
 )
@@ -30,21 +34,21 @@ MaterialApp(
 
 A floating button appears in the corner of your app. Tap it to open the menu.
 
-Every tool works with no key at all — you just get a minimal event history. A free key (it comes with an account) unlocks standard access, with event history across every tool, and a Pro `licenseKey` unlocks everything: production builds, the MCP server, and unlimited events. See [pricing](https://buoy.gg/pricing).
+Get a key from your Buoy account and run `flutter run --dart-define=BUOY_KEY=YOUR_LICENSE_KEY`. See [Installation](./installation) for a complete app example and SDK requirements.
 
 ## 3. Add tools
 
-With the umbrella install, every Flutter tool is already registered. Prefer individual packages? Install any tool — it appears in the menu:
+The umbrella registers its bundled Flutter tools. Perform an action that makes an HTTP request, then open Network and select the new row. Check the URL and response. If no row appears, confirm that the action made a fresh request and uses a supported client.
 
-<!-- ::pub package="buoy_network" -->
-
-That's it. Open the menu, tap Network, and you're watching every API call in real-time.
+Individual packages require explicit registration. Follow the standalone Network example in [Installation](./installation#available-packages).
 
 ### Riverpod providers
 
 If you use Riverpod, add the Buoy observer to your `ProviderScope`:
 
 ```dart
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:buoy_riverpod/buoy_riverpod.dart';
 
 void main() {
@@ -58,7 +62,7 @@ void main() {
 }
 ```
 
-No wrappers, no middleware. Providers automatically appear in the Riverpod tool inside your Buoy menu.
+The observer reports provider changes to the Riverpod tool. See [Riverpod](./tools/riverpod) for package requirements and complete integration.
 
 ### go_router
 
@@ -74,40 +78,15 @@ registerBuoyRoutes(router: myGoRouter);
 
 <!-- ::flutter-tools-table -->
 
-Install what you need. Skip what you don't. Or keep the umbrella and get them all.
+Use the umbrella for the bundled suite, or register a smaller set of individual packages.
 
 ## Control who sees devtools
 
-Only show devtools to specific users — admins, QA, internal team members, or whoever your business needs:
-
-```dart
-import 'package:buoy/buoy.dart';
-
-Widget build(BuildContext context) {
-  final user = context.watch<AuthCubit>().state.user;
-
-  final showDevTools = user?.role == 'admin' ||
-      user?.role == 'qa' ||
-      (user?.email.endsWith('@yourcompany.com') ?? false);
-
-  return MaterialApp(
-    builder: (context, child) {
-      final app = child ?? const SizedBox.shrink();
-      if (!showDevTools) return app;
-      return BuoyDevTools(
-        licenseKey: 'YOUR_LICENSE_KEY',
-        child: app,
-      );
-    },
-  );
-}
-```
-
-Or keep it available for everyone — your QA and support teams will thank you.
+Mount `BuoyDevTools` only when your app allows the current tester to inspect its data. Use your existing authorization checks. Omitting the widget also omits the initialization and connection it manages; it is not a desktop-only mode.
 
 ## Take it further
 
-The tools you just installed aren't only in the floating menu — reach the same live app two more ways:
+You can also connect this debug build to Desktop or MCP:
 
 - **[Buoy Desktop](../desktop)** — mirror every tool to a full dashboard on macOS, Windows, or Linux, with a live performance HUD and multi-device switching.
 - **[AI / MCP Server](../mcp)** — let Claude Code, Cursor, or any MCP editor inspect and control your running app. One command to wire it up:
@@ -135,4 +114,4 @@ Run `flutter pub add buoy`, then wrap your app in `BuoyDevTools` via `MaterialAp
 
 ### Do I need a license key to try it?
 
-No — every tool works without one, with a minimal event history. A free key, which comes with an account, unlocks standard access, with event history across all tools. Pro unlocks everything: production builds, the MCP server, and unlimited events.
+Use a Free or Pro account key. Pro enables paid capabilities such as MCP, but does not enable the Flutter widget in profile or release mode.

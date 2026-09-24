@@ -5,100 +5,147 @@ id: flutter-installation
 description: "Step-by-step guide to installing Buoy devtools in a Flutter app — requirements, umbrella or à-la-carte packages, and picking your first tools."
 ---
 
-Get Buoy running in your Flutter app in minutes.
+Install Buoy in an existing Flutter app and open its floating tool menu. The `BuoyDevTools` widget runs in debug mode; in profile and release builds it returns only your app's child widget.
 
 ## Requirements
 
-<!-- ::flutter-requirements -->
+The package manifests require Dart `^3.9.0` and Flutter `>=3.27.0`. Use a Flutter SDK that includes Dart 3.9 or a compatible newer Dart 3 release. Check your installed versions with:
+
+```bash
+flutter --version
+```
 
 ## Quick Start
 
-Install the umbrella (whole suite) or pick individual tools:
+For the full suite, run this from your Flutter app's directory:
 
-<!-- ::flutter-quick-install -->
+```bash
+flutter pub add buoy
+```
+
+Wrap your app through `MaterialApp.builder`. A complete minimal `lib/main.dart` looks like this:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:buoy/buoy.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      builder: (context, child) => BuoyDevTools(
+        licenseKey: const String.fromEnvironment('BUOY_KEY'),
+        child: child ?? const SizedBox.shrink(),
+      ),
+      home: const Scaffold(
+        body: Center(child: Text('Open the Buoy menu to inspect this app.')),
+      ),
+    );
+  }
+}
+```
+
+Get your account key as described below, then start a debug build:
+
+```bash
+flutter run --dart-define=BUOY_KEY=YOUR_LICENSE_KEY
+```
+
+Tap the floating button. Confirm that the menu opens and includes Network. To check capture, perform an action in your app that makes a new HTTP request, then open Network and inspect it. The minimal app above opens the menu but does not make a request.
 
 ## Available Packages
 
-Each package adds a new tool to your floating menu. Install only what you need — or use `buoy` for everything.
+The `buoy` umbrella registers its bundled tools. Some tools still need app-specific setup, such as connecting a router or supplying environment values. Their pages describe those steps.
 
 <!-- ::flutter-tool-packages -->
 
-## Register Your License Key
+To install only Network and the core widget:
 
-Buoy runs three ways, and a key is what moves you up:
-
-| | Key | What you get |
-| --- | --- | --- |
-| **No key** | none | Every tool works, with a minimal event history. |
-| **Free** | free key, from an account | Standard access — event history across every tool. |
-| **Pro** | paid key | Everything: production builds, the MCP server, and unlimited events. |
-
-Pass the key as a prop to `BuoyDevTools`:
-
-```dart
-import 'package:buoy/buoy.dart';
-
-MaterialApp(
-  builder: (context, child) => BuoyDevTools(
-    licenseKey: 'YOUR_LICENSE_KEY',
-    child: child ?? const SizedBox.shrink(),
-  ),
-)
+```bash
+flutter pub add buoy_core buoy_network
 ```
 
-Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+Use these imports in place of the umbrella import:
+
+```dart
+import 'package:buoy_core/buoy_core.dart';
+import 'package:buoy_network/buoy_network.dart' show registerBuoyNetwork;
+```
+
+Register Network before `runApp`; keep the `MyApp` widget from the example above:
+
+```dart
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  registerBuoyNetwork();
+  runApp(const MyApp());
+}
+```
+
+Individual tool packages need their registration calls. Adding a dependency alone does not register it with the core widget.
+
+## Register Your License Key
+
+Use a Free or Pro Buoy account key. Visit [pricing](https://buoy.gg/pricing) for account options and plan limits. Pass the key through `--dart-define=BUOY_KEY=...` as shown above; the widget reads it with `String.fromEnvironment`.
+
+If the widget shows account setup, confirm that the build received the key and complete the prompt. A Pro key does not enable this widget in profile or release mode.
 
 ## Desktop & AI (optional)
 
-The packages above power the in-app floating menu. Two more surfaces connect to the same app — both Buoy Pro for MCP:
+- [Buoy Desktop](../desktop) provides a free desktop dashboard for connected apps.
+- [AI / MCP Server](../mcp) lets Claude Code, Cursor, or another MCP editor inspect and control your app. MCP requires Pro.
 
-- **Buoy Desktop** — a full dashboard for macOS, Windows & Linux. [Download it](https://buoy.gg/pricing) and launch it — simulators/emulators find it automatically. See [Buoy Desktop](../desktop).
-- **AI / MCP Server** — drive your app from Claude Code, Cursor, or any MCP editor:
+For MCP configuration, run:
 
 ```bash
 npx -y @buoy-gg/mcp@latest init
 ```
 
-See [AI / MCP Server](../mcp) for the full setup.
+Keep the Flutter app running in debug mode with `BuoyDevTools` mounted. Follow the connection guide for your chosen surface.
 
 ## Devices
 
-- **iOS Simulator / Android Emulator** — connects to Buoy Desktop automatically (`localhost` / `10.0.2.2`).
-- **Physical devices** — pass your computer's LAN IP via the widget: `BuoyDevTools(socketUrl: 'http://192.168.1.x:42831', …)`. iOS will show the Local Network permission prompt on first connect — tap Allow.
+- iOS Simulator uses `localhost`; Android Emulator uses `10.0.2.2` to reach the computer running Desktop or the MCP broker.
+- On a physical device, set `socketUrl` to your computer's LAN address, for example `BuoyDevTools(socketUrl: 'http://192.168.1.20:42831', child: child)`. Replace the address with your computer's address and keep the device on a network that can reach it. Allow local network access if iOS asks.
+
+If the device does not appear, confirm that the broker is running, the address is correct, and the network or firewall allows the connection.
 
 ## Dart Support
 
-All packages are pure Dart (no pods, no gradle edits, no FFI). Null-safe APIs and pub.dev docs ship with every package.
+Buoy's Flutter implementation is Dart. Its dependencies may include Flutter plugins, so follow any platform setup required by the packages you install.
 
 ## Monorepos & Enterprise Setups
 
-Buoy is built to survive locked-down Flutter apps:
+After adding packages or changing tool registration, stop and restart the app. For individual packages, call each tool's registration function before using it.
 
-- **After adding a new `buoy_*` package, do a full restart** — hot reload won't pick up new plugin/package registrations. Stop the app and run again.
-- **Physical devices need a LAN `socketUrl`** — unlike React Native (Metro-derived broker), Flutter apps on a phone should pass `BuoyDevTools(socketUrl: 'http://<your-lan-ip>:42831')`.
-- **Same broker as React Native** — Flutter and RN devices can sit side by side on one Desktop / MCP session.
-- **No on-device UI for end users** — omit `BuoyDevTools` (or gate it behind a role check) for builds where only the desktop dashboard should see the session. See [Quick Start](./quick-start#control-who-sees-devtools).
+Flutter and React Native devices can connect to the same Desktop or MCP broker. Physical Flutter devices need an explicit reachable `socketUrl`.
+
+Keep `BuoyDevTools` mounted for the setup on this page. Removing it also removes the initialization and connection it manages; this guide does not provide a separate headless setup.
 
 ## Not on Flutter (yet)
 
-React Query, Redux, Zustand, render highlighting, debug borders, and JS Top remain **React Native only**. Coming soon for Flutter: benchmarking/batch reports for Perf Monitor, and Dart Top. [Vote on the roadmap](https://buoy.gg/roadmap).
+React Query, Redux, Zustand, render highlighting, debug borders, and JS Top are React Native tools. Check each Flutter tool page for supported features; a matching tool name does not imply complete feature parity. See the [roadmap](https://buoy.gg/roadmap) for proposed additions.
 
 ## Next Steps
 
-- [Quick Start](./quick-start) — Basic setup guide
-- [BuoyDevTools](./buoy-devtools) — Core widget reference
-- [Buoy Desktop](../desktop) — The full desktop dashboard
-- [AI / MCP Server](../mcp) — Drive your app from your AI editor
-- [Custom Tools](./custom-tools) — Build your own debugging tools
-
----
+- [Quick Start](./quick-start): Flutter setup and usage
+- [BuoyDevTools](./buoy-devtools): widget reference
+- [Buoy Desktop](../desktop): desktop connection setup
+- [AI / MCP Server](../mcp): connect your AI editor
+- [Custom Tools](./custom-tools): add an app-specific tool
 
 ## FAQ
 
 ### What's the difference between the `buoy` umbrella and the individual packages?
 
-`buoy` pulls in the whole suite and registers every tool for you. The individual packages (`buoy_network`, `buoy_storage`, and the rest) let you install only what you need. Either way you mount the same `BuoyDevTools` widget.
+`buoy` imports and registers its bundled tools. Individual packages let you choose a smaller set, with explicit registration for each tool. Both use a `BuoyDevTools` widget, but the umbrella exports its own wrapper around the core widget.
 
 ### Where do I mount BuoyDevTools in a Flutter app?
 
-In `MaterialApp.builder` (or `CupertinoApp.builder`), wrapping the `child` — the floating button then sits above every screen in the app.
+Use `MaterialApp.builder` or `CupertinoApp.builder` to wrap the child so the menu appears above your screens. Keep it inside any providers needed by your tools.

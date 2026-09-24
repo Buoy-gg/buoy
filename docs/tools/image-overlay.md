@@ -7,11 +7,9 @@ description: "Overlay design mockups on your running React Native app and tweak 
 
 <!-- ::platform-badge platform="both" -->
 
-Overlay design mockups directly on your running app to compare against your implementation. Adjust opacity, scale, and position to get pixel-perfect results — no more switching between your design tool and the simulator.
+Overlay design mockups directly on your running app to compare against your implementation. Load a mockup, match its scale and position to the screen, and adjust opacity to compare spacing and alignment.
 
-Below is the real tool, running here in your browser over a mock storefront:
-scan for tagged components, pin the design to the product card, watch it stay
-locked when the layout shifts, and read the padding bug off the offset slider.
+The demo shows component targeting and alignment on a mock storefront.
 
 <!-- ::image-overlay-live-demo -->
 
@@ -31,7 +29,7 @@ To make a component discoverable in **Component Mode**, add a `testID` with the 
 <View testID="image-target:LoginCard">
   <Text>Welcome back</Text>
   <TextInput placeholder="Email" />
-  <Button title="Sign In" />
+  <Button title="Sign In" onPress={() => {}} />
 </View>
 ```
 
@@ -70,7 +68,7 @@ You can load a design mockup in two ways:
 - **Paste from Clipboard** — Copy an image in Figma (or anywhere) and tap "Paste from Clipboard". Requires `expo-clipboard`.
 - **Enter a URL** — Paste a direct image URL and tap "Load". Works with any React Native setup.
 
-> **Clipboard paste requires Expo.** The "Paste from Clipboard" feature uses `expo-clipboard` to read image data. If you're using bare React Native without Expo, use the URL method instead.
+Clipboard image loading requires `expo-clipboard` and its native setup. Use a direct image URL for the minimal path; load it, reduce opacity, align the mockup, and lock the overlay before interacting with the screen.
 
 ---
 
@@ -102,7 +100,7 @@ Manually position and resize the overlay anywhere on screen. Drag to move, pinch
 
 - [Highlight Updates](./highlight-updates) — See exactly why components re-render
 - [Environment Inspector](./env) — View and search environment variables
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 
 ---
 
@@ -111,3 +109,7 @@ Manually position and resize the overlay anywhere on screen. Drag to move, pinch
 ### How do I compare my React Native UI against a Figma design?
 
 Export the frame as an image, then load it in Image Overlay from clipboard or URL — adjust opacity over the running app and differences jump out.
+
+## Web support (unreleased)
+
+Tag browser targets with data-testid="image-target:Name" and import the browser registration before React DOM. The shared controls support target and free placement. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

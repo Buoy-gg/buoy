@@ -7,9 +7,7 @@ description: "Capture every console.log, warn, and error from your React Native 
 
 <!-- ::platform-badge platform="both" -->
 
-A Chrome-DevTools-style console for your React Native app. Buoy Console captures every `console.log`, `console.warn`, `console.error`, and `console.info` on the device and shows them in a familiar, filterable panel — on your phone, on the desktop dashboard, or through your AI agent.
-
-Logs stream in, a promo warning and a 500 land, you read the error as structured data instead of one flat line, the gutter names the function behind each run, and the buffer rides out a relaunch.
+Read captured `console.log`, `console.info`, `console.warn`, and `console.error` calls in your app. Filter by level or search the message, then expand structured arguments for context. Capture begins after the tool installs its hooks and account access permits it.
 
 <!-- ::console-live-demo -->
 
@@ -66,8 +64,12 @@ With the [MCP server](../mcp), an AI agent can read the console tail directly wi
 
 ### How do I see console logs in a React Native production build?
 
-Install `@buoy-gg/console` — logs are captured in the app itself and viewable from the floating menu in any build, with access under your control.
+Install `@buoy-gg/console` — logs are captured in the app itself and viewable from the floating menu. Production use requires Pro and app-controlled access. Logs stripped from the bundle or emitted before capture starts are unavailable.
 
 ### Do I still need the Metro terminal or React Native DevTools?
 
 For breakpoints, yes — keep React Native DevTools. For reading logs anywhere (including devices not attached to your machine), the in-app console replaces terminal-watching.
+
+## Web support (unreleased)
+
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

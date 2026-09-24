@@ -1,17 +1,17 @@
 ---
 title: Assets
-seoTitle: "React Native Asset Inventory — sizes, duplicates & unused"
+seoTitle: "React Native Asset Inventory — sizes, duplicates & runtime registration"
 id: tools-assets
-description: "See every asset shipped in your app — bundled images, fonts, video and audio with real byte sizes, scale-variant coverage, duplicate detection, and shipped-but-never-loaded auditing. Zero configuration."
+description: "Inspect React Native assets with available sizes, scale variants, duplicate checks, and development-only bundle coverage. Identify assets not loaded during a test session."
 ---
 
 <!-- ::platform-badge platform="both" -->
 
-How many megabytes of images are you shipping? Which ones does nobody ever see? Is that hero PNG in the bundle twice? React Native gives you **no** inventory of your bundled assets — the usual answer is unzipping a release build and spelunking through APK Analyzer after you've already shipped the bloat.
+Inspect assets registered in the running app, including dimensions, scale variants, and available size data. In development, the Metro graph adds bundle-wide information for duplicate and not-yet-loaded checks.
 
-The Assets tool is that inventory, live in your app: every bundled asset — images, fonts, video, audio — with dimensions, `@1x/@2x/@3x` scale coverage, real byte sizes, duplicate-content detection, and the one thing no build-time tool can do: which assets are **shipped but never loaded** at runtime. Pure JavaScript, zero configuration.
+An asset not loaded during this session may still be used by another screen or flow. Exercise representative flows before removing it.
 
-Watch the inventory fill largest-first, catch the unused megabytes, filter what no code loads, then baseline the size regression — the real tool on mock data:
+Buoy's own package assets are excluded from the inventory, size totals, and reports. The exclusion uses package source paths, so app assets with the same filenames remain visible.
 
 <!-- ::assets-live-demo -->
 
@@ -40,12 +40,12 @@ export default function App() {
 
 ## What You Can Do
 
-- **See the whole inventory, largest first** — every bundled asset with a thumbnail, dimensions, scale variants, and its size. Filter by kind (images / fonts / video / audio / data) or show only never-loaded assets.
+- **See the whole inventory, largest first** — assets visible through the available inventory sources with a thumbnail, dimensions, scale variants, and its size. Filter by kind (images / fonts / video / audio / data) or show only assets not observed in the runtime registry.
 - **Get real byte sizes** — in dev, every scale variant is measured from the Metro server, per variant and totaled. In release builds you still get decoded-memory estimates.
-- **Find assets you ship but never use** — the tool diffs the full bundle graph (dev server) against what actually registered at runtime. Static grep tools can't know what's *loaded*; this does.
+- **Find assets not observed in the runtime registry** — compare the bundle graph with React Native asset registrations during this app run. Other loading paths may not be captured.
 - **Catch duplicate content** — identical bytes shipped under different names or paths, flagged by content hash. One of the most common (and cheapest to fix) app-size wins.
 - **Audit scale coverage** — images whose variants can't serve the current device's pixel ratio (blurry on 3x) are flagged per record.
-- **Spot WebP wins** — large PNG/JPEG assets that would typically shrink 20–40% as WebP.
+- **Spot WebP wins** — large PNG/JPEG candidates for conversion; measure the converted files before claiming savings.
 - **See every loaded font family** — build-time embedded and runtime loaded (via the expo-font native module when present).
 - **Copy a markdown report** — the full inventory with findings, ready for an issue or PR description.
 
@@ -56,27 +56,39 @@ export default function App() {
 Three layers, each degrading gracefully:
 
 1. **Runtime registry (everywhere, incl. release):** enumerates `@react-native/assets-registry` — every asset whose module has been evaluated — and patches `registerAsset` for live updates. Works in Expo Go, dev clients, bare RN, and release builds.
-2. **Metro graph (dev):** fetches the dev server's full asset graph for bundle-wide coverage, source paths, and byte measurement — this is what powers never-loaded detection and real sizes.
+2. **Metro graph (dev):** fetches the dev server's full asset graph for bundle-wide coverage, source paths, and byte measurement — this is what powers runtime registration comparisons and real sizes.
 3. **Expo enrichment (when present):** loaded font families and the expo-updates embedded-asset map, read through guarded globals — no extra dependencies for bare RN apps.
 
-**Honest limits:** `.json` files (including Lottie) compile into the JS bundle as source modules, so they never reach the asset registry — they're visible in dev via the bundle graph only. Native-only resources (app icons, splash screens) live outside the JS bundle entirely and aren't listed.
+**Limits:** `.json` files (including Lottie) compile into the JS bundle as source modules, so they never reach the asset registry — they're visible in dev via the bundle graph only. Native-only resources (app icons, splash screens) live outside the JS bundle entirely and aren't listed.
 
 ---
 
 ## FAQ
 
+### Can I preview SVG assets?
+
+On native apps, SVG thumbnails and detail previews use `expo-image` if it is installed and its native module is available. It is optional, and Assets does not require `react-native-svg`. When a preview cannot load, the tool shows a placeholder. Desktop and web use browser image rendering. The iOS system SVG decoder has limitations with some path commands.
+
+### Why does the asset count grow after I open the tool?
+
+The tool shows registered assets first, then asks the development server for the larger bundle inventory. A spinner and a "found so far" count show that discovery is still running. After eight seconds, a message explains the wait. You can keep browsing the assets already listed.
+
+Size checks run after discovery. If discovery fails or exceeds 90 seconds, the tool keeps the assets it already found and offers Retry. Without a development server, it shows runtime-registered assets only.
+
 ### How do I find out how big my React Native app assets are?
 
-Open the tool in a dev build — every scale variant of every bundled asset is measured from the Metro server and summed per asset, with kind totals in the header. Release builds still get decoded-memory estimates.
+Open the tool in a dev build — every scale variant of assets visible through the available inventory sources is measured from the Metro server and summed per asset, with kind totals in the header. Release builds still get decoded-memory estimates.
 
 ### Can it find assets I ship but never use?
 
-Yes — in dev it fetches the full Metro bundle graph and diffs it against what actually registered at runtime, so anything bundled but never required shows up under UNUSED. Runtime knowledge is what static grep scripts are missing.
+In development, it compares the Metro bundle graph with React Native’s runtime asset registry. **Not observed** shows assets missing from that registry during this app run, across screens. Other loading paths may not register there, so this is not proof that an asset is unused.
 
 ### How is this different from the Images tool?
 
 Images shows what your app renders at runtime — per-load cache verdicts, timings, failures. Assets shows what your app ships in the bundle. The slow load is an Images problem; the megabytes are an Assets problem.
 
-### How do I stop asset bloat from creeping back in?
+Use **Duplicates** at the top of the asset list to show every asset that shares a content hash with another asset. The count includes all copies. Selecting it clears the search; select **All** or tap **Duplicates** again to return to the full list.
 
-Save a baseline before you start, then re-open the tool after any change — it reports added, removed and grown assets with the net byte delta, persisted across app restarts.
+## Web support (unreleased)
+
+Browser capture observes loaded resources. Add the Vite asset manifest or register a manifest from your bundler to include files before they load. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

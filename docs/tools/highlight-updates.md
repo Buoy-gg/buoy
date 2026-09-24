@@ -7,11 +7,9 @@ description: "See why your React Native components re-render — visual overlays
 
 <!-- ::platform-badge platform="both" -->
 
-You already suspect the list is re-rendering too much. What you cannot get is *why* — and why is the only part that tells you what to change.
+See which components render as you interact with a development build. The overlay shows render counts; the detail view shows available causes and hook value changes.
 
-React's profiler records a session for a desktop to analyse afterwards; it will not tell you that this card re-rendered because a parent passed a new inline object while you were typing in a search box. Highlight Updates draws the renders on the running app as they happen, counts them per component, and names the cause on each one — down to the `useState` value before and after.
-
-Typing in a search box re-renders every card in the list, the 47x badge names the worst offender, the detail view names the cause — down to the exact useState before → after.
+Use the demo to inspect a list update, then compare it with an interaction in your app.
 
 <!-- ::highlight-live-demo -->
 
@@ -19,7 +17,7 @@ Typing in a search box re-renders every card in the list, the 47x badge names th
 
 <!-- ::render-causes-grid -->
 
-> **Know the WHY** — Every render is tagged with its cause. No more guessing why your component updated.
+Inspect the recorded cause alongside the component and interaction before deciding whether a render is unnecessary.
 
 ---
 
@@ -55,7 +53,7 @@ When a state change causes a render, Highlight Updates shows you the **before an
 
 ## What It Can't Do
 
-**It needs a development build.** Render data comes from React's own DevTools hook (`__REACT_DEVTOOLS_GLOBAL_HOOK__`), which release builds do not install. Most Buoy tools run in production; this one genuinely cannot.
+**It needs a development build.** Render data comes from React's own DevTools hook (`__REACT_DEVTOOLS_GLOBAL_HOOK__`), which release builds do not install. This tool requires the development hook.
 
 **The overlay costs frame time.** Drawing a box and a counter over every committed component is real work on the UI thread, so the numbers tell you *which* component re-renders and *why*, not what your frame budget looks like with the overlay off. For that measurement use [Bench](./perf-monitor).
 
@@ -63,7 +61,7 @@ When a state change causes a render, Highlight Updates shows you the **before an
 
 - [Image Overlay](./image-overlay) — Overlay design mockups on your running app
 - [Environment Inspector](./env) — View and search environment variables
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 
 ---
 
@@ -75,4 +73,8 @@ Install `@buoy-gg/highlight-updates` and turn on highlighting — components fla
 
 ### How is this different from the React DevTools profiler?
 
-The profiler records a session for later analysis on a desktop. Buoy highlights renders live on the device while you use the app — and also works in staging/production builds where the profiler can't attach.
+Buoy shows overlays and render details inside the running development build. Use React's profiler for profiling sessions and Buoy for inspecting renders during an interaction. Highlight Updates does not work in production builds.
+
+## Web support (unreleased)
+
+Import @buoy-gg/core/web/register before React DOM to capture roots and renders. The shared inspector measures DOM elements. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

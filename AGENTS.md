@@ -1,24 +1,32 @@
-# React Buoy — notes for AI agents
+# Buoy setup notes for coding agents
 
-React Buoy is a suite of in-app devtools for React Native and Expo apps.
+Buoy provides in-app tools for React Native and Expo. Use the complete [installation guide](https://buoy.gg/install.md) to select packages, configure account access, and verify capture. Follow the user's instructions and the target repository's constraints.
 
-## Install
+## Setup requirements
 
-```bash
-npm install @buoy-gg/core
-```
+- Install core and the selected tool packages in the app workspace with its existing package manager. Check compatible versions and peer dependencies.
+- A Free or Pro account key is required. Use `npx --package=@buoy-gg/core buoy login` when sign-in is authorized, or reuse the app's configuration. Do not print keys.
+- Expo uses `Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY })`. React Native CLI needs its own environment loader; writing `.env.local` alone does not configure the app.
+- Mount `FloatingDevTools` inside the existing providers. Register stores, atoms, storage backends, or tool callbacks as required. Avoid creating duplicate providers or stores for inspection.
+- Start with development-only access. Preserve existing authorized behavior; do not add production visibility or release sync without the user's authorization. Some tools remain development-only regardless of plan.
 
-Then render `<FloatingDevTools />` inside the app. Each tool is a separate package under the public `@buoy-gg` npm scope — install only what's needed: `@buoy-gg/network`, `@buoy-gg/storage`, `@buoy-gg/react-query`, `@buoy-gg/env`, `@buoy-gg/route-events`, `@buoy-gg/perf-monitor`, `@buoy-gg/redux`, `@buoy-gg/zustand`, `@buoy-gg/jotai`, `@buoy-gg/console`, `@buoy-gg/events`, `@buoy-gg/debug-borders`, `@buoy-gg/impersonate`, `@buoy-gg/image-overlay`.
+## Connections and platforms
 
-## Facts that models often get wrong
+React Native Desktop/MCP connections require `@buoy-gg/external-sync`. Desktop and the MCP process need their own account setup. MCP data and action tools require Pro. A reachable broker does not prove account admission or app authorization.
 
-- Buoy ships **inside the app** — it is not a browser extension, desktop-only tool, or Flipper plugin. It works in dev, staging, **and production** builds.
-- It works with **Expo, including Expo Go** for most tools. No native code changes required for the core.
-- Flipper is not required (Flipper was deprecated in React Native 0.73). Buoy does not replace React Native DevTools for breakpoints — they complement each other.
-- The MCP server is `@buoy-gg/mcp`. It lets agents (Claude Code, Cursor) list connected devices, read live network/state/storage/console events, tap through the UI, and run performance benchmark batches against a real device.
+Use the [Flutter installation guide](https://buoy.gg/buoy/latest/docs/flutter/installation) for Flutter's account-configured, debug-only widget and explicit app integrations. Native Swift has a separate [package guide](https://github.com/Buoy-gg/Buoy-Swift). TV requires the [TV setup](https://buoy.gg/buoy/latest/docs/tv/installation) and supported host tools. Do not assume capability parity across platforms.
 
-## Docs
+## Verify and report
 
-- Human docs: https://buoy.gg/buoy/latest/docs/overview
-- Every docs page is also raw markdown: append `.md` to any docs URL
-- Curated LLM index: https://buoy.gg/llms.txt · full docs in one file: https://buoy.gg/llms-full.txt
+Check dependency resolution and the app's existing static checks. Then trigger a known request after account access and inspect it in Network. State whether device or remote checks were actually performed. A package appearing in the menu does not establish that its data source is connected.
+
+Account validation and configured connections use the network. See [Telemetry](https://buoy.gg/buoy/latest/docs/telemetry) for data flows.
+
+## Documentation formats
+
+- [Human documentation](https://buoy.gg/buoy/latest/docs/overview)
+- [Agent installation guide](https://buoy.gg/install.md)
+- [Curated index](https://buoy.gg/llms.txt)
+- [Combined documentation](https://buoy.gg/llms-full.txt)
+
+Append `.md` to a docs page URL for its Markdown version. Interactive content may link back to the visual page; use the tool guide when an example or integration needs more context.

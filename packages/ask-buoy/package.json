@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/ask-buoy",
-  "version": "7.0.36",
-  "description": "Ask Buoy - an in-app AI chat that drives every Buoy devtool, powered by your own model endpoint",
+  "version": "7.0.40",
+  "description": "In-app AI chat for supported Buoy inspection and action tools, using a configured model endpoint.",
   "homepage": "https://buoy.gg/tools/ask-buoy",
   "keywords": [
     "react-native",

@@ -7,11 +7,7 @@ description: "Inspect Jotai atoms in your React Native app — watch state chang
 
 <!-- ::platform-badge platform="both" -->
 
-Atoms are small on purpose, which means a wrong value has usually travelled through four of them before it reaches the screen. Jotai's model gives you nothing to log — there is no store to inspect, and derived atoms recompute silently — so the usual approach is a `useEffect` that prints one atom at a time.
-
-Buoy registers your atoms by name and shows their live values in one list, with a write history that puts prev → next on every change. You find the atom where the value went wrong, instead of the component where you noticed.
-
-Atoms update as the app runs, applyPromo wipes cart.total, you read prev → next and the on-device diff, then Clear the log and the broken value is still sitting on Atoms.
+Inspect named Jotai atoms, their current values, and recorded changes. Register the atoms you need with the same store your app uses, then follow a value through the event history and diff views.
 
 <!-- ::jotai-live-demo -->
 
@@ -41,7 +37,7 @@ watchAtoms(getDefaultStore(), {
 
 That's it. Registered atoms automatically appear in the Jotai tool inside your FloatingDevTools menu.
 
-> **Zero config required** — Your existing atoms work as-is. No wrappers, no `atomWithDevTools`, nothing to change.
+Change a registered atom through your app, then confirm its new value and event appear. If it is absent, check that `watchAtoms` received the same store as your provider.
 
 ---
 
@@ -132,16 +128,16 @@ Pause atom capture when you need to focus, resume when ready.
 
 ## What It Can't Do
 
-**Only atoms you register are visible.** Jotai has no store to enumerate — atoms are module-level values — so Buoy shows what you pass to `watchAtoms` and nothing else. An atom you forgot to register is invisible, not missing.
+Only registered atoms are visible. Jotai has stores, but Buoy does not automatically discover every atom your app may use.
 
-**Derived atoms are read-only.** An atom computed from others has no setter, so Buoy captures it for inspection and refuses to write it (`Atom "…" is read-only (derived) — cannot set`). On restore, derived atoms recompute from their sources rather than being set back — which is the correct behaviour, and worth knowing before you expect a restore to pin one.
+Read-only atoms cannot be written. A derived atom can be writable if it defines a write function; derivation alone does not determine whether a write is allowed. Check the tool's reported capability before editing or restoring it.
 
 ## What's Next
 
 - [Zustand DevTools](./zustand) — Zustand store monitor with state diffing and jump-to-state
 - [Redux DevTools](./redux) — Redux action monitor with state diffing and time-travel
 - [React Query DevTools](./react-query) — TanStack Query inspection
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 
 ---
 
@@ -150,3 +146,7 @@ Pause atom capture when you need to focus, resume when ready.
 ### How do I inspect Jotai atoms in React Native?
 
 Install `@buoy-gg/jotai` and register your atoms — they appear in the on-device browser with live values, write history, and diffs.
+
+## Web support (unreleased)
+
+Register the app’s atoms and store with watchAtoms. The shared panel and snapshot provider use those registrations. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

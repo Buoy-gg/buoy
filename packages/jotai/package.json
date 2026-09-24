@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/jotai",
-  "version": "7.0.36",
-  "description": "Jotai devtools inside your React Native app — every atom write shows prev → next, with per-atom history & live values. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Inspect registered Jotai atoms, observed writes, retained history and current values in a React Native app.",
   "homepage": "https://buoy.gg/tools/jotai",
   "keywords": [
     "react-native",

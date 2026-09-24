@@ -5,9 +5,9 @@ id: flutter-tools-impersonate
 description: "Test your Flutter app as any user by injecting impersonation headers into your network requests — no logging out or switching accounts required."
 ---
 
-Admin user impersonation for Flutter. Test your app as any user by injecting impersonation headers into your network requests — without logging out or switching accounts. State persists across launches and mirrors live to Buoy Desktop.
+Configure an authorized user-search API and attach the current impersonation headers to requests sent to your backend. Select a test user, verify the header in Network, then stop impersonation and confirm the header is removed.
 
-Search a stuck customer, become her with one tap, pause from the banner — then try it yourself:
+Your backend must authenticate the operator and authorize the target user. Adding a header does not grant permission.
 
 <!-- ::impersonate-live-demo -->
 
@@ -26,13 +26,14 @@ import 'package:buoy_impersonate/buoy_impersonate.dart';
 
 registerBuoyImpersonate(
   onSearchUsers: (query) async => api.searchUsers(query), // List<ImpersonateUser>
-  onClearAsyncStorage: () => prefs.clear(),               // optional data nukes
 );
 ```
 
-Dart has no global `fetch` to patch, so you apply the header in your HTTP client — e.g. a dio interceptor:
+The snippets assume your app defines `api.searchUsers` and a Dio instance named `dio`. Add the interceptor only to the client for your authorized backend, not to a shared client that also sends requests to third-party services:
 
 ```dart
+import 'package:dio/dio.dart';
+
 dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
   options.headers.addAll(BuoyImpersonate.instance.impersonationHeaders);
   handler.next(options);
@@ -64,7 +65,7 @@ Search for users by email, name, or ID. Results display in a clean card format s
 Quick-switch between recently impersonated users. History persists across app restarts. Each history entry shows when the user was last impersonated.
 
 ### Data Clearing
-Pass optional nuke callbacks so switching users clears stale client state:
+Pass optional clearing callbacks so switching users clears stale client state:
 
 | Callback | Typical use |
 |----------|-------------|
@@ -76,7 +77,7 @@ Pass optional nuke callbacks so switching users clears stale client state:
 Unlike React Native, Flutter has no runtime auto-detection — “configured” means you passed the callback.
 
 ### Floating Banner
-A floating banner appears when impersonation is active, so you can’t forget you’re viewing as another user. Toggle it in Settings.
+A floating banner appears when impersonation is active, to identify the selected user. Toggle it in Settings.
 
 ---
 
@@ -115,7 +116,7 @@ Read the live map anywhere with `BuoyImpersonate.instance.impersonationHeaders`.
 
 ## What's Next
 
-- [Network Monitor](./network) — Watch the headers on every request
+- [Network Monitor](./network) — Inspect headers on captured requests
 - [Storage Explorer](./storage) — Inspect the impersonated user's persisted state
 - [Events Timeline](./events) — The whole flow in one stream
 

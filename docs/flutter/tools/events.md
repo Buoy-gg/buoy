@@ -5,9 +5,9 @@ id: flutter-tools-events
 description: "Watch network requests, storage writes, state changes, and navigation in one chronological timeline to debug complex Flutter user flows."
 ---
 
-See every event across all your dev tools in one chronological timeline. Debug complex user flows by watching network requests, storage changes, state updates, and navigation happen in real-time.
+Inspect captured events from registered source tools in one chronological timeline. Debug complex user flows by watching network requests, storage changes, state updates, and navigation happen in real-time.
 
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::events-live-demo -->
 
@@ -15,7 +15,15 @@ The React Native build of this tool, running here on mock data. The Flutter port
 
 <!-- ::pub package="buoy_events" -->
 
-Events Timeline automatically aggregates from all installed Buoy tools. No additional setup required — each tool registers its own event source when it registers itself.
+With the umbrella, Events and its bundled source tools are registered for you. For a standalone install, register Events as well as the sources you need:
+
+```dart
+import 'package:buoy_events/buoy_events.dart';
+
+registerBuoyEvents();
+```
+
+Call registration before using the tool and keep `BuoyDevTools` mounted in debug mode. Complete Network, Storage, Routes, or Riverpod integration on the corresponding tool pages. Trigger one event and check its source badge in the timeline.
 
 ---
 
@@ -28,7 +36,7 @@ Events Timeline automatically aggregates from all installed Buoy tools. No addit
 | [Routes](./routes) | every navigation with params |
 | [Riverpod](./riverpod) | every provider state change |
 
-> **Auto-detection** — If you have the tool installed, its events automatically appear in the timeline.
+> **Auto-detection** — A source must be registered and capturing events before it appears in the timeline.
 
 ---
 
@@ -66,7 +74,7 @@ Related events can share a `correlationId` (included in JSON / LLM exports) so y
 
 ## What's Next
 
-- [Network Monitor](./network) — Deep dive into API requests
+- [Network Monitor](./network) — Inspect request details
 - [Riverpod Inspector](./riverpod) — State inspection with diffs
 - [Storage Explorer](./storage) — Browse and edit persisted data
 
@@ -76,7 +84,7 @@ Related events can share a `correlationId` (included in JSON / LLM exports) so y
 
 ### How do I see everything my Flutter app did in one timeline?
 
-Install `buoy_events` — it aggregates automatically from the Buoy tools you already have: network requests, storage writes, navigation, and Riverpod state changes, newest-first, with per-source filters and live counts. No extra setup.
+Install `buoy_events` — it aggregates automatically from the Buoy tools you already have: network requests, storage writes, navigation, and Riverpod state changes, newest-first, with per-source filters and live counts. Source tools must be registered and configured.
 
 ### Can I export the timeline?
 

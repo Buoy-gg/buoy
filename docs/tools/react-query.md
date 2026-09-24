@@ -7,11 +7,9 @@ description: "Full TanStack Query devtools for React Native — browse queries, 
 
 <!-- ::platform-badge platform="both" -->
 
-React Query bugs are almost never in the request. The network tab shows a clean 200 and the screen still shows yesterday's data, because the problem is in the cache: which key it landed under, whether the query is stale, whether anything is still observing it.
+Inspect the queries in your app's TanStack Query client, including keys, status, observers, and cached data. Edit cache values or simulate loading and errors to test the screen that consumes them.
 
-TanStack's own devtools answer exactly that — and they are web-only, so on React Native you are back to logging `queryClient.getQueryData` and rebuilding to read it. Buoy puts the same query browser on the device: every query with its key, state and cached data, editable in place, plus one-tap loading and error simulation.
-
-The demo below is the real on-device tool on a mock QueryClient: the cache lights up, a checkout query fails, you inspect cart JSON, force a loading spinner without the network, restore it, then free-play.
+The demo uses a mock QueryClient. In your app, the tool reads the client supplied by its surrounding provider.
 
 <!-- ::query-live-demo -->
 
@@ -19,7 +17,18 @@ The demo below is the real on-device tool on a mock QueryClient: the cache light
 
 <!-- ::PM npm="npm install @buoy-gg/react-query" yarn="yarn add @buoy-gg/react-query" pnpm="pnpm add @buoy-gg/react-query" bun="bun add @buoy-gg/react-query" -->
 
-That's it. The React Query DevTools auto-detects your QueryClient and appears in your FloatingDevTools menu.
+Mount `FloatingDevTools` inside the same `QueryClientProvider` as your screens. Installing the package does not make a client outside that context available.
+
+```tsx
+<QueryClientProvider client={queryClient}>
+  <YourApp />
+  <FloatingDevTools />
+</QueryClientProvider>
+```
+
+This placement example uses your existing `queryClient` and app component; import `QueryClientProvider` from `@tanstack/react-query` and `FloatingDevTools` from `@buoy-gg/core`. Keep your existing account configuration.
+
+Open a screen that runs a query, find its key in the tool, and inspect the cached data. Try a simulated loading state, then restore it and confirm that the screen resumes.
 
 ---
 
@@ -50,7 +59,7 @@ Track all your mutations in real-time:
 
 ## WiFi Toggle
 
-Simulate offline mode with one tap. The WiFi toggle controls React Query's `onlineManager` to pause all queries — perfect for testing offline-first features.
+Simulate offline mode with one tap. The WiFi toggle controls React Query's `onlineManager` to test offline behavior for queries that honor that manager. It does not disable the device network or override a query's network mode.
 
 ---
 
@@ -62,7 +71,7 @@ Simulate offline mode with one tap. The WiFi toggle controls React Query's `onli
 
 ## What's Next
 
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
 - [Environment Inspector](./env) — Validate env vars with type checking
 
@@ -72,8 +81,12 @@ Simulate offline mode with one tap. The WiFi toggle controls React Query's `onli
 
 ### How do I use React Query devtools in React Native?
 
-The official TanStack devtools are web-only. Install `@buoy-gg/react-query` and the same capabilities — query browser, cache inspector, state simulation — run inside your app on the device.
+Install `@buoy-gg/react-query` and place the menu inside your app's query provider. Open the tool to inspect queries and simulate cache states.
 
 ### Does it work with Expo Go?
 
-Yes. It's pure JavaScript — no native modules — so it works in Expo Go, dev builds, and production.
+Yes. It's pure JavaScript — no native modules — so the tool can run in Expo Go. Production access requires Pro and deliberate app authorization.
+
+## Web support (unreleased)
+
+Use the app’s existing QueryClientProvider. The browser host mounts the shared tracker and cache adapter. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

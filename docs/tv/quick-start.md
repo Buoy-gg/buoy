@@ -5,12 +5,20 @@ id: tv-quick-start
 description: "Get Buoy running in a React Native TV app in minutes: install the core, mount it headless, and open your Apple TV or Android TV device in Buoy Desktop."
 ---
 
-Get a TV app streaming to Buoy Desktop in under 2 minutes. There is no separate TV SDK — you
-install the same packages you would in any React Native app.
+Connect a React Native TV app to Buoy Desktop, then inspect remote input and focus. Buoy uses the same JavaScript packages as its phone integration.
 
 ## 1. Install the core
 
-<!-- ::PM npm="npm install @buoy-gg/core" yarn="yarn add @buoy-gg/core" pnpm="pnpm add @buoy-gg/core" bun="bun add @buoy-gg/core" -->
+<!-- ::PM npm="npm install @buoy-gg/core @buoy-gg/external-sync" yarn="yarn add @buoy-gg/core @buoy-gg/external-sync" pnpm="pnpm add @buoy-gg/core @buoy-gg/external-sync" bun="bun add @buoy-gg/core @buoy-gg/external-sync" -->
+
+For plain Markdown readers, the command is:
+
+```bash
+npm install @buoy-gg/core @buoy-gg/external-sync
+```
+
+Configure a Free or Pro key with `npx --package=@buoy-gg/core buoy login`. The examples use Expo's `EXPO_PUBLIC_BUOY_KEY`; React Native CLI apps must supply the key through their own environment configuration.
+
 
 ## 2. Mount it headless
 
@@ -21,7 +29,7 @@ export default function App() {
   return (
     <>
       {/* your app */}
-      <FloatingDevTools headless />  {/* TV apps run headless — no bubble */}
+      <FloatingDevTools headless licenseKey={process.env.EXPO_PUBLIC_BUOY_KEY} />  {/* TV apps run headless — no bubble */}
     </>
   );
 }
@@ -33,14 +41,13 @@ not a TV-specific flag; it is the same mode shipped for field builds where only 
 see the session. See [Overview](./overview#why-there-is-no-floating-menu-on-tv) for why that is the
 right call on TV rather than a compromise.
 
-Buoy adds **no native dependencies** to a TV app — no podspecs, no gradle edits, no prebuild — so
-this needs only a Metro restart.
+Buoy adds **no native dependencies** to a TV app. Restart Metro after adding the packages. Follow the requirements of any other dependencies you add.
 
 ## 3. Add the TV tools
 
 <!-- ::PM npm="npm install @buoy-gg/tv-remote @buoy-gg/focus-inspector" yarn="yarn add @buoy-gg/tv-remote @buoy-gg/focus-inspector" pnpm="pnpm add @buoy-gg/tv-remote @buoy-gg/focus-inspector" bun="bun add @buoy-gg/tv-remote @buoy-gg/focus-inspector" -->
 
-Nothing else to wire — installed tools register themselves. Add any other tool the same way
+The TV tools register when installed. Other tools may need app-specific configuration. Add any other tool the same way
 (`@buoy-gg/network`, `@buoy-gg/storage`, …) and it appears in the desktop dashboard.
 
 ## 4. Connect Buoy Desktop
@@ -74,14 +81,13 @@ pipx install fb-idb
 Without it the Apple TV lane is disabled and the panel says so. A retail Apple TV can be **recorded
 but not driven** — see the target table in the [Overview](./overview#what-works-where).
 
-Then open **Focus** and drive the app: every focus move is credited to the direction that caused
-it, and focus that gets stuck, vanishes, or is never reached gets flagged.
+Then open **Focus** and drive the app: reported focus moves can be compared with observed direction inputs. Review flags against actual device behavior.
 
 ## Requirements
 
 - `react-native-tvos` and the New Architecture (Fabric).
-- Buoy adds no native dependencies — a Metro restart is the whole install step.
-- Headless has **no license entry UI**. A Pro key can only arrive as the `licenseKey` prop. The
+- Restart Metro after adding JavaScript tools. Your TV runtime and host input tools have separate setup requirements.
+- Headless has **no license entry UI**. Configure your Free or Pro account key before mounting the headless tools. The
   desktop dashboard works at the free tier; the MCP server requires Pro.
 
 More detail in [Installation](./installation).

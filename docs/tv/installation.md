@@ -26,7 +26,16 @@ of TV, not of Buoy.
 Install the core, then any tools you want. Installed tools register themselves; there is no list to
 maintain.
 
-<!-- ::PM npm="npm install @buoy-gg/core" yarn="yarn add @buoy-gg/core" pnpm="pnpm add @buoy-gg/core" bun="bun add @buoy-gg/core" -->
+<!-- ::PM npm="npm install @buoy-gg/core @buoy-gg/external-sync" yarn="yarn add @buoy-gg/core @buoy-gg/external-sync" pnpm="pnpm add @buoy-gg/core @buoy-gg/external-sync" bun="bun add @buoy-gg/core @buoy-gg/external-sync" -->
+
+For plain Markdown readers, the command is:
+
+```bash
+npm install @buoy-gg/core @buoy-gg/external-sync
+```
+
+Configure a Free or Pro key with `npx --package=@buoy-gg/core buoy login`. The examples use Expo's `EXPO_PUBLIC_BUOY_KEY`; React Native CLI apps must supply the key through their own environment configuration.
+
 
 The two TV-specific tools:
 
@@ -50,7 +59,7 @@ export default function App() {
       <FloatingDevTools
         headless
         licenseKey={process.env.EXPO_PUBLIC_BUOY_KEY}
-        externalSync={{ deviceId: DEVICE_ID, deviceName: "Living Room Apple TV" }}
+        externalSync={{ deviceName: "Living Room Apple TV" }}
       />
     </>
   );
@@ -70,7 +79,7 @@ simulator and an Android TV emulator running the same app are otherwise hard to 
 |---|---|
 | Apple TV simulator | Nothing — it connects on its own. |
 | Android TV emulator | `adb -s <serial> reverse tcp:42831 tcp:42831`, once per boot. |
-| Physical TV device | A `socketUrl` pointing at your machine's LAN address. |
+| Physical TV device | A `socketURL` pointing at your machine's LAN address. |
 
 Pass `-s <serial>` to `adb` explicitly. A physical phone is often attached alongside the emulator,
 and an unqualified `adb reverse` forwards the wrong device.
@@ -95,14 +104,10 @@ Recording needs none of this — capture is pure JavaScript and works on retail 
 
 ## License keys
 
-| | Key | What you get |
-| --- | --- | --- |
-| **No key** | none | Every tool works, with a minimal event history. |
-| **Free** | free key, from an account | Standard access — event history across every tool. |
-| **Pro** | paid key | Everything: production builds, the MCP server, and unlimited events. |
+A verified Free or Pro account is required. Desktop is free to use; MCP and production access require Pro.
 
 **Headless has no license entry UI** — there is no on-device screen to type into. On TV a key can
-only arrive as the `licenseKey` prop, typically from an env var. The desktop dashboard works at the
-free tier; the [MCP server](../mcp) requires Pro and will refuse an anonymous-tier TV device.
+be supplied through initialization or the `licenseKey` prop, typically from your environment configuration. The desktop dashboard works at the
+free tier; the [MCP server](../mcp) requires Pro and will refuse a TV device with no admitted account.
 
 Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).

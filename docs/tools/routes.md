@@ -7,11 +7,9 @@ description: "Browse every route in your app — Expo Router or React Navigation
 
 <!-- ::platform-badge platform="both" -->
 
-Navigation bugs do not throw. A user reaches a screen they should not be able to reach, back goes somewhere wrong, or a screen stays mounted underneath the one you can see and keeps firing its effects — and none of that appears in a log or a crash report.
+Inspect captured navigation events, route parameters, and the stack available from your navigator. Use the timeline to compare where navigation started with the screen that became active.
 
-The Route Inspector shows the live stack, the sitemap of every route your app declares, and a timestamped stream of every navigation with its params. It reads Expo Router and React Navigation with no configuration.
-
-Hops stream in, a 38ms `/login` → `/account` flash lands, you open the Login event, the Stack still has Login MOUNTED under Account FOCUSED, Clear wipes the timeline but not the stranded screen.
+A route duration is time since the previous navigation event, not a measurement of screen render time. The demo uses a mock session.
 
 <!-- ::routes-live-demo -->
 
@@ -64,7 +62,7 @@ Tap any event to open its **detail page** — the full route template, from/to p
 
 ## What's Next
 
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 - [Storage Explorer](./storage) — Browse and edit AsyncStorage & MMKV
 - [React Query DevTools](./react-query) — Inspect query cache and simulate states
 
@@ -79,3 +77,7 @@ Install `@buoy-gg/route-events` and open Routes — the Stack tab shows the live
 ### Does it work with Expo Router?
 
 Yes — it's built for Expo Router: the sitemap, stack, and event stream all reflect your file-based routes.
+
+## Web support (unreleased)
+
+Browser History API and hash changes feed the shared route history. Register known paths and the framework router adapter for route selection and navigation. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

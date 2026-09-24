@@ -5,9 +5,9 @@ id: flutter-tools-image-overlay
 description: "Overlay design mockups on your running Flutter app and tweak opacity, scale, and position to nail pixel-perfect UI without leaving the simulator."
 ---
 
-Overlay design mockups directly on your running app to compare against your implementation. Adjust opacity, scale, and position to get pixel-perfect results — no more switching between your design tool and the simulator.
+Overlay design mockups directly on your running app to compare against your implementation. Load a mockup, match its scale and position to the screen, and adjust opacity to compare spacing and alignment.
 
-The React Native build of this tool, running here on mock data. The Flutter port ships the same panels — walk the tour, or skip it and start tapping.
+The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::image-overlay-live-demo -->
 
@@ -67,7 +67,7 @@ Manually position and resize the overlay anywhere on screen. Drag to move, aspec
 
 - [Images](./images) — Every image load with cache verdicts and oversize audits
 - [Environment Inspector](./env) — Validate env vars with type checking
-- [Network Monitor](./network) — See every API call your app makes
+- [Network Monitor](./network) — Inspect supported HTTP requests
 
 ---
 

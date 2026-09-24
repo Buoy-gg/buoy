@@ -7,9 +7,9 @@ description: "Benchmark React Native performance on a real device — track UI/J
 
 <!-- ::platform-badge platform="both" -->
 
-Measure and prove performance on a real device. Bench tracks UI FPS, JS FPS, CPU, memory, and jank in real time, records runs you can save and compare, and can benchmark a matrix of variants to tell you which implementation is actually faster.
+Record FPS, CPU, memory, and jank while repeating a test on a device. Compare saved runs or benchmark variants under the same conditions. Available metrics depend on your native dependencies and build mode.
 
-Walk the live tour: the HUD streams → FlatList janks → open the run for render blame → a ranked batch crowns FlashList → the library keeps the proof.
+Start with one repeatable interaction. Record it before and after a change, then check the UI as well as the metrics.
 
 <!-- ::perf-monitor-live-demo -->
 
@@ -57,7 +57,7 @@ PerfMonitorController.toggle();
 
 A batch runs one throwaway case before the first real one, and drops it from the results.
 
-It has to. Whatever the app was doing when you pressed Run — dismissing the tool sheet, navigating twice, mounting the target screen for the first time — lands inside whichever case records first, and it costs more frames than most of the changes you'd be benchmarking. Left in, the batch reliably ranks its first case worst, which is a property of the running order rather than of your code (and with case shuffling on, it poisons a different variant every time). The warmup wears that cost instead.
+The first run can include sheet dismissal, navigation, and initial mounting. The warmup absorbs that setup work so the recorded cases begin under more comparable conditions.
 
 So a batch of four cases records five runs and takes about a fifth longer than the arithmetic suggests. The report shows four.
 
@@ -76,7 +76,8 @@ A few things to know:
 - Requires a **dev build** (the React DevTools hook and profiling timers aren't present in release builds). Without them the run simply has no render data — nothing breaks.
 - Capture walks committed fibers on the JS thread, adding a small overhead per commit. It's applied **uniformly to every case** in a batch, so relative comparisons stay fair — but for absolute FPS measurements you can turn it off: the **Capture render commits** toggle in the tool's Settings covers manual recordings, the **Capture renders** toggle in Automate settings covers batches, and `captureRenders: false` works on `run_benchmark_batch`.
 - Buoy's own devtools UI (the HUD, floating menu, etc.) is excluded from results automatically, and React Native framework wrappers (`View`, `Text`, `Animated(View)`, Touchable internals, VirtualizedList cells, …) are folded into the run totals instead of cluttering the component list — the rows you see are your components.
-- Want to *watch* the renders as they happen? Turn on **Show live render highlights** in the tool's Settings (off by default) — while a recording is running, the [Render Highlighter](./highlight-updates)'s bounding boxes flash in real time, then the overlay returns to whatever state it was in. The boxes themselves cost real frame time, so leave this off when you care about the numbers.
+- Want to *watch* the renders as they happen? Turn on **Show render highlights while recording** in the tool's Settings (off by default). While a recording is running, the [Render Highlighter](./highlight-updates)'s bounding boxes flash in real time, then the overlay returns to whatever state it was in. Outside a recording this setting draws nothing; use the Highlight Updates tool in the menu for that. The boxes themselves cost real frame time, so leave this off when you care about the numbers.
+- Both render settings need `@buoy-gg/highlight-updates` installed in the app. Without it the switches are greyed out and say so.
 
 ---
 
@@ -88,7 +89,7 @@ Bench powers Buoy's AI performance workflow. The [MCP server](../mcp) ships a **
 - Read the ranked comparison (FPS, CPU, memory, jank) from the **real device**, pick the winner, and apply the next optimization
 - Loop — measure, change, re-measure — until the numbers stop improving
 
-Because it measures on-device instead of guessing, it collapses what is normally days or weeks of AI back-and-forth into minutes. In one real pass, a Skia LED display went from **28 lights stuttering** under advanced effects to **over 12,000 lights with no lag**.
+Compare repeated runs with the same device, build, data, and interaction. Check that a performance improvement preserves the intended UI and behavior.
 
 The only steps that stay manual are the ones a human has to eyeball — mainly confirming the result still *renders correctly*. If you're on Skia or other GPU-drawn UI, plan to glance at the screen between passes: the wizard drives the metrics, you verify it still looks right. Say **"buoy optimize"** in your editor to start.
 
@@ -111,3 +112,7 @@ Install `@buoy-gg/perf-monitor` and record a run — Bench samples both UI-threa
 ### Can I compare performance before and after a change?
 
 Yes — runs are saved and comparable, and via the Buoy MCP server an AI agent can run benchmark batches of both variants and report which is faster.
+
+## Web support (unreleased)
+
+Browser measurements use frame timing, available JS heap data, and long tasks. Native CPU, RSS, and thermal measurements remain device-specific. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

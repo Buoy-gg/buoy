@@ -2,9 +2,9 @@
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/redux?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/redux) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/redux?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/redux)
 
-**Redux DevTools on the device — action log, state diffs, and time travel with zero store changes.**
+Inspect your connected Redux store, review captured actions and state changes, and dispatch actions from your device.
 
-Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside your React Native app. Install it and it auto-appears in the floating menu from [`@buoy-gg/core`](https://www.npmjs.com/package/@buoy-gg/core).
+Part of [Buoy](https://github.com/Buoy-gg/buoy). Install the package, complete account setup, and follow the integration steps below.
 
 ## Install
 
@@ -12,11 +12,30 @@ Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside yo
 npm install @buoy-gg/core @buoy-gg/redux
 ```
 
-## Quick start
+## Before you start
 
-Zero config. Your existing store works as-is — no middleware, no wrapper. Buoy hooks the store at creation via the official Redux DevTools integration point (which Redux Toolkit enables by default), so actions are captured from your app's very first dispatch — including everything dispatched inside thunks and RTK Query.
+Use a development build with `@buoy-gg/core` and a Free or Pro Buoy account key. From your app’s directory, sign in:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+For Expo, initialize Buoy before rendering the menu:
 
 ```tsx
+import { Buoy } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+The login command writes the Expo key to `.env.local`. For React Native CLI, pass the key from your app’s environment configuration; React Native does not load `.env.local` automatically. Mount `FloatingDevTools` inside the same providers as your screens and restart the development server after installation. The [Quick Start](https://buoy.gg/buoy/latest/docs/quick-start) shows the complete root component setup.
+
+## Quick start
+
+Load the Buoy Redux integration before creating your store and keep Redux DevTools integration enabled. The example uses your existing `rootReducer` and app component; do not create a second store for Buoy.
+
+```tsx
+import '@buoy-gg/redux'; // Load before the module that creates your store.
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { FloatingDevTools } from '@buoy-gg/core';
@@ -33,11 +52,11 @@ export default function App() {
 }
 ```
 
-### How capture works (and how to guarantee full capture)
+### Capture modes
 
 Buoy binds to your store the earliest way available, in this order:
 
-1. **Store-creation hook (default, full capture)** — importing `@buoy-gg/redux` claims the Redux DevTools global that RTK checks by default. If the package loads before your store module, Buoy is inside the store from creation: every action (thunk-internal, RTK Query) is captured and time travel is real. To **guarantee** this ordering, make it the first import of your app entry:
+1. **Store-creation hook (default, full capture)** — importing `@buoy-gg/redux` claims the Redux DevTools global that RTK checks by default. If the package loads before your store module, Buoy is inside the store from creation: every action (thunk-internal, RTK Query) is captured and time travel is real. To establish this ordering, make it the first import of your app entry:
 
    ```tsx
    // index.js — first line
@@ -47,7 +66,12 @@ Buoy binds to your store the earliest way available, in this order:
 2. **Middleware (explicit full capture)** — one line if you prefer being explicit:
 
    ```tsx
-   middleware: (getDefault) => getDefault().concat(buoyReduxMiddleware),
+   import { buoyReduxMiddleware } from "@buoy-gg/redux";
+
+   const store = configureStore({
+     reducer: rootReducer,
+     middleware: (getDefault) => getDefault().concat(buoyReduxMiddleware),
+   });
    ```
 
 3. **Startup fallback** — if your store was created before Buoy loaded, `FloatingDevTools` binds it automatically at app mount. Top-level dispatches are captured from startup; actions dispatched *inside* thunks/middleware aren't visible to this mode (the tool tells you when it's in it).
@@ -64,6 +88,10 @@ const store = configureStore({
 });
 ```
 
+## Check the integration
+
+Dispatch an existing app action and confirm that its action and state change appear. Keep the Redux devtools connection enabled and initialize Buoy’s Redux integration before creating the store. Jumping to a retained state does not reverse backend requests or other side effects.
+
 ## What you get
 
 - **Every action, captured** — type, payload, timestamp, and a diff summary (`+added -removed ~modified`) per dispatch
@@ -77,14 +105,18 @@ const store = configureStore({
 
 ## Desktop & AI
 
-The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) (free, macOS/Windows/Linux) and to Claude Code or Cursor via the [Buoy MCP server](https://buoy.gg/buoy/latest/docs/mcp).
+To connect a React Native app to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) or MCP, install `@buoy-gg/external-sync` and follow the [Desktop connection guide](https://buoy.gg/buoy/latest/docs/desktop). Sign in to Desktop separately. [MCP setup](https://buoy.gg/buoy/latest/docs/mcp) also requires a process account and Pro access. Available remote actions depend on the tool and app integration.
 
-## Free vs Pro
+## Account and plan requirements
 
-Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for anyone holding a key — including a free one (`npx buoy login`).
+Use a Free or Pro Buoy account. History limits and paid features vary by tool; see [pricing](https://buoy.gg/pricing). Production access requires Pro where supported. Development-only hooks and actions remain unavailable in release builds.
 
 ---
 
 📚 [Full docs](https://buoy.gg/buoy/latest/docs/tools/redux) · [All Buoy tools](https://github.com/Buoy-gg/buoy)
 
 Proprietary software. © Buoy LLC. [Terms](https://buoy.gg/terms)
+
+## Web support (unreleased)
+
+Use the app’s existing Redux provider. The browser host mounts capture and exposes the shared state and action panels. The browser build is available in this checkout and has not been published yet. See the [web setup guide](https://buoy.gg/buoy/latest/docs/web-preview) for registration, dependencies, and browser boundaries.

@@ -7,19 +7,20 @@ description: "Mirror your React Native or Flutter app's Buoy devtools to a full-
 
 <!-- ::desktop-download -->
 
-Buoy Desktop is a native dashboard for macOS, Windows, and Linux that mirrors your on-device Buoy tools to a full-size window in real time. Same tools as the floating menu — with dramatically more room — plus a live performance HUD, multi-device switching, and remote control over the running app.
+Buoy Desktop is a native dashboard for macOS, Windows, and Linux that mirrors your on-device Buoy tools to a full-size window in real time. It includes a live performance HUD, multi-device switching, and remote control over the running app.
 
 React Native and Flutter devices speak the **same protocol**, so they show up side by side in one dashboard.
 
 ## Requirements
 
+- A verified Buoy account in Desktop and in the app. A connected device does not sign Desktop in.
 - **A running app** with Buoy devtools installed and open on a device or simulator (React Native or Flutter).
 - **React Native:** the `@buoy-gg/external-sync` package installed in the app — it's the sync client, and it ships separately from the tools (see below).
 - The app and the desktop dashboard on the **same machine or local network**.
 
 ## Install
 
-The download button above grabs the right build for your machine automatically; every build for macOS, Windows, and Linux is on the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). It auto-updates, so you stay on the latest build. Buoy Desktop is free to use — a [Buoy Pro license](https://buoy.gg/pricing) unlocks full history and unlimited capture, and every weekend Pro unlocks for everyone.
+The download button above grabs the right build for your machine automatically; every build for macOS, Windows, and Linux is on the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). It auto-updates, so you stay on the latest build. Buoy Desktop is free to use — a [Buoy Pro license](https://buoy.gg/pricing) unlocks full history and unlimited capture, See pricing for current plan allowances.
 
 ## Connect your app
 
@@ -31,7 +32,7 @@ First, install the sync client in your app. It's a separate package on purpose �
 
 <!-- ::pm npm="npm install @buoy-gg/external-sync" yarn="yarn add @buoy-gg/external-sync" pnpm="pnpm add @buoy-gg/external-sync" bun="bun add @buoy-gg/external-sync" -->
 
-With it installed, the connection is **automatic** — no wiring, no config. `FloatingDevTools` detects the package and derives the broker address from the Metro dev server that served the bundle, so simulators, emulators, and physical devices on the same Wi-Fi all find your machine with zero config.
+Restart Metro after installing it. In development, `FloatingDevTools` detects the package and derives the broker address from Metro. The device must be able to reach that address; use the options below when the derived host is unsuitable.
 
 Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
 
@@ -69,6 +70,8 @@ Most tools work the same in a release build — network capture, storage, consol
 
 ### Flutter
 
+Run a debug build with `BuoyDevTools` mounted and your account configured. Flutter's widget does not enable this connection in profile or release mode.
+
 - **iOS Simulator / Android Emulator** — connects automatically (`localhost` / `10.0.2.2`).
 - **Physical devices** — pass your computer's LAN IP:
 
@@ -88,12 +91,12 @@ iOS will show the Local Network permission prompt on first connect — tap Allow
 - **Multi-device** — Switch between every connected simulator and physical device (RN and Flutter mixed).
 - **Remote actions** — Edit storage, navigate routes, and drive installed tools from your desk.
 - **Screenshot tool** — Capture a region or a specific component from the iOS Simulator (React Native).
-- **[Ask Buoy](./tools/ask-buoy), mirrored** — Follow a tester's in-app AI conversation live from your desk: what it says, what it changed, whether each change can be put back, and what the turn cost in tokens. Read-only, plus remote undo — there is no desktop composer on purpose, because the broker has no authentication.
+- **[Ask Buoy](./tools/ask-buoy), mirrored** — Follow a tester's in-app AI conversation live from your desk: what it says, what it changed, whether each change can be put back, and what the turn cost in tokens. Read-only, plus remote undo — there is no desktop composer on purpose, because conversations are started on the device. Keep the broker on a trusted development network; account admission does not authorize individual users to control particular devices.
 - **Built-in troubleshooting** — A "no devices" panel shows your machine's exact URLs with a phone-browser test; the Diagnostics console streams the broker's own connection log (handshakes, disconnect reasons, version mismatches — replayed even if they happened before you opened it); offline devices are removable and age out after a day.
 
 ## How it works
 
-The desktop app hosts the same local broker the [MCP server](./mcp) uses. Your app connects as a device; the dashboard connects as a "Dashboard" client and receives live state and sends actions over the external-sync protocol. Nothing leaves your machine.
+The desktop app hosts the same local broker the [MCP server](./mcp) uses. Your app connects as a device; the dashboard connects as a "Dashboard" client and receives live state and sends actions over the external-sync protocol. Tool data travels between the device and the configured broker, including across your LAN for physical devices. Account validation and telemetry use separate services; see [Telemetry](./telemetry).
 
 ## What's Next
 

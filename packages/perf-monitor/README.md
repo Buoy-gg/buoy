@@ -2,9 +2,9 @@
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/perf-monitor?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/perf-monitor) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/perf-monitor?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/perf-monitor)
 
-**Bench — benchmark React Native performance on a real device: UI/JS FPS, CPU, memory, and jank, with recorded runs you can compare to prove what's actually faster.**
+Measure available frame-rate, CPU, and memory metrics on a device. Record comparable runs to investigate performance changes.
 
-Part of [Buoy](https://github.com/Buoy-gg/buoy) — devtools that live inside your React Native app. Install it and it auto-appears in the floating menu from [`@buoy-gg/core`](https://www.npmjs.com/package/@buoy-gg/core).
+Part of [Buoy](https://github.com/Buoy-gg/buoy). Install the package, complete account setup, and follow the integration steps below.
 
 ## Install
 
@@ -19,6 +19,24 @@ Bench relies on native peers:
 - **Without the toolkit**, Bench still runs in JS-fallback mode (rAF-based JS FPS, approximated UI FPS, JS heap; no CPU) and shows a one-time notice explaining what's missing.
 
 Requires React Native >= 0.76.
+
+## Before you start
+
+Use a development build with `@buoy-gg/core` and a Free or Pro Buoy account key. From your app’s directory, sign in:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+For Expo, initialize Buoy before rendering the menu:
+
+```tsx
+import { Buoy } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+The login command writes the Expo key to `.env.local`. For React Native CLI, pass the key from your app’s environment configuration; React Native does not load `.env.local` automatically. Mount `FloatingDevTools` inside the same providers as your screens and restart the development server after installation. The [Quick Start](https://buoy.gg/buoy/latest/docs/quick-start) shows the complete root component setup.
 
 ## Quick start
 
@@ -44,6 +62,10 @@ import { PerfMonitorOverlay, PerfMonitorController } from "@buoy-gg/perf-monitor
 PerfMonitorController.toggle();  // show/hide
 ```
 
+## Check the integration
+
+Repeat the same screen interaction on the same device and build, then compare runs. Available metrics depend on platform and installed native modules. Render capture requires the development-only React hooks; do not compare it as if it were available in release builds.
+
 ## What you get
 
 - **Live HUD on a real device** — UI FPS, JS FPS, CPU, memory, and jank updating in real time as you use the app; the HUD reads UI-thread shared values, so it keeps moving even when JS is fully blocked.
@@ -55,14 +77,18 @@ PerfMonitorController.toggle();  // show/hide
 
 ## Desktop & AI
 
-The same live session streams to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) (free, macOS/Windows/Linux) — including a live HUD with Start/Stop recording — and to Claude Code or Cursor via the [Buoy MCP server](https://buoy.gg/buoy/latest/docs/mcp).
+To connect a React Native app to [Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) or MCP, install `@buoy-gg/external-sync` and follow the [Desktop connection guide](https://buoy.gg/buoy/latest/docs/desktop). Sign in to Desktop separately. [MCP setup](https://buoy.gg/buoy/latest/docs/mcp) also requires a process account and Pro access. Available remote actions depend on the tool and app integration.
 
-## Free vs Pro
+## Account and plan requirements
 
-Every tool is free. [Pro](https://buoy.gg/pricing) unlocks production builds, the MCP server, and unlimited capture. Every weekend, Pro features unlock free for anyone holding a key — including a free one (`npx buoy login`).
+Use a Free or Pro Buoy account. History limits and paid features vary by tool; see [pricing](https://buoy.gg/pricing). Production access requires Pro where supported. Development-only hooks and actions remain unavailable in release builds.
 
 ---
 
 📚 [Full docs](https://buoy.gg/buoy/latest/docs/tools/perf-monitor) · [All Buoy tools](https://github.com/Buoy-gg/buoy)
 
 Proprietary software. © Buoy LLC. [Terms](https://buoy.gg/terms)
+
+## Web support (unreleased)
+
+Browser measurements use frame timing, available JS heap data, and long tasks. Native CPU, RSS, and thermal measurements remain device-specific. The browser build is available in this checkout and has not been published yet. See the [web setup guide](https://buoy.gg/buoy/latest/docs/web-preview) for registration, dependencies, and browser boundaries.

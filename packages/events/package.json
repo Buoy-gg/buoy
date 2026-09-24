@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/events",
-  "version": "7.0.36",
-  "description": "One timeline across every Buoy devtool, with LLM-ready export presets. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Review retained events from connected Buoy tools and export timeline data for investigation.",
   "homepage": "https://buoy.gg/tools/events",
   "keywords": [
     "react-native",

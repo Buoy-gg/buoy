@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/redux",
-  "version": "7.0.36",
-  "description": "Redux DevTools inside your React Native app — action log, state diffs & time travel with zero store changes. Part of Buoy devtools.",
+  "version": "7.0.40",
+  "description": "Inspect a connected Redux store, captured actions and state changes, and dispatch supported actions from Buoy tools.",
   "homepage": "https://buoy.gg/tools/redux",
   "keywords": [
     "react-native",

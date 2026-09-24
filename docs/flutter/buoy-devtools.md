@@ -22,7 +22,7 @@ MaterialApp(
 )
 ```
 
-That's it. With the [`buoy` umbrella](./installation), every first-party tool you've installed self-registers on mount and appears in the menu. Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+The [`buoy` umbrella](./installation) explicitly registers its bundled tools on mount. Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
 
 Mount it from `MaterialApp.builder` (or `MaterialApp.router`) so it sits above your Navigator and survives every route change.
 
@@ -31,7 +31,7 @@ Mount it from `MaterialApp.builder` (or `MaterialApp.router`) so it sits above y
 | Prop | Type | Default | Notes |
 |------|------|---------|-------|
 | `child` | `Widget` | required | Your app (usually the `MaterialApp` builder child) |
-| `licenseKey` | `String?` | `null` | Unlocks Pro (production + MCP) |
+| `licenseKey` | `String?` | `null` | Free or Pro account key; widget remains debug-only |
 | `deviceName` | `String?` | auto | Label in Buoy Desktop / MCP. Default: `'Flutter App (ios · 2c1d)'` — the app, the platform, and the last 4 of the install id |
 | `deviceId` | `String?` | auto | Leave unset: each install mints `flutter-app-ios-<8 hex>` once and keeps it. If you pin one it MUST be unique per device — two devices under one id look like one device to the broker |
 | `socketUrl` | `String?` | auto | LAN broker URL for physical devices |
@@ -41,7 +41,7 @@ Mount it from `MaterialApp.builder` (or `MaterialApp.router`) so it sits above y
 
 React Native discovers tools by optional-require; Dart has no equivalent, so Flutter tools register explicitly — but with the umbrella package you never write the call yourself:
 
-- **Umbrella** — add a tool package, and `package:buoy` calls its `registerBuoyX()` for you when `BuoyDevTools` mounts. Install and it shows up:
+- **Umbrella** — `package:buoy` calls the registration functions for its bundled tool list when `BuoyDevTools` mounts. Adding a separate dependency does not extend that list. Install and it shows up:
 
   ```bash
   flutter pub add buoy
@@ -101,7 +101,7 @@ The current sync target and connection state show up in the menu's Settings tab 
 
 ## Debug builds only
 
-`BuoyDevTools` renders your child and nothing else outside a debug build — no button, no dial, no sync, no capture. There is no flag to change that on Flutter yet, so shipping the widget in your release build is safe by construction.
+`BuoyDevTools` renders your child and nothing else outside a debug build — no button, no dial, no sync, no capture. There is no flag to change that on Flutter yet, This describes initialization managed by the widget; separately initialized code has its own behavior.
 
 Two React Native options have no Flutter counterpart today:
 

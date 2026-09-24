@@ -79,6 +79,10 @@
               "to": "custom-tools"
             },
             {
+              "label": "Floating Tools",
+              "to": "custom-tools/floating-tools"
+            },
+            {
               "label": "Telemetry",
               "to": "telemetry"
             }

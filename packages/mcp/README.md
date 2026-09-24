@@ -3,7 +3,15 @@
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/mcp?style=flat-square&labelColor=1c1c1c&color=10B981)](https://www.npmjs.com/package/@buoy-gg/mcp)
 [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/mcp?style=flat-square&labelColor=1c1c1c&color=10B981&label=downloads%2Fmonth)](https://www.npmjs.com/package/@buoy-gg/mcp)
 
-**Your agent gets hands.** The MCP server that connects Claude Code, Cursor, or any MCP editor to the [Buoy devtools](https://www.npmjs.com/package/@buoy-gg/core) running inside your React Native app — so your agent can read live runtime state, drive the UI, and benchmark on a real device instead of debugging blind.
+Connect an MCP client to supported Buoy tools in a running app. Read captured state, invoke tool actions, and run configured benchmarks.
+
+## Before you start
+
+Use Node.js 18 or later. For React Native, complete the [Quick Start](https://buoy.gg/buoy/latest/docs/quick-start), install `@buoy-gg/external-sync`, and restart the app. Flutter uses its [debug-build connection setup](https://buoy.gg/buoy/latest/docs/flutter/quick-start).
+
+Configure the MCP process account as well as the device account. The process accepts `BUOY_LICENSE_KEY` or supported project keys such as `BUOY_KEY` and `EXPO_PUBLIC_BUOY_KEY`. It checks the project’s `.env.local` and `.env` when no supported process environment key is set. Set `BUOY_PROJECT_DIR` if the editor launches the process outside your app directory. A connected device’s key does not sign the process in.
+
+Data and action tools require Pro. Device discovery is still subject to broker account admission.
 
 ## Install
 
@@ -11,35 +19,37 @@
 npx -y @buoy-gg/mcp@latest init
 ```
 
-One command, non-destructive:
+Run setup from your app’s directory. Review its changes:
 
-- Registers a `buoy` server in your MCP configs — `.mcp.json` (Claude Code, always), plus `.cursor/mcp.json` and `.vscode/mcp.json` when those folders exist. Existing servers are preserved; re-running just refreshes the Buoy entry.
-- Installs the **buoy-optimize** skill into `.claude/skills/`.
+- Registers a `buoy` server in your MCP configs — `.mcp.json` and `.cursor/mcp.json` (created when needed), plus `.vscode/mcp.json` when `.vscode` exists. Existing servers are preserved; re-running replaces the Buoy entry, including customizations to that entry.
+- Copies the bundled `buoy-optimize` skill into `.claude/skills/`. Rerunning setup overwrites matching skill files, so save any customizations before updating.
+- Appends debugging guidance to `CLAUDE.md` and `AGENTS.md` when the guide heading is absent. Existing blocks are preserved and may need manual updating.
 
-The config it writes launches the server via `npx -y @buoy-gg/mcp@latest`, so every editor restart re-resolves the newest published version — you never get pinned to a stale copy. Restart your editor, open your app with Buoy running, and start with `list_devices`.
+The config it writes launches the server via `npx -y @buoy-gg/mcp@latest`, which may require registry access at launch. Review package updates as part of your development workflow. Restart your editor, open your app with Buoy running, and start with `list_devices`.
 
 ### Corporate / private npm registries
 
-If your machine's `.npmrc` points npm at a private registry that isn't reachable (a common setup on work laptops, e.g. off-VPN), `npx @latest` would hang trying to download the package on every editor launch — so `init` probes that registry first and, when it's unreachable, automatically installs a **pinned local copy** (from public npm) and writes a `node <path>` config instead. That takes the network off the startup path entirely.
+If your machine's `.npmrc` points npm at a private registry that isn't reachable (a common setup on work laptops, e.g. off-VPN), `npx @latest` would hang trying to download the package on every editor launch — so `init` probes that registry first and, when it's unreachable, automatically installs a **pinned local copy** (from public npm) and writes a `node <path>` config instead. This removes package download from the local server launch path. Account validation and broker connections can still use the network.
 
 You can also force it:
 
 ```bash
-npx -y @buoy-gg/mcp@latest init --local                 # always install locally, no network on startup
-npx -y @buoy-gg/mcp@latest init --npx                    # always use the auto-updating npx entry
+npx -y @buoy-gg/mcp@latest init --local                 # install a pinned local server
+npx -y @buoy-gg/mcp@latest init --npx                    # launch through npx @latest
 npx -y @buoy-gg/mcp@latest init --registry <url>         # registry the local install pulls from
 ```
 
-To update a local install later, just re-run `init`.
+To update a local server install, run `npx -y @buoy-gg/mcp@latest init --local`. Review skill customizations before rerunning setup. Existing debugging-guide blocks are preserved and need separate review.
 
 ## What your agent can do
 
 **Read the runtime**
 
 - `get_events` — one timeline across every tool: network, state changes, renders, routes, storage writes — in token-friendly summaries
-- `get_console` — read the app's console logs, even from a release build
+- `get_console` — read the app's console logs, including release logs when console calls are retained and capture is enabled
 - `get_network_requests` — HTTP requests *with their ids* (which `get_events` omits), marked 📌 pinned / 🔖 saved; `flagged:"any"` reads the requests you kept
 - `network_action` — pin or save a request. Pinned requests survive Clear, the history cap and restarts, so it doubles as a handoff: pin the broken call and ask your agent about "the pinned request", or let it pin what it wants you to see
+- `network_conditions` — read or set the device's network conditions: offline, +500 ms, +2000 ms, or normal. Offline rejects new intercepted requests before they leave the device, so an agent can check an error path without touching the server. Development builds only, and the profile resets on a JS reload
 
 **Drive the UI**
 
@@ -49,8 +59,8 @@ To update a local install later, just re-run `init`.
 
 **Change state**
 
-- `redux_dispatch`, `react_query_action`, `storage_action`, `navigate` — dispatch actions, invalidate caches, edit storage, jump to any screen
-- `get_redux_state`, `get_zustand_state`, `get_jotai_state`, `get_react_query`, `get_storage`, `get_routes` — read any store first
+- `redux_dispatch`, `react_query_action`, `storage_action`, `navigate` — dispatch actions, invalidate caches, edit storage, navigate to supported routes
+- `get_redux_state`, `get_zustand_state`, `get_jotai_state`, `get_react_query`, `get_storage`, `get_routes` — read connected stores first
 
 **Measure**
 
@@ -66,26 +76,26 @@ To update a local install later, just re-run `init`.
 - `camera_stop` — turn the camera off
 - `camera_diagnose` — why the camera is not working, including whether the app is reading it
 
-The `camera_*` tools need Buoy Pro, read from Buoy Desktop's entitlement — `camera_diagnose` is ungated so it can report the tier. The camera itself is free to use by hand in the desktop panel.
+The `camera_*` tools need Buoy Pro, read from Buoy Desktop's entitlement — `camera_diagnose` is ungated so it can report the tier. The Desktop panel requires an account. Its webcam, image, video, pattern and QR-generation sources are available at Free limits; screen-region capture and non-QR generation require Pro access.
 - `list_devices` — see connected devices and the tools each exposes
 
 ## The buoy-optimize skill
 
-`init` also installs a guided performance wizard. Your assistant benchmarks implementation variants on the **real device**, reads the ranked results, applies the winning change, and repeats until the metrics plateau. Measuring instead of guessing is what makes it fast: one real run took a Skia LED display from 28 stuttering lights to over 12,000 with no lag. Kick it off with **"buoy optimize"**.
+`init` installs a performance workflow for comparing implementation variants on a device. Ask your assistant for "buoy optimize", review the proposed benchmark, and compare repeated runs under the same conditions. Results depend on the app and workload.
 
 ## Requirements
 
 - **Node.js 18+** on the machine running your editor.
 - **A running app** with [`@buoy-gg/core`](https://www.npmjs.com/package/@buoy-gg/core) and the tool packages you want to drive.
 - The server connects to the local Buoy broker — or spawns its own in-process — so it works standalone, no Buoy Desktop required.
-- **macOS + Xcode** only for `screenshot_component` and the `camera_*` tools (they drive the iOS Simulator); everything else is platform-agnostic.
-- The `camera_*` tools need **no connected device** — the simulator camera is host-side and works on any booted simulator app, including ones with no Buoy integration.
+- **macOS + Xcode** only for `screenshot_component` and the `camera_*` tools (they drive the iOS Simulator); other tools depend on the connected app and its platform integrations.
+- The `camera_*` tools need **no connected device** — the simulator camera is host-side and supports compatible simulator apps without an in-app Buoy integration. Host, simulator and account requirements still apply.
 
-## Pro
+## Plans and connections
 
-The MCP data and action tools require [Buoy Pro](https://buoy.gg/pricing); `list_devices` always works free. And every Saturday and Sunday, Pro unlocks free for anyone holding a key, including a free one (`npx buoy login`) — built into the product, so you can try the whole thing for real before deciding.
+[MCP data and action tools require Pro](https://buoy.gg/pricing). Account admission also applies to discovery. Check current pricing for Weekend Pass terms.
 
-Everything runs over a localhost-only broker — nothing ever leaves your machine.
+The broker can accept connections over your LAN; it is not necessarily localhost-only. Use a trusted development network. Account and license validation make external requests. See [Telemetry](https://buoy.gg/buoy/latest/docs/telemetry) for additional data flows.
 
 ## Links
 

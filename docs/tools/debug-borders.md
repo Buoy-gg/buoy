@@ -8,7 +8,7 @@ description: "Visualize your React Native layout with colored borders and labels
 
 <!-- ::platform-badge platform="both" -->
 
-See your layout instead of guessing at it. Debug Borders draws colored borders and labels over your running app, then lets you tap any label to inspect the component underneath — its `testID`, styles, position, and accessibility info — without leaving the device.
+Inspect layout boundaries on the running app. Debug Borders draws colored borders and labels over your running app, then lets you tap any label to inspect the component underneath — its `testID`, styles, position, and accessibility info — without leaving the device.
 
 ---
 
@@ -26,7 +26,7 @@ Tap the BORDERS icon in the floating menu to cycle through modes:
 
 | Mode        | What you see                                                                 |
 | ----------- | ---------------------------------------------------------------------------- |
-| **Off**     | Nothing — zero overhead                                                       |
+| **Off**     | No border overlay                                                       |
 | **Borders** | Rainbow-colored borders on every component, colored by depth in the tree      |
 | **Labels**  | Borders + labels, but only for components with a `testID` or `accessibilityLabel` |
 
@@ -54,7 +54,7 @@ Tap any label to open a full inspection modal for that component:
 - **Accessibility** — role, hint, and state
 - **Styles** — the full computed styles in an interactive viewer
 
-Perfect for answering "what testID does QA need for this button?" or "which component owns this padding?" straight from the device.
+Use it to answer "what testID does QA need for this button?" or "which component owns this padding?" straight from the device.
 
 ---
 
@@ -71,7 +71,7 @@ const layoutTool = createDebugBordersTool({
   offColor: "#9ca3af",
   bordersColor: "#ec4899",
   labelsColor: "#8b5cf6",
-  id: "custom-borders",
+  id: "debug-borders",
 });
 ```
 
@@ -96,3 +96,7 @@ Install `@buoy-gg/debug-borders` and tap the BORDERS icon to cycle modes — Bor
 ### Can I inspect a component's styles without a desktop debugger?
 
 Yes — tap any label to inspect the component underneath on the device itself: its `testID`, styles, position, and accessibility info. Nothing has to be attached to your machine.
+
+## Web support (unreleased)
+
+Import @buoy-gg/core/web/register before React DOM. The shared overlay measures DOM elements and draws their borders and labels. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.

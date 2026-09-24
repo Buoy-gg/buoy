@@ -7,17 +7,13 @@ description: "See what holds D-pad focus in a React Native TV app from Buoy Desk
 
 <!-- ::platform-badge platform="both" -->
 
-TV focus bugs are the ones you can only describe by waving your hands. "It gets stuck down
-there." "Sometimes the highlight just disappears." "That button — you can see it, but you can't
-get to it." Nothing is thrown, nothing is logged, and the only witness is whoever was holding the
-remote.
+Inspect observed focus transitions, the current focus target, and the scanned focusable elements in a React Native TV app. Flags identify patterns worth testing, such as repeated unsuccessful moves or an element that has not been reached.
 
-The Focus Inspector turns that into a record. It watches every focus change your app makes,
-credits each one to the direction that caused it, inventories everything the focus engine could
-land on, and flags the three ways TV focus actually breaks: it gets **stuck**, it **vanishes**,
-or an element is **never reached**.
+Treat flags as diagnostic evidence. Confirm a suspected bug with the same remote sequence and your intended focus behavior.
 
 ## Installation
+
+Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, your account key, and a working Desktop connection. Then add this tool.
 
 <!-- ::PM npm="npm install @buoy-gg/focus-inspector" yarn="yarn add @buoy-gg/focus-inspector" pnpm="pnpm add @buoy-gg/focus-inspector" bun="bun add @buoy-gg/focus-inspector" -->
 
@@ -28,14 +24,14 @@ export default function App() {
   return (
     <>
       {/* your app */}
-      <FloatingDevTools headless />  {/* TV apps run headless — no bubble */}
+      <FloatingDevTools headless licenseKey={process.env.EXPO_PUBLIC_BUOY_KEY} />  {/* TV apps run headless — no bubble */}
     </>
   );
 }
 ```
 
 Then open **Focus** in [Buoy Desktop](../desktop) and drive your app with the remote — or with
-the [TV Remote](tv-remote) tool, which presses it for you.
+the [TV Remote](./tv-remote) tool, which presses it for you.
 
 Requires `react-native-tvos` and the New Architecture. On a phone build the tool reports "not a
 TV build" and attaches nothing.
@@ -62,12 +58,7 @@ Two warnings live here, and they are the ones worth knowing about:
 
 A D-pad compass showing where each direction has been *seen* to lead from the focused element.
 
-A direction you have not pressed from here reads **unknown** and stays dim. That is deliberate.
-There is no API on either platform that answers "if focus is here and the user presses RIGHT,
-where does it go" — Android has one natively but never exposes it to JavaScript, and tvOS's focus
-engine decides at runtime and answers nothing at all. Every edge in this tool is one your app
-actually took. A tool that guessed the rest would be wrong in precisely the cases you opened it
-for: focus guides, `nextFocus*` overrides, and traps.
+A direction not yet pressed from the current element remains unknown. Observed exits describe transitions that occurred; they do not predict untested paths through guides, overrides, or traps.
 
 ### Transitions
 
@@ -114,14 +105,10 @@ rescan, rather than turning every element of the old screen into a mystery.
 
 ## Platform differences worth knowing
 
-**`trapFocus*` holds on tvOS and silently does not hold on Android TV.** The same code traps
-focus on one platform and does nothing on the other. So a trap flagged on Android is *always* a
-real bug, whatever your props say — and a trap flagged on tvOS with `trapFocus` set is probably
-what you asked for. The panel tells you which one you are looking at.
+`TVFocusGuideView` and `trapFocus*` are documented for both platforms in [react-native-tvos](https://github.com/react-native-tvos/react-native-tvos#tvfocusguideview). A trapped region may be intentional on Android TV as well as tvOS. Compare the flag with your props, framework version, and observed navigation before classifying it as a defect.
 
 **Focus and blur arrive in different orders.** tvOS delivers the new element's focus first and
-the old element's blur second; Android does the opposite. The tool handles both, which is why a
-transition never disappears and a fast traversal never fabricates a "focus lost".
+the old element's blur second; Android does the opposite. The tool handles both, to distinguish transitions from focus loss.
 
 `Platform.isTVOS` is `undefined` on Android TV, not `false` — a detail that has cost more than
 one team an afternoon.
@@ -154,8 +141,12 @@ the tool running and with it removed.
 
 ## Pairs well with
 
-- **[TV Remote](tv-remote)** — press the D-pad from your desktop and record the sequence as a
+- **[TV Remote](./tv-remote)** — press the D-pad from your desktop and record the sequence as a
   macro. Replay a macro while the Focus Inspector records, and you have a repeatable focus
   regression test.
-- **[Routes](route-events)** — when focus "vanishes" on navigation, the route timeline usually
+- **[Routes](./routes)** — when focus "vanishes" on navigation, the route timeline usually
   says why.
+
+## Web support (unreleased)
+
+Browser capture measures DOM focusable elements and observes real focus and keyboard events. It uses the existing sync adapter for remote inspection. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
