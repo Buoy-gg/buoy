@@ -7,7 +7,9 @@ description: "Inspect supported HTTP requests in your Flutter app — package:ht
 
 Inspect requests that use the instrumented `dart:io` HttpClient path. Open a captured request to read its status, headers, body, timing, and error details.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="network" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::network-live-demo -->
 

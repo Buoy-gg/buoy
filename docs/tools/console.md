@@ -9,6 +9,8 @@ description: "Capture every console.log, warn, and error from your React Native 
 
 Read captured `console.log`, `console.info`, `console.warn`, and `console.error` calls in your app. Filter by level or search the message, then expand structured arguments for context. Capture begins after the tool installs its hooks and account access permits it.
 
+<!-- ::tool-film id="console" -->
+
 <!-- ::console-live-demo -->
 
 ## Installation

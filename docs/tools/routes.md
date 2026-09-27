@@ -11,6 +11,8 @@ Inspect captured navigation events, route parameters, and the stack available fr
 
 A route duration is time since the previous navigation event, not a measurement of screen render time. The demo uses a mock session.
 
+<!-- ::tool-film id="routes" -->
+
 <!-- ::routes-live-demo -->
 
 ## Supported Libraries

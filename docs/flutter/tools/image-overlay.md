@@ -7,7 +7,9 @@ description: "Overlay design mockups on your running Flutter app and tweak opaci
 
 Overlay design mockups directly on your running app to compare against your implementation. Load a mockup, match its scale and position to the screen, and adjust opacity to compare spacing and alignment.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="image-overlay" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::image-overlay-live-demo -->
 

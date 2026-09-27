@@ -7,7 +7,9 @@ description: "Watch network requests, storage writes, state changes, and navigat
 
 Inspect captured events from registered source tools in one chronological timeline. Debug complex user flows by watching network requests, storage changes, state updates, and navigation happen in real-time.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="events" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::events-live-demo -->
 

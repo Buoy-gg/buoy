@@ -9,6 +9,8 @@ description: "Inspect captured Sentry envelopes, reported drops and usage estima
 
 Inspect JavaScript Sentry envelopes and captured drop reasons before or as the SDK sends them. Use the tool to review payloads, resolved SDK configuration, and estimated quota usage.
 
+<!-- ::tool-film id="sentry" -->
+
 ## Why this exists
 
 A missing event can be caused by client configuration or processing before ingestion. Buoy helps inspect that part of the path. Its cost view estimates usage from observed envelopes; your Sentry plan and billing records determine actual charges.

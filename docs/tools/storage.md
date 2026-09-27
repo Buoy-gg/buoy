@@ -9,6 +9,8 @@ description: "Browse and edit supported storage in your React Native app — Asy
 
 Inspect and edit AsyncStorage, registered MMKV instances, and registered SecureStore keys. Use the backend filter to choose the data you want to inspect.
 
+<!-- ::tool-film id="storage" -->
+
 <!-- ::storage-live-demo -->
 
 ## Supported Backends

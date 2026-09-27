@@ -11,6 +11,8 @@ Record FPS, CPU, memory, and jank while repeating a test on a device. Compare sa
 
 Start with one repeatable interaction. Record it before and after a change, then check the UI as well as the metrics.
 
+<!-- ::tool-film id="bench" -->
+
 <!-- ::perf-monitor-live-demo -->
 
 ## Installation

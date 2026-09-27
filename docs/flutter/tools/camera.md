@@ -10,6 +10,8 @@ Buoy Desktop supplies a camera feed to Flutter apps in the iOS Simulator. Choose
 **iOS Simulator only.** Android emulators can already use a webcam natively, and
 this is not a physical-device tool.
 
+<!-- ::tool-film id="camera" -->
+
 <!-- ::camera-demo -->
 
 ## Use it

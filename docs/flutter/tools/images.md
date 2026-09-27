@@ -7,7 +7,9 @@ description: "Inspect instrumented image loads, available cache and timing data,
 
 Inspect images rendered through `BuoyImage`, including their load timing, decoded dimensions, displayed size, and available cache information. Plain Image widgets are not captured automatically.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="images" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::images-live-demo -->
 

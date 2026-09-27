@@ -11,6 +11,8 @@ Inspect the queries in your app's TanStack Query client, including keys, status,
 
 The demo uses a mock QueryClient. In your app, the tool reads the client supplied by its surrounding provider.
 
+<!-- ::tool-film id="react-query" -->
+
 <!-- ::query-live-demo -->
 
 ## Installation

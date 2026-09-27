@@ -9,6 +9,10 @@ Configure an authorized user-search API and attach the current impersonation hea
 
 Your backend must authenticate the operator and authorize the target user. Adding a header does not grant permission.
 
+<!-- ::tool-film id="impersonate" -->
+
+The film shows the React Native tool.
+
 <!-- ::impersonate-live-demo -->
 
 ## Installation

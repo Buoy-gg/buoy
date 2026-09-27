@@ -7,7 +7,9 @@ description: "Watch your Flutter app's performance on a real device — a live H
 
 Watch performance on a real device. The Perf Monitor is a live on-device HUD showing FPS, jank, CPU, and memory while you use the app — streamed to the [Buoy Desktop](../../desktop) dashboard so you can watch it full-size while you drive the phone.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="bench" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::perf-monitor-live-demo -->
 

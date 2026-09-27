@@ -11,6 +11,8 @@ Read supported events from installed and configured tools in one chronological t
 
 The demo shows a mock checkout session. Exports contain the filtered captured events, not a complete record of everything the app did.
 
+<!-- ::tool-film id="events" -->
+
 <!-- ::events-live-demo -->
 
 ## Installation

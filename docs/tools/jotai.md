@@ -9,6 +9,8 @@ description: "Inspect Jotai atoms in your React Native app — watch state chang
 
 Inspect named Jotai atoms, their current values, and recorded changes. Register the atoms you need with the same store your app uses, then follow a value through the event history and diff views.
 
+<!-- ::tool-film id="jotai" -->
+
 <!-- ::jotai-live-demo -->
 
 ## Installation

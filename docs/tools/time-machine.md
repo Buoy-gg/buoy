@@ -11,6 +11,8 @@ Save a named snapshot of registered client-state sources and restore it when rep
 
 Check the Sources strip before capture. A snapshot covers the sources available to Buoy; it does not include backend state, component-local state, or in-flight requests.
 
+<!-- ::tool-film id="time-machine" -->
+
 <!-- ::time-machine-live-demo -->
 
 ## Installation

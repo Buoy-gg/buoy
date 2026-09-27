@@ -9,6 +9,8 @@ description: "Redux DevTools for React Native — monitor dispatched actions, in
 
 Inspect captured Redux actions, their payloads, state, and diffs. Import Buoy before store creation for enhancer-based capture, or use the explicit middleware setup below. State jumps need the enhancer or reducer wrapper.
 
+<!-- ::tool-film id="redux" -->
+
 <!-- ::redux-live-demo -->
 
 ## Installation

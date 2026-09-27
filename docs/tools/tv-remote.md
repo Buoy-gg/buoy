@@ -14,6 +14,8 @@ once.
 
 Record a short navigation sequence, replay it, and inspect each event result alongside the resulting focus and screen state. Receiving a key event does not prove that the app reached the intended screen.
 
+<!-- ::tool-film id="tv-remote" -->
+
 ## Installation
 
 Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, your account key, and a working Desktop connection. Then add this tool.

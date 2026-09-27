@@ -11,6 +11,8 @@ Inspect environment values available to the running JavaScript process and valid
 
 Expo's build-time substitution does not make every `EXPO_PUBLIC_` variable enumerable at runtime. A value missing from this tool is not proof that it is missing from your app's bundle. See the limitations below.
 
+<!-- ::tool-film id="env" -->
+
 <!-- ::env-live-demo -->
 
 ## Installation

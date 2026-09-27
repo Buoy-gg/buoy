@@ -13,6 +13,8 @@ The demo uses a mock storefront. Cache verdicts and byte data depend on the imag
 
 <!-- ::images-live-demo -->
 
+<!-- ::tool-film id="images" -->
+
 ## Installation
 
 <!-- ::PM npm="npm install @buoy-gg/images" yarn="yarn add @buoy-gg/images" pnpm="pnpm add @buoy-gg/images" bun="bun add @buoy-gg/images" -->

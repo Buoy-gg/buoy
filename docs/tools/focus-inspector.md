@@ -11,6 +11,8 @@ Inspect observed focus transitions, the current focus target, and the scanned fo
 
 Treat flags as diagnostic evidence. Confirm a suspected bug with the same remote sequence and your intended focus behavior.
 
+<!-- ::tool-film id="focus-inspector" -->
+
 ## Installation
 
 Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, your account key, and a working Desktop connection. Then add this tool.

@@ -7,7 +7,9 @@ description: "Capture every print, debugPrint, and log call from your Flutter ap
 
 A Chrome-DevTools-style console for your Flutter app. Buoy Console captures logs captured through the configured hooks — plus `FlutterError` reports and uncaught async errors — and shows them in a familiar, filterable panel: on your phone, on the desktop dashboard, or through your AI agent.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="console" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::console-live-demo -->
 

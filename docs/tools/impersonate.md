@@ -11,6 +11,8 @@ Test an authorized user's app experience by attaching an impersonation header to
 
 Configure user search, select a test user, verify the header on a request to your backend, then stop impersonation and confirm it is removed.
 
+<!-- ::tool-film id="impersonate" -->
+
 <!-- ::impersonate-live-demo -->
 
 ## Installation

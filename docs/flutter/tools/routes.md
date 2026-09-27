@@ -7,7 +7,9 @@ description: "Browse every go_router route in your Flutter app, jump to any scre
 
 Inspect the routes and navigation events exposed by your registered go_router instance. Navigate between two screens, then check the from/to paths and parameters in the timeline.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="routes" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::routes-live-demo -->
 

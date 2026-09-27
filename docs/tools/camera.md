@@ -9,6 +9,8 @@ description: "Supply camera feeds to supported iOS Simulator apps. Review accoun
 
 Buoy Desktop supplies a camera feed to supported iOS Simulator apps on macOS. Sign in with a Buoy account before using the Desktop panel. Webcam, image, video, pattern and QR generation are available at Free limits; screen-region capture and non-QR generation require Pro access.
 
+<!-- ::tool-film id="camera" -->
+
 <!-- ::camera-demo -->
 
 ## Use it

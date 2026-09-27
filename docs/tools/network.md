@@ -9,6 +9,8 @@ Inspect HTTP requests on your device: URLs, headers, request and response bodies
 
 <!-- ::platform-badge platform="both" -->
 
+<!-- ::tool-film id="network" -->
+
 <!-- ::network-live-demo -->
 
 ## Supported Clients

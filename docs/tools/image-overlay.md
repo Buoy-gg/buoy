@@ -11,6 +11,8 @@ Overlay design mockups directly on your running app to compare against your impl
 
 The demo shows component targeting and alignment on a mock storefront.
 
+<!-- ::tool-film id="image-overlay" -->
+
 <!-- ::image-overlay-live-demo -->
 
 ## Installation

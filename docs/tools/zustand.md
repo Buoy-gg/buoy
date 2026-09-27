@@ -9,6 +9,8 @@ description: "Zustand devtools for React Native — watch store state changes, e
 
 Inspect registered Zustand stores, current values, and recorded changes. Use the diff to find which keys changed, then test a retained state with Jump or restore the initial state with Reset.
 
+<!-- ::tool-film id="zustand" -->
+
 <!-- ::zustand-live-demo -->
 
 ## Installation

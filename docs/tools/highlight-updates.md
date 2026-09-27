@@ -11,6 +11,8 @@ See which components render as you interact with a development build. The overla
 
 Use the demo to inspect a list update, then compare it with an interaction in your app.
 
+<!-- ::tool-film id="highlight-updates" -->
+
 <!-- ::highlight-live-demo -->
 
 ## Render Causes

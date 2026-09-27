@@ -13,6 +13,8 @@ An asset not loaded during this session may still be used by another screen or f
 
 Buoy's own package assets are excluded from the inventory, size totals, and reports. The exclusion uses package source paths, so app assets with the same filenames remain visible.
 
+<!-- ::tool-film id="assets" -->
+
 <!-- ::assets-live-demo -->
 
 ## Installation

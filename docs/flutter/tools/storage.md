@@ -7,7 +7,9 @@ description: "Browse and edit every key-value pair your Flutter app persists —
 
 Inspect shared_preferences values and supported registered backends. Edit a disposable test key, read it back through your app, and remove it after checking the integration.
 
-The demo shows the React Native tool with mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
+<!-- ::tool-film id="storage" -->
+
+The film and the demo show the React Native tool, and the demo uses mock data. Use the Flutter setup and feature descriptions below for supported behavior; the demo does not establish Flutter feature parity.
 
 <!-- ::storage-live-demo -->
 

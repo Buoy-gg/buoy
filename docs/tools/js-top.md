@@ -11,6 +11,8 @@ Rank the callback origins JS Top can observe by execution time and call count. C
 
 The tool uses JavaScript instrumentation and can run in Expo Go. Production access requires Pro.
 
+<!-- ::tool-film id="js-top" -->
+
 <!-- ::js-top-live-demo -->
 
 ## Installation
