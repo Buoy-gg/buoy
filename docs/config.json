@@ -131,6 +131,10 @@
         {
           "label": "AI / MCP Server",
           "to": "mcp"
+        },
+        {
+          "label": "Buoy Optimize",
+          "to": "optimize"
         }
       ]
     },

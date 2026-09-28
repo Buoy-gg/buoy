@@ -85,20 +85,17 @@ A few things to know:
 
 ## Optimize with your AI
 
-Bench powers Buoy's AI performance workflow. The [MCP server](../mcp) ships a **`buoy-optimize` wizard skill** that turns the whole tune → measure → repeat loop into an almost hands-off process. Point your assistant at a new feature you're building — or an existing screen that's slow on device — and it will:
+[Buoy Optimize](../optimize) is a skill that lets your coding agent drive Bench. Tell the agent which screen is slow and it builds each idea for a fix as its own variant, benchmarks every variant on the device with `run_benchmark_batch`, and keeps what's faster. You check that each variant still looks right, which matters most on Skia and other GPU-drawn UI. Say "buoy optimize" in your editor to start.
 
-- Navigate to the screen and benchmark a matrix of implementation variants with `run_benchmark_batch`
-- Read the ranked comparison (FPS, CPU, memory, jank) from the **real device**, pick the winner, and apply the next optimization
-- Loop — measure, change, re-measure — until the numbers stop improving
+<!-- ::tool-film id="optimize" -->
 
-Compare repeated runs with the same device, build, data, and interaction. Check that a performance improvement preserves the intended UI and behavior.
-
-The only steps that stay manual are the ones a human has to eyeball — mainly confirming the result still *renders correctly*. If you're on Skia or other GPU-drawn UI, plan to glance at the screen between passes: the wizard drives the metrics, you verify it still looks right. Say **"buoy optimize"** in your editor to start.
+See [Buoy Optimize](../optimize) for how a round works, what you need and a worked example.
 
 ---
 
 ## What's Next
 
+- [Buoy Optimize](../optimize) — Let your AI agent benchmark and pick fixes
 - [AI / MCP Server](../mcp) — Automate benchmarks with an AI agent
 - [Render Highlighter](./highlight-updates) — Find the re-renders hurting performance
 - [Events Timeline](./events) — See performance in context with everything else

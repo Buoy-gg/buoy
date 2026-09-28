@@ -95,7 +95,7 @@ Ask your assistant to start with `list_devices` to see connected devices and the
 - **Screenshot a component** *(React Native / iOS Simulator)* — `screenshot_component` locates a component by testID/name and returns a tight, cropped image.
 - **Reload the app** *(React Native)* — `reload_app` restarts the JS bundle (see below).
 
-A good starting prompt on React Native: **"buoy optimize"** kicks off a guided performance pass using the bundled skill.
+A good starting prompt on React Native: **"buoy optimize"** starts a guided performance pass with the bundled skill. See [Buoy Optimize](./optimize).
 
 ## Confirming a fix actually worked
 
@@ -161,7 +161,7 @@ It ships with `@buoy-gg/core` itself, with supported app reload mechanisms. A fa
 
 ## The buoy-optimize skill (React Native)
 
-For a new skill installation, `init` adds a workflow for investigating rendering performance with [Bench](./tools/perf-monitor) and render measurements. Rerunning setup overwrites matching skill files; save customizations first. Ask your assistant for "buoy optimize" to compare a baseline and selected variants on the target device.
+For a new skill installation, `init` adds a workflow for investigating rendering performance with [Bench](./tools/perf-monitor) and render measurements. Rerunning setup overwrites matching skill files; save customizations first. Ask your assistant for "buoy optimize" to compare a baseline and selected variants on the target device. [Buoy Optimize](./optimize) walks through a round, with a film and a worked example.
 
 Keep device, build mode, workload and interaction comparable. Review failures, missing metrics and visual behavior before selecting a change. Simulator measurements do not establish results on physical hardware, and a ranking is not proof that the feature works correctly.
 
