@@ -17,7 +17,7 @@ Buoy puts a floating menu in your React Native app. Open it on the device to loo
 Flutter has its own [setup for debug builds](https://buoy.gg/buoy/latest/docs/flutter/quick-start).
 
 <p align="center">
-  <a href="https://buoy.gg"><img src=".github/readme/film.png" alt="Play the 53-second Buoy film on buoy.gg" width="760" /></a>
+  <a href="https://buoy.gg"><img src=".github/readme/film.png" alt="Play the Buoy film (1 minute 50 seconds) on buoy.gg" width="760" /></a>
 </p>
 
 ## Get started
