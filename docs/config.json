@@ -62,6 +62,27 @@
           ]
         },
         {
+          "label": "web",
+          "children": [
+            {
+              "label": "Overview",
+              "to": "web/overview"
+            },
+            {
+              "label": "Quick Start",
+              "to": "web/quick-start"
+            },
+            {
+              "label": "Installation",
+              "to": "web/installation"
+            },
+            {
+              "label": "Frameworks",
+              "to": "web/frameworks"
+            }
+          ]
+        },
+        {
           "label": "swift",
           "children": [
             {
@@ -124,6 +145,23 @@
             {
               "label": "FloatingDevTools",
               "to": "floating-devtools"
+            },
+            {
+              "label": "Telemetry",
+              "to": "telemetry"
+            }
+          ]
+        },
+        {
+          "label": "web",
+          "children": [
+            {
+              "label": "FloatingDevTools",
+              "to": "floating-devtools"
+            },
+            {
+              "label": "Custom Tools",
+              "to": "custom-tools"
             },
             {
               "label": "Telemetry",
@@ -210,6 +248,22 @@
             {
               "label": "Time Machine",
               "to": "tools/time-machine"
+            },
+            {
+              "label": "Clock",
+              "to": "tools/clock"
+            },
+            {
+              "label": "Lifecycle",
+              "to": "tools/lifecycle"
+            },
+            {
+              "label": "Location",
+              "to": "tools/location"
+            },
+            {
+              "label": "Permissions",
+              "to": "tools/permissions"
             },
             {
               "label": "Route Inspector",
@@ -364,6 +418,103 @@
             {
               "label": "Jotai DevTools",
               "to": "tools/jotai"
+            }
+          ]
+        },
+        {
+          "label": "web",
+          "children": [
+            {
+              "label": "Ask Buoy",
+              "to": "tools/ask-buoy"
+            },
+            {
+              "label": "Environment Inspector",
+              "to": "tools/env"
+            },
+            {
+              "label": "Events Timeline",
+              "to": "tools/events"
+            },
+            {
+              "label": "Console",
+              "to": "tools/console"
+            },
+            {
+              "label": "Sentry",
+              "to": "tools/sentry"
+            },
+            {
+              "label": "Network Monitor",
+              "to": "tools/network"
+            },
+            {
+              "label": "Storage Explorer",
+              "to": "tools/storage"
+            },
+            {
+              "label": "Time Machine",
+              "to": "tools/time-machine"
+            },
+            {
+              "label": "Clock",
+              "to": "tools/clock"
+            },
+            {
+              "label": "Lifecycle",
+              "to": "tools/lifecycle"
+            },
+            {
+              "label": "Location",
+              "to": "tools/location"
+            },
+            {
+              "label": "Permissions",
+              "to": "tools/permissions"
+            },
+            {
+              "label": "Route Inspector",
+              "to": "tools/routes"
+            },
+            {
+              "label": "Highlight Updates",
+              "to": "tools/highlight-updates"
+            },
+            {
+              "label": "Bench",
+              "to": "tools/perf-monitor"
+            },
+            {
+              "label": "JS Top",
+              "to": "tools/js-top"
+            },
+            {
+              "label": "React Query DevTools",
+              "to": "tools/react-query"
+            },
+            {
+              "label": "Redux DevTools",
+              "to": "tools/redux"
+            },
+            {
+              "label": "Zustand DevTools",
+              "to": "tools/zustand"
+            },
+            {
+              "label": "Jotai DevTools",
+              "to": "tools/jotai"
+            },
+            {
+              "label": "Assets",
+              "to": "tools/assets"
+            },
+            {
+              "label": "Impersonate Tool",
+              "to": "tools/impersonate"
+            },
+            {
+              "label": "Image Overlay",
+              "to": "tools/image-overlay"
             }
           ]
         },

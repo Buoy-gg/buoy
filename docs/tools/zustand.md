@@ -185,6 +185,6 @@ Install `@buoy-gg/zustand` and register your stores — they appear in the on-de
 
 Yes — the event stream timestamps every update with the store name and changed key, and each event has a before/after diff.
 
-## Web support (unreleased)
+## Web support
 
-Register live stores with watchStores. The shared browser panel edits the same store objects used by the app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Register live stores with watchStores. The shared browser panel edits the same store objects used by the app. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

@@ -167,7 +167,7 @@ Keep device, build mode, workload and interaction comparable. Review failures, m
 
 ## How it works
 
-Buoy tools run inside your app and sync to a local broker over the external-sync protocol. The MCP server connects to that broker as a "Dashboard" client — the same role the Buoy desktop app plays — or spawns its own broker in-process when no desktop app is running, so it works standalone.
+Buoy tools run inside your app and sync to a local broker over the external-sync protocol. The MCP server connects to that broker as a "Dashboard" client — the same role the Buoy desktop app plays — or spawns its own broker in-process when no desktop app is running, so it works standalone. It proves it's a dashboard with the token the broker writes to `~/.buoy/broker-token`, so it must run as the same user as Buoy Desktop. An MCP version older than Desktop's broker is refused; update both together.
 
 React Native and Flutter devices appear together in `list_devices`.
 

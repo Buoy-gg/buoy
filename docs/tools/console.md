@@ -72,9 +72,9 @@ Install `@buoy-gg/console` — logs are captured in the app itself and viewable 
 
 For breakpoints, yes — keep React Native DevTools. For reading logs anywhere (including devices not attached to your machine), the in-app console replaces terminal-watching.
 
-## Web support (unreleased)
+## Web support
 
-Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Native iOS (Swift)
 

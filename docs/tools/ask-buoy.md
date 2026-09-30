@@ -350,6 +350,6 @@ The agent reads live app data, and some of that comes from services an attacker 
 - [Impersonate](./impersonate) — see the app as a specific user.
 - [Custom tools](../custom-tools) — register your own, and hand the agent their descriptors so it can drive them too.
 
-## Web support (unreleased)
+## Web support
 
-Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

@@ -137,9 +137,9 @@ Install `@buoy-gg/env` and open the Env tool — it shows runtime-visible values
 
 Yes — declare expected types and values, and failures show the current value, expected value, and context.
 
-## Web support (unreleased)
+## Web support
 
-Supply public runtime values explicitly with setRemoteEnv. The inspector cannot enumerate variables that a bundler replaced at build time. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Supply public runtime values explicitly with setRemoteEnv. The inspector cannot enumerate variables that a bundler replaced at build time. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Native iOS (Swift)
 

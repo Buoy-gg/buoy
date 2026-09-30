@@ -149,6 +149,6 @@ the tool running and with it removed.
 - **[Routes](./routes)** — when focus "vanishes" on navigation, the route timeline usually
   says why.
 
-## Web support (unreleased)
+## Web support
 
-Browser capture measures DOM focusable elements and observes real focus and keyboard events. It uses the existing sync adapter for remote inspection. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Browser capture measures DOM focusable elements and observes real focus and keyboard events. It uses the existing sync adapter for remote inspection. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

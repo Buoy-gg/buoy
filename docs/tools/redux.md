@@ -213,6 +213,6 @@ REPLAY works on every setup. JUMP needs a reducer that handles the jump, which y
 
 JUMP is also disabled on older actions whose raw state has been released. Buoy keeps the before/after state trees of the 25 most recent actions only: every retained action pins its own copy of the tree, and on an app that replaces large slices wholesale (a store switch, a rehydration) a few dozen of those are enough to exhaust memory. Older actions keep their row, their diff summary and their payload — just not a tree to restore.
 
-## Web support (unreleased)
+## Web support
 
-Use the app’s existing Redux provider. The browser host mounts capture and exposes the shared state and action panels. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Use the app’s existing Redux provider. The browser host mounts capture and exposes the shared state and action panels. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

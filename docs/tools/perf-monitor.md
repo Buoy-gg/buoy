@@ -112,6 +112,6 @@ Install `@buoy-gg/perf-monitor` and record a run — Bench samples both UI-threa
 
 Yes — runs are saved and comparable, and via the Buoy MCP server an AI agent can run benchmark batches of both variants and report which is faster.
 
-## Web support (unreleased)
+## Web support
 
-Browser measurements use frame timing, available JS heap data, and long tasks. Native CPU, RSS, and thermal measurements remain device-specific. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Browser measurements use frame timing, available JS heap data, and long tasks. Native CPU, RSS, and thermal measurements remain device-specific. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

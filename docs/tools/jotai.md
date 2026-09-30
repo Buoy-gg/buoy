@@ -149,6 +149,6 @@ Read-only atoms cannot be written. A derived atom can be writable if it defines 
 
 Install `@buoy-gg/jotai` and register your atoms — they appear in the on-device browser with live values, write history, and diffs.
 
-## Web support (unreleased)
+## Web support
 
-Register the app’s atoms and store with watchAtoms. The shared panel and snapshot provider use those registrations. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Register the app’s atoms and store with watchAtoms. The shared panel and snapshot provider use those registrations. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

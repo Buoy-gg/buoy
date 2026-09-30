@@ -200,7 +200,7 @@ Scenarios shipped in code with `defineScenario()` don't count toward the device 
 
 ## Web support (unreleased)
 
-Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Swift
 

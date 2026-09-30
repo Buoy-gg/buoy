@@ -114,9 +114,9 @@ For builds that ship to non-developers — field or associate builds where the d
 - [AI / MCP Server](./mcp) — Drive your app from your AI editor
 - [Quick Start](./quick-start) — Full setup walkthrough
 
-## Web support (unreleased)
+## Web support
 
-Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](./web-preview.md) for registration, dependencies, and browser boundaries.
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](./web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 The browser dial supports Tab, arrow keys between tools, Enter to activate controls, and Escape to close. Its center button opens settings. Drag panel backgrounds or handles to move them; tabs and inputs keep their normal mouse behavior. Minimized tools stay above the floating bar and scroll when needed. They open below only when there is not enough room above for one row.
 

@@ -91,9 +91,9 @@ Images shows what your app renders at runtime — per-load cache verdicts, timin
 
 Use **Duplicates** at the top of the asset list to show every asset that shares a content hash with another asset. The count includes all copies. Selecting it clears the search; select **All** or tap **Duplicates** again to return to the full list.
 
-## Web support (unreleased)
+## Web support
 
-Browser capture observes loaded resources. Add the Vite asset manifest or register a manifest from your bundler to include files before they load. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Browser capture observes loaded resources. Add the Vite asset manifest or register a manifest from your bundler to include files before they load. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Native Swift status
 

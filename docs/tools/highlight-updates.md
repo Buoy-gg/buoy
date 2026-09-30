@@ -77,9 +77,9 @@ Install `@buoy-gg/highlight-updates` and turn on highlighting — components fla
 
 Buoy shows overlays and render details inside the running development build. Use React's profiler for profiling sessions and Buoy for inspecting renders during an interaction. Highlight Updates does not work in production builds.
 
-## Web support (unreleased)
+## Web support
 
-Import @buoy-gg/core/web/register before React DOM to capture roots and renders. The shared inspector measures DOM elements. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Import @buoy-gg/core/web/register before React DOM to capture roots and renders. The shared inspector measures DOM elements. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 
 ## Swift interaction support

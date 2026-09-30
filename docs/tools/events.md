@@ -87,9 +87,9 @@ Open the Events timeline — the interleaved history of requests, state changes,
 
 The timeline exports in a compact structured format designed to paste into an AI assistant — so the model sees exactly what the app did, in order, with timestamps.
 
-## Web support (unreleased)
+## Web support
 
-Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Native Swift status
 

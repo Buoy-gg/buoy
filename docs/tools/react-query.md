@@ -89,6 +89,6 @@ Install `@buoy-gg/react-query` and place the menu inside your app's query provid
 
 Yes. It's pure JavaScript — no native modules — so the tool can run in Expo Go. Production access requires Pro and deliberate app authorization.
 
-## Web support (unreleased)
+## Web support
 
-Use the app’s existing QueryClientProvider. The browser host mounts the shared tracker and cache adapter. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Use the app’s existing QueryClientProvider. The browser host mounts the shared tracker and cache adapter. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

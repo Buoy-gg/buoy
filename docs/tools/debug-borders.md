@@ -97,6 +97,6 @@ Install `@buoy-gg/debug-borders` and tap the BORDERS icon to cycle modes — Bor
 
 Yes — tap any label to inspect the component underneath on the device itself: its `testID`, styles, position, and accessibility info. Nothing has to be attached to your machine.
 
-## Web support (unreleased)
+## Web support
 
-Import @buoy-gg/core/web/register before React DOM. The shared overlay measures DOM elements and draws their borders and labels. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Import @buoy-gg/core/web/register before React DOM. The shared overlay measures DOM elements and draws their borders and labels. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

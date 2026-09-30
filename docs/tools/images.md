@@ -95,9 +95,9 @@ Yes — capture is pure JavaScript (RN’s official component-decorator hook plu
 
 The registry compares each image’s decoded pixels against its rendered size × device pixel ratio and totals the estimated wasted decoded bytes — sort by the red verdicts, then use the on-device re-encode to prove what a right-sized source would save.
 
-## Web support (unreleased)
+## Web support
 
-Browser capture observes DOM images and supports shared overrides and size analysis. Savings previews use Canvas; cross-origin reads require permission from the image server. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Browser capture observes DOM images and supports shared overrides and size analysis. Savings previews use Canvas; cross-origin reads require permission from the image server. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Native iOS (Swift)
 

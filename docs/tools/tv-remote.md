@@ -249,6 +249,6 @@ sees.
 No. `@buoy-gg/tv-remote` is JavaScript. Other Buoy tools may have native dependencies. The shelling out happens in
 the desktop app.
 
-## Web support (unreleased)
+## Web support
 
-Browser capture observes keyboard events without consuming them. It does not reproduce a TV’s native focus behavior. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Browser capture observes keyboard events without consuming them. It does not reproduce a TV’s native focus behavior. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

@@ -80,9 +80,9 @@ Install `@buoy-gg/route-events` and open Routes — the Stack tab shows the live
 
 Yes — it's built for Expo Router: the sitemap, stack, and event stream all reflect your file-based routes.
 
-## Web support (unreleased)
+## Web support
 
-Browser History API and hash changes feed the shared route history. Register known paths and the framework router adapter for route selection and navigation. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Browser History API and hash changes feed the shared route history. Register known paths and the framework router adapter for route selection and navigation. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Native iOS (Swift)
 

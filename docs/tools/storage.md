@@ -107,9 +107,9 @@ Install `@buoy-gg/storage` and open the Storage tool from the floating menu — 
 
 Yes. Register each MMKV instance, then select it with the backend filter. SecureStore requires explicit key registration too.
 
-## Web support (unreleased)
+## Web support
 
-The browser uses localStorage and sessionStorage with the shared editor, event history, undo, and snapshots. Native secure storage is unavailable on web. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+The browser uses localStorage and sessionStorage with the shared editor, event history, undo, and snapshots. Native secure storage is unavailable on web. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 
 ## Swift backends

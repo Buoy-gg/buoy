@@ -101,4 +101,4 @@ Not yet. Native crashes, release-health sessions and Session Replay uploads are 
 
 ## Web support (unreleased)
 
-Pass the existing browser SDK’s getClient through the host’s sentryGetClient prop. Envelope capture and diagnostic panels use the shared implementation. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Pass the existing browser SDK’s getClient through the host’s sentryGetClient prop. Envelope capture and diagnostic panels use the shared implementation. The browser build is available in this checkout and has not been published yet. See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

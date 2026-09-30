@@ -26,6 +26,16 @@ The download button above grabs the right build for your machine automatically; 
 
 Buoy tools sync to a local broker on **port 42831**. Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects — every install of your app is its own entry, named after the app and hardware (`Acme App (iPhone 17 Pro · 2c1d)`). If no device appears, the dashboard shows a troubleshooting panel with your machine's exact URLs and a test you can run from the phone's browser.
 
+### Who can connect
+
+The broker listens on your local network, so phones on the same Wi-Fi reach it without setup. Only Buoy Desktop and the Buoy MCP server on your machine can read app data or send actions to an app. They prove it with a token the broker writes when it starts, to `~/.buoy/broker-token` (`%APPDATA%\Buoy\broker-token` on Windows), a file only your user account can read. Anything else that connects is treated as an app: it can send its own data and receive actions addressed to it, and can't see or control anything else.
+
+Web apps served from your machine or your local network connect as usual. When a page from any other site tries to connect, such as your production site with Buoy turned on for admins, Buoy Desktop asks whether to allow that site. It remembers an Allow; a Don't Allow lasts until Desktop restarts.
+
+To accept connections from this machine only, create `broker-settings.json` containing `{ "allowNetworkDevices": false }` in Buoy Desktop's data folder (`~/Library/Application Support/Buoy` on macOS, `%APPDATA%\Buoy` on Windows, `~/.config/Buoy` on Linux) and restart Desktop, or launch it with `BUOY_BROKER_HOST=127.0.0.1`. Simulators, emulators and Android over USB keep working; phones on Wi-Fi can't connect.
+
+Traffic between a phone and your machine isn't encrypted, so connect over a network you trust.
+
 ### React Native
 
 First, install the sync client in your app. It's a separate package on purpose — apps that never use the desktop dashboard don't carry the sync code at all:
@@ -51,22 +61,36 @@ Need to point somewhere else? Pass `socketURL` in the `externalSync` prop:
 A shipped app must never dial a broker on a customer's phone, so sync is **off** whenever `__DEV__` is false. To profile a release build you own — a local `--configuration Release` run, an internal TestFlight/EAS build, a field build that ships headless — opt in explicitly. It also requires a real Pro license.
 
 ```tsx
+<FloatingDevTools externalSync={{ enableInRelease: true }} />
+```
+
+There is no Metro server in a release bundle, so the broker host can't be derived and `socketURL` defaults to `http://localhost:42831`. That is already right for the iOS Simulator, the Android emulator, and Android over USB (`adb reverse tcp:42831 tcp:42831`).
+
+Release sync carries real user data, such as session tokens in network captures. So a release build won't connect over plain `http://` to another machine, where anyone on the same network could read the traffic; it logs a warning instead. It connects to `localhost` or over `https://`. For a physical iOS device on a network you trust, opt in to plain http as well:
+
+```tsx
 <FloatingDevTools
   externalSync={{
     enableInRelease: true,
-    // iOS physical devices only: there is no Metro host to derive
     socketURL: "http://192.168.1.20:42831",
+    allowInsecureNetwork: true,
   }}
 />
 ```
-
-There is no Metro server in a release bundle, so the broker host can't be derived and `socketURL` defaults to `http://localhost:42831`. That is already right for the iOS Simulator, the Android emulator, and Android over USB (`adb reverse tcp:42831 tcp:42831`) — pass it explicitly for a physical iOS device or a broker on another machine.
 
 Most tools work the same in a release build — network capture, storage, console, the state tools, routes, images, assets, the performance HUD, and remote actions. Three things stay off, by design and not by choice:
 
 - **Highlight Updates** (render counts, and the MCP `describe_screen` / `tap_element` / `measure_renders` calls) needs React's DevTools hook, which React only installs in dev builds.
 - **Network response overrides** stay disabled — a shipped build must not be able to mock its own responses.
 - **Reload** falls back to `expo-updates`; without that package installed, `reload_app` reports that it has no mechanism instead of reloading.
+
+Impersonate's remote actions that search users or start an impersonation are also refused in release builds, because they run with the signed-in user's credentials. Stopping an impersonation still works. To allow them from Desktop and the MCP, list the tool:
+
+```tsx
+<FloatingDevTools
+  externalSync={{ enableInRelease: true, releaseActions: ["impersonate"] }}
+/>
+```
 
 ### Flutter
 
@@ -118,4 +142,4 @@ Buoy tools sync to a local broker on port 42831. Launch Buoy Desktop first — i
 
 ### Can I use it with a release build?
 
-Sync is off whenever `__DEV__` is false, so a shipped app never dials a broker on a customer's phone. To profile a release build you own — a local Release run, an internal TestFlight/EAS build — opt in explicitly; it also requires a real Pro license.
+Sync is off whenever `__DEV__` is false, so a shipped app never dials a broker on a customer's phone. To profile a release build you own — a local Release run, an internal TestFlight/EAS build — opt in explicitly; it also requires a real Pro license. Release builds connect to `localhost` or over `https://` unless you set `allowInsecureNetwork`; see [Release builds](#release-builds).

@@ -131,9 +131,9 @@ Pending calls retain their starting profile. Offline takes precedence over autho
 
 Closing the panel, pausing its list, clearing requests or filtering them keeps conditions active. Select No throttling to clear them. A full JS reload or loss of account access resets them automatically. Native simulator and device validation is still pending for this preview.
 
-## Web support (unreleased)
+## Web support
 
-Browser fetch and XHR use the shared capture, rules, conditions, and request panels. CORS still controls which response data the page can read. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Browser fetch and XHR use the shared capture, rules, conditions, and request panels. CORS still controls which response data the page can read. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 The capture control reads “Pause network capture” while capture is enabled and “Resume network capture” while it is paused. Existing requests remain visible while capture is paused.
 

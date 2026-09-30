@@ -303,9 +303,9 @@ No. Buoy only attaches the headers you configure to outgoing requests. Your back
 
 Yes — if your flag service keys off user identity or headers, switching the impersonated user flips the flags the app receives.
 
-## Web support (unreleased)
+## Web support
 
-Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Native iOS (Swift)
 

@@ -43,6 +43,38 @@ void main() {
 
 ---
 
+## Required keys
+
+Pass required keys when registering Storage. The same declarations validate the
+local browser and reach Desktop through the `getRequiredKeys` action.
+
+```dart
+if (kDebugMode) {
+  registerBuoyStorage(requiredKeys: const [
+    RequiredStorageKey(
+      key: 'theme',
+      storageType: 'async',
+      expectedValue: 'dark',
+    ),
+    RequiredStorageKey(
+      key: 'auth_token',
+      storageType: 'secure',
+      expectedType: 'string',
+    ),
+  ]);
+}
+```
+
+Use `async`, `secure`, or `mmkv` for `storageType`. Omitting it applies the
+declaration to every registered backend. Checks distinguish missing keys, wrong
+values, and wrong types. A required secure key can be read by name even when it
+is absent from the backend's key list. Keys marked `requireAuthentication` in
+that list remain unread and are shown as protected.
+
+Calling `registerBuoyStorage()` again without `requiredKeys` preserves the
+configuration, including when the umbrella registers the tool. Pass an empty
+list to clear it.
+
 ## What You Can Do
 
 <!-- ::storage-actions-grid -->

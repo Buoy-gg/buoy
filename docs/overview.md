@@ -31,7 +31,7 @@ To install by hand, follow the [Quick Start](./quick-start). It goes from instal
 ## What you can do
 
 - **Inspect** requests, storage, React Query, Redux, Zustand and Jotai state, navigation, console output, image loads and re-renders.
-- **Change** the running app: edit storage, refetch queries, dispatch actions, restore a [Time Machine](./tools/time-machine) snapshot, or switch to a test user through [Impersonate](./tools/impersonate).
+- **Change** the running app: edit storage, refetch queries, dispatch actions, restore a [Time Machine](./tools/time-machine) snapshot, move the app to another date with [Clock](./tools/clock), put it in the background or relaunch it with [Lifecycle](./tools/lifecycle), move it to another place or along a route with [Location](./tools/location), make it see a denied or limited permission with [Permissions](./tools/permissions), or switch to a test user through [Impersonate](./tools/impersonate).
 - **Measure** FPS, CPU, memory and JavaScript thread time with [Bench](./tools/perf-monitor) and [JS Top](./tools/js-top).
 
 Every tool is its own package, so you only install what you use. [Installation](./installation#available-packages) lists them all.
