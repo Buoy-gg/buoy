@@ -201,3 +201,15 @@ Scenarios shipped in code with `defineScenario()` don't count toward the device 
 ## Web support (unreleased)
 
 Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Swift
+
+The Swift SDK includes `BuoyScenarios`. Register shipped definitions with `BuoyScenarios.define(...)`, using the same scenario fields and `{ tool, action, params }` steps. The example app shares the Pokémon API error and delay definitions with RN.
+
+The `scenarios` MCP adapter exposes the library, draft review, previews, execution, deactivation, folders, and JSON export. Remote saves always become drafts. Steps dispatch through the native tool registry, so an RN-only action fails preflight before any step runs. Native execution is disabled in production builds.
+
+Storage writes need explicit undo steps. Deactivation removes recorded override rules and stops recorded impersonation sessions; read the result for changes left behind. A timed-out action blocks further runs until it finishes, and late successful effects remain available for cleanup. The native UI provides draft review, typed variables, a step preview, and a failed-run report showing completed, failed, and skipped steps.
+
+Native recording captures supported host taps and text, then lets you review and select steps before saving. It excludes Buoy controls and secure text fields, and adds waits for observed navigation. It does not record scroll gestures or native state-store shortcuts; long presses and slider interactions are not replayable. Capture and execution require a development build. MCP-driven capture and replay have passed simulator checks; physical-touch recording still needs device QA.
+
+For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#scenarios).

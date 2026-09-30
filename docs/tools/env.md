@@ -140,3 +140,7 @@ Yes — declare expected types and values, and failures show the current value, 
 ## Web support (unreleased)
 
 Supply public runtime values explicitly with setRemoteEnv. The inspector cannot enumerate variables that a bundler replaced at build time. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native iOS (Swift)
+
+Environment Inspector is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#env).

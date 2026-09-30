@@ -60,6 +60,23 @@
               "to": "tv/installation"
             }
           ]
+        },
+        {
+          "label": "swift",
+          "children": [
+            {
+              "label": "Overview",
+              "to": "swift/overview"
+            },
+            {
+              "label": "Quick Start",
+              "to": "swift/quick-start"
+            },
+            {
+              "label": "Installation",
+              "to": "swift/installation"
+            }
+          ]
         }
       ]
     },
@@ -111,6 +128,19 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            }
+          ]
+        },
+        {
+          "label": "swift",
+          "children": [
+            {
+              "label": "Physical Devices",
+              "to": "swift/devices"
+            },
+            {
+              "label": "Release Builds",
+              "to": "swift/release-builds"
             }
           ]
         }
@@ -334,6 +364,63 @@
             {
               "label": "Jotai DevTools",
               "to": "tools/jotai"
+            }
+          ]
+        },
+        {
+          "label": "swift",
+          "children": [
+            {
+              "label": "Network Monitor",
+              "to": "swift/tools#network"
+            },
+            {
+              "label": "Console",
+              "to": "swift/tools#console"
+            },
+            {
+              "label": "Storage Explorer",
+              "to": "swift/tools#storage"
+            },
+            {
+              "label": "Environment Inspector",
+              "to": "swift/tools#env"
+            },
+            {
+              "label": "Impersonate Tool",
+              "to": "swift/tools#impersonate"
+            },
+            {
+              "label": "Image Overlay",
+              "to": "swift/tools#image-overlay"
+            },
+            {
+              "label": "Images",
+              "to": "swift/tools#images"
+            },
+            {
+              "label": "Push Notifications",
+              "to": "swift/tools#notifications"
+            },
+            {
+              "label": "Route Inspector",
+              "to": "swift/tools#routes"
+            },
+            {
+              "label": "Scenarios",
+              "to": "swift/tools#scenarios"
+            },
+            {
+              "label": "Time Machine",
+              "to": "swift/tools#time-machine"
+            },
+            {
+              "label": "Events Timeline",
+              "to": "swift/tools#events"
+            },
+            {
+              "label": "Assets",
+              "to": "swift/tools#assets"
             }
           ]
         }

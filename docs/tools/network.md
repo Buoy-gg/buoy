@@ -69,7 +69,7 @@ The captured **Response Body** is read-only. Change the response returned to you
 
 A rule created from a request matches its endpoint, with the query string replaced by a wildcard. Review the pattern before enabling it: requests with different query parameters can match the same rule.
 
-Patterns use `*` globs against the full URL. For example, `*/v1/users*` matches that path on any host. The first enabled rule matching the URL and method wins. Selecting `POST` matches POST requests; it does not change the request method or outgoing body.
+Patterns use `*` globs against the full URL. For example, `*/v1/users*` matches that path on any host. A pattern that starts with `/` is a path on any host: `/v1/users` matches `https://api.example.com/v1/users`, and `/v1/users*` also matches it with a query string. The first enabled rule matching the URL and method wins. Selecting `POST` matches POST requests; it does not change the request method or outgoing body.
 
 Rules persist across app restarts. If they remain armed and untouched across three launches, Buoy pauses them and offers a control to resume them. The master switch disables overrides while retaining the rules.
 
@@ -136,3 +136,7 @@ Closing the panel, pausing its list, clearing requests or filtering them keeps c
 Browser fetch and XHR use the shared capture, rules, conditions, and request panels. CORS still controls which response data the page can read. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
 
 The capture control reads “Pause network capture” while capture is enabled and “Resume network capture” while it is paused. Existing requests remain visible while capture is paused.
+
+## Native iOS (Swift)
+
+Network Monitor is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#network).

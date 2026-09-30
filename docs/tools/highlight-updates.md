@@ -80,3 +80,10 @@ Buoy shows overlays and render details inside the running development build. Use
 ## Web support (unreleased)
 
 Import @buoy-gg/core/web/register before React DOM to capture roots and renders. The shared inspector measures DOM elements. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+
+## Swift interaction support
+
+Swift uses the `highlight-updates` adapter ID for native screen inspection and interaction. It does not track React renders. Inspect the connected device’s action list: native builds provide `describeScreen`, `tapElement`, `waitFor`, `scroll`, and `typeText`, plus `startTouchCapture`, `stopTouchCapture`, `clearTouchCapture`, and `readTouchCapture` for Scenarios recording.
+
+Touch capture requires a development build. It excludes Buoy controls and secure text inputs, retains at most 500 interactions, and reports capture status and coverage problems through `readTouchCapture`. Stop capture when finished; clear it to remove retained records. A successful action dispatch does not prove a tap worked: check the returned `tapped` field and the resulting screen. Physical-touch capture remains pending device QA; MCP-driven capture and replay have been checked in the simulator.

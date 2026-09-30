@@ -306,3 +306,7 @@ Yes — if your flag service keys off user identity or headers, switching the im
 ## Web support (unreleased)
 
 Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native iOS (Swift)
+
+Impersonate is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#impersonate).

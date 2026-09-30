@@ -9,11 +9,13 @@ description: "Inspect instrumented image loads, available cache and timing data,
 
 Inspect captured React Native Image and expo-image loads, including timing, dimensions, errors, and cache information. Use the registry to find oversized sources and retry failed loads.
 
+Buoy's icons, backgrounds and tool previews are excluded from the registry. App images remain visible, including app views that use the same source as a tool preview.
+
 The demo uses a mock storefront. Cache verdicts and byte data depend on the image component and platform; the coverage notes below explain the differences.
 
-<!-- ::images-live-demo -->
-
 <!-- ::tool-film id="images" -->
+
+<!-- ::images-live-demo -->
 
 ## Installation
 
@@ -96,3 +98,7 @@ The registry compares each image’s decoded pixels against its rendered size ×
 ## Web support (unreleased)
 
 Browser capture observes DOM images and supports shared overrides and size analysis. Savings previews use Canvas; cross-origin reads require permission from the image server. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native iOS (Swift)
+
+Images is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#images).

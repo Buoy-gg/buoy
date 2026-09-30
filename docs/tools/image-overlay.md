@@ -78,7 +78,7 @@ Clipboard image loading requires `expo-clipboard` and its native setup. Use a di
 
 ### Component Mode
 
-Tap **Component Match** to scan your app and see all tagged targets. Select one, and the overlay pins to that component — measuring its exact position and size. When the component scrolls or repositions, the overlay follows automatically.
+Tap **Component Match** to scan your app and see all tagged targets. Select one, and the overlay pins to that component, measuring its exact position and size. Turn on **Auto Track** and the overlay follows the component when it scrolls or moves.
 
 ### Free Mode
 
@@ -94,7 +94,7 @@ Manually position and resize the overlay anywhere on screen. Drag to move, pinch
 - **Flip** — Mirror the overlay horizontally or vertically
 - **Lock** — Prevent accidental repositioning while comparing
 - **Outline toggle** — Show overlay boundaries for precise placement
-- **Auto-track** — Remeasures the target component on every render cycle so the overlay stays locked even during animations and layout shifts
+- **Auto-track** — Remeasures the target component every frame, so the overlay stays on it while the screen scrolls, animates or shifts
 
 ---
 
@@ -112,6 +112,18 @@ Manually position and resize the overlay anywhere on screen. Drag to move, pinch
 
 Export the frame as an image, then load it in Image Overlay from clipboard or URL — adjust opacity over the running app and differences jump out.
 
+## Swift MCP controls
+
+The Swift iOS port exposes an `image-overlay` adapter. Check the selected device's capabilities before calling it; these actions are not registered by the React Native tool.
+
+Use `listTargets` and `selectTarget({ id })` to attach an overlay to a marked app view. `loadImage({ url })` starts an HTTP(S) image download. Read `getSnapshot` until `loading` is false, then check `hasImage` and `error`. Image loading shares the on-device controller and excludes its requests from Buoy Network capture.
+
+`setSettings` accepts opacity (0–1), positive scale, point offsets (`offsetX`, `offsetY`), and boolean visibility, lock, flip, outline, and tracking settings (`visible`, `locked`, `flipped`, `flippedY`, `showOutline`, `autoTrack`). `fitToScreen` fits the image to the screen width. `resetSettings` resets placement adjustments, opacity, and flips. `remove` clears the image and cancels pending loading.
+
 ## Web support (unreleased)
 
 Tag browser targets with data-testid="image-target:Name" and import the browser registration before React DOM. The shared controls support target and free placement. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native iOS (Swift)
+
+Image Overlay is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#image-overlay).

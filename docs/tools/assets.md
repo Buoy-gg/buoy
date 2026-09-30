@@ -94,3 +94,11 @@ Use **Duplicates** at the top of the asset list to show every asset that shares 
 ## Web support (unreleased)
 
 Browser capture observes loaded resources. Add the Vite asset manifest or register a manifest from your bundler to include files before they load. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native Swift status
+
+The Swift port inventories loose resources in the main app bundle and explicitly registered app resource bundles. It measures bytes, finds duplicate files, tracks host-reported loads, and supports baseline comparison through the UI and nine MCP actions. Buoy resource bundles are excluded.
+
+Compiled asset catalogs are aggregate files in this first native implementation. Per-entry catalog inventory, scale-variant findings, and decoded-memory findings are pending. Check `scanStatus.coverage` and `warnings`; an asset without an observed load is not proof of unused code or content.
+
+For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#assets).

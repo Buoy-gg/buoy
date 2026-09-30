@@ -199,3 +199,7 @@ This version has no direct APNs, FCM or Expo Push Service sender, Firebase/Notif
 Capture is disabled by default in release builds. Internal release tests can explicitly set `enableInRelease: true` in capture setup. Desktop sync retains its separate `externalSync.enableInRelease` and Pro requirements. Keep these options confined to the builds where notification inspection is intended.
 
 See [Expo notification setup](https://docs.expo.dev/push-notifications/push-notifications-setup/) and [Expo Notifications](https://docs.expo.dev/versions/v56.0.0/sdk/notifications/) for native configuration and platform limits.
+
+## Native iOS (Swift)
+
+Push Notifications is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#notifications).

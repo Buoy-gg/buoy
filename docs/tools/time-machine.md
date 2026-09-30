@@ -94,3 +94,13 @@ Yes — they persist on-device through restarts and JS reloads, and each one als
 ## Web support (unreleased)
 
 Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native Swift status
+
+The Swift tool captures typed UserDefaults, registered MMKV instances, and app-provided snapshot sources. It supports live restore, saved exclusions and scopes, duplication, a saved-route option, and expandable current/saved values. Source switches apply to capture and restore. Disabled sources remain untouched, even when an older restore point contains them. Restores save a safety point before writing enabled providers.
+
+Open the floating restore bar from the header to capture, select, or restore a point while using the app. An explicit selection persists; otherwise the bar chooses the most recently restored point, then the newest capture. Safety points are excluded from automatic selection. Undo is available for ten seconds after a restore that created a safety point.
+
+Native MCP exposes 11 actions. Keychain snapshots, in-process reload, fresh-install baselines, and wipe-all are unavailable. The native preview still lacks RN's full grouping and filtering workflow. Inspect the connected device's capabilities and provider details before restoring.
+
+For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#time-machine).

@@ -83,3 +83,7 @@ Yes — it's built for Expo Router: the sitemap, stack, and event stream all ref
 ## Web support (unreleased)
 
 Browser History API and hash changes feed the shared route history. Register known paths and the framework router adapter for route selection and navigation. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native iOS (Swift)
+
+Route Inspector is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#routes).

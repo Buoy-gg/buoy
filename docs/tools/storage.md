@@ -110,3 +110,14 @@ Yes. Register each MMKV instance, then select it with the backend filter. Secure
 ## Web support (unreleased)
 
 The browser uses localStorage and sessionStorage with the shared editor, event history, undo, and snapshots. Native secure storage is unavailable on web. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+
+## Swift backends
+
+The Swift port maps `async.*` to the app's UserDefaults domain and `secure.*` to registered keychain items. `getRequiredKeys` returns the configuration from `BuoyStorageModule.configure(requiredKeys:)`.
+
+Register existing native MMKV instances with `BuoyMMKVRegistry.shared.register(...)`. Each registration supplies typed reads, writes, removals, and its encryption/read-only flags. The Storage browser and MCP use the same registration. Call `refresh(instanceId:)` after app writes to record changes; Buoy writes refresh automatically. The SDK does not add an MMKV dependency. See the [Swift integration guide](https://github.com/Buoy-gg/Buoy-Swift) for the host integration.
+
+MMKV values keep their string, number, or boolean type. Binary values show their byte count. Read-only stores reject edits, and internal Buoy keys are filtered out. Storage history undo/jump supports UserDefaults only.
+
+For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#storage).

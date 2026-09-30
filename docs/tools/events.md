@@ -90,3 +90,9 @@ The timeline exports in a compact structured format designed to paste into an AI
 ## Web support (unreleased)
 
 Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See the [web setup guide](../web-preview.md) for registration, dependencies, and browser boundaries.
+
+## Native Swift status
+
+The Swift timeline combines captured Network, UserDefaults/MMKV, and Routes events. It supports source selection, search, pause, clear, copy, JSON detail, and the three Events MCP actions. Native export supports a subset of RN's formatting settings and rejects unsupported settings. Copy Settings selects the export preset and event-data inclusion; on-device copy respects the selected sources. Interactive source detail pages remain pending. React store and render sources do not apply to Swift.
+
+For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#events).
