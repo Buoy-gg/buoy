@@ -29,9 +29,10 @@ Once installed, Bench appears in the floating menu. On [Buoy Desktop](../desktop
 
 Bench also runs in the browser — Expo web, Electron, or any React DOM app — with **no native modules and no dev build**. On web the HUD samples browser APIs instead:
 
-- **FPS** — main-thread frame rate (`requestAnimationFrame`). On web there's a single thread, so JS FPS and UI FPS read the same value.
+- **FPS** — main-thread frame rate (`requestAnimationFrame`). Your JavaScript runs on the main thread, so JS FPS and UI FPS read the same value. The browser also draws on other threads, and this number can't see frames dropped there.
 - **BUSY** — replaces the CPU row: the % of recent time the main thread was blocked by [long tasks](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming) (>50ms). This is the "why does it feel janky" number.
 - **JS heap** — `performance.memory` (Chromium-based browsers; the row hides elsewhere).
+- **Batch runs** — each run also saves the gaps between frames (p95 and worst) and the long-task time inside that run. In Chrome it also saves the scripts behind slow frames ([Long Animation Frames](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongAnimationFrameTiming)). It saves style and layout time and tap response. It saves layout shifts and DOM size too. If the tab is hidden or the window changes size during a batch run, that run is saved as a failure. A metric the browser can't measure stays empty, never 0.
 - **PAGES** — the full HUD ranks your slowest routes by average FPS while each was active (browser-history route tracking — works with React Router, Next, hash routers, or plain `pushState`). Watch it while you click around to see exactly which pages are slow.
 
 React Native Web apps get this automatically. Plain React apps need the standard one-line bundler alias (`react-native` → `react-native-web`) and can render the HUD directly:

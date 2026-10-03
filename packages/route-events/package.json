@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/route-events",
-  "version": "7.0.45",
+  "version": "7.0.48",
   "description": "Inspect reported navigation state and supported route actions in React Native apps using Expo Router or React Navigation.",
   "homepage": "https://buoy.gg/tools/routes",
   "keywords": [

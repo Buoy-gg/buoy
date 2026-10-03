@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/ask-buoy",
-  "version": "7.0.45",
+  "version": "7.0.48",
   "description": "In-app AI chat for supported Buoy inspection and action tools, using a configured model endpoint.",
   "homepage": "https://buoy.gg/tools/ask-buoy",
   "keywords": [

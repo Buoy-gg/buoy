@@ -28,6 +28,7 @@ A phone gets warmer over a long batch, and a warm phone runs slower. Bench's Fas
 ## What you need
 
 - [Bench](./tools/perf-monitor) (`@buoy-gg/perf-monitor`) in a React Native development build. Bench's native dependencies don't run in Expo Go.
+- Or Bench in a web app, from its `/web` entry. See [Bench on the web](./tools/perf-monitor#web).
 - The [Buoy MCP server](./mcp) in your editor. `npx -y @buoy-gg/mcp@latest init` sets it up and installs the `buoy-optimize` skill. Rerunning it overwrites the skill files, so save any changes you made to them first.
 - Buoy Pro. Running benchmarks over MCP is a Pro feature.
 
@@ -67,6 +68,10 @@ Any agent that can use an MCP server and read a skill file, such as Claude Code 
 
 Only for the simulator. Use simulator rounds to rule ideas out quickly, then run the finalists on a real phone before you ship.
 
+### Does Buoy Optimize work on the web?
+
+Yes. The agent runs the same rounds in a browser tab. The web report shows frame rate, gaps between frames and long tasks. It has no CPU column, because a web page can't read CPU use. Keep the tab in front while it runs. The agent can also use `run_web_benchmark`. It opens your app in its own headless Chrome. It can slow the CPU 4x or 6x. Then check the finalists in Safari on an iPhone and in Chrome on an Android phone.
+
 ### Does Buoy Optimize work with Flutter?
 
-Not yet. The skill and `run_benchmark_batch` are React Native only.
+Not yet. The skill and `run_benchmark_batch` work with React Native and web apps.

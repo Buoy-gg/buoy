@@ -56,6 +56,14 @@ With no internet, Buoy keeps working for 7 days. Then the tools lock until it ca
 
 If someone leaves your team, or you remove a site, Buoy stops for them within 12 hours.
 
+## Your settings follow you
+
+Sign in on two devices. Change a setting on one, and it shows up on the other. This works with a sign-in or a dev token. Plain keys and bot keys don't sync.
+
+Only your settings move. Web calls you saved and other data Buoy caught stay on the device.
+
+A new setting goes out a few seconds after you change it. Other devices get it when they start, or within 15 minutes.
+
 ## Teams
 
 Business teams are run from the [Team page](https://buoy.gg/dashboard/team). A team admin can:
@@ -63,7 +71,8 @@ Business teams are run from the [Team page](https://buoy.gg/dashboard/team). A t
 - invite people by email, up to the seats you bought;
 - give each person a role, like dev or qa;
 - remove people, which frees their seat;
-- list the team's live sites, which every member then uses.
+- list the team's live sites, which every member then uses;
+- list web calls to hide for the whole team. They add to each person's own list. In the Network tool, they show a TEAM badge.
 
 ## Keys for bots and CI
 

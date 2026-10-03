@@ -90,7 +90,8 @@ Ask your assistant to start with `list_devices` to see connected devices and the
 - **Take the app offline, or slow it down** *(React Native, development builds)* — `network_conditions` applies offline or added latency to the whole device; [response overrides](./tools/network) cover one specific URL (see below).
 - **Take actions** — navigate routes, edit storage, and more via `call_action` or the tool-specific wrappers. React Native also exposes dispatch Redux / set Zustand/Jotai / invalidate React Query when those tools are installed.
 - **Drive the UI** *(React Native)* — `describe_screen` and `tap_element` let the agent read what's on screen and interact with it, no screenshots (see below).
-- **Benchmark performance** *(React Native Bench)* — `run_benchmark_batch` and the perf-monitor tools.
+- **Benchmark performance** *(React Native and web Bench)* — `run_benchmark_batch` and the perf-monitor tools.
+- **Benchmark a web page in a fresh browser** *(web)* — `run_web_benchmark` opens your running app in its own headless Chromium. Each run gets a fresh page. It can slow the CPU 4x or 6x. It reports frame gaps, long tasks and the scripts behind slow frames. It also reports Chrome's own script, style and layout time. The app needs no Buoy setup. The project needs Playwright (`npm i -D playwright && npx playwright install chromium`).
 - **Profile the JS thread** *(React Native)* — `get_js_thread_top` returns a live "Task Manager" of which timers, Promise chains & callbacks eat JS-thread time (with freeze attribution); `get_js_thread_origin_detail` drills into one origin's scheduling site and stats.
 - **Screenshot a component** *(React Native / iOS Simulator)* — `screenshot_component` locates a component by testID/name and returns a tight, cropped image.
 - **Reload the app** *(React Native)* — `reload_app` restarts the JS bundle (see below).
