@@ -76,7 +76,7 @@ A Free or Pro account key is required. For Vite, run this from the app directory
 npx --package=@buoy-gg/core buoy login
 ```
 
-The CLI writes `VITE_BUOY_KEY` to `.env.development.local` for a Free account or `.env.local` for a paid one. Restart the dev server, then pass `licenseKey={import.meta.env.VITE_BUOY_KEY}`. Other bundlers supply the key through their own environment configuration. Account checks, feature limits and development-only restrictions still apply.
+The CLI writes a dev token as `VITE_BUOY_KEY` in `.env.development.local`. Restart the dev server. Then pass `licenseKey={import.meta.env.VITE_BUOY_KEY}`. Other tools set it in their own env setup. The token works in dev builds for 30 days. A live site uses [Sign in with Buoy](../sign-in#your-live-site) instead, with no key in the build. Account checks and plan limits still apply.
 
 ## Tool setup
 

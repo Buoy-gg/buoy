@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/storage",
-  "version": "7.0.44",
+  "version": "7.0.45",
   "description": "Inspect supported AsyncStorage data, registered MMKV instances and registered SecureStore keys in a React Native app.",
   "homepage": "https://buoy.gg/tools/storage",
   "keywords": [

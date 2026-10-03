@@ -45,9 +45,9 @@ Buoy needs a Free or Pro account key. The plans have different history limits an
 npx --package=@buoy-gg/core buoy login
 ```
 
-This opens your browser, signs you in and writes the key to an env file, adding the file to `.gitignore` if it isn't there already. The variable name depends on your setup: `EXPO_PUBLIC_BUOY_KEY` on Expo and `BUOY_KEY` on bare React Native. The prefix matters, because Expo only inlines `EXPO_PUBLIC_` variables into the bundle.
+This opens your browser and signs you in. Then it writes a dev token to an env file. It adds that file to `.gitignore` too, if it isn't there yet. On Expo the name is `EXPO_PUBLIC_BUOY_KEY`. On bare React Native it is `BUOY_KEY`. Keep the prefix: Expo only puts `EXPO_PUBLIC_` names in your app.
 
-On Expo, a free key goes to `.env.development.local`. Expo reads that file for `expo start` only, so the key never ends up in a release build. A paid key goes to `.env.local` so it can also reach a TestFlight or QA build if you want the tools there. Bare React Native always gets `.env.local`.
+A dev token works in dev builds and sims for 30 days. Then run `buoy login` again. On Expo it goes in `.env.development.local`. Expo reads that file for `expo start` only. Bare React Native gets `.env.local`. A dev token opens nothing in a TestFlight, QA or store build. For those, use your account key from [buoy.gg/dashboard/licenses](https://buoy.gg/dashboard/licenses), or a bot key. See [Sign in with Buoy](./sign-in).
 
 Read the key in your app and keep the menu inside the same providers as your screens. In React Native CLI, use your app's env loader to read `BUOY_KEY`, because writing an env file doesn't put it in `process.env`.
 

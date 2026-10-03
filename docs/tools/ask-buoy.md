@@ -7,9 +7,9 @@ description: "An in-app AI chat that uses installed Buoy tools. Your QA tester t
 
 <!-- ::platform-badge platform="both" -->
 
-Ask Buoy is an in-app assistant for installed Buoy tools. It can inspect app data and run supported actions, such as editing storage or creating a development-only network override. It requires Pro and a model endpoint you configure. The feature is in beta.
-
 <!-- ::tool-film id="ask-buoy" -->
+
+Ask Buoy is an in-app assistant for installed Buoy tools. It can inspect app data and run supported actions, such as editing storage or creating a development-only network override. It requires Pro and a model endpoint you configure. The feature is in beta.
 
 Start with read-only access and a test build. Ask it to inspect a request, then check the tool result before enabling writes.
 

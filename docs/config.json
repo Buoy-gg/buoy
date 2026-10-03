@@ -123,6 +123,10 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            },
+            {
+              "label": "Sign in with Buoy",
+              "to": "sign-in"
             }
           ]
         },
@@ -166,6 +170,10 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            },
+            {
+              "label": "Sign in with Buoy",
+              "to": "sign-in"
             }
           ]
         },

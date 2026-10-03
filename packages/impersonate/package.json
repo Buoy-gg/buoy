@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/impersonate",
-  "version": "7.0.44",
+  "version": "7.0.45",
   "description": "Configure impersonation headers for supported app requests. Your backend must authenticate and authorize user changes.",
   "homepage": "https://buoy.gg/tools/impersonate",
   "keywords": [

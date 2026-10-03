@@ -33,7 +33,7 @@ Then sign in to your Buoy account:
 npx --package=@buoy-gg/core buoy login
 ```
 
-The command opens your browser, writes your key to an env file and adds that file to `.gitignore`. In Expo, a free key goes to `.env.development.local` as `EXPO_PUBLIC_BUOY_KEY`. That file is only read in development, so the key never ends up in a release build. A paid key goes to `.env.local`. React Native CLI apps get `BUOY_KEY` in `.env.local`. [Installation](./installation#get-your-key) has the details.
+The command opens your browser, writes a dev token to an env file and adds that file to `.gitignore`. In Expo, it goes to `.env.development.local` as `EXPO_PUBLIC_BUOY_KEY`. React Native CLI apps get `BUOY_KEY` in `.env.local`. The token works in dev builds for 30 days. [Installation](./installation#get-your-key) has the details.
 
 ## 2. Mount the menu
 
