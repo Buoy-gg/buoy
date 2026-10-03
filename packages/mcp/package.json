@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/mcp",
-  "version": "7.0.48",
+  "version": "7.0.49",
   "description": "MCP server exposing supported Buoy inspection and action tools through the device sync protocol. Tool access requires account and Pro setup.",
   "homepage": "https://buoy.gg",
   "keywords": [

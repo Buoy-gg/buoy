@@ -25,7 +25,7 @@ npx --package=@buoy-gg/core buoy logout   # sign this computer out
 
 ## Desktop and the MCP
 
-In Buoy Desktop, click Sign in with buoy.gg. Desktop keeps your sign-in in your computer's keychain, and you stay in after restarts. Sign out ends it on buoy.gg too.
+In Buoy Desktop, click Sign in with buoy.gg. Desktop keeps your sign-in in your computer's keychain, and you stay in after restarts. Sign out ends it on buoy.gg too. Your settings follow you to Desktop as well.
 
 The MCP uses the sign-in from `buoy login`. You don't need a key in your project for the MCP.
 
@@ -72,7 +72,10 @@ Business teams are run from the [Team page](https://buoy.gg/dashboard/team). A t
 - give each person a role, like dev or qa;
 - remove people, which frees their seat;
 - list the team's live sites, which every member then uses;
-- list web calls to hide for the whole team. They add to each person's own list. In the Network tool, they show a TEAM badge.
+- list web calls to hide for the whole team;
+- list React Query queries to hide, or the only ones to show.
+
+Team lists add to each person's own lists. In the app, team items show a TEAM badge.
 
 ## Keys for bots and CI
 

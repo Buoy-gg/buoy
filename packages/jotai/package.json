@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/jotai",
-  "version": "7.0.48",
+  "version": "7.0.49",
   "description": "Inspect registered Jotai atoms, observed writes, retained history and current values in a React Native app.",
   "homepage": "https://buoy.gg/tools/jotai",
   "keywords": [
