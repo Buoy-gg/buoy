@@ -78,6 +78,16 @@ BuoyDevTools(
 
 On Flutter, Buoy runs in debug builds. So this lets you skip `buoy login` there.
 
+### Swift
+
+```swift
+var config = BuoyConfig()
+config.signIn = BuoySignInConfig()
+Buoy.start(config)
+```
+
+Swift reads the app id from your bundle id.
+
 ## How long you stay in
 
 You stay signed in as long as you use Buoy at least once every 60 days. Buoy renews your sign-in in the background.
