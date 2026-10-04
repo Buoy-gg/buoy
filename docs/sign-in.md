@@ -1,5 +1,7 @@
 # Sign in with Buoy
 
+<!-- ::tool-film id="sign-in" -->
+
 Your Buoy account turns on Buoy, the same way a key does. You sign in once on each computer, browser or site.
 
 ## Your dev builds
