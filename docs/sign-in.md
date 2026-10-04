@@ -1,6 +1,6 @@
 # Sign in with Buoy
 
-Your Buoy account turns on Buoy, the same way a key does. You sign in once on each computer, browser or site. Keys still work everywhere.
+Your Buoy account turns on Buoy, the same way a key does. You sign in once on each computer, browser or site.
 
 ## Your dev builds
 
@@ -46,7 +46,24 @@ Only show `FloatingDevTools` to your own people. Your app decides who sees it, t
 
 Buoy on a live site needs a Pro or Business plan. A free account sees a note that asks for a plan.
 
-The live site button is for the web today.
+## Phones and test builds
+
+A phone app can't open a sign-in window. So it shows a code instead, as a QR code and as text. Use it for TestFlight, QA and store builds, where no key is in the app.
+
+1. Add your app at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites). Type `app:` and then its id, like `app:com.acme.shop`. That is the iOS bundle id or the Android package.
+2. Add `signIn` to `FloatingDevTools`:
+
+```tsx
+<FloatingDevTools signIn />
+```
+
+Tap "Sign in" in the corner. Scan the QR code with any phone that is signed in to buoy.gg. Or go to buoy.gg/activate and type the code. Check the code, then tap Allow. Buoy opens in the app a few seconds later.
+
+Buoy reads the app id from your Expo config. If it can't, pass it in: `signIn={{ appId: "com.acme.shop" }}`.
+
+A code lasts 10 minutes and works once. Only allow a code shown on a device in your hand. If someone sends you a code, don't type it in.
+
+The same plan rule applies: Buoy in a test or store build needs Pro or Business.
 
 ## How long you stay in
 
@@ -76,6 +93,10 @@ Business teams are run from the [Team page](https://buoy.gg/dashboard/team). A t
 - list React Query queries to hide, or the only ones to show.
 
 Team lists add to each person's own lists. In the app, team items show a TEAM badge.
+
+## Keys still work
+
+You don't have to switch. A key you already use keeps working everywhere, and keys are staying. Use one if you'd rather not sign in, or for a build where no one can sign in.
 
 ## Keys for bots and CI
 

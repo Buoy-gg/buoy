@@ -5,7 +5,7 @@ id: installation
 description: "Step-by-step guide to installing React Buoy devtools in a React Native or Expo app — requirements, core package setup, and picking your first tools."
 ---
 
-This is the reference for installing Buoy: packages, your account key, Desktop and MCP, and fixes for common problems. New to Buoy? [Quick Start](./quick-start) walks you through a first install and ends with a captured request.
+This is the reference for installing Buoy: packages, signing in, Desktop and MCP, and fixes for common problems. New to Buoy? [Quick Start](./quick-start) walks you through a first install and ends with a captured request.
 
 ## Requirements
 
@@ -35,11 +35,11 @@ Each package adds one tool to the floating menu. Install only the ones you need.
 
 <!-- ::Tool-Packages -->
 
-## Register Your License Key
+## Sign In
 
-Buoy needs a Free or Pro account key. The plans have different history limits and features, and production access, MCP and Ask Buoy require Pro. See [pricing](https://buoy.gg/pricing) for details.
+Buoy needs a Free or Pro account. The plans have different history limits and features, and production access, MCP and Ask Buoy require Pro. See [pricing](https://buoy.gg/pricing) for details.
 
-### Get your key
+### Sign in from your project
 
 ```bash
 npx --package=@buoy-gg/core buoy login
@@ -66,13 +66,17 @@ export default function App() {
 }
 ```
 
-### Or pass it directly
+### Keys still work
+
+You don't have to sign in. Your account key from [buoy.gg/dashboard/licenses](https://buoy.gg/dashboard/licenses) works the same as before, and it always will. Put it in the same env var, or pass it in:
 
 ```tsx
 <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
 ```
 
-This is fine for a solo project. On a team, use the env var instead. A key committed to a shared repo is shared by everyone who clones it, so it stops identifying a person and starts identifying a repository.
+Passing it in is fine for a solo project. On a team, use the env var. A key in a shared repo is shared by everyone who clones it.
+
+For CI and test runs, use a bot key. A team admin makes one on the Team page. See [Keys for bots and CI](./sign-in#keys-for-bots-and-ci).
 
 ## Desktop & AI (optional)
 

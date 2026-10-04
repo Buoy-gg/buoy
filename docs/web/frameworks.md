@@ -153,7 +153,7 @@ Mount the host from the root route's `component` with the same `ClientDevTools` 
 
 Buoy also works in production builds, for example for admins, developers or QA testers using the live site. Two things change:
 
-- **The key.** Outside development, `FloatingDevTools` renders only with a Pro key.
+- **Access.** Outside development, `FloatingDevTools` needs Pro or Business. Use a Pro key, or [Sign in with Buoy](../sign-in#your-live-site) with no key in the build.
 - **Who sees it.** Load the host for the users who should have it, instead of behind a development check. Buoy doesn't know your roles, so the check is yours:
 
   ```tsx
@@ -176,7 +176,7 @@ The Desktop connection has its own production switch: pass `externalSync={{ enab
 
 ## Account key variable
 
-Pass the key through a variable your framework exposes to the browser: `VITE_BUOY_KEY` in Vite, React Router and TanStack Start, and `NEXT_PUBLIC_BUOY_KEY` in Next.js. `buoy login` picks the right one from your `package.json`.
+Pass the dev token or key through a variable your framework exposes to the browser: `VITE_BUOY_KEY` in Vite, React Router and TanStack Start, and `NEXT_PUBLIC_BUOY_KEY` in Next.js. `buoy login` picks the right one from your `package.json`.
 
 ## Other frameworks
 

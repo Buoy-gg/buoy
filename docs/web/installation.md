@@ -68,15 +68,15 @@ Mount the host inside the app's providers, behind a development check or, in pro
 
 A tool that needs callbacks from your app is configured as a preset and passed through `apps={[createWebTool(preset)]}`. It replaces the module's default preset with the same ID. Custom tools keep their modal metadata and sync adapter.
 
-## License key
+## Sign in
 
-A Free or Pro account key is required. For Vite, run this from the app directory and finish the browser sign-in:
+A Free or Pro account is required. For Vite, run this from the app directory and finish the browser sign-in:
 
 ```bash
 npx --package=@buoy-gg/core buoy login
 ```
 
-The CLI writes a dev token as `VITE_BUOY_KEY` in `.env.development.local`. Restart the dev server. Then pass `licenseKey={import.meta.env.VITE_BUOY_KEY}`. Other tools set it in their own env setup. The token works in dev builds for 30 days. A live site uses [Sign in with Buoy](../sign-in#your-live-site) instead, with no key in the build. Account checks and plan limits still apply.
+The CLI writes a dev token as `VITE_BUOY_KEY` in `.env.development.local`. Restart the dev server. Then pass `licenseKey={import.meta.env.VITE_BUOY_KEY}`. Other tools set it in their own env setup. The token works in dev builds for 30 days. A live site uses [Sign in with Buoy](../sign-in#your-live-site) instead, with no key in the build. Account checks and plan limits still apply. Keys still work if you'd rather use one.
 
 ## Tool setup
 

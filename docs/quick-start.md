@@ -33,7 +33,7 @@ Then sign in to your Buoy account:
 npx --package=@buoy-gg/core buoy login
 ```
 
-The command opens your browser, writes a dev token to an env file and adds that file to `.gitignore`. In Expo, it goes to `.env.development.local` as `EXPO_PUBLIC_BUOY_KEY`. React Native CLI apps get `BUOY_KEY` in `.env.local`. The token works in dev builds for 30 days. [Installation](./installation#get-your-key) has the details.
+The command opens your browser, writes a dev token to an env file and adds that file to `.gitignore`. In Expo, it goes to `.env.development.local` as `EXPO_PUBLIC_BUOY_KEY`. React Native CLI apps get `BUOY_KEY` in `.env.local`. The token works in dev builds for 30 days. [Installation](./installation#sign-in-from-your-project) has the details.
 
 ## 2. Mount the menu
 
@@ -143,7 +143,7 @@ Start in development. Before enabling access in a shipped app, review the [compo
 
 ### Do I need a license key to use React Buoy?
 
-Use a Free or Pro Buoy account key for this setup. Run `npx --package=@buoy-gg/core buoy login` from your app's directory. Plan limits and paid features are listed on [pricing](https://buoy.gg/pricing).
+No. You need a Free or Pro Buoy account. Run `npx --package=@buoy-gg/core buoy login` from your app's folder to sign in. Keys still work if you'd rather use one, and CI uses a bot key. Plan limits and paid features are listed on [pricing](https://buoy.gg/pricing).
 
 ### Does Buoy phone home?
 

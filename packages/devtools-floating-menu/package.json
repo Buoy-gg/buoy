@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/core",
-  "version": "7.0.50",
+  "version": "7.0.51",
   "description": "Floating developer menu and account setup for React Native. Add tool packages and configure Desktop or MCP connections separately.",
   "homepage": "https://buoy.gg",
   "keywords": [

@@ -19,7 +19,7 @@ npm install @buoy-gg/core @buoy-gg/network @buoy-gg/storage react-native-web
 
 Add other tools the same way. Your app doesn't need React Native or Expo.
 
-## 2. Get an account key
+## 2. Sign in
 
 From the app directory:
 
@@ -27,7 +27,7 @@ From the app directory:
 npx --package=@buoy-gg/core buoy login
 ```
 
-In a Vite app, the CLI writes `VITE_BUOY_KEY` to `.env.development.local` for a Free account, or to `.env.local` for a paid one. Restart the dev server afterward.
+In a Vite app, the CLI writes a dev token as `VITE_BUOY_KEY` in `.env.development.local`. Restart the dev server afterward. The token works in dev builds for 30 days. Keys still work too: see [Sign in with Buoy](../sign-in#keys-still-work).
 
 ## 3. Register the early hook
 

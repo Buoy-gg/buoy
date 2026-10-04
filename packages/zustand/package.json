@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/zustand",
-  "version": "7.0.50",
+  "version": "7.0.51",
   "description": "Inspect registered Zustand stores, compare captured state changes and use supported reset or state-update actions.",
   "homepage": "https://buoy.gg/tools/zustand",
   "keywords": [
