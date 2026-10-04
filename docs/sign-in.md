@@ -65,6 +65,17 @@ A code lasts 10 minutes and works once. Only allow a code shown on a device in y
 
 The same plan rule applies: Buoy in a test or store build needs Pro or Business.
 
+### Flutter
+
+```dart
+BuoyDevTools(
+  signIn: const BuoySignIn(appId: 'com.acme.shop'),
+  child: child,
+)
+```
+
+On Flutter, Buoy runs in debug builds. So this lets you skip `buoy login` there.
+
 ## How long you stay in
 
 You stay signed in as long as you use Buoy at least once every 60 days. Buoy renews your sign-in in the background.
