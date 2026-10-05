@@ -9,7 +9,7 @@ description: "An in-app AI chat that uses installed Buoy tools. Your QA tester t
 
 <!-- ::tool-film id="ask-buoy" -->
 
-Ask Buoy is an in-app assistant for installed Buoy tools. It can inspect app data and run supported actions, such as editing storage or creating a development-only network override. It requires Pro and a model endpoint you configure. The feature is in beta.
+Ask Buoy is an in-app assistant for installed Buoy tools. It can inspect app data and run supported actions, such as editing storage or creating a development-only network override. It needs Pro, Business or a trial. Use Buoy's hosted AI (beta), or point it at your own model endpoint. The feature is in beta.
 
 Start with read-only access and a test build. Ask it to inspect a request, then check the tool result before enabling writes.
 
@@ -43,6 +43,50 @@ import { FloatingDevTools } from "@buoy-gg/core";
 ```
 
 The tool appears in the dial as **ASK BUOY**.
+
+---
+
+## Hosted Ask Buoy (beta)
+
+Hosted Ask Buoy needs no AI key and no gateway. Buoy runs the AI for you. Your plan comes with credits each month.
+
+```tsx
+import { FloatingDevTools } from "@buoy-gg/core";
+import { hostedAskBuoy } from "@buoy-gg/ask-buoy";
+
+<FloatingDevTools signIn askBuoy={hostedAskBuoy()} />
+```
+
+Each person signs in with Buoy in your app. They tap Sign in, then scan the QR code or type the code at buoy.gg/activate. Allowing the code adds your app to your account's Sites list. On a team, only a team admin can do that. Other members are asked to get an admin to add it.
+
+### Credits
+
+| Plan | Credits each month | About how many asks |
+| --- | ---: | ---: |
+| Pro | 2,000 | 600 |
+| Business | 5,000 per seat, shared by the team | 1,500 per seat |
+| Trial | 1,000, once | 300 |
+
+One credit is $0.001 of AI use. Most asks cost 2 to 4 credits. Credits reset each month on the day you started paying. Unused credits do not carry over. One ask can never cost more than 100 credits.
+
+See what is left in Ask Buoy's settings, or on buoy.gg under Dashboard, then Billing.
+
+### What it sends
+
+Your question, and the app data needed to answer it, go to OpenAI's GPT-6 Luna model through OpenRouter. Buoy keeps the cost of each answer. It never keeps the chat. The first time someone uses it, Ask Buoy shows this note before it sends anything.
+
+Need your data to stay with your own AI provider? Use your own endpoint below instead.
+
+### When something goes wrong
+
+Every error shows a short code and a request id. Tap **Copy details** to copy them, or **Report problem** to send them to us. A report never includes your chat.
+
+| What you see | What it means |
+| --- | --- |
+| You used this month's credits | Credits come back on the reset date shown. |
+| Sign in to use hosted Ask Buoy | Sign in with Buoy in the app first. |
+| Hosted AI is paused right now | We paused it for everyone for a short time. Try again later, or use your own endpoint. |
+| Hosted Ask Buoy is in a small test right now | Your account is not in the beta yet. |
 
 ---
 
@@ -319,7 +363,7 @@ Your actions then get the same param validation, policy gates and release-build 
 ## Security
 
 - **Gateway credentials.** With `headers`, your app obtains a session token and sends it to your endpoint. Keep provider keys on the gateway. Direct `apiKey` configuration embeds a provider credential in the app.
-- **Model traffic.** Conversation requests go to your configured endpoint. Buoy account validation and telemetry are separate; see [Telemetry](../telemetry).
+- **Model traffic.** With your own endpoint, conversation requests go only to that endpoint. With hosted Ask Buoy, they go through Buoy's gateway to OpenAI via OpenRouter, and Buoy keeps no chat text. Buoy account validation and telemetry are separate; see [Telemetry](../telemetry).
 - **Its own traffic is invisible to it**, so it can never read back its own auth headers.
 - **Credentials are stripped** from tool results by field name *and* by shape (bearer tokens, JWTs, key patterns) before anything is sent.
 - **The saved conversation holds no tool results.** It survives a restart (see above) under a `@react_buoy` key, capped and scrubbed for credential shapes — but only what was *said*. The payloads the agent read (storage values, response bodies, user records) are never written; it comes back knowing what it did, not what it saw. (The full copies it can re-read mid-conversation are held in memory, after credential redaction, and vanish with the conversation.) Turn the whole thing off with `persistTranscript: false` if the agent works over regulated data, since anything on disk under a Buoy key is readable by the Storage tool and, through it, by clients with access to your development broker. Account validation does not provide per-user device authorization.

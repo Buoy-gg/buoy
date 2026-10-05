@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/image-overlay",
-  "version": "7.0.52",
+  "version": "7.0.51",
   "description": "Overlay a design mockup on a running React Native app and adjust opacity to compare spacing and alignment.",
   "homepage": "https://buoy.gg/tools/image-overlay",
   "keywords": [

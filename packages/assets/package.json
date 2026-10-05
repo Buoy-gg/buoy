@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/assets",
-  "version": "7.0.52",
+  "version": "7.0.51",
   "description": "Inspect assets reported by a manifest and runtime hooks, including available sizes, scale variants, duplicates and baseline changes.",
   "homepage": "https://buoy.gg/tools/assets",
   "keywords": [

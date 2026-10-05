@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/js-top",
-  "version": "7.0.52",
+  "version": "7.0.51",
   "description": "Inspect instrumented JavaScript timers, promises and callbacks to investigate work on the React Native JS thread.",
   "homepage": "https://buoy.gg/tools/js-top",
   "keywords": [

@@ -1,8 +1,8 @@
 ---
 title: Storage Explorer
-seoTitle: "React Native Storage Viewer: AsyncStorage, MMKV, SecureStore"
+seoTitle: "React Native AsyncStorage & MMKV Viewer — browse on-device"
 id: tools-storage
-description: "See and edit storage in your React Native app with Buoy. Browse AsyncStorage, plus the MMKV and SecureStore keys you register, and watch them change."
+description: "Browse and edit supported storage in your React Native app — AsyncStorage, MMKV, and SecureStore in one explorer with real-time updates."
 ---
 
 <!-- ::platform-badge platform="both" -->

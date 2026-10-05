@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/env",
-  "version": "7.0.52",
+  "version": "7.0.51",
   "description": "Environment variable inspector for React Native with runtime-visible values, required-variable checks, and type validation.",
   "homepage": "https://buoy.gg/tools/env",
   "keywords": [

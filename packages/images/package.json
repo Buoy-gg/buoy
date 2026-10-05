@@ -1,6 +1,6 @@
 {
   "name": "@buoy-gg/images",
-  "version": "7.0.52",
+  "version": "7.0.51",
   "description": "Inspect instrumented React Native Image and expo-image loads, available cache and timing data, failures, and image-size estimates.",
   "homepage": "https://buoy.gg/tools/images",
   "keywords": [

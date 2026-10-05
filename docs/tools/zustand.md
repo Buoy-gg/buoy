@@ -1,8 +1,8 @@
 ---
 title: Zustand DevTools
-seoTitle: "Zustand DevTools for React Native: State and Diffs"
+seoTitle: "Zustand DevTools for React Native — stores, diffs & time travel"
 id: tools-zustand
-description: "Watch Zustand stores change in your React Native app. Use Buoy to see state and diffs, jump back to a saved state, or reset a store."
+description: "Zustand devtools for React Native — watch store state changes, explore diffs, jump back to any previous state, and reset stores live on your device."
 ---
 
 <!-- ::platform-badge platform="both" -->
