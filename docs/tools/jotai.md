@@ -1,8 +1,8 @@
 ---
 title: Jotai DevTools
-seoTitle: "Jotai DevTools for React Native — atoms, diffs & event history"
+seoTitle: "Jotai DevTools for React Native: Inspect Atoms"
 id: tools-jotai
-description: "Inspect Jotai atoms in your React Native app — watch state changes, browse live atom values, and explore value diffs in real time, right on the device."
+description: "See Jotai atom values and changes in your React Native app. Set up Buoy with your store, track named atoms and use diffs to find a bug."
 ---
 
 <!-- ::platform-badge platform="both" -->
