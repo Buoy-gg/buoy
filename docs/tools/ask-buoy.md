@@ -48,7 +48,7 @@ The tool appears in the dial as **ASK BUOY**.
 
 ## Hosted Ask Buoy (beta)
 
-Hosted Ask Buoy needs no AI key and no gateway. Buoy runs the AI for you. Your plan comes with credits each month.
+Hosted Ask Buoy needs no AI key and no gateway. Buoy runs the AI for you. Your plan comes with credits each week.
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
@@ -61,13 +61,13 @@ Each person signs in with Buoy in your app. They tap Sign in, then scan the QR c
 
 ### Credits
 
-| Plan | Credits each month | About how many asks |
+| Plan | Credits each week | About how many asks |
 | --- | ---: | ---: |
-| Pro | 2,000 | 600 |
-| Business | 5,000 per seat, shared by the team | 1,500 per seat |
+| Pro | 480 | 140 |
+| Business | 1,200 per seat, shared by the team | 350 per seat |
 | Trial | 1,000, once | 300 |
 
-One credit is $0.001 of AI use. Most asks cost 2 to 4 credits. Credits reset each month on the day you started paying. Unused credits do not carry over. One ask can never cost more than 100 credits.
+One credit is $0.001 of AI use. Most asks cost 2 to 4 credits. Credits reset each Monday at 00:00 UTC. Unused credits do not carry over. One ask can never cost more than 100 credits.
 
 See what is left in Ask Buoy's settings, or on buoy.gg under Dashboard, then Billing.
 
@@ -83,7 +83,7 @@ Every error shows a short code and a request id. Tap **Copy details** to copy th
 
 | What you see | What it means |
 | --- | --- |
-| You used this month's credits | Credits come back on the reset date shown. |
+| You used this week's credits | Credits come back on the reset date shown. |
 | Sign in to use hosted Ask Buoy | Sign in with Buoy in the app first. |
 | Hosted AI is paused right now | We paused it for everyone for a short time. Try again later, or use your own endpoint. |
 | Hosted Ask Buoy is in a small test right now | Your account is not in the beta yet. |
