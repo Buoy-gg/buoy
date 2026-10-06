@@ -226,6 +226,14 @@
               "to": "tools/ask-buoy"
             },
             {
+              "label": "Ask Buoy: teach it your app",
+              "to": "tools/ask-buoy/teach-it-your-app"
+            },
+            {
+              "label": "Ask Buoy: in the chat",
+              "to": "tools/ask-buoy/in-the-chat"
+            },
+            {
               "label": "Camera",
               "to": "tools/camera"
             },
@@ -435,6 +443,14 @@
             {
               "label": "Ask Buoy",
               "to": "tools/ask-buoy"
+            },
+            {
+              "label": "Ask Buoy: teach it your app",
+              "to": "tools/ask-buoy/teach-it-your-app"
+            },
+            {
+              "label": "Ask Buoy: in the chat",
+              "to": "tools/ask-buoy/in-the-chat"
             },
             {
               "label": "Environment Inspector",
