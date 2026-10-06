@@ -223,15 +223,17 @@
           "children": [
             {
               "label": "Ask Buoy",
-              "to": "tools/ask-buoy"
-            },
-            {
-              "label": "Ask Buoy: teach it your app",
-              "to": "tools/ask-buoy/teach-it-your-app"
-            },
-            {
-              "label": "Ask Buoy: in the chat",
-              "to": "tools/ask-buoy/in-the-chat"
+              "to": "tools/ask-buoy",
+              "subpages": [
+                {
+                  "label": "Teach it your app",
+                  "to": "tools/ask-buoy/teach-it-your-app"
+                },
+                {
+                  "label": "In the chat",
+                  "to": "tools/ask-buoy/in-the-chat"
+                }
+              ]
             },
             {
               "label": "Camera",
@@ -442,15 +444,17 @@
           "children": [
             {
               "label": "Ask Buoy",
-              "to": "tools/ask-buoy"
-            },
-            {
-              "label": "Ask Buoy: teach it your app",
-              "to": "tools/ask-buoy/teach-it-your-app"
-            },
-            {
-              "label": "Ask Buoy: in the chat",
-              "to": "tools/ask-buoy/in-the-chat"
+              "to": "tools/ask-buoy",
+              "subpages": [
+                {
+                  "label": "Teach it your app",
+                  "to": "tools/ask-buoy/teach-it-your-app"
+                },
+                {
+                  "label": "In the chat",
+                  "to": "tools/ask-buoy/in-the-chat"
+                }
+              ]
             },
             {
               "label": "Environment Inspector",
