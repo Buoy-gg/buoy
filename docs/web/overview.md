@@ -5,6 +5,8 @@ id: web-overview
 description: "Meet Buoy on the web (beta): the same floating menu, tool panels and Desktop connection as React Native, running in a React web app through React Native Web."
 ---
 
+Use the [phone app guide](../capacitor) for Capacitor / Ionic (Beta).
+
 Buoy's web build is the React Native one. Every package ships a `/web` entry that uses the same tool panels, stores, filters, actions, snapshots and sync protocol, with React Native Web drawing the UI. A small set of browser modules replaces what differs: storage, routing, DOM inspection, the clipboard, images and performance timing. A fix to a shared tool reaches both platforms.
 
 Web support is in beta. Browser builds first shipped in `7.0.41`.
@@ -14,6 +16,14 @@ Web support is in beta. Browser builds first shipped in `7.0.41`.
 - **In the page** — the same floating menu and dial as on a phone.
 - **On your desktop** — [Buoy Desktop](../desktop) lists the browser tab in the device switcher next to your phones.
 - **Through your AI** — the [MCP server](../mcp) lets Claude Code, Cursor or another MCP client read and drive the tab (Pro).
+
+## Start here
+
+Let your coding agent install Buoy in your app:
+
+<!-- ::agent-install platform="web" where="docs-web-overview" -->
+
+To install by hand, follow the [Quick Start](./quick-start).
 
 ## What you need
 

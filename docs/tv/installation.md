@@ -21,6 +21,12 @@ version of [Quick Start](./quick-start).
 Expo Go cannot run a TV app at all — TV is always a prebuild + `expo run:*` app. That is a property
 of TV, not of Buoy.
 
+## Install with your agent
+
+Paste the prompt into Claude Code, Cursor or Codex. Your agent reads your app and picks the tools. Review its changes before you commit them.
+
+<!-- ::agent-install platform="tv" where="docs-tv-installation" -->
+
 ## Packages
 
 Install the core, then any tools you want. Installed tools register themselves; there is no list to

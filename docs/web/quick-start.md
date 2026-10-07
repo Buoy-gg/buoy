@@ -7,6 +7,15 @@ description: "Get Buoy running in a React web app: install the web entries, regi
 
 Add Buoy to a React web app and open the floating menu. The examples use Vite; any bundler that reads the `browser` export condition works. [Frameworks](./frameworks) has the setup for Next.js, React Router and TanStack Start.
 
+## Let your agent do it
+
+Your coding agent can set up Buoy for you.
+Use Claude Code, Cursor or Codex. Copy the prompt and paste it into your agent. Then review its changes.
+
+<!-- ::agent-install platform="web" where="docs-web-quick-start" -->
+
+To install by hand, follow the steps below.
+
 ## 1. Install
 
 <!-- ::PM npm="npm install @buoy-gg/core @buoy-gg/network @buoy-gg/storage react-native-web" yarn="yarn add @buoy-gg/core @buoy-gg/network @buoy-gg/storage react-native-web" pnpm="pnpm add @buoy-gg/core @buoy-gg/network @buoy-gg/storage react-native-web" bun="bun add @buoy-gg/core @buoy-gg/network @buoy-gg/storage react-native-web" -->

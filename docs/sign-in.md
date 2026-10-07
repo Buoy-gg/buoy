@@ -25,11 +25,19 @@ npx --package=@buoy-gg/core buoy whoami   # are you signed in?
 npx --package=@buoy-gg/core buoy logout   # sign this computer out
 ```
 
+`whoami` checks two things. It tells you if this computer is signed in. It also tells you which env file holds a key for this project.
+
+### If login can't reach buoy.gg
+
+Some VPNs and proxies let your browser reach buoy.gg but block Node. Then `buoy login` says it could not reach buoy.gg. Your browser still signs in the project. The CLI writes your account key to your env file. A Pro or Business key goes in `.env.local`.
+
+This computer stays signed out, so `whoami` says so. It also names the file that has the key. To sign in this computer too, run `buoy login` again when Node can reach buoy.gg.
+
 ## Desktop and the MCP
 
 In Buoy Desktop, click Sign in with buoy.gg. Desktop keeps your sign-in in your computer's keychain, and you stay in after restarts. Sign out ends it on buoy.gg too. Your settings follow you to Desktop as well.
 
-The MCP uses the sign-in from `buoy login`. You don't need a key in your project for the MCP.
+The MCP uses the sign-in from `buoy login`. You don't need a key in your project for the MCP. If this computer is not signed in, the MCP looks for a key in the env files of the folder it runs in. It checks that key with buoy.gg, so Node must be able to reach buoy.gg.
 
 ## Your live site
 

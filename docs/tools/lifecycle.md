@@ -59,7 +59,7 @@ No. It gets the same events it gets on a phone. Buoy's own tools ignore simulate
 
 ### Can I cause the real events?
 
-On an iOS simulator, yes. The [MCP server](../mcp)'s `lifecycle_action` takes `real: true` for background, return, relaunch, color scheme and deep links. It uses `xcrun simctl`, so relaunch really kills the app. Memory warnings and Android devices are simulated only for now.
+On an iOS simulator or Android, yes. The [MCP server](../mcp)'s `lifecycle_action` takes `real: true` for background, return, relaunch, color scheme and deep links. It uses `xcrun simctl` or adb, so relaunch really kills the app. It can also `quit`, `launch` and `reinstall` the app. Memory warnings are simulated only for now.
 
 ### Can AI agents use it?
 

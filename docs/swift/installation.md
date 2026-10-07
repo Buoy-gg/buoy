@@ -13,6 +13,12 @@ description: "Install the Buoy Swift package with Xcode or Package.swift, config
 
 Buoy ships as a prebuilt, signed framework for iOS devices and the iOS Simulator. Mac Catalyst and macOS are not supported. Apps can use Swift 5 or Swift 6 language mode.
 
+## Install with your agent
+
+Paste the prompt into Claude Code, Cursor or Codex. Your agent reads your app and picks the tools. Review its changes before you commit them.
+
+<!-- ::agent-install platform="swift" where="docs-swift-installation" -->
+
 ## Add the package
 
 In Xcode, choose **File > Add Package Dependencies…** and enter:

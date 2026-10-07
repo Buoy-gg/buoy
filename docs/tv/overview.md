@@ -20,6 +20,14 @@ TV support is in beta. The documented target set includes Apple TV simulators an
 
 There is no third way on TV: the in-app floating menu is deliberately absent.
 
+## Start here
+
+Let your coding agent install Buoy in your app:
+
+<!-- ::agent-install platform="tv" where="docs-tv-overview" -->
+
+To install by hand, follow the [Quick Start](./quick-start).
+
 ## Why there is no floating menu on TV
 
 TV uses D-pad navigation. A focusable debug overlay can enter that focus order and affect the behavior under test. Mount Buoy headless to keep its controls on Desktop and leave the app screen available for inspection.

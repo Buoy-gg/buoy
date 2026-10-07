@@ -7,6 +7,15 @@ description: "Get Buoy's floating in-app devtools menu running in your Flutter a
 
 Open Buoy in a Flutter debug build, then inspect a request. You need a Free or Pro account key. Profile and release builds do not show the widget or start its tools.
 
+## Let your agent do it
+
+Your coding agent can set up Buoy for you.
+Use Claude Code, Cursor or Codex. Copy the prompt and paste it into your agent. Then review its changes.
+
+<!-- ::agent-install platform="flutter" where="docs-flutter-quick-start" -->
+
+To install by hand, follow the steps below.
+
 ## 1. Install the core
 
 ```bash

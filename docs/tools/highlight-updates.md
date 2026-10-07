@@ -9,6 +9,8 @@ description: "See why your React Native components re-render — visual overlays
 
 See which components render as you interact with a development build. The overlay shows render counts; the detail view shows available causes and hook value changes.
 
+Your search stays in view when you leave a render.
+
 Use the demo to inspect a list update, then compare it with an interaction in your app.
 
 <!-- ::tool-film id="highlight-updates" -->

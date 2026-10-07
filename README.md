@@ -15,6 +15,7 @@
 Buoy puts a floating menu in your React Native app. Open it on the device to look at network requests, storage, query caches and stores, routes, renders and performance, and change them while the app runs. The same session can also connect to Buoy Desktop, to your coding agent over MCP, or to Ask Buoy inside the app.
 
 Flutter has its own [setup for debug builds](https://buoy.gg/buoy/latest/docs/flutter/quick-start).
+[Capacitor / Ionic (Beta)](https://buoy.gg/buoy/latest/docs/capacitor) uses the web tools on iOS and Android.
 
 <p align="center">
   <a href="https://buoy.gg"><img src=".github/readme/film.png" alt="Play the Buoy film (1 minute 50 seconds) on buoy.gg" width="760" /></a>

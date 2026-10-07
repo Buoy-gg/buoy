@@ -15,6 +15,12 @@ The package manifests require Dart `^3.9.0` and Flutter `>=3.27.0`. Use a Flutte
 flutter --version
 ```
 
+## Install with your agent
+
+Paste the prompt into Claude Code, Cursor or Codex. Your agent reads your app and picks the tools. Review its changes before you commit them.
+
+<!-- ::agent-install platform="flutter" where="docs-flutter-installation" -->
+
 ## Quick Start
 
 For the full suite, run this from your Flutter app's directory:

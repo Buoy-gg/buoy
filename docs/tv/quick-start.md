@@ -7,6 +7,15 @@ description: "Get Buoy running in a React Native TV app in minutes: install the 
 
 Connect a React Native TV app to Buoy Desktop, then inspect remote input and focus. Buoy uses the same JavaScript packages as its phone integration.
 
+## Let your agent do it
+
+Your coding agent can set up Buoy for you.
+Use Claude Code, Cursor or Codex. Copy the prompt and paste it into your agent. Then review its changes.
+
+<!-- ::agent-install platform="tv" where="docs-tv-quick-start" -->
+
+To install by hand, follow the steps below.
+
 ## 1. Install the core
 
 <!-- ::PM npm="npm install @buoy-gg/core @buoy-gg/external-sync" yarn="yarn add @buoy-gg/core @buoy-gg/external-sync" pnpm="pnpm add @buoy-gg/core @buoy-gg/external-sync" bun="bun add @buoy-gg/core @buoy-gg/external-sync" -->

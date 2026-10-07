@@ -12,6 +12,9 @@ Measure available frame-rate, CPU and memory metrics on a device. Record compara
 
 </div>
 
+Capacitor / Ionic (Beta) uses this package through `/web`.
+See the [setup guide](https://buoy.gg/buoy/latest/docs/capacitor) for steps and limits.
+
 ## Install
 
 ```bash

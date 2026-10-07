@@ -11,6 +11,14 @@ Buoy for Swift adds Buoy's developer tools to a native iOS app built with SwiftU
 
 Swift support is in beta. The tools work on the device, in [Buoy Desktop](../desktop) and through the [MCP server](../mcp), but they do not match the React Native tools feature for feature. Each tool section in [Tools](./tools) lists what the native version leaves out.
 
+## Start here
+
+Let your coding agent install Buoy in your app:
+
+<!-- ::agent-install platform="swift" where="docs-swift-overview" -->
+
+To install by hand, follow the [Quick Start](./quick-start).
+
 ## What you get
 
 One `import Buoy` brings in every tool:

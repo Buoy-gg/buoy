@@ -7,6 +7,15 @@ description: "Add Buoy to a SwiftUI app in a few minutes: add the Swift package,
 
 This guide adds Buoy to a SwiftUI app and checks that a network request shows up. For UIKit, see [Installation](./installation#uikit).
 
+## Let your agent do it
+
+Your coding agent can set up Buoy for you.
+Use Claude Code, Cursor or Codex. Copy the prompt and paste it into your agent. Then review its changes.
+
+<!-- ::agent-install platform="swift" where="docs-swift-quick-start" -->
+
+To install by hand, follow the steps below.
+
 ## 1. Add the package
 
 In Xcode, choose **File > Add Package Dependencies…** and enter:

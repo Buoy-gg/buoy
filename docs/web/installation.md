@@ -18,6 +18,12 @@ This is the complete version of [Quick Start](./quick-start). The browser uses t
 
 Keep the libraries your tools inspect, such as Zustand, Jotai, React Redux or TanStack Query.
 
+## Install with your agent
+
+Paste the prompt into Claude Code, Cursor or Codex. Your agent reads your app and picks the tools. Review its changes before you commit them.
+
+<!-- ::agent-install platform="web" where="docs-web-installation" -->
+
 ## Packages
 
 <!-- ::PM npm="npm install @buoy-gg/core react-native-web" yarn="yarn add @buoy-gg/core react-native-web" pnpm="pnpm add @buoy-gg/core react-native-web" bun="bun add @buoy-gg/core react-native-web" -->

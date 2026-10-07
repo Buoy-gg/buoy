@@ -1,8 +1,8 @@
 ---
 title: Redux DevTools
-seoTitle: "Redux DevTools for React Native — actions, state & time travel"
+seoTitle: "Redux DevTools for React Native: Actions and State"
 id: tools-redux
-description: "Redux DevTools for React Native — monitor dispatched actions, inspect state changes, and time-travel debug your store live on the device, no Flipper needed."
+description: "Track Redux actions, payloads and state diffs in your React Native app. Set up Buoy with the enhancer to jump back to a past state."
 ---
 
 <!-- ::platform-badge platform="both" -->

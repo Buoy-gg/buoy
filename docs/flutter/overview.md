@@ -9,6 +9,14 @@ Buoy provides tools for inspecting Flutter apps: network requests, storage, stat
 
 Flutter support is in beta. `BuoyDevTools` runs in debug mode; it does not enable tools in profile or release builds.
 
+## Start here
+
+Let your coding agent install Buoy in your app:
+
+<!-- ::agent-install platform="flutter" where="docs-flutter-overview" -->
+
+To install by hand, follow the [Quick Start](./quick-start).
+
 ## Who It's For
 
 Developers can inspect a failed request alongside the app state that produced it. QA can use configured tools to edit test data and exercise error states. Support teams can collect debugging context when your app grants them access.
