@@ -38,39 +38,46 @@ npx --package=@buoy-gg/core buoy login
 
 In a Vite app, the CLI writes a dev token as `VITE_BUOY_KEY` in `.env.development.local`. Restart the dev server afterward. The token works in dev builds for 30 days. Keys still work too: see [Sign in with Buoy](../sign-in#keys-still-work).
 
-## 3. Register the early hook
-
-Put this import at the top of your entry file, before React DOM loads:
+## 3. Add the Vite plugin
 
 ```ts
-// main.tsx
-import '@buoy-gg/core/web/register';
-import ReactDOM from 'react-dom/client';
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { buoy } from '@buoy-gg/core/vite';
+
+export default defineConfig({
+  plugins: [react(), buoy()],
+});
 ```
 
-It lets the render, layout and element tools see React, and it starts recording `fetch` and XHR calls so Network can show the requests your page makes while it loads. Other tools work without it.
+The plugin finds the Buoy tools you installed and loads them.
+It also adds Buoy's early hook to `index.html`.
+The hook lets render tools see React.
+It also lets Network show calls from page load.
+Not using Vite? See [Installation](./installation#without-the-vite-plugin).
 
-## 4. Mount the host
+## 4. Mount Buoy
 
 ```tsx
-import { FloatingDevTools } from '@buoy-gg/core/web';
-import * as network from '@buoy-gg/network/web';
-import * as storage from '@buoy-gg/storage/web';
-
-// Keep this outside the component so it stays stable.
-const modules = { network, storage };
+import { BuoyDevTools } from '@buoy-gg/core/web/auto';
 
 export function App() {
   return (
     <>
       {/* your app */}
-      <FloatingDevTools modules={modules} licenseKey={import.meta.env.VITE_BUOY_KEY} />
+      <BuoyDevTools licenseKey={import.meta.env.VITE_BUOY_KEY} />
     </>
   );
 }
 ```
 
-Import from the `/web` entries and pass each namespace in `modules`, keyed by package name (`'react-query'`, `'route-events'`, `'time-machine'`). Mount the host inside the providers your tools inspect, such as `QueryClientProvider` or the Redux `Provider`.
+`BuoyDevTools` shows Buoy in dev builds.
+Release builds don't load Buoy's tools or menu.
+They still load the early hook.
+It stays off unless Buoy ran in that browser in the last week.
+Mount it inside the providers your tools read.
+Examples are `QueryClientProvider` and the Redux `Provider`.
 
 Reload the page. The floating menu appears, and Network lists the page's requests, including the ones made before Buoy loaded.
 
@@ -80,12 +87,7 @@ Reload the page. The floating menu appears, and Network lists the page's request
 npm install @buoy-gg/external-sync
 ```
 
-```tsx
-import * as externalSync from '@buoy-gg/external-sync/web';
-
-const modules = { network, storage, 'external-sync': externalSync };
-```
-
+The plugin adds it like any other tool.
 Open [Buoy Desktop](../desktop) and the tab appears in the device switcher.
 
 More detail, including the setup for each tool, is in [Installation](./installation).

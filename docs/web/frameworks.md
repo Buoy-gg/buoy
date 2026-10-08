@@ -16,6 +16,38 @@ Where each one goes depends on the framework. Each setup below comes from a test
 
 ## Vite + React
 
+The `buoy()` plugin does both for you:
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { buoy } from '@buoy-gg/core/vite';
+
+export default defineConfig({
+  plugins: [react(), buoy()],
+});
+```
+
+```tsx
+import { BuoyDevTools } from '@buoy-gg/core/web/auto';
+
+export function App() {
+  return (
+    <Providers>
+      {/* your app */}
+      <BuoyDevTools licenseKey={import.meta.env.VITE_BUOY_KEY} />
+    </Providers>
+  );
+}
+```
+
+The plugin adds the hook to `index.html` and loads every installed tool.
+`BuoyDevTools` loads Buoy only in dev builds.
+Its files still sit in a release build, but no page loads them.
+The early hook still loads, and it stays off for most visitors.
+To keep the host and tools out of the build, set it up by hand.
+
 Put the hook on the first line of `src/main.tsx`:
 
 ```tsx
@@ -157,7 +189,7 @@ See its test notes and limits before you ship.
 
 A Capacitor app runs your web app inside a phone app. Set up Buoy the same way as [Vite + React](#vite--react), with two changes.
 
-**Use the app's debug flag.** `cap run` ships a production `vite build`, even to a debug run. So `import.meta.env.DEV` is false there, and Buoy would never load. Check `Capacitor.DEBUG` instead. The phone app sets it, and it is true in debug builds. On iOS, `CAPACITOR_DEBUG` in `Info.plist` can also turn it on:
+**Use the app's debug flag.** `cap run` ships a production `vite build`, even to a debug run. So `import.meta.env.DEV` is false there, and Buoy would never load. `BuoyDevTools` checks `Capacitor.DEBUG` instead. The phone app sets it, and it is true in debug builds. On iOS, `CAPACITOR_DEBUG` in `Info.plist` can also turn it on. If you load Buoy by hand, check the flag yourself:
 
 ```tsx
 import { Capacitor } from '@capacitor/core';
@@ -166,7 +198,7 @@ const showBuoy = Capacitor.isNativePlatform() ? Capacitor.DEBUG : import.meta.en
 const DevTools = showBuoy ? lazy(() => import('./DevTools')) : () => null;
 ```
 
-**Mount it outside the router.** In Ionic, put `FloatingDevTools` inside `IonApp` but outside `IonRouterOutlet`. Ionic's page changes move the page, and that would move Buoy with it.
+**Mount it outside the router.** In Ionic, put `BuoyDevTools` inside `IonApp` but outside `IonRouterOutlet`. Ionic's page changes move the page, and that would move Buoy with it.
 
 Buoy reads the rest from the phone app on its own:
 
@@ -200,7 +232,8 @@ Run `npx cap sync` after you change it. If Android still blocks the connection, 
 
 In debug builds, Buoy sees each call your app makes to a plugin. You add no code for this. The early hook (`@buoy-gg/core/web/register`) starts it first. So Buoy also sees the listeners your app adds when it starts.
 
-Add each tool to `modules`, like the rest:
+With the `buoy()` plugin, install each tool and it shows up.
+Without the plugin, add each tool to `modules`, like the rest:
 
 ```ts
 import * as clock from '@buoy-gg/clock/web';
@@ -229,7 +262,7 @@ Here is what each one does:
 - **Events** lists plugin calls under Capacitor. It hides values with names like `token` or `password`.
 - **Impersonate** clears your `@capacitor/preferences` keys when it switches users. Buoy's own keys stay.
 - **Images** finds images inside web components too, like Ionic's `ion-img`.
-- **Assets** lists the files your page loads. To list the rest too, add `buoyAssets()` from `@buoy-gg/assets/vite` and load `buoy-assets.json`, as in [Assets that haven't loaded](./installation#assets-that-havent-loaded).
+- **Assets** lists the files your page loads. To list the rest too, add `buoyAssets()` from `@buoy-gg/assets/vite`. With `buoy()` too, Buoy loads its list for you. See [Assets that haven't loaded](./installation#assets-that-havent-loaded).
 - **Push notifications** saves what reaches your `@capacitor/push-notifications` and `@capacitor/local-notifications` listeners. Buoy adds no push listener of its own. So it can't take the tap that opened your app.
 
 Buoy only sees calls that go to the phone's own code. A plugin that runs only in JavaScript won't show up.
@@ -238,13 +271,13 @@ Add `@capacitor/app` and `@capacitor/device` if you can. Buoy reads your app's b
 
 ### Sign in and hosted Ask Buoy
 
-Hosted Ask Buoy needs a real Buoy sign-in, not a key. Pass `signIn` to `FloatingDevTools`. In a Capacitor app, Buoy then shows a QR code and a short code. Open buoy.gg/activate on any device and allow it. Buoy uses your bundle id. To pick a different id, pass `signIn={{ appId: 'com.example.app' }}`.
+Hosted Ask Buoy needs a real Buoy sign-in, not a key. Pass `signIn` to `BuoyDevTools`. In a Capacitor app, Buoy then shows a QR code and a short code. Open buoy.gg/activate on any device and allow it. Buoy uses your bundle id. To pick a different id, pass `signIn={{ appId: 'com.example.app' }}`.
 
 ```tsx
-import { hostedAskBuoy } from '@buoy-gg/ask-buoy/web';
-
-<FloatingDevTools modules={modules} signIn askBuoy={{ ...hostedAskBuoy() }} />
+<BuoyDevTools signIn askBuoy="hosted" />
 ```
+
+Install `@buoy-gg/ask-buoy` first.
 
 Your app id shows up as `app:` plus the id in your Sites list at buoy.gg/dashboard/sites.
 

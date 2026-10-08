@@ -21,28 +21,38 @@ To set it up by hand, follow the steps below.
 ## Install
 
 Keep React and React DOM in your app.
-Add `react-native-web` 0.21 and the tools you need.
+Add `react-native-web` 0.21 and the tools you want.
 Keep all Buoy packages on the same release.
 
 ```bash
 npm install @buoy-gg/core react-native-web @buoy-gg/network @buoy-gg/storage @buoy-gg/external-sync
 ```
 
-Each tool uses its `/web` entry in this guide.
 You do not need React Native or Expo.
 See [web setup](./web/installation#tool-setup) for state tools and routes.
-Keep Buoy in the providers you use now.
 
-## Load the hook first
-
-Put this first in your entry file, before React DOM:
+## Add the Vite plugin
 
 ```ts
-// src/main.tsx
-import '@buoy-gg/core/web/register';
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { buoy } from '@buoy-gg/core/vite';
+
+export default defineConfig({
+  plugins: [react(), buoy()],
+});
 ```
 
-The hook sees calls and listeners from app boot.
+The plugin finds each Buoy tool your app installed.
+Buoy loads them for you. You add no imports.
+Install a tool later and it shows up.
+The dev server restarts when your tool list changes.
+To leave a tool out, use `buoy({ exclude: ['console'] })`.
+
+The plugin also adds Buoy's early hook to `index.html`.
+The hook runs before your app code starts.
+It sees calls and listeners from app boot.
 It also helps track renders and early web calls.
 Phone plugin capture runs in debug builds.
 It sees calls that go to the phone's code.
@@ -50,43 +60,26 @@ Plugins made of JavaScript alone do not show there.
 
 ## Mount Buoy
 
-Keep the module map outside your component.
-Add tools by name. Use `/web` for each import.
-
 ```tsx
-// DevTools.tsx
-import { FloatingDevTools } from '@buoy-gg/core/web';
-import * as network from '@buoy-gg/network/web';
-import * as storage from '@buoy-gg/storage/web';
-import * as externalSync from '@buoy-gg/external-sync/web';
-
-const modules = { network, storage, 'external-sync': externalSync };
-
-export default function DevTools() {
-  return <FloatingDevTools modules={modules} signIn />;
-}
-```
-
-Load this file only when your app should show Buoy.
-Use the phone's debug flag for a native app:
-
-```tsx
-import { lazy, Suspense } from 'react';
-import { Capacitor } from '@capacitor/core';
-
-const showBuoy = Capacitor.isNativePlatform()
-  ? (window as Window & { Capacitor?: { DEBUG?: boolean } }).Capacitor?.DEBUG === true
-  : import.meta.env.DEV;
-const DevTools = showBuoy ? lazy(() => import('./DevTools')) : () => null;
+import { BuoyDevTools } from '@buoy-gg/core/web/auto';
 
 // Inside your app's existing providers:
 <IonApp>
   <IonReactRouter>
     <IonRouterOutlet>{/* your routes */}</IonRouterOutlet>
   </IonReactRouter>
-  <Suspense fallback={null}><DevTools /></Suspense>
+  <BuoyDevTools signIn />
 </IonApp>
 ```
+
+`BuoyDevTools` shows Buoy only in debug builds.
+On a phone, it uses the app's debug flag.
+In a browser, it uses your dev build.
+Other builds don't load Buoy's tools or menu.
+They still load the early hook.
+It stays off unless Buoy ran in that app in the last week.
+Set `enabled` to choose for yourself.
+It takes the same props as `FloatingDevTools`.
 
 Set the viewport so Buoy can avoid the notch:
 
@@ -99,8 +92,7 @@ This keeps page moves from moving Buoy too.
 Plain React apps can mount beside their router.
 
 A phone debug run may use a Vite production bundle.
-So `import.meta.env.DEV` alone can hide Buoy there.
-Buoy reads `Capacitor.DEBUG` from the phone app too.
+So Buoy reads `Capacitor.DEBUG` from the phone app.
 On iOS, `CAPACITOR_DEBUG` in `Info.plist` can turn it on.
 Check that flag when you test a release build.
 
@@ -111,27 +103,38 @@ If your app has its own back listener, check
 `isBuoyHoldingBackButton()` from `@buoy-gg/core/web`.
 Skip your back action while it returns true.
 
+### Without the Vite plugin
+
+Put the early hook first in your entry file, before React DOM:
+
+```ts
+// src/main.tsx
+import '@buoy-gg/core/web/register';
+```
+
+Then import each tool's `/web` entry and pass them as `modules`.
+Use package names as keys. Notifications uses `'push-notifications'`.
+Keep `modules` outside your components.
+
+```tsx
+import * as network from '@buoy-gg/network/web';
+import * as storage from '@buoy-gg/storage/web';
+import * as externalSync from '@buoy-gg/external-sync/web';
+
+const modules = { network, storage, 'external-sync': externalSync };
+
+<BuoyDevTools modules={modules} signIn />
+```
+
+With `modules`, Buoy loads just those tools.
+Pass `modules={{}}` to load none.
+
 ## Phone plugin tools
 
-Install each tool you want, then add its module:
+Install the ones you want. The plugin adds them.
 
 ```bash
 npm install @buoy-gg/clock @buoy-gg/lifecycle @buoy-gg/location @buoy-gg/permissions @buoy-gg/notifications
-```
-
-```ts
-import * as clock from '@buoy-gg/clock/web';
-import * as lifecycle from '@buoy-gg/lifecycle/web';
-import * as location from '@buoy-gg/location/web';
-import * as permissions from '@buoy-gg/permissions/web';
-import * as notifications from '@buoy-gg/notifications/web';
-
-// Add these to the module map above:
-const modules = {
-  network, storage, 'external-sync': externalSync,
-  clock, lifecycle, location, permissions,
-  'push-notifications': notifications,
-};
 ```
 
 Clock changes JavaScript dates and timers in your app.
@@ -167,7 +170,7 @@ Set `signIn={{ appId: 'com.example.app' }}` to choose one.
 Find it as `app:` plus that id in your
 [Sites list](https://buoy.gg/dashboard/sites).
 
-For hosted Ask Buoy, add its package and module.
+For hosted Ask Buoy, add its package.
 It needs Pro and a real Buoy sign-in.
 A key alone does not grant hosted chat access.
 
@@ -176,11 +179,7 @@ npm install @buoy-gg/ask-buoy
 ```
 
 ```tsx
-import * as askBuoy from '@buoy-gg/ask-buoy/web';
-import { hostedAskBuoy } from '@buoy-gg/ask-buoy/web';
-
-// Add 'ask-buoy': askBuoy to your module map.
-<FloatingDevTools modules={modules} signIn askBuoy={{ ...hostedAskBuoy() }} />
+<BuoyDevTools signIn askBuoy="hosted" />
 ```
 
 You can also use a dev key for other tools.
@@ -190,7 +189,7 @@ Plan limits still apply to each tool and action.
 
 ## Desktop and MCP
 
-Keep the `external-sync` module from the mount example.
+Install `@buoy-gg/external-sync`, as in the install step.
 Open [Buoy Desktop](./desktop) and sign in there too.
 Set up [MCP](./mcp) for your editor if you need it.
 MCP needs its own account. Data and actions need Pro.
@@ -209,7 +208,7 @@ It shows as `ios` or `android` with a saved device ID.
 For a phone on Wi-Fi, use your own Mac's address:
 
 ```tsx
-<FloatingDevTools modules={modules} signIn
+<BuoyDevTools signIn
   externalSync={{ socketURL: 'http://192.168.1.20:42831' }} />
 ```
 
@@ -233,7 +232,7 @@ Keep that app network setting scoped to debug use too.
 Release sync needs Pro and `enableInRelease: true`.
 A plain HTTP LAN address also needs `allowInsecureNetwork: true`.
 See [release rules](./desktop#release-builds) before you enable it.
-The mount guard above shows Buoy in debug runs only.
+`BuoyDevTools` hides Buoy in release builds. Pass `enabled` to show it.
 
 ## Names, source maps and assets
 
@@ -249,24 +248,18 @@ npm install @buoy-gg/assets
 // vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { buoy } from '@buoy-gg/core/vite';
 import { buoyAssets } from '@buoy-gg/assets/vite';
 
 export default defineConfig({
-  plugins: [react(), buoyAssets()],
+  plugins: [react(), buoy(), buoyAssets()],
   esbuild: { keepNames: true },
   build: { sourcemap: true },
 });
 ```
 
 Use source maps in debug builds for this setup.
-Load the asset list in your dev tools file:
-
-```ts
-import * as assets from '@buoy-gg/assets/web';
-
-// Add assets to modules. Respect your app's base path.
-await assets.loadBrowserAssetManifest('/buoy-assets.json');
-```
+`buoy()` loads the asset list into Assets for you.
 
 Vite builds list emitted files and media from `public`.
 In Vite dev, source files show up as they load.

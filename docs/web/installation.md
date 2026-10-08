@@ -36,9 +36,35 @@ npm install @buoy-gg/core react-native-web
 
 Then install the tools you want, for example `@buoy-gg/network` or `@buoy-gg/zustand`. Import the `/web` entries explicitly. That selects the browser API in TypeScript and in server bundlers. Browser bundlers also pick these builds through the packages' `browser` export condition. Native apps keep using the root imports.
 
+## The Vite plugin
+
+In a Vite app, add `buoy()` to your plugins:
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { buoy } from '@buoy-gg/core/vite';
+
+export default defineConfig({
+  plugins: [react(), buoy()],
+});
+```
+
+It finds the Buoy tools your app installed.
+A tool counts when your `package.json` lists it.
+Buoy loads those tools, so you write no imports.
+The dev server restarts when your tool list changes.
+Leave a tool out with `buoy({ exclude: ['console'] })`.
+The plugin also adds the early hook below to `index.html`.
+Turn that off with `buoy({ register: false })`.
+The hook loads in release builds too. It stays off there unless Buoy ran in that browser in the last week.
+The plugin needs Buoy 7.0.62 or later.
+
 ## The early DevTools hook
 
-Put this import at the top of your entry file, **before React DOM**. Render, layout, focus and element inspection need it, and so does Network if you want the requests made while the page loads:
+The Vite plugin adds this hook for you.
+Without the plugin, put this import at the top of your entry file, **before React DOM**. Render, layout, focus and element inspection need it, and so does Network if you want the requests made while the page loads:
 
 ```ts
 import '@buoy-gg/core/web/register';
@@ -49,6 +75,33 @@ It installs the React DevTools backend before React mounts, keeps Vite Fast Refr
 The right place for the import depends on the framework. [Frameworks](./frameworks) covers Next.js, React Router and TanStack Start.
 
 ## Mounting
+
+With the Vite plugin, mount `BuoyDevTools`:
+
+```tsx
+import { BuoyDevTools } from '@buoy-gg/core/web/auto';
+
+export function App() {
+  return (
+    <>
+      {/* your app */}
+      <BuoyDevTools licenseKey={import.meta.env.VITE_BUOY_KEY} />
+    </>
+  );
+}
+```
+
+`BuoyDevTools` shows Buoy in dev builds.
+In a Capacitor app, it uses the phone app's debug flag.
+Release builds don't load Buoy's tools or menu.
+They still load the early hook.
+It stays off unless Buoy ran in that browser in the last week.
+Set `enabled` to choose for yourself.
+It takes the same props as `FloatingDevTools`.
+Pass `askBuoy="hosted"` for hosted Ask Buoy.
+Mount it inside the providers your tools read.
+
+### Without the Vite plugin
 
 Register the modules you use. The host finds their presets, mounts their capture and overlays, and registers their actions:
 
@@ -70,7 +123,7 @@ export function DevTools({ licenseKey }: { licenseKey: string }) {
 }
 ```
 
-Mount the host inside the app's providers, behind a development check or, in production, a check for the users who should see it. Keep `modules` outside the component so it stays stable. Use keys that match the package names, such as `'react-query'`, `'route-events'` and `'time-machine'`.
+Mount the host inside the app's providers, behind a development check or, in production, a check for the users who should see it. Keep `modules` outside the component so it stays stable. Use keys that match the package names, such as `'react-query'`, `'route-events'` and `'time-machine'`. Notifications uses `'push-notifications'`. When you pass `modules`, Buoy loads only those tools, even with the plugin.
 
 A tool that needs callbacks from your app is configured as a preset and passed through `apps={[createWebTool(preset)]}`. It replaces the module's default preset with the same ID. Custom tools keep their modal metadata and sync adapter.
 
@@ -132,11 +185,13 @@ The Vite plugin builds an inventory without downloading each asset in the browse
 
 ```ts
 // vite.config.ts
+import { buoy } from '@buoy-gg/core/vite';
 import { buoyAssets } from '@buoy-gg/assets/vite';
-export default { plugins: [buoyAssets()] };
+export default { plugins: [buoy(), buoyAssets()] };
 ```
 
-Load it from your development setup:
+With `buoy()` in the list, Buoy loads the list for you.
+Without it, load the list in your dev setup:
 
 ```ts
 import { loadBrowserAssetManifest } from '@buoy-gg/assets/web';

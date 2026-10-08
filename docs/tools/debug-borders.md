@@ -99,4 +99,4 @@ Yes — tap any label to inspect the component underneath on the device itself: 
 
 ## Web support
 
-Import @buoy-gg/core/web/register before React DOM. The shared overlay measures DOM elements and draws their borders and labels. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+Import @buoy-gg/core/web/register before React DOM. The `buoy()` Vite plugin adds it for you. The shared overlay measures DOM elements and draws their borders and labels. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.

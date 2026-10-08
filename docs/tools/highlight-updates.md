@@ -81,7 +81,7 @@ Buoy shows overlays and render details inside the running development build. Use
 
 ## Web support
 
-Import @buoy-gg/core/web/register before React DOM to capture roots and renders. The shared inspector measures DOM elements. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+Import @buoy-gg/core/web/register before React DOM to capture roots and renders. The `buoy()` Vite plugin adds it for you. The shared inspector measures DOM elements. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 
 ## Swift interaction support
