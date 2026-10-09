@@ -14,6 +14,13 @@ The examples load the host in development only. To show Buoy to admins or QA in 
 
 Where each one goes depends on the framework. Each setup below comes from a test app that Buoy's framework test suite installs the way you would, then checks tool by tool. The examples mount a `DevTools` component like the one in [Installation](./installation#mounting).
 
+## Angular (Beta)
+
+Use the [Angular guide](./angular) and its [AI install prompt](./angular#start-here).
+Run `ng add @buoy-gg/angular`, then `npx buoy login`.
+Start your app with `ng serve`.
+The guide covers NgRx, NGXS, QA, and custom builders.
+
 ## Vite + React
 
 The `buoy()` plugin does both for you:
@@ -308,6 +315,66 @@ export default defineConfig({
 
 - Release builds follow the [Production builds](#production-builds) rules. A plain `http` address on your network also needs `allowInsecureNetwork`.
 - We have tested Capacitor 7 on the iOS Simulator and the Android emulator.
+
+## Three.js
+
+Three.js support is in Beta. Start with the [three.js guide](./three).
+It has full setup for R3F and plain apps.
+
+Use the same web tools with Three.js. Buoy draws on the page, above the canvas.
+
+### React Three Fiber
+
+Place `<FloatingDevTools>` next to `<Canvas>`. Do not put it inside `<Canvas>`. Keep Buoy in your app's Query and Redux providers. Pass your Zustand stores and Jotai atoms as usual. Buoy cannot read R3F's private store.
+
+Add the [Scene tool](../tools/three) to see the tree. It can pick, hide, move, turn, and tint nodes. Its guide shows how to link your scene. Add Perf Monitor for counts. Add Assets and Events for file loads.
+
+### Plain Three.js
+
+Add `react`, `react-dom`, and `react-native-web` as dev deps. The web tools need all three to run.
+
+Load the boot file before your app:
+
+```ts
+// boot.ts
+import '@buoy-gg/core/web/register';
+void import('./app');
+```
+
+Then mount Buoy in your app:
+
+```ts
+// app.ts
+import { mountBuoy } from '@buoy-gg/core/web';
+import * as network from '@buoy-gg/network/web';
+import * as storage from '@buoy-gg/storage/web';
+
+const unmount = mountBuoy({
+  modules: { network, storage },
+  licenseKey: import.meta.env.VITE_BUOY_KEY,
+});
+
+// Call when the app shuts down.
+// unmount();
+```
+
+`mountBuoy` takes the same props as `<FloatingDevTools>`. Call its return value to remove Buoy. It uses its own React root. It cannot read providers from another root. Query, Redux, and Highlight Updates have no app to watch here. Pass a vanilla store for Zustand to watch.
+
+The boot import must run before Three.js loads. The hook keeps a short list of past events. Weak refs let the app free old scenes. It keeps a hook that was already there. A late boot import cannot catch past Three.js events. The hook uses the same dev and release rules.
+
+### Mouse, keys, and full screen
+
+Put the canvas in a wrapper for full screen:
+
+```ts
+await document.querySelector('#scene-wrap')?.requestFullscreen();
+```
+
+Buoy moves into that wrapper. It moves back on exit. A bare canvas in full screen cannot show Buoy. Its child DOM is fallback content.
+
+Press Esc to free a mouse held by pointer lock. Then click Buoy. Text fields stop keys sent to game handlers. When focus enters Buoy, it sends key-up events. Games must accept these events to clear held keys. Wheel events in Buoy stay in Buoy. Drag and Esc still work in its panels. These guards cannot stop page handlers in the capture phase.
+
+Buoy's DOM tools cannot read objects drawn in WebGL. DOM overlays do not show in a WebXR headset. A scene in a worker is outside the hook's reach.
 
 ## Production builds
 

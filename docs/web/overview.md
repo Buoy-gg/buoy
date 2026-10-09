@@ -5,6 +5,11 @@ id: web-overview
 description: "Meet Buoy on the web (beta): the same floating menu, tool panels and Desktop connection as React Native, running in a React web app through React Native Web."
 ---
 
+For Angular, use the [Angular guide](./angular).
+It has its own [AI install prompt](./angular#start-here).
+
+For 3D apps, use the [three.js (Beta) guide](./three).
+
 Use the [phone app guide](../capacitor) for Capacitor / Ionic (Beta).
 
 Buoy's web build is the React Native one. Every package ships a `/web` entry that uses the same tool panels, stores, filters, actions, snapshots and sync protocol, with React Native Web drawing the UI. A small set of browser modules replaces what differs: storage, routing, DOM inspection, the clipboard, images and performance timing. A fix to a shared tool reaches both platforms.

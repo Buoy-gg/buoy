@@ -11,6 +11,10 @@ Record FPS, CPU, memory, and jank while repeating a test on a device. Compare sa
 
 Start with one repeatable interaction. Record it before and after a change, then check the UI as well as the metrics.
 
+Web case fields fit side by side on small screens.
+Live numbers fit their text and leave room for hints.
+On web, Bench leaves its own views out of render counts.
+
 <!-- ::tool-film id="bench" -->
 
 <!-- ::perf-monitor-live-demo -->
@@ -26,6 +30,10 @@ These ship native code, so rebuild the app with a custom **dev build** (`expo pr
 Once installed, Bench appears in the floating menu. On [Buoy Desktop](../desktop) it also renders as a live HUD you can watch while you use the app.
 
 ### Web
+
+Capacitor apps can copy and paste case lists.
+Install `@capacitor/clipboard`, then run `npx cap sync`.
+Bench uses that plugin when it is present.
 
 Bench also runs in the browser — Expo web, Electron, or any React DOM app — with **no native modules and no dev build**. On web the HUD samples browser APIs instead:
 
@@ -116,3 +124,9 @@ Yes — runs are saved and comparable, and via the Buoy MCP server an AI agent c
 ## Web support
 
 Browser measurements use frame timing, available JS heap data, and long tasks. Native CPU, RSS, and thermal measurements remain device-specific. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+
+## Counts from other tools
+
+Scene sends render counts to this panel. Counts are not bytes. Fields with no data show as unknown.
+
+Other tools can use `registerPerfSeries(source)`. Call `update(rows)` with `id`, `label`, `value`, and `unit` for each row. A row can have a `note` too. Updates are sent at most four times per second. Each source has at most 32 rows. Call `dispose()` when the source stops.

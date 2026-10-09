@@ -121,3 +121,5 @@ Register this package’s /web namespace in FloatingDevTools modules to use its 
 The browser dial supports Tab, arrow keys between tools, Enter to activate controls, and Escape to close. Its center button opens settings. Drag panel backgrounds or handles to move them; tabs and inputs keep their normal mouse behavior. Minimized tools stay above the floating bar and scroll when needed. They open below only when there is not enough room above for one row.
 
 The web dial follows the shared Background selection in Settings, including changes made while the dial is open.
+
+For plain Three.js, use `mountBuoy` from `@buoy-gg/core/web`. See [Three.js](./web/frameworks#threejs) for the boot file and full screen rules.

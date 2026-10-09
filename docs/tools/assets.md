@@ -102,3 +102,13 @@ The Swift port inventories loose resources in the main app bundle and explicitly
 Compiled asset catalogs are aggregate files in this first native implementation. Per-entry catalog inventory, scale-variant findings, and decoded-memory findings are pending. Check `scanStatus.coverage` and `warnings`; an asset without an observed load is not proof of unused code or content.
 
 For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#assets).
+
+## Scene file loads
+
+With `@buoy-gg/three`, this tool shows three.js file loads. Size and time come from the browser. Missing data stays unknown. Known cache hits show as cache hits.
+
+Buoy's own image previews do not count as app loads.
+
+Cached images count when the app loads them too.
+
+Buoy keeps its own files and tool previews out of this view.

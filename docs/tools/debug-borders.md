@@ -12,6 +12,8 @@ Inspect layout boundaries on the running app. Debug Borders draws colored border
 
 ---
 
+On web, borders also show on plain DOM nodes. They do not show objects inside the 3D scene.
+
 ## Installation
 
 <!-- ::PM npm="npm install @buoy-gg/debug-borders" yarn="yarn add @buoy-gg/debug-borders" pnpm="pnpm add @buoy-gg/debug-borders" bun="bun add @buoy-gg/debug-borders" -->

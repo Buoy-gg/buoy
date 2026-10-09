@@ -4,6 +4,7 @@ seoTitle: "Buoy for Capacitor and Ionic (Beta)"
 id: capacitor
 description: "Set up Buoy in your app. Use web tools, phone plugins, Desktop and MCP."
 ---
+<!-- ::tool-film id="capacitor" -->
 
 Beta. Use Buoy in your app on iOS and Android.
 This guide is for React apps built with Capacitor.

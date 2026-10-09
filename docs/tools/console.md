@@ -79,3 +79,5 @@ Register this package’s /web namespace in FloatingDevTools modules to use its 
 ## Native iOS (Swift)
 
 Console is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#console).
+
+Buoy keeps its own logs out of this view. The browser console still gets those logs.

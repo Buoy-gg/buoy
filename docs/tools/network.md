@@ -13,6 +13,8 @@ Inspect HTTP requests on your device: URLs, headers, request and response bodies
 
 <!-- ::network-live-demo -->
 
+Buoy hides its own cloud settings calls from the list.
+
 ## Supported Clients
 
 Capture covers requests that pass through the instrumented global `fetch` or `XMLHttpRequest` APIs. Clients using those APIs, including Axios and HTTP-based GraphQL clients, can appear in the inspector. A native client or a separately imported fetch implementation may bypass these hooks.
@@ -140,3 +142,5 @@ The capture control reads “Pause network capture” while capture is enabled a
 ## Native iOS (Swift)
 
 Network Monitor is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#network).
+
+Buoy keeps its own web calls out of this view. App calls still show when they use the same files.

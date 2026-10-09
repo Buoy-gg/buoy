@@ -102,3 +102,5 @@ Browser capture observes DOM images and supports shared overrides and size analy
 ## Native iOS (Swift)
 
 Images is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#images).
+
+Buoy keeps its own images and tool previews out of this view.

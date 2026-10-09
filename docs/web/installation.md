@@ -5,7 +5,13 @@ id: web-installation
 description: "Full install guide for Buoy in a React web app: packages, the early DevTools hook, module registration, per-tool setup, routers, assets, Desktop and MCP."
 ---
 
+For Angular, use the [Angular guide](./angular).
+It has its own [AI install prompt](./angular#start-here).
+
 This is the complete version of [Quick Start](./quick-start). The browser uses the same tool panels, stores, filters, actions, snapshot providers and sync protocol as React Native. React Native Web renders the panels, and small browser modules handle storage, routing, DOM inspection, the clipboard, images and performance timing. Settings, account status and modal persistence are shared too.
+
+For 3D apps, use the [three.js (Beta) setup](./three).
+That beta needs the matching `beta` packages.
 
 ## Requirements
 
@@ -160,6 +166,7 @@ Each tool's own page is shared with React Native. This is what changes in the br
 | [Highlight Updates](../tools/highlight-updates) | React render tracking and DOM measurement, through the early DevTools hook. |
 | [Image Overlay](../tools/image-overlay) | Matches `data-testid="image-target:Name"` elements or places a free overlay. Clipboard access follows browser permissions. |
 | [Assets](../tools/assets) | Resources the page loaded, plus a build manifest for files that haven't loaded. See below. |
+| [Scene (Beta)](../tools/three) | Use `@buoy-gg/three/web` in apps with `three`. Call `registerThree({ renderer, scene, camera, loadingManager })`. Call its cleanup on scene swap and hot reload. Add Perf Monitor for counts, and Assets and Events for loads. |
 
 Debug Borders and Images also have browser builds; their pages cover the web setup. TV Remote and Focus Inspector observe browser keyboard and DOM focus events, which is not the same as a TV's native focus engine.
 

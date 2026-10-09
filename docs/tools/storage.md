@@ -121,3 +121,5 @@ Register existing native MMKV instances with `BuoyMMKVRegistry.shared.register(.
 MMKV values keep their string, number, or boolean type. Binary values show their byte count. Read-only stores reject edits, and internal Buoy keys are filtered out. Storage history undo/jump supports UserDefaults only.
 
 For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#storage).
+
+Buoy keeps its own keys out of this view. Counts and saved app state leave them out too.

@@ -87,3 +87,10 @@ Browser History API and hash changes feed the shared route history. Register kno
 ## Native iOS (Swift)
 
 Route Inspector is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#routes).
+
+## Angular
+
+See the app's routes in the log.
+Go asks for params. It uses Angular Router.
+The sitemap gets real app paths.
+See the [setup steps](../web/angular).

@@ -89,7 +89,7 @@ You can't start a chat from Desktop. Start it on the phone. Only use the broker 
 ## Troubleshooting
 
 - **A strange error on the first message.** Your `endpoint` and `protocol` don't match. Ask Buoy warns you when it can tell.
-- **"Endpoint busy — retrying in 4s (1 of 2)".** The AI company is busy or hit a limit. Ask Buoy waits and tries again by itself. It does this only when nothing came back yet, so no step ever runs twice.
+- **"Endpoint busy — retrying in …".** The AI company is busy or hit a limit. Ask Buoy waits and tries again by itself. It does this only when nothing came back yet, so no step ever runs twice.
 - **"Couldn't reach your AI endpoint".** The connection dropped. Tap **Retry**. If it keeps happening, a work proxy may be holding back the stream.
 - **"This conversation is too large for the AI endpoint".** The AI's memory is full and there was nothing old to trim. Start a new chat, or ask a shorter question. Ask Buoy trims old parts by itself first, so this is rare.
 - **The answer shows up all at once.** React Native's own `fetch` can't stream. Buoy switches to a different way after the first answer. On Expo, you can also use `expo/fetch` as the global `fetch`.

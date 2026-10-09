@@ -11,6 +11,8 @@ See which components render as you interact with a development build. The overla
 
 Your search stays in view when you leave a render.
 
+Names use `displayName` when the app sets it.
+
 Use the demo to inspect a list update, then compare it with an interaction in your app.
 
 <!-- ::tool-film id="highlight-updates" -->
@@ -89,3 +91,9 @@ Import @buoy-gg/core/web/register before React DOM to capture roots and renders.
 Swift uses the `highlight-updates` adapter ID for native screen inspection and interaction. It does not track React renders. Inspect the connected device’s action list: native builds provide `describeScreen`, `tapElement`, `waitFor`, `scroll`, and `typeText`, plus `startTouchCapture`, `stopTouchCapture`, `clearTouchCapture`, and `readTouchCapture` for Scenarios recording.
 
 Touch capture requires a development build. It excludes Buoy controls and secure text inputs, retains at most 500 interactions, and reports capture status and coverage problems through `readTouchCapture`. Stop capture when finished; clear it to remove retained records. A successful action dispatch does not prove a tap worked: check the returned `tapped` field and the resulting screen. Physical-touch capture remains pending device QA; MCP-driven capture and replay have been checked in the simulator.
+
+### Angular
+
+Draw boxes and count views in Angular.
+Use a stable build: Angular 20, 21, or 22.
+See the [setup steps](../web/angular).

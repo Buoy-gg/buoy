@@ -55,3 +55,5 @@ Register any React component as a [custom tool](./custom-tools), such as a featu
 - [Installation](./installation): packages, account keys and troubleshooting
 - [AI / MCP Server](./mcp): connect your coding agent
 - [Custom Tools](./custom-tools): build a tool for your app
+
+See [Scene (Beta)](./tools/three.md) to inspect a three.js scene.

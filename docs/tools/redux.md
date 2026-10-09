@@ -216,3 +216,10 @@ JUMP is also disabled on older actions whose raw state has been released. Buoy k
 ## Web support
 
 Use the app’s existing Redux provider. The browser host mounts capture and exposes the shared state and action panels. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+
+## Angular
+
+Use DI to link an Angular store.
+NgRx and NGXS each have their own bridge.
+Buoy leaves the Redux browser global alone.
+See the [setup steps](../web/angular).

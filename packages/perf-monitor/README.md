@@ -4,6 +4,13 @@
 
 Measure available frame-rate, CPU and memory metrics on a device. Record comparable runs to investigate performance changes.
 
+Web case fields fit side by side on small screens.
+Live numbers fit their text and leave room for hints.
+On web, Bench leaves its own views out of render counts.
+Capacitor apps can copy and paste case lists.
+Install `@capacitor/clipboard`, then run `npx cap sync`.
+Bench uses that plugin when it is present.
+
 <a href="https://buoy.gg/buoy/latest/docs/tools/perf-monitor"><b>Bench guide</b></a> &nbsp;·&nbsp; <a href="https://buoy.gg">buoy.gg</a> &nbsp;·&nbsp; <a href="https://github.com/Buoy-gg/buoy">All tools</a>
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/perf-monitor?style=flat-square&labelColor=10302a&color=2a9d78)](https://www.npmjs.com/package/@buoy-gg/perf-monitor) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/perf-monitor?style=flat-square&labelColor=10302a&color=2a9d78&label=downloads%2Fmonth)](https://www.npmjs.com/package/@buoy-gg/perf-monitor)

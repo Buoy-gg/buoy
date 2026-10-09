@@ -2,7 +2,7 @@
 
 # @buoy-gg/core
 
-The floating developer-tools menu for your React Native app. Add the tool packages you need to inspect requests, app state, storage and performance.
+A floating menu of dev tools for your app. Add tools to check web calls, state and storage. You can check speed too.
 
 <a href="https://buoy.gg/buoy/latest/docs/quick-start"><b>Quick start</b></a> &nbsp;·&nbsp; <a href="https://buoy.gg">buoy.gg</a> &nbsp;·&nbsp; <a href="https://github.com/Buoy-gg/buoy">All tools</a>
 

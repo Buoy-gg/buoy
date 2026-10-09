@@ -96,3 +96,9 @@ Register this package’s /web namespace in FloatingDevTools modules to use its 
 The Swift timeline combines captured Network, UserDefaults/MMKV, and Routes events. It supports source selection, search, pause, clear, copy, JSON detail, and the three Events MCP actions. Native export supports a subset of RN's formatting settings and rejects unsupported settings. Copy Settings selects the export preset and event-data inclusion; on-device copy respects the selected sources. Interactive source detail pages remain pending. React store and render sources do not apply to Swift.
 
 For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#events).
+
+## Scene file loads
+
+With `@buoy-gg/three`, this tool shows three.js file loads. Size and time come from the browser. Missing data stays unknown. Known cache hits show as cache hits.
+
+Buoy keeps its own saved keys and calls out of this view. They do not add to the row count.

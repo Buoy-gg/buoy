@@ -92,3 +92,10 @@ Yes. It's pure JavaScript — no native modules — so the tool can run in Expo 
 ## Web support
 
 Use the app’s existing QueryClientProvider. The browser host mounts the shared tracker and cache adapter. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+
+## Angular
+
+Pass the app's client to Buoy. It reads the data.
+Add `@tanstack/react-query`.
+Match its version to `@tanstack/angular-query-experimental`.
+See the [setup steps](../web/angular).
