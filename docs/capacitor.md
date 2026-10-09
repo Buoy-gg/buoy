@@ -193,7 +193,7 @@ Plan limits still apply to each tool and action.
 Install `@buoy-gg/external-sync`, as in the install step.
 Open [Buoy Desktop](./desktop) and sign in there too.
 Set up [MCP](./mcp) for your editor if you need it.
-MCP needs its own account. Data and actions need Pro.
+MCP needs its own account. Free has the basic MCP. Pro adds the full MCP.
 Run `list_devices` and pick your app before using tools.
 It shows as `ios` or `android` with a saved device ID.
 

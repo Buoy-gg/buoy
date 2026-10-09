@@ -12,7 +12,7 @@ Buoy provides in-app tools for React Native and Expo. Use the complete [installa
 
 ## Connections and platforms
 
-React Native Desktop/MCP connections require `@buoy-gg/external-sync`. Desktop and the MCP process need their own account setup. MCP data and action tools require Pro. A reachable broker does not prove account admission or app authorization.
+React Native Desktop/MCP connections require `@buoy-gg/external-sync`. Desktop and the MCP process need their own account setup. Free includes the basic MCP. Pro adds the full MCP. A reachable broker does not prove account admission or app authorization.
 
 Use the [Flutter installation guide](https://buoy.gg/buoy/latest/docs/flutter/installation) for Flutter's account-configured, debug-only widget and explicit app integrations. Native Swift has a separate [package guide](https://github.com/Buoy-gg/Buoy-Swift). TV requires the [TV setup](https://buoy.gg/buoy/latest/docs/tv/installation) and supported host tools. Do not assume capability parity across platforms.
 

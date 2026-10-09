@@ -72,7 +72,7 @@ the Mac's cameras and windows (`camera_inputs`), pick what to show
 everything the simulator launches), then check its own work (`camera_status`,
 `camera_diagnose`) and clean up (`camera_stop`).
 
-No app-side Buoy package or device connection is required. MCP requires Pro. QR generation is free; Screen region and additional barcode types require Pro. See [Camera](../../tools/camera) for the shared plan and source details.
+No app-side Buoy package or device connection is required. Camera MCP tools require Pro. QR generation is free; Screen region and additional barcode types require Pro. See [Camera](../../tools/camera) for the shared plan and source details.
 
 ## Limits
 

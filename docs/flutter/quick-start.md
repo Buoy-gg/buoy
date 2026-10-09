@@ -104,7 +104,7 @@ You can also connect this debug build to Desktop or MCP:
 npx -y @buoy-gg/mcp@latest init
 ```
 
-Buoy Desktop is free to use; the MCP server is a Pro feature. Both connect to the same app you just set up — Flutter devices appear next to React Native ones.
+Buoy Desktop is free to use; the MCP server is free in its basic form. Pro adds the full MCP. Both connect to the same app you just set up — Flutter devices appear next to React Native ones.
 
 ## What's next
 
@@ -123,4 +123,4 @@ Run `flutter pub add buoy`, then wrap your app in `BuoyDevTools` via `MaterialAp
 
 ### Do I need a license key to try it?
 
-Use a Free or Pro account key. Pro enables paid capabilities such as MCP, but does not enable the Flutter widget in profile or release mode.
+Use a Free or Pro account key. Pro enables paid capabilities such as the full MCP, but does not enable the Flutter widget in profile or release mode.

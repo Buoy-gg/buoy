@@ -57,7 +57,7 @@ Clock changes `Date.now()`, `new Date()` and your app's timers. The time zone, a
 
 ### What is free?
 
-Jumping ahead, Date & Time and the token row. Freeze, Speed, keeping the time after a restart, the two token tests, the MCP server and Ask Buoy need Pro.
+Jumping ahead, Date & Time and the token row. Freeze, Speed, keeping the time after a restart, the two token tests, the clock tools in the full MCP and Ask Buoy need Pro.
 
 ### Does this change the time on my phone?
 

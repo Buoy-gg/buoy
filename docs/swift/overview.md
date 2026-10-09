@@ -5,7 +5,7 @@ id: swift-overview
 description: "Buoy for native iOS (beta): add network, storage, console, routes and other developer tools to a SwiftUI or UIKit app, and inspect them on the device, in Buoy Desktop or through MCP."
 ---
 
-<!-- ::tool-film id="swift" -->
+<!-- ::tool-film id="swift-trailer" -->
 
 Buoy for Swift adds Buoy's developer tools to a native iOS app built with SwiftUI or UIKit. It is a separate SDK from the React Native packages: one Swift package, [Buoy-Swift](https://github.com/Buoy-gg/Buoy-Swift), that ships as a prebuilt, signed framework.
 

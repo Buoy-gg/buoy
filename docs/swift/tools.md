@@ -56,7 +56,19 @@ BuoyAsyncImage(url: imageURL) { phase in
 }
 ```
 
-Native image records group by URL. Expo disk-cache operations and WebP savings reports are not available.
+Native image records group by URL. Expo disk-cache operations are not available.
+
+A savings report needs a WebP encoder. iOS has none built in, and Buoy doesn't ship one. To get savings reports, give Buoy your own encoder. It gets the image and a quality from 0 to 1. It returns WebP bytes.
+
+```swift
+#if DEBUG
+ImageSavings.encodeWebP = { image, quality in
+    try MyWebPEncoder.encode(image, quality: quality)
+}
+#endif
+```
+
+With no encoder, `proveSavings` says "No WebP encoder is set up."
 
 ## Notifications
 
@@ -104,6 +116,6 @@ Compiled `Assets.car` files appear as a single record each, and loaded status is
 
 ## MCP
 
-Follow the [MCP setup guide](../mcp) to connect your editor. MCP data and action tools require Pro. Start with device discovery, then check the capabilities your Swift app advertises.
+Follow the [MCP setup guide](../mcp) to connect your editor. Free includes the basic MCP. Pro adds the full MCP. Start with device discovery, then check the capabilities your Swift app advertises.
 
 The UIKit interaction adapter lets an agent inspect and act on supported UI elements. Coverage depends on the view and accessibility information your app exposes, so check the result in the app after an action. Swift advertises only the actions it implements; React render tracking, Expo cache controls and in-process app reload are absent.

@@ -4,6 +4,10 @@ seoTitle: "Buoy for React web apps — the React Native devtools, in the browser
 id: web-overview
 description: "Meet Buoy on the web (beta): the same floating menu, tool panels and Desktop connection as React Native, running in a React web app through React Native Web."
 ---
+<!-- ::tool-film id="web" -->
+
+For Angular, use the [Angular guide](./angular).
+It has its own [AI install prompt](./angular#start-here).
 
 For Angular, use the [Angular guide](./angular).
 It has its own [AI install prompt](./angular#start-here).
@@ -20,7 +24,7 @@ Web support is in beta. Browser builds first shipped in `7.0.41`.
 
 - **In the page** — the same floating menu and dial as on a phone.
 - **On your desktop** — [Buoy Desktop](../desktop) lists the browser tab in the device switcher next to your phones.
-- **Through your AI** — the [MCP server](../mcp) lets Claude Code, Cursor or another MCP client read and drive the tab (Pro).
+- **Through your AI** — the [MCP server](../mcp) lets Claude Code, Cursor or another MCP client read and drive the tab. Free has the basic MCP. Pro adds the full MCP.
 
 ## Start here
 

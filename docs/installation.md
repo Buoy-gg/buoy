@@ -37,7 +37,7 @@ Each package adds one tool to the floating menu. Install only the ones you need.
 
 ## Sign In
 
-Buoy needs a Free or Pro account. The plans have different history limits and features, and production access, MCP and Ask Buoy require Pro. See [pricing](https://buoy.gg/pricing) for details.
+Buoy needs a Free or Pro account. The plans have different history limits and features, and production access and Ask Buoy require Pro. Free has the basic MCP. Pro adds the full MCP. See [pricing](https://buoy.gg/pricing) for details.
 
 ### Sign in from your project
 
@@ -80,7 +80,7 @@ For CI and test runs, use a bot key. A team admin makes one on the Team page. Se
 
 ## Desktop & AI (optional)
 
-The packages above power the in-app menu. Desktop is free with a Buoy account. MCP requires Pro.
+The packages above power the in-app menu. Desktop is free with a Buoy account. Free has the basic MCP. Pro adds the full MCP.
 
 - **Buoy Desktop** is a dashboard for macOS, Windows and Linux. Install the sync client in your app with `npm install @buoy-gg/external-sync`. It ships separately so apps that never use Desktop don't carry it. Then [download Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest) and launch it. Your app finds it on its own, because the broker address comes from the Metro host. See [Buoy Desktop](./desktop).
 - **AI / MCP Server** lets Claude Code, Cursor or any MCP editor drive your app:

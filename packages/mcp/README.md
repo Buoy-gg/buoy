@@ -18,7 +18,7 @@ Connect an MCP client to supported Buoy tools in a running app. Read captured st
 npx -y @buoy-gg/mcp@latest init
 ```
 
-Run it from your app's directory. It registers a `buoy` server in your MCP configs and adds the `buoy-optimize` skill. Your React Native app also needs `@buoy-gg/external-sync`, and data and action tools require Pro. Restart your editor, open your app, and start with `list_devices`.
+Run it from your app's directory. It registers a `buoy` server in your MCP configs and adds the `buoy-optimize` skill. Your React Native app also needs `@buoy-gg/external-sync`. A free account gets the basic tools, and Pro adds the full MCP. Restart your editor, open your app, and start with `list_devices`.
 
 The [MCP guide](https://buoy.gg/buoy/latest/docs/mcp) covers setup, what it captures and its limits. New to Buoy? Start with the [Quick start](https://buoy.gg/buoy/latest/docs/quick-start).
 

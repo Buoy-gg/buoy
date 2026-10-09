@@ -4,6 +4,7 @@ seoTitle: "React Buoy — in-app devtools for React Native & Expo"
 id: overview
 description: "Meet React Buoy, the in-app devtools platform for React Native — debug network, state, storage, and performance from your phone, desktop, or AI agent."
 ---
+<!-- ::tool-film id="react-native" -->
 
 Buoy puts devtools inside your React Native app. Inspect requests, storage, state and performance on the phone, in Buoy Desktop or from your coding agent.
 
@@ -19,7 +20,7 @@ To install by hand, follow the [Quick Start](./quick-start). It goes from instal
 
 - **In your app.** A floating button opens the tools over your app, so QA and support can use them on the device that hit the bug. See [FloatingDevTools](./floating-devtools).
 - **On your desktop.** [Buoy Desktop](./desktop) shows every connected app in one window. It's free with a Buoy account.
-- **In your coding agent.** The [MCP server](./mcp) lets Claude Code, Cursor or Codex read and control the running app. Requires Pro.
+- **In your coding agent.** The [MCP server](./mcp) lets Claude Code, Cursor or Codex read and control the running app. Free has the basic MCP. Pro adds the full MCP.
 - **In a chat inside the app.** [Ask Buoy](./tools/ask-buoy) (beta) drives the other tools in plain English, on the model endpoint you configure. Requires Pro.
 
 ## Pick your framework

@@ -13,10 +13,36 @@ Works with **React Native and Flutter** on the same broker. Some capabilities be
 
 ## Requirements
 
-- **Buoy Pro** — the MCP is a Pro feature. Configure the MCP process account as well as the device account. Data and action tools require Pro; device discovery remains subject to broker admission.
+- **A Buoy account** on the app and on the MCP process. Free works. Pro unlocks every tool (see [Free and Pro](#free-and-pro)). Device discovery is still subject to broker admission.
 - **Node.js 18+** on the machine running your editor.
 - **A running app** with Buoy devtools open on a device or simulator (React Native or Flutter).
 - **macOS + Xcode, or adb** — only for tools that work the simulator or phone from your computer: screenshots, real touches and app control. iOS needs Xcode. Android needs adb. Camera and TV input have their own needs; check their tool pages.
+
+## Free and Pro
+
+A free account gets the basic MCP. Your AI can use the app the way a person does:
+
+- Read the screen: `describe_screen`, `native_inspect`
+- Tap, swipe and type: `tap_element`, `native_tap`, `native_swipe`, `native_type`, `native_pinch`
+- Run steps in a row: `run_flow`
+- Take pictures and videos: `screenshot_component`, `screen_recording`
+- Work the device: `device_control`, `reload_app`, `navigate`, `get_routes`
+- Read logs: `get_console`
+- See web calls: `get_network_requests` (the list, not the bodies)
+- Get a quick summary: `get_triage` (storage key names, not values)
+
+Pro adds the rest. Your AI can see inside the app and change it:
+
+- State: Zustand, Redux, Jotai and React Query
+- Storage values and edits
+- Web call bodies, mocks and network conditions
+- Clock, location, permissions and app lifecycle
+- Time Machine and scenarios
+- Render checks, benchmarks and JS thread profiling
+- Sentry, images, assets, three.js, camera and the sim farm
+- `get_snapshot`, `call_action` and `get_events`
+
+When a free app calls a Pro tool, the tool says it needs Pro. Nothing reaches the app.
 
 ## Install
 
@@ -199,7 +225,7 @@ Run `npx -y @buoy-gg/mcp@latest init` from the app project, review the configura
 
 ### Do I need Buoy Pro for the MCP server?
 
-For data and actions, yes. Configure a verified account for the MCP process and the connected app. Reading runtime data and running actions require Pro.
+No. A free account gets the basic MCP: reading the screen, taps, flows, screenshots, logs and the web call list. Pro adds state, storage values, request bodies, mocks and the other tools. See [Free and Pro](#free-and-pro). The MCP process and the app both need a Buoy account.
 
 ### Does the MCP server work with Flutter?
 

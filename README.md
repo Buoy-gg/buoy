@@ -84,7 +84,7 @@ Install only the ones your app needs. Each link goes to its guide.
 
 ## Beyond the device
 
-[Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) shows your connected tools in desktop panels and lets you switch between devices. The [MCP server](https://buoy.gg/buoy/latest/docs/mcp) lets an AI editor read and change the running app. Both need `@buoy-gg/external-sync` in your app; the [Desktop guide](https://buoy.gg/buoy/latest/docs/desktop) covers the connection.
+[Buoy Desktop](https://github.com/Buoy-gg/Buoy-Desktop) shows your connected tools in desktop panels and lets you switch between devices. The [MCP server](https://buoy.gg/buoy/latest/docs/mcp) lets an AI editor read and change the running app. A free account gets the basic MCP, and Pro adds the full MCP. Both need `@buoy-gg/external-sync` in your app; the [Desktop guide](https://buoy.gg/buoy/latest/docs/desktop) covers the connection.
 
 Buoy starts in development builds. Turning it on in a shipped app takes Pro and your own access checks; read the [component reference](https://buoy.gg/buoy/latest/docs/floating-devtools) before you do.
 

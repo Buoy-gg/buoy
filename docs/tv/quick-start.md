@@ -97,6 +97,6 @@ Then open **Focus** and drive the app: reported focus moves can be compared with
 - `react-native-tvos` and the New Architecture (Fabric).
 - Restart Metro after adding JavaScript tools. Your TV runtime and host input tools have separate setup requirements.
 - Headless has **no license entry UI**. Configure your Free or Pro account key before mounting the headless tools. The
-  desktop dashboard works at the free tier; the MCP server requires Pro.
+  desktop dashboard works at the free tier; the basic MCP server is free. Pro adds the full MCP.
 
 More detail in [Installation](./installation).

@@ -110,10 +110,10 @@ Recording needs none of this — capture is pure JavaScript and works on retail 
 
 ## License keys
 
-A verified Free or Pro account is required. Desktop is free to use; MCP and production access require Pro.
+A verified Free or Pro account is required. Desktop is free to use. Production access requires Pro. Free has the basic MCP, and Pro adds the full MCP.
 
 **Headless has no license entry UI** — there is no on-device screen to type into. On TV a key can
 be supplied through initialization or the `licenseKey` prop, typically from your environment configuration. The desktop dashboard works at the
-free tier; the [MCP server](../mcp) requires Pro and will refuse a TV device with no admitted account.
+free tier; the [MCP server](../mcp) needs an account and will refuse a TV device with no admitted account.
 
 Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).

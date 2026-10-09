@@ -105,7 +105,7 @@ If the widget shows account setup, confirm that the build received the key and c
 ## Desktop & AI (optional)
 
 - [Buoy Desktop](../desktop) provides a free desktop dashboard for connected apps.
-- [AI / MCP Server](../mcp) lets Claude Code, Cursor, or another MCP editor inspect and control your app. MCP requires Pro.
+- [AI / MCP Server](../mcp) lets Claude Code, Cursor, or another MCP editor inspect and control your app. Free has the basic MCP. Pro adds the full MCP.
 
 For MCP configuration, run:
 

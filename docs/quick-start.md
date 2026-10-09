@@ -134,7 +134,7 @@ Start in development. Before enabling access in a shipped app, review the [compo
 ## Next steps
 
 - [Buoy Desktop](./desktop): see your connected apps in a desktop dashboard. Desktop is free to use. React Native apps need `@buoy-gg/external-sync` to connect.
-- [AI / MCP Server](./mcp): let Claude Code, Cursor or Codex inspect and control the running app. Requires Pro.
+- [AI / MCP Server](./mcp): let Claude Code, Cursor or Codex inspect and control the running app. Free has the basic MCP. Pro adds the full MCP.
 - [Ask Buoy](./tools/ask-buoy): an in-app assistant that runs on the model endpoint you configure. Requires Pro.
 - [Custom Tools](./custom-tools): add a tool that's specific to your app.
 - [FloatingDevTools](./floating-devtools): component options and access controls.

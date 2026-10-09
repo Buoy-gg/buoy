@@ -108,6 +108,23 @@
           ]
         },
         {
+          "label": "maui",
+          "children": [
+            {
+              "label": "Overview",
+              "to": "maui/overview"
+            },
+            {
+              "label": "Quick start",
+              "to": "maui/quick-start"
+            },
+            {
+              "label": "Install",
+              "to": "maui/installation"
+            }
+          ]
+        },
+        {
           "label": "capacitor",
           "children": [
             {
@@ -225,6 +242,19 @@
             {
               "label": "Release Builds",
               "to": "swift/release-builds"
+            }
+          ]
+        },
+        {
+          "label": "maui",
+          "children": [
+            {
+              "label": "Devices and Desktop",
+              "to": "maui/devices"
+            },
+            {
+              "label": "Release builds",
+              "to": "maui/release-builds"
             }
           ]
         },
@@ -684,6 +714,59 @@
             {
               "label": "Assets",
               "to": "swift/tools#assets"
+            }
+          ]
+        },
+        {
+          "label": "maui",
+          "children": [
+            {
+              "label": "Ask Buoy",
+              "to": "maui/ask-buoy"
+            },
+            {
+              "label": "Tools",
+              "to": "maui/tools"
+            },
+            {
+              "label": "Network",
+              "to": "maui/tools#network"
+            },
+            {
+              "label": "Env",
+              "to": "maui/tools#env"
+            },
+            {
+              "label": "Storage",
+              "to": "maui/tools#storage"
+            },
+            {
+              "label": "Events",
+              "to": "maui/tools#events"
+            },
+            {
+              "label": "Console",
+              "to": "maui/tools#console"
+            },
+            {
+              "label": "Clock",
+              "to": "maui/tools#clock"
+            },
+            {
+              "label": "Lifecycle",
+              "to": "maui/tools#lifecycle"
+            },
+            {
+              "label": "Routes",
+              "to": "maui/tools#routes"
+            },
+            {
+              "label": "Location",
+              "to": "maui/tools#location"
+            },
+            {
+              "label": "Permissions",
+              "to": "maui/tools#permissions"
             }
           ]
         },
