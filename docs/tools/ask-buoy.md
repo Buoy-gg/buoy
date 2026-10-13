@@ -58,13 +58,13 @@ Each person signs in with Buoy in your app. They scan the QR code or type the co
 
 | Plan | Credits each week | About how many asks |
 | --- | ---: | ---: |
-| Pro | 480 | 140 |
-| Business | 1,200 per seat, shared by the team | 350 per seat |
-| Trial | 1,000, once | 300 |
+| Pro | 2,300 | 500 |
+| Business | 4,600 per seat, shared by the team | 1,000 per seat |
+| Trial | 1,000, once | 250 |
 
-One credit is $0.001 of AI use. Most asks cost 2 to 4 credits. One ask never costs more than 100. Credits reset each Monday at 00:00 UTC. Unused credits don't carry over.
+Most asks use about 5 credits. A long, many-step ask uses more. One ask never uses more than 100. Credits reset each Monday at 00:00 UTC. Unused credits don't carry over.
 
-See what's left in Ask Buoy's settings. You can also see it on buoy.gg under Dashboard, then Billing.
+See what's left in Ask Buoy's settings. You can also see it on buoy.gg: open the Dashboard, then the Ask Buoy tab. That tab is also where you pick your model.
 
 ### When something goes wrong
 
@@ -75,6 +75,8 @@ Each error shows a short code and a request id. Tap **Copy details** to copy the
 | You used this week's credits | They come back on the date shown. |
 | Sign in to use hosted Ask Buoy | Sign in with Buoy in the app first. |
 | Hosted AI is paused right now | We paused it for a short time. Try again later, or use your own model. |
+| Claude is busy right now, so Luna is answering | Claude is down for now. Luna answers until you start a new chat. |
+| Ask Buoy is down right now | Claude and Luna are both down. We get an alert and are working on it. Try again in a few minutes. |
 
 ---
 
@@ -117,7 +119,7 @@ You can make it ask before every change, or allow only some tools. See [In the c
 
 ## What it sends, and what it saves
 
-**Where the chat goes.** With hosted AI, it goes through Buoy's server to OpenAI's GPT-6 Luna model, by way of OpenRouter. Buoy keeps the cost of each ask, but not the chat. The first time someone uses it, Ask Buoy shows a note about this before it sends anything. With your own model, the chat goes only to your server.
+**Where the chat goes.** With hosted AI, it goes through Buoy's server to Anthropic's Claude Haiku 5.5 model. If Claude is down, it goes to OpenAI's GPT-6 Luna model instead, by way of OpenRouter. You can pick Luna first in Ask Buoy's settings. Buoy keeps the cost of each ask, but not the chat. The first time someone uses it, Ask Buoy shows a note about this before it sends anything. With your own model, the chat goes only to your server.
 
 **What each ask sends.** Your message goes first. Then your `context` notes and types. Then a sketch of the app: route paths, store names, storage key names and field names. It also sends the screen you're on with its route params, which query keys are on screen and your last few web call URLs. Params, keys and URLs can hold ids. Tool results go too, like storage values and web call bodies. It strips anything that looks like a secret first. SecureStore values stay off unless you set `policy.secureReads: true`.
 
