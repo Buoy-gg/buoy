@@ -49,9 +49,9 @@ Chat can use these tools when you set them up:
 - Impersonate: see the app as one test user.
 - Images and Perf Monitor: read image loads and app speed.
 - Riverpod: read providers. It can't change them.
+- The screen: read what's on it, tap buttons, type and flip switches. This needs no setup.
 
 Each tool needs its own [setup](./network).
-Chat can't read or tap the screen in Flutter.
 Image Overlay is not in the chat.
 
 Try one safe ask first: *"List the installed tools."*
@@ -64,6 +64,12 @@ Big changes, like wiping storage, wait for your tap.
 The changes bar at the top counts what changed.
 Tap **Undo** to put most of it back.
 A change it can't undo is marked **permanent**.
+
+You can shrink the chat to watch your app.
+It keeps working.
+If it needs your tap, its icon gets a **!**.
+A green dot means it is done.
+A red dot means it failed.
 
 To ask before every change, use this:
 
