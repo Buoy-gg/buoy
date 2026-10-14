@@ -72,7 +72,9 @@ return builder.Build();
 Buoy adds its own view to your app window.
 You do not need to wrap or replace pages.
 If your app has an HTTP client, keep its setup.
-Use the [Network guide](./tools#network) to wire that client.
+Clients from `AddHttpClient` need no change.
+Buoy sees them on its own.
+For other clients, see the [Network guide](./tools/network).
 Do not add a second client your app never uses.
 
 ## 4. Check a web call
@@ -83,6 +85,7 @@ Have your app make a fresh call through that client.
 Open Network and find its URL and status.
 
 A plain `new HttpClient()` does not use Buoy.
+Clients from `AddHttpClient` do.
 If the call is missing, check the app's client first.
 Then check your account and the tool's capture switch.
 The package alone does not prove calls are captured.

@@ -29,3 +29,7 @@ The [Quick start](https://buoy.gg/buoy/latest/docs/quick-start) walks through th
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+## Three.js on web
+
+Use `mountBuoy(options)` from `@buoy-gg/core/web` in plain Three.js. It takes the same props as `<FloatingDevTools>`. Call its return value to remove Buoy. Load `@buoy-gg/core/web/register` before your app. See the [Three.js guide](https://buoy.gg/docs/web/frameworks#threejs) for setup and limits.

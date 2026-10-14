@@ -4,6 +4,10 @@
 
 Highlight observed React component updates in development builds and inspect the available render details.
 
+Your search stays in view when you leave a render.
+
+Names use `displayName` when the app sets it.
+
 <a href="https://buoy.gg/buoy/latest/docs/tools/highlight-updates"><b>Highlight Updates guide</b></a> &nbsp;·&nbsp; <a href="https://buoy.gg">buoy.gg</a> &nbsp;·&nbsp; <a href="https://github.com/Buoy-gg/buoy">All tools</a>
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/highlight-updates?style=flat-square&labelColor=10302a&color=2a9d78)](https://www.npmjs.com/package/@buoy-gg/highlight-updates) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/highlight-updates?style=flat-square&labelColor=10302a&color=2a9d78&label=downloads%2Fmonth)](https://www.npmjs.com/package/@buoy-gg/highlight-updates)
@@ -21,6 +25,13 @@ npm install @buoy-gg/core @buoy-gg/highlight-updates
 It appears in the menu once installed. You don't need a React DevTools connection.
 
 The [Highlight Updates guide](https://buoy.gg/buoy/latest/docs/tools/highlight-updates) covers setup, what it captures and its limits. New to Buoy? Start with the [Quick start](https://buoy.gg/buoy/latest/docs/quick-start).
+
+## Angular dev builds
+
+The Angular port can feed this tool's boxes and counts.
+Use `connectBuoyHighlights` from `@buoy-gg/angular/highlights` in dev.
+It leaves React and React Native setup as it is.
+See the [Angular setup](https://buoy.gg/buoy/latest/docs/web/angular#router-and-highlight).
 
 ---
 

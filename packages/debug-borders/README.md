@@ -4,6 +4,8 @@
 
 Show layout borders and component labels over your React Native app. Tap a label to inspect the component's available properties.
 
+On web, borders also show on plain DOM nodes. They do not show objects inside the 3D scene.
+
 <a href="https://buoy.gg/buoy/latest/docs/tools/debug-borders"><b>Debug Borders guide</b></a> &nbsp;·&nbsp; <a href="https://buoy.gg">buoy.gg</a> &nbsp;·&nbsp; <a href="https://github.com/Buoy-gg/buoy">All tools</a>
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/debug-borders?style=flat-square&labelColor=10302a&color=2a9d78)](https://www.npmjs.com/package/@buoy-gg/debug-borders) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/debug-borders?style=flat-square&labelColor=10302a&color=2a9d78&label=downloads%2Fmonth)](https://www.npmjs.com/package/@buoy-gg/debug-borders)

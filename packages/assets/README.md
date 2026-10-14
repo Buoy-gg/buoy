@@ -20,8 +20,14 @@ npm install @buoy-gg/core @buoy-gg/assets
 
 Assets appears in the menu once installed. SVG previews use `expo-image` when it's available.
 
+On web, tool image previews do not count as app loads.
+
 The [Assets guide](https://buoy.gg/buoy/latest/docs/tools/assets) covers setup, what it captures and its limits. New to Buoy? Start with the [Quick start](https://buoy.gg/buoy/latest/docs/quick-start).
 
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+Cached images count when the app loads them too.
+
+Buoy keeps its own files and tool previews out of this view.

@@ -25,3 +25,5 @@ The [Events guide](https://buoy.gg/buoy/latest/docs/tools/events) covers setup, 
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+Buoy keeps its own saved keys and calls out of this view. They do not add to the row count.

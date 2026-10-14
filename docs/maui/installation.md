@@ -83,6 +83,9 @@ Testers can then scan the code and sign in.
 Hosted [Ask Buoy](./ask-buoy) needs that sign-in session.
 A license key alone does not set up hosted chat.
 
+With a sign-in or a dev token, your Buoy settings follow you to your other devices.
+See [Your settings follow you](../sign-in#your-settings-follow-you).
+
 ## Pick your tools
 
 Add tool calls before `builder.Build()`.

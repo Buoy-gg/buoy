@@ -25,3 +25,17 @@ The [Redux guide](https://buoy.gg/buoy/latest/docs/tools/redux) covers setup, wh
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+### Angular stores
+
+NgRx apps can use `provideBuoyNgRx` from `@buoy-gg/angular/ngrx`.
+It gives NgRx its own DevTools object through DI.
+It never claims the browser's Redux extension global.
+NGXS 22 apps use `provideBuoyNgxs` from `@buoy-gg/angular/ngxs`.
+Use just one bridge for the Redux tool per app.
+See the [Angular setup](https://buoy.gg/buoy/latest/docs/web/angular) for each one.
+
+A store bridge can call `connectReduxAdapter(store)`.
+The store must read state and dispatch actions.
+It must also handle `@@buoy/JUMP_TO_STATE` with a state payload.
+Call the returned stop function when the adapter stops.

@@ -12,6 +12,8 @@ Inspect HTTP requests captured through your React Native app's global `fetch` an
 
 </div>
 
+Buoy hides its own cloud settings calls from the list.
+
 ## Install
 
 ```bash
@@ -25,3 +27,5 @@ The [Network guide](https://buoy.gg/buoy/latest/docs/tools/network) covers setup
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+Buoy keeps its own web calls out of this view. App calls still show when they use the same files.

@@ -27,16 +27,16 @@ The [tool guide](./tools) shows the steps and limits.
 
 | Tool | What you can do |
 | --- | --- |
-| [Network](./tools#network) | See web calls and test mock replies. |
-| [Env](./tools#env) | Check app values and rules you pass in. |
-| [Storage](./tools#storage) | Read and edit known app keys. |
-| [Events](./tools#events) | See web calls and store events in one list. |
-| [Console](./tools#console) | Read, search, and filter app logs. |
-| [Clock](./tools#clock) | Change time read through the Buoy clock. |
-| [Lifecycle](./tools#lifecycle) | Test app state, theme, and power changes. |
-| [Routes](./tools#routes) | See the page stack and open known paths. |
-| [Location](./tools#location) | Test places and trips through the Buoy wrapper. |
-| [Permissions](./tools#permissions) | Test what the app does with each grant. |
+| [Network](./tools/network) | See web calls and test mock replies. |
+| [Env](./tools/env) | Check app values and rules you pass in. |
+| [Storage](./tools/storage) | Read and edit known app keys. |
+| [Events](./tools/events) | See web calls and store events in one list. |
+| [Console](./tools/console) | Read, search, and filter app logs. |
+| [Clock](./tools/clock) | Change time read through the Buoy clock. |
+| [Lifecycle](./tools/lifecycle) | Test app state, theme, and power changes. |
+| [Routes](./tools/routes) | See the page stack and open known paths. |
+| [Location](./tools/location) | Test places and trips through the Buoy wrapper. |
+| [Permissions](./tools/permissions) | Test what the app does with each grant. |
 
 [Ask Buoy](./ask-buoy) adds chat inside your app.
 It needs Pro and uses the tools you add.

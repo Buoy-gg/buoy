@@ -35,3 +35,9 @@ The [Bench guide](https://buoy.gg/buoy/latest/docs/tools/perf-monitor) covers se
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+## Counts from other tools
+
+Scene sends render counts to this panel. Counts are not bytes. Fields with no data show as unknown.
+
+Other tools can use `registerPerfSeries(source)`. Call `update(rows)` with `id`, `label`, `value`, and `unit` for each row. A row can have a `note` too. Updates are sent at most four times per second. Each source has at most 32 rows. Call `dispose()` when the source stops.

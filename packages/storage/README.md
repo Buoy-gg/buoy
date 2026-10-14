@@ -25,3 +25,5 @@ The [Storage guide](https://buoy.gg/buoy/latest/docs/tools/storage) covers setup
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+Buoy keeps its own keys out of this view. Counts and saved app state leave them out too.

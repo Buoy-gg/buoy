@@ -25,3 +25,12 @@ The [Routes guide](https://buoy.gg/buoy/latest/docs/tools/routes) covers setup, 
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+### Angular Router
+
+Use `connectBuoyRouter` from `@buoy-gg/angular/router` in the lazy setup.
+It reads route names, params, and matched paths.
+It also fills the sitemap from Angular's route list.
+Go calls Angular Router. It asks for path params.
+Call the returned stop function when the app stops.
+Raw URL capture still works without this adapter.

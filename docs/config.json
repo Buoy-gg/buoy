@@ -255,6 +255,10 @@
             {
               "label": "Release builds",
               "to": "maui/release-builds"
+            },
+            {
+              "label": "Custom tools",
+              "to": "maui/custom-tools"
             }
           ]
         },
@@ -734,43 +738,43 @@
             },
             {
               "label": "Network",
-              "to": "maui/tools#network"
+              "to": "maui/tools/network"
             },
             {
               "label": "Env",
-              "to": "maui/tools#env"
+              "to": "maui/tools/env"
             },
             {
               "label": "Storage",
-              "to": "maui/tools#storage"
+              "to": "maui/tools/storage"
             },
             {
               "label": "Events",
-              "to": "maui/tools#events"
+              "to": "maui/tools/events"
             },
             {
               "label": "Console",
-              "to": "maui/tools#console"
+              "to": "maui/tools/console"
             },
             {
               "label": "Clock",
-              "to": "maui/tools#clock"
+              "to": "maui/tools/clock"
             },
             {
               "label": "Lifecycle",
-              "to": "maui/tools#lifecycle"
+              "to": "maui/tools/lifecycle"
             },
             {
               "label": "Routes",
-              "to": "maui/tools#routes"
+              "to": "maui/tools/routes"
             },
             {
               "label": "Location",
-              "to": "maui/tools#location"
+              "to": "maui/tools/location"
             },
             {
               "label": "Permissions",
-              "to": "maui/tools#permissions"
+              "to": "maui/tools/permissions"
             }
           ]
         },

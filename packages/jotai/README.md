@@ -4,6 +4,8 @@
 
 Inspect registered Jotai atoms and their captured changes, with live values and per-atom history.
 
+The Free row cap is used after the filter.
+
 <a href="https://buoy.gg/buoy/latest/docs/tools/jotai"><b>Jotai guide</b></a> &nbsp;·&nbsp; <a href="https://buoy.gg">buoy.gg</a> &nbsp;·&nbsp; <a href="https://github.com/Buoy-gg/buoy">All tools</a>
 
 [![npm version](https://img.shields.io/npm/v/@buoy-gg/jotai?style=flat-square&labelColor=10302a&color=2a9d78)](https://www.npmjs.com/package/@buoy-gg/jotai) [![npm downloads](https://img.shields.io/npm/dm/@buoy-gg/jotai?style=flat-square&labelColor=10302a&color=2a9d78&label=downloads%2Fmonth)](https://www.npmjs.com/package/@buoy-gg/jotai)

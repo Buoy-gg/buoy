@@ -22,6 +22,26 @@ Run it from your app's directory. It registers a `buoy` server in your MCP confi
 
 The [MCP guide](https://buoy.gg/buoy/latest/docs/mcp) covers setup, what it captures and its limits. New to Buoy? Start with the [Quick start](https://buoy.gg/buoy/latest/docs/quick-start).
 
+
+## Read screens
+
+Use `native_inspect` to read a point without a tap.
+Pass `pointX` and `pointY` in iOS Sim points.
+Other hosts use pixels. On a real iPhone, this reads the app view.
+The `x` and `y` fields still use screen fractions.
+
+Use `screenshot_component` with `compareTo` to view a saved PNG
+next to the live screen. The saved file comes first.
+Use a full path, or start at the project root.
+The saved file stays as it is.
+
+## Do more in one call
+
+`run_flow` can tap, type and swipe in one call.
+A `swipe` step with `untilEnd: true` goes to the end of a list.
+Pass `real: true` to make each tap a real touch.
+`screen_recording` can take `steps`. It records them, then stops and saves.
+
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
