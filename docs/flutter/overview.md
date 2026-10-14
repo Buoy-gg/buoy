@@ -39,6 +39,7 @@ Some tasks need app integration. Impersonation requires your backend to authoriz
 | **Events Timeline** | Unified timeline across all tools with LLM-ready export |
 | **Impersonate** | Inject configured headers for backend-authorized impersonation |
 | **Image Overlay** | Overlay design mockups on your app for pixel-perfect comparison |
+| **Ask Buoy** | AI chat that reads and changes app state through your tools, with Undo |
 
 ## Why Buoy
 

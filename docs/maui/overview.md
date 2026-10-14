@@ -4,6 +4,7 @@ seoTitle: "Buoy for .NET MAUI"
 id: maui-overview
 description: "See web calls, logs, and app state in MAUI. Use the tools on your phone or in Buoy Desktop."
 ---
+<!-- ::tool-film id="maui" -->
 
 Buoy adds dev tools to your .NET MAUI app.
 Open them from a small button in your app.

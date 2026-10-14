@@ -9,7 +9,9 @@ Buoy's install ping is separate from account validation and the connections you 
 
 ## Turn it off
 
-For the React Native SDK, include `telemetry: false` in your initialization:
+Each Buoy SDK has a `telemetry` switch. Set it to false.
+
+React Native, web, Angular and Capacitor:
 
 ```ts
 import { Buoy } from '@buoy-gg/core';
@@ -20,23 +22,51 @@ Buoy.init({
 });
 ```
 
-This example uses Expo's environment variable. React Native CLI apps should pass the key from their configured environment loader.
+This example uses an Expo env value. React Native CLI apps pass the key from their own env loader.
 
-For Desktop, set `BUOY_TELEMETRY=0` in its launch environment. The opt-out prevents this ping and its telemetry-state writes. It does not disable account validation, tool persistence, or configured remote connections.
+Flutter:
+
+```dart
+Buoy.init(telemetry: false);
+// or
+BuoyDevTools(telemetry: false, child: app);
+```
+
+Swift:
+
+```swift
+var config = BuoyConfig()
+config.telemetry = false
+Buoy.start(config)
+```
+
+.NET MAUI:
+
+```csharp
+builder.UseBuoy(options =>
+{
+    options.Telemetry = false;
+});
+```
+
+For Desktop, set `BUOY_TELEMETRY=0` when you launch it.
+
+Turning it off stops this ping. It also stops the ping from saving its state. It does not stop the account check. Your saved tool data stays. Your Desktop, MCP and Ask Buoy links keep working.
 
 ## What it sends
 
-The SDK sends four fields. Desktop adds `surface`:
+The SDKs send five fields. Desktop sends `surface` too.
 
 | Field | Example | Meaning |
 | --- | --- | --- |
-| `installId` | `9f3c1d7a-…` | Random identifier saved locally for this installation |
-| `version` | `7.0.22` | Installed Buoy version |
-| `platform` | `ios` | Operating-system platform |
-| `tier` | `free` | `free` or `pro` for an admitted account; `locked` when no account has been verified |
-| `surface` | `desktop` | Added by Desktop to identify the sending application |
+| `installId` | `9f3c1d7a-…` | A random id saved on this machine |
+| `version` | `7.0.22` | The Buoy version you have |
+| `platform` | `ios` | The OS, like `ios`, `android` or `web` |
+| `tier` | `free` | `free` or `pro` once your account is checked. `locked` if no account is checked yet |
+| `framework` | `flutter` | The kind of app: `react-native`, `tv`, `web`, `angular`, `capacitor`, `flutter`, `swift` or `maui` |
+| `surface` | `desktop` | Sent only by Desktop. It says which app sent the ping |
 
-The install identifier is generated independently of hardware and account properties. It persists with local telemetry state; reinstalling does not necessarily remove that state.
+The id is made at random. It does not come from your machine or your account. It is saved with the ping's state. A reinstall may not clear it.
 
 ## What it never sends
 
@@ -46,9 +76,11 @@ This payload restriction does not apply to other features. Account validation se
 
 ## When it fires
 
-The React Native SDK checks the development flag before sending. Desktop checks on launch. Both throttle attempts to at most once per 24 hours for an installation and handle request failures without blocking normal startup.
+Each SDK sends the ping only in dev builds. A shipped app never sends it. Desktop checks when it starts.
 
-The first SDK attempt for a new install prints a notice with the opt-out setting. Existing telemetry state suppresses repeated notices.
+Each one sends at most one ping a day. If the ping fails, your app keeps going.
+
+The first time a new install sends it, Buoy prints a note. The note tells you how to turn it off. You see it once.
 
 ## Why it exists
 

@@ -447,6 +447,10 @@
           "label": "flutter",
           "children": [
             {
+              "label": "Ask Buoy",
+              "to": "flutter/tools/ask-buoy"
+            },
+            {
               "label": "Camera",
               "to": "flutter/tools/camera"
             },
