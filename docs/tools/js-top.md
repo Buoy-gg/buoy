@@ -52,7 +52,7 @@ Alongside that, a calibrated high-frequency probe measures **estimated thread oc
 
 ## Ask your AI what's eating the thread
 
-With the [MCP server](../mcp), an agent can call `get_js_thread_top` — the device samples for a few seconds and returns the ranked table, so "why is JS FPS low?" becomes a one-tool-call answer.
+With the [MCP server](../mcp), an agent can call `get_js_thread_top` — the device samples for a few seconds and returns the ranked table, so "why is JS FPS low?" becomes a one-tool-call answer. On a free account it returns the busy % and freezes. The ranked table needs Pro.
 
 ---
 

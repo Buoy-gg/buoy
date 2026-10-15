@@ -325,6 +325,10 @@
         {
           "label": "Buoy Optimize",
           "to": "optimize"
+        },
+        {
+          "label": "Sim Farm",
+          "to": "tools/sim-farm"
         }
       ]
     },

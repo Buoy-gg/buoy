@@ -31,6 +31,15 @@ A free account gets the basic MCP. Your AI can use the app the way a person does
 - See web calls: `get_network_requests` (the list, not the bodies)
 - Get a quick summary: `get_triage` (storage key names, not values)
 
+Free also gets [Buoy Optimize](./optimize), with no cap on speed tests or sims. Free shows what is faster. Pro shows why.
+
+- Speed tests: `run_benchmark_batch`, `get_batch_report`, `compare_reports`, `get_benchmark_settings` and the other Bench tools
+- Web speed tests: `run_web_benchmark`, `find_web_ceiling`, `screenshot_web_variants`
+- The [Sim Farm](./tools/sim-farm): every `sim_farm_*` tool
+- JS thread totals: `get_js_thread_top` gives busy % and freezes
+
+Free results have fps, CPU, memory, jank, frame gaps, time totals and render totals. They leave out the names: which components re-render and why, which scripts ran in slow frames, and which code used the JS thread. A free result ends with a short note that says what Pro would show for that run.
+
 Pro adds the rest. Your AI can see inside the app and change it:
 
 - State: Zustand, Redux, Jotai and React Query
@@ -38,11 +47,13 @@ Pro adds the rest. Your AI can see inside the app and change it:
 - Web call bodies, mocks and network conditions
 - Clock, location, permissions and app lifecycle
 - Time Machine and scenarios
-- Render checks, benchmarks and JS thread profiling
-- Sentry, images, assets, three.js, camera and the sim farm
+- Why a screen is slow: render names and causes, slow-frame scripts, the JS thread table (`get_js_thread_origin_detail`), `measure_renders` and Chrome traces (`traceDir`)
+- Sentry, images, assets, three.js and camera
 - `get_snapshot`, `call_action` and `get_events`
 
 When a free app calls a Pro tool, the tool says it needs Pro. Nothing reaches the app.
+
+Every Saturday and Sunday, a free account gets everything Pro does. This is the [Weekend Pass](https://buoy.gg/pricing).
 
 ## Install
 
@@ -225,7 +236,7 @@ Run `npx -y @buoy-gg/mcp@latest init` from the app project, review the configura
 
 ### Do I need Buoy Pro for the MCP server?
 
-No. A free account gets the basic MCP: reading the screen, taps, flows, screenshots, logs and the web call list. Pro adds state, storage values, request bodies, mocks and the other tools. See [Free and Pro](#free-and-pro). The MCP process and the app both need a Buoy account.
+No. A free account gets the basic MCP: reading the screen, taps, flows, screenshots, logs and the web call list. It also gets Buoy Optimize and the Sim Farm, without the names that say why. Pro adds state, storage values, request bodies, mocks and the other tools. See [Free and Pro](#free-and-pro). The MCP process and the app both need a Buoy account.
 
 ### Does the MCP server work with Flutter?
 

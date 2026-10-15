@@ -20,7 +20,7 @@ To install by hand, follow the [Quick Start](./quick-start). It goes from instal
 
 - **In your app.** A floating button opens the tools over your app, so QA and support can use them on the device that hit the bug. See [FloatingDevTools](./floating-devtools).
 - **On your desktop.** [Buoy Desktop](./desktop) shows every connected app in one window. It's free with a Buoy account.
-- **In your coding agent.** The [MCP server](./mcp) lets Claude Code, Cursor or Codex read and control the running app. Free has the basic MCP. Pro adds the full MCP.
+- **In your coding agent.** The [MCP server](./mcp) lets Claude Code, Cursor or Codex read and control the running app. Free has the basic MCP, Buoy Optimize and the [Sim Farm](./tools/sim-farm). Pro adds the full MCP.
 - **In a chat inside the app.** [Ask Buoy](./tools/ask-buoy) (beta) drives the other tools in plain English, on the model endpoint you configure. Requires Pro.
 
 ## Pick your framework

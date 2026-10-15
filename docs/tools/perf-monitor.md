@@ -80,7 +80,7 @@ The sampler runs on the JS thread, so it physically can't take samples *while* t
 
 ## Render Capture
 
-With [`@buoy-gg/highlight-updates`](./highlight-updates) installed, every recording — manual or batch — also captures **which components rendered, how many times, and how long they took** (self time, React DevTools profiler convention). Batch reports gain a *Top re-renderers* section per case, single-run reports get a *Render commits* block, and the MCP `run_benchmark_batch` ranking includes the heaviest components per case — so instead of "case B dropped to 41 JS FPS" you get "case B dropped to 41 JS FPS **because `ProductList` rendered 47× costing 312ms**".
+With [`@buoy-gg/highlight-updates`](./highlight-updates) installed, every recording — manual or batch — also captures **which components rendered, how many times, and how long they took** (self time, React DevTools profiler convention). Batch reports gain a *Top re-renderers* section per case, single-run reports get a *Render commits* block, and the MCP `run_benchmark_batch` ranking includes the heaviest components per case — so instead of "case B dropped to 41 JS FPS" you get "case B dropped to 41 JS FPS **because `ProductList` rendered 47× costing 312ms**". Component names in MCP results need Pro. A free account gets the render totals.
 
 A few things to know:
 

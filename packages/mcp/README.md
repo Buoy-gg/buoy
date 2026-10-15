@@ -18,7 +18,7 @@ Connect an MCP client to supported Buoy tools in a running app. Read captured st
 npx -y @buoy-gg/mcp@latest init
 ```
 
-Run it from your app's directory. It registers a `buoy` server in your MCP configs and adds the `buoy-optimize` skill. Your React Native app also needs `@buoy-gg/external-sync`. A free account gets the basic tools, and Pro adds the full MCP. Restart your editor, open your app, and start with `list_devices`.
+Run it from your app's directory. It registers a `buoy` server in your MCP configs and adds the `buoy-optimize` skill. Your React Native app also needs `@buoy-gg/external-sync`. A free account gets the basic tools and Buoy Optimize, and Pro adds the full MCP. Restart your editor, open your app, and start with `list_devices`.
 
 The [MCP guide](https://buoy.gg/buoy/latest/docs/mcp) covers setup, what it captures and its limits. New to Buoy? Start with the [Quick start](https://buoy.gg/buoy/latest/docs/quick-start).
 
@@ -41,6 +41,23 @@ The saved file stays as it is.
 A `swipe` step with `untilEnd: true` goes to the end of a list.
 Pass `real: true` to make each tap a real touch.
 `screen_recording` can take `steps`. It records them, then stops and saves.
+
+## Many sims at once
+
+The `sim_farm_*` tools run many slim iOS sims on one Mac. They make Buoy Optimize faster. Ask your agent:
+
+```text
+Use buoy optimize and the sim farm on our slow feed screen.
+```
+
+The agent finds as many ideas as it can and tests them all. Each idea gets its own sim. The agent checks how each one looks and how much memory it uses. Each app acts like a real iPhone SE, so an idea that uses too much memory is out. Then the best ideas are timed on one quiet sim. You can run the farm yourself too:
+
+```bash
+npx -y @buoy-gg/mcp@latest farm status
+npx -y @buoy-gg/mcp@latest farm phone use off
+```
+
+See the [Sim Farm guide](https://buoy.gg/buoy/latest/docs/tools/sim-farm).
 
 ---
 

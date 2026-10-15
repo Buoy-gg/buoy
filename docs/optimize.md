@@ -25,12 +25,24 @@ Rounds on a simulator are quick and good for ruling ideas out. Simulator numbers
 
 A phone gets warmer over a long batch, and a warm phone runs slower. Bench's Fast preset uses short cooldowns and assumes the phone stays cool, which is what a cold pack or cooling pad under the phone is for. The Slow preset waits 20 seconds between runs so a room-temperature phone can cool down on its own. Shuffling the case order is on in both, so any heat that's left spreads across every variant instead of piling up on the last one.
 
+## Many ideas at once
+
+On a Mac, the agent can use the [Sim Farm](./tools/sim-farm). Ask for it in your prompt:
+
+```text
+Use buoy optimize and the sim farm on our slow feed screen.
+```
+
+The farm runs many slim iOS sims at once. Each idea gets its own sim. The agent opens each one to check how it looks. Each app acts like a real iPhone SE, so an idea that uses too much memory shows up early.
+
+Speed is timed on one quiet sim, since all sims share the Mac's CPU. The farm checks if the Mac was too busy during a run. If it was, the agent runs it again.
+
 ## What you need
 
 - [Bench](./tools/perf-monitor) (`@buoy-gg/perf-monitor`) in a React Native development build. Bench's native dependencies don't run in Expo Go.
 - Or Bench in a web app, from its `/web` entry. See [Bench on the web](./tools/perf-monitor#web).
 - The [Buoy MCP server](./mcp) in your editor. `npx -y @buoy-gg/mcp@latest init` sets it up and installs the `buoy-optimize` skill. Rerunning it overwrites the skill files, so save any changes you made to them first.
-- Buoy Pro. Running benchmarks over MCP is a Pro feature.
+- A Buoy account. Free runs the whole loop, with no cap on speed tests or sims. Free results show what is faster. Pro also shows why: which components re-render and why, which scripts ran in slow frames, and which code used the JS thread.
 
 The agent drives Bench with these MCP tools: `get_benchmark_settings`, `run_benchmark_batch`, `get_batch_report` and `compare_reports`. For a slow interaction rather than a slow screen, it starts with `measure_renders`, which counts renders during a set of steps and can compare them before and after a change.
 
@@ -53,6 +65,7 @@ The winning version stopped recomputing every light on the JavaScript thread. Th
 - [Bench](./tools/perf-monitor): the benchmark runner Buoy Optimize drives
 - [AI / MCP Server](./mcp): set up the server and the skill
 - [Render Highlighter](./tools/highlight-updates): see which components re-render
+- [Sim Farm](./tools/sim-farm): many iOS sims on one Mac
 
 ## FAQ
 

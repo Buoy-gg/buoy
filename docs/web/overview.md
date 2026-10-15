@@ -24,7 +24,7 @@ Web support is in beta. Browser builds first shipped in `7.0.41`.
 
 - **In the page** — the same floating menu and dial as on a phone.
 - **On your desktop** — [Buoy Desktop](../desktop) lists the browser tab in the device switcher next to your phones.
-- **Through your AI** — the [MCP server](../mcp) lets Claude Code, Cursor or another MCP client read and drive the tab. Free has the basic MCP. Pro adds the full MCP.
+- **Through your AI** — the [MCP server](../mcp) lets Claude Code, Cursor or another MCP client read and drive the tab. Free has the basic MCP and Buoy Optimize. Pro adds the full MCP.
 
 ## Start here
 
