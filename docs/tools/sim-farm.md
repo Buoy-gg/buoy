@@ -7,6 +7,8 @@ description: "Run Buoy Optimize on many slim iOS simulators at once. Your AI age
 
 The Sim Farm runs many iOS sims on one Mac for [Buoy Optimize](../optimize). Optimize has your AI agent build many ideas to make a slow screen faster. The farm gives each idea its own sim, so the agent can check them all at once. It's free with a Buoy account.
 
+<!-- ::tool-film id="sim-farm" -->
+
 ## How it works with Buoy Optimize
 
 Name the slow screen or component. Ask your agent:
