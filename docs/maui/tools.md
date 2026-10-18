@@ -14,6 +14,16 @@ It shows the setup call and what the tool can and can't see.
 - [Events](./tools/events): See web calls and store events in one list.
 - [Console](./tools/console): See app logs with search and level filters.
 - [Clock](./tools/clock): Set a date or jump ahead.
+- [Impersonate](./tools/impersonate): Test your app as another user.
+- [Perf Monitor](./tools/perf-monitor): See how fast your app runs, and compare runs.
+- [Images](./tools/images): See each image your app loads, and find big or broken ones.
+- [Image Overlay](./tools/image-overlay): Lay a design picture over your app to check your work.
+- [Debug Borders](./tools/debug-borders): Draw a box around each view, and tap a tag to see its id.
+- [Time Machine](./tools/time-machine): Save your app's state and put it back later.
+- [Assets](./tools/assets): See every image, font and file your app ships.
+- [Sentry](./tools/sentry): See what your app sends to Sentry, and what it dropped.
+- [Scenarios](./tools/scenarios): Set up a test state with one tap, then undo it.
+- [Notifications](./tools/push-notifications): Send a test notification and see what your app got.
 - [Lifecycle](./tools/lifecycle): Test app states, themes, links, and power values.
 - [Routes](./tools/routes): See your page stack and the route log.
 - [Location](./tools/location): Test a place, route, weak signal, or coarse fix.

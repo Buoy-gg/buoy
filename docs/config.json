@@ -765,6 +765,46 @@
               "to": "maui/tools/clock"
             },
             {
+              "label": "Impersonate",
+              "to": "maui/tools/impersonate"
+            },
+            {
+              "label": "Perf Monitor",
+              "to": "maui/tools/perf-monitor"
+            },
+            {
+              "label": "Images",
+              "to": "maui/tools/images"
+            },
+            {
+              "label": "Image Overlay",
+              "to": "maui/tools/image-overlay"
+            },
+            {
+              "label": "Debug Borders",
+              "to": "maui/tools/debug-borders"
+            },
+            {
+              "label": "Time Machine",
+              "to": "maui/tools/time-machine"
+            },
+            {
+              "label": "Assets",
+              "to": "maui/tools/assets"
+            },
+            {
+              "label": "Sentry",
+              "to": "maui/tools/sentry"
+            },
+            {
+              "label": "Scenarios",
+              "to": "maui/tools/scenarios"
+            },
+            {
+              "label": "Notifications",
+              "to": "maui/tools/push-notifications"
+            },
+            {
               "label": "Lifecycle",
               "to": "maui/tools/lifecycle"
             },
