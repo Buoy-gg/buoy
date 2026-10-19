@@ -51,11 +51,13 @@ builder.UseBuoy(options =>
 
 For Desktop, set `BUOY_TELEMETRY=0` when you launch it.
 
+For [Buoy Web](./buoy-web), set `BUOY_TELEMETRY=0` (or `DO_NOT_TRACK=1`) in its MCP config. Buoy Web sends the same kind of ping with `surface` set to `web-mcp`. It never sends web addresses, page text or which tools ran. Its random id is kept in `~/.buoy/web/install.json`.
+
 Turning it off stops this ping. It also stops the ping from saving its state. It does not stop the account check. Your saved tool data stays. Your Desktop, MCP and Ask Buoy links keep working.
 
 ## What it sends
 
-The SDKs send five fields. Desktop sends `surface` too.
+The SDKs send five fields. Desktop and Buoy Web send `surface` too. Buoy Web sends no `framework`.
 
 | Field | Example | Meaning |
 | --- | --- | --- |
@@ -64,7 +66,7 @@ The SDKs send five fields. Desktop sends `surface` too.
 | `platform` | `ios` | The OS, like `ios`, `android` or `web` |
 | `tier` | `free` | `free` or `pro` once your account is checked. `locked` if no account is checked yet |
 | `framework` | `flutter` | The kind of app: `react-native`, `tv`, `web`, `angular`, `capacitor`, `flutter`, `swift` or `maui` |
-| `surface` | `desktop` | Sent only by Desktop. It says which app sent the ping |
+| `surface` | `desktop` | Sent only by Desktop (`desktop`) and Buoy Web (`web-mcp`). It says which app sent the ping |
 
 The id is made at random. It does not come from your machine or your account. It is saved with the ping's state. A reinstall may not clear it.
 

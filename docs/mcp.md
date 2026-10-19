@@ -9,6 +9,8 @@ Drive your Buoy dev tools from an AI coding assistant. The Buoy MCP server lets 
 
 Works with **React Native and Flutter** on the same broker. Some capabilities below are React Native–only today (called out inline).
 
+Want your AI to use websites in Chrome instead? That's [Buoy Web](./buoy-web). It comes in the same package. Set it up with `npx -y @buoy-gg/mcp@latest init --web`. It's free and needs no account.
+
 <!-- ::mcp-showcase -->
 
 ## Requirements

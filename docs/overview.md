@@ -22,6 +22,7 @@ To install by hand, follow the [Quick Start](./quick-start). It goes from instal
 - **On your desktop.** [Buoy Desktop](./desktop) shows every connected app in one window. It's free with a Buoy account.
 - **In your coding agent.** The [MCP server](./mcp) lets Claude Code, Cursor or Codex read and control the running app. Free has the basic MCP, Buoy Optimize and the [Sim Farm](./tools/sim-farm). Pro adds the full MCP.
 - **In a chat inside the app.** [Ask Buoy](./tools/ask-buoy) (beta) drives the other tools in plain English, on the model endpoint you configure. Requires Pro.
+- **On the web.** [Buoy Web](./buoy-web) lets your AI use Chrome for you, with real clicks. Use Ask Buoy in Chrome's side panel, or your AI coding tool. The coding-tool part is free.
 
 ## Pick your framework
 

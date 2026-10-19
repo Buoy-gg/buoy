@@ -1,7 +1,7 @@
 {
   "name": "@buoy-gg/mcp",
-  "version": "7.0.68",
-  "description": "MCP server exposing supported Buoy inspection and action tools through the device sync protocol. Tool access requires account and Pro setup.",
+  "version": "7.0.69",
+  "description": "MCP server for Buoy. Lets AI coding tools read and drive your running app (free account for the basic tools, Pro for the rest), and use the web in Chrome with Buoy Web (free, no account).",
   "homepage": "https://buoy.gg",
   "keywords": [
     "react-native",

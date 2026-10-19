@@ -323,6 +323,10 @@
           "to": "mcp"
         },
         {
+          "label": "Buoy Web",
+          "to": "buoy-web"
+        },
+        {
           "label": "Buoy Optimize",
           "to": "optimize"
         },

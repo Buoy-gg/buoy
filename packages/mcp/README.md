@@ -22,6 +22,16 @@ Run it from your app's directory. It registers a `buoy` server in your MCP confi
 
 The [MCP guide](https://buoy.gg/buoy/latest/docs/mcp) covers setup, what it captures and its limits. New to Buoy? Start with the [Quick start](https://buoy.gg/buoy/latest/docs/quick-start).
 
+## Buoy Web
+
+Let your AI use the web in its own Chrome tabs. It's free and needs no account.
+
+```bash
+npx -y @buoy-gg/mcp@latest init --web
+```
+
+This adds a `buoy-web` server for all your projects. Then add the Buoy Web Chrome extension and restart your editor. It only uses tabs it opened, and it never types passwords or card numbers. See the [Buoy Web guide](https://buoy.gg/buoy/latest/docs/buoy-web).
+
 
 ## Read screens
 
