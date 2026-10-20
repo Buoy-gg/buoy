@@ -7,6 +7,8 @@ description: "Buoy Web lets an AI use the web for you, with real clicks. Use Ask
 
 Buoy Web lets an AI use the web for you. It clicks and types like a person. It only works in the tabs you give it. Your other tabs are left alone.
 
+<!-- ::buoy-web-race -->
+
 ## Two ways to use it
 
 | | Ask Buoy in Chrome | Your AI coding tool |
