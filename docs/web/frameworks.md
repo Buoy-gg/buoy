@@ -21,6 +21,13 @@ Run `ng add @buoy-gg/angular`, then `npx buoy login`.
 Start your app with `ng serve`.
 The guide covers NgRx, NGXS, QA, and custom builders.
 
+## Solid (Beta)
+
+Use the [Solid guide](./solid).
+Add `buoy()` to your Vite plugins and `<Buoy />` to your router's root.
+Then run `npx buoy login` and start your app.
+The guide covers Solid Router, Solid Query and Solid stores.
+
 ## Vite + React
 
 The `buoy()` plugin does both for you:
@@ -273,6 +280,11 @@ Here is what each one does:
 - **Push notifications** saves what reaches your `@capacitor/push-notifications` and `@capacitor/local-notifications` listeners. Buoy adds no push listener of its own. So it can't take the tap that opened your app.
 
 Buoy only sees calls that go to the phone's own code. A plugin that runs only in JavaScript won't show up.
+
+These tools work in a plain browser too, with no Capacitor:
+
+- **Lifecycle** can send the page to the background. Then the page is hidden, so `visibilitychange` fires. The app switcher fires `blur`, then `focus`. A deep link like `myapp://offer?id=1` opens `/offer?id=1` in your router. A link to another site can't open. Dark mode works too.
+- **Permissions** answers `navigator.permissions.query`, `navigator.geolocation`, `getUserMedia` and `Notification`. A browser has only three states: ask, yes and no. So "blocked" reads as no, and "approximate" reads as yes.
 
 Add `@capacitor/app` and `@capacitor/device` if you can. Buoy reads your app's bundle id and the simulator from them. MCP needs those to send real events to a simulator, and Desktop needs them to send a test push.
 

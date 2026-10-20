@@ -186,6 +186,21 @@ const cleanup = registerBrowserRouter({
 
 Register the adapter for the router's lifetime and call `cleanup` when it goes away. Without an adapter, Buoy changes same-origin browser history directly. History capture starts when Buoy mounts, because browsers don't expose the history stack from before that.
 
+Expo Router on the web needs this too. Buoy can't find Expo Router by itself in a browser. Without it, Go and MCP `navigate` can hang or reload the page. Pass Expo Router's `router` in your web host, in a `.web.tsx` file:
+
+```tsx
+import { useEffect } from 'react';
+import { router } from 'expo-router';
+import { registerBrowserRouter } from '@buoy-gg/shared-ui/web/utils';
+
+useEffect(() => registerBrowserRouter({
+  push: path => router.push(path),
+  replace: path => router.replace(path),
+  back: () => router.back(),
+  canGoBack: () => router.canGoBack(),
+}), []);
+```
+
 ## Assets that haven't loaded
 
 The Vite plugin builds an inventory without downloading each asset in the browser:

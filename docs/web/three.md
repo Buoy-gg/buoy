@@ -236,8 +236,7 @@ Images sees DOM images, not drawings in a canvas.
 - Bare-canvas full screen hides Buoy. Use a wrapper.
 - Camera has no web build. Native stores need phone tools.
 - Browser Push capture is not covered by this beta.
-- Permissions has no plain browser adapter. Phone plugins are separate.
-- Lifecycle does not change page visibility in these web tests.
+- In a plain browser, Permissions has three states: ask, yes and no.
 - TV focus tools read DOM focus, not 3D nodes.
 - A live Desktop check is still open for Scene.
 
