@@ -8,6 +8,9 @@ description: "Full install guide for Buoy in a React web app: packages, the earl
 For Angular, use the [Angular guide](./angular).
 It has its own [AI install prompt](./angular#start-here).
 
+For Solid, use the [Solid guide](./solid).
+It has its own [AI install prompt](./solid#start-here).
+
 This is the complete version of [Quick Start](./quick-start). The browser uses the same tool panels, stores, filters, actions, snapshot providers and sync protocol as React Native. React Native Web renders the panels, and small browser modules handle storage, routing, DOM inspection, the clipboard, images and performance timing. Settings, account status and modal persistence are shared too.
 
 For 3D apps, use the [three.js (Beta) setup](./three).

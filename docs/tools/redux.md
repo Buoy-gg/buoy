@@ -223,3 +223,9 @@ Use DI to link an Angular store.
 NgRx and NGXS each have their own bridge.
 Buoy leaves the Redux browser global alone.
 See the [setup steps](../web/angular).
+
+## Solid
+
+Redux Toolkit works in Solid.
+Load `@buoy-gg/redux/web` before you make the store.
+See the [setup steps](../web/solid).

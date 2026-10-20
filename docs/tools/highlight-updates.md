@@ -97,3 +97,10 @@ Touch capture requires a development build. It excludes Buoy controls and secure
 Draw boxes and count views in Angular.
 Use a stable build: Angular 20, 21, or 22.
 See the [setup steps](../web/angular).
+
+### Solid
+
+Draw boxes around the parts that changed in Solid.
+It names the nearest component you wrote.
+It works in dev builds only.
+See the [setup steps](../web/solid#highlight).

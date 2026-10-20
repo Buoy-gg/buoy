@@ -65,7 +65,7 @@ The SDKs send five fields. Desktop and Buoy Web send `surface` too. Buoy Web sen
 | `version` | `7.0.22` | The Buoy version you have |
 | `platform` | `ios` | The OS, like `ios`, `android` or `web` |
 | `tier` | `free` | `free` or `pro` once your account is checked. `locked` if no account is checked yet |
-| `framework` | `flutter` | The kind of app: `react-native`, `tv`, `web`, `angular`, `capacitor`, `flutter`, `swift` or `maui` |
+| `framework` | `flutter` | The kind of app: `react-native`, `tv`, `web`, `angular`, `solid`, `capacitor`, `flutter`, `swift` or `maui` |
 | `surface` | `desktop` | Sent only by Desktop (`desktop`) and Buoy Web (`web-mcp`). It says which app sent the ping |
 
 The id is made at random. It does not come from your machine or your account. It is saved with the ping's state. A reinstall may not clear it.

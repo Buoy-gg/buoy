@@ -99,3 +99,10 @@ Pass the app's client to Buoy. It reads the data.
 Add `@tanstack/react-query`.
 Match its version to `@tanstack/angular-query-experimental`.
 See the [setup steps](../web/angular).
+
+## Solid
+
+Add `@tanstack/react-query` too.
+Match its version to `@tanstack/solid-query`.
+`<Buoy />` finds your client from `QueryClientProvider`.
+See the [setup steps](../web/solid#solid-query).

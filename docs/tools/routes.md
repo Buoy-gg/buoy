@@ -94,3 +94,10 @@ See the app's routes in the log.
 Go asks for params. It uses Angular Router.
 The sitemap gets real app paths.
 See the [setup steps](../web/angular).
+
+## Solid
+
+Inside `<Router>`, the log shows route names and params.
+Go uses Solid Router.
+Pass `routes` to `<Buoy />` to list every page.
+See the [setup steps](../web/solid#routes).
