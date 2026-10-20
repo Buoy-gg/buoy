@@ -92,7 +92,7 @@ For accurate duplicate pushes and pops, pass `stack:` to `BuoyRoutes.configure`.
 
 `BuoyScenarios.define(...)` registers a scenario from app code. Scenarios saved remotely, for example by an AI agent over MCP, arrive as drafts that you review and accept before running. The runner checks that the needed actions and variables are available before the first step, records the effects it applies, and supports explicit undo recipes. Library entries and active effects survive a restart.
 
-**Record a flow** captures supported taps and text in your app, adds waits for observed navigation, and opens a review before saving. Buoy's own controls and secure text fields are excluded. Scroll gestures, slider replay, long-press replay and state-store shortcuts are not supported.
+**Record a flow** captures supported taps and text in your app, adds waits for observed navigation, and opens a review before saving. Buoy's own controls and secure text fields are excluded. It also records long presses, switches and sliders. Scroll gestures and state-store shortcuts are not supported.
 
 Running and recording scenarios only work in development builds; see [Release Builds](./release-builds#development-only-features).
 
@@ -102,17 +102,17 @@ Time Machine captures UserDefaults and registered MMKV instances and keeps their
 
 Register additional state with `BuoyTimeMachine.registerProvider(BuoySnapshotProvider(...))`. A provider returns keyed `BuoySnapshotItem` values and implements `restoreItem`; a nil payload removes the item. Payloads must be JSON compatible.
 
-In-process reload, fresh-install baselines and wipe-all are not available. Keychain is excluded from the default provider.
+Time Machine can save the Keychain keys you set up in Storage. It skips keys that need a face or fingerprint check. For reload restores, fresh-install baselines and wipe-all, set a reload hook with `BuoyTimeMachine.setReloadHandler(...)`.
 
 ## Events
 
-Events combines captured Network, UserDefaults and MMKV, and Routes activity in one timeline, with source filters, search, pause, clear, copy and JSON detail. Exports support JSON, Markdown, plain text and Mermaid. React store and render events are not available.
+Events combines captured Network, UserDefaults and MMKV, and Routes activity in one timeline, with source filters, search, pause, clear, copy and JSON detail. Exports support JSON, Markdown, plain text and Mermaid. Highlight's draws show up as a Render source. It starts off, like React Native. React store events are not there.
 
 ## Assets
 
-Assets scans loose resources in your app bundle, measures their size, finds duplicate content and saves a comparison baseline. Register other resource bundles with `BuoyAssets.registerBundle(...)`, and call `BuoyAssets.markLoaded(url)` after your app loads a resource.
+Assets scans loose resources in your app bundle, measures their size, finds duplicate content and saves a comparison baseline. Register other resource bundles with `BuoyAssets.registerBundle(...)`, `UIImage(named:)` marks its files as loaded on its own. SwiftUI's `Image("name")` does not go through UIImage, so call `BuoyAssets.markLoaded(url)` after those loads.
 
-Compiled `Assets.car` files appear as a single record each, and loaded status is what your app reports; a resource never marked as loaded is not necessarily unused. Read `scanStatus.coverage` and `warnings` before acting on the inventory.
+Compiled `Assets.car` files appear as a single record each, and loaded status comes from `UIImage(named:)` and your `markLoaded` calls; a resource never marked as loaded is not necessarily unused. Read `scanStatus.coverage` and `warnings` before acting on the inventory.
 
 ## MCP
 

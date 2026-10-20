@@ -38,8 +38,16 @@ One `import Buoy` brings in every tool:
 | [Time Machine](./tools#time-machine) | Snapshots and live restore of UserDefaults and MMKV |
 | [Events](./tools#events) | One timeline of network, storage and route activity |
 | [Assets](./tools#assets) | Bundle resource sizes, duplicates and baselines |
+| [Clock](../tools/clock) | Jump, freeze or speed up time read through `BuoyClock.now()` and Buoy's timers |
+| [Lifecycle](../tools/lifecycle) | What the app does when people leave and come back |
+| [Location](../tools/location) | Fake places, routes and geofences for `BuoyLocationProvider` |
+| [Permissions](../tools/permissions) | Denied, blocked, limited and not-asked states for `BuoyPermissions` checks |
+| [Bench](../tools/perf-monitor) | A floating speed HUD, plus benchmarks you can record and compare |
+| [Highlight](../tools/highlight-updates) | Redraws of views marked with `.buoyTrackRenders` |
+| [Debug Borders](../tools/debug-borders) | Outlines around views, to check layout |
+| [Ask Buoy](../tools/ask-buoy) | Chat about the app in plain English and use its tools |
 
-Tools that depend on JavaScript stores or React rendering, such as React Query, Redux or Highlight Updates, are not part of the Swift SDK.
+Tools for JavaScript stores, such as React Query, Redux, Zustand and Jotai, are not part of the Swift SDK. Neither are JS Top and Three. Sentry is not on Swift yet.
 
 ## Requirements
 

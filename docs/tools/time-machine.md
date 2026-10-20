@@ -103,6 +103,6 @@ The Swift tool captures typed UserDefaults, registered MMKV instances, and app-p
 
 Open the floating restore bar from the header to capture, select, or restore a point while using the app. An explicit selection persists; otherwise the bar chooses the most recently restored point, then the newest capture. Safety points are excluded from automatic selection. Undo is available for ten seconds after a restore that created a safety point.
 
-Native MCP exposes 11 actions. Keychain snapshots, in-process reload, fresh-install baselines, and wipe-all are unavailable. The native preview still lacks RN's full grouping and filtering workflow. Inspect the connected device's capabilities and provider details before restoring.
+Native MCP exposes 13 actions. It can save the Keychain keys you set up in Storage. Reload restores, fresh-install baselines and wipe-all work once the app sets a reload hook. The native preview still lacks RN's full grouping and filtering workflow. Inspect the connected device's capabilities and provider details before restoring.
 
 For Swift setup and what the native version covers, see the [Swift tools guide](../swift/tools#time-machine).
