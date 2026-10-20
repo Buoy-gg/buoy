@@ -28,6 +28,7 @@ To install by hand, follow the [Quick Start](./quick-start). It goes from instal
 
 - **[React Native and Expo](./quick-start)** has the full tool set.
 - **[Flutter](./flutter/overview)** is in beta. It runs in debug builds only, and tool coverage differs from React Native.
+- **[Web](./web/overview)** is in beta for React, [Angular](./web/angular) and [Solid](./web/solid).
 - **[TV](./tv/overview)** is in beta for Apple TV and Android TV. Nothing renders on the TV screen; the desktop dashboard is the interface.
 
 ## What you can do

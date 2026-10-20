@@ -9,8 +9,8 @@ description: "Meet Buoy on the web (beta): the same floating menu, tool panels a
 For Angular, use the [Angular guide](./angular).
 It has its own [AI install prompt](./angular#start-here).
 
-For Angular, use the [Angular guide](./angular).
-It has its own [AI install prompt](./angular#start-here).
+For Solid, use the [Solid guide](./solid).
+It has its own [AI install prompt](./solid#start-here).
 
 For 3D apps, use the [three.js (Beta) guide](./three).
 
