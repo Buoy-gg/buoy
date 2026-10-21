@@ -116,6 +116,23 @@
           ]
         },
         {
+          "label": "android",
+          "children": [
+            {
+              "label": "Overview",
+              "to": "android/overview"
+            },
+            {
+              "label": "Quick Start",
+              "to": "android/quick-start"
+            },
+            {
+              "label": "Installation",
+              "to": "android/installation"
+            }
+          ]
+        },
+        {
           "label": "maui",
           "children": [
             {
@@ -276,6 +293,19 @@
             {
               "label": "Release Builds",
               "to": "swift/release-builds"
+            }
+          ]
+        },
+        {
+          "label": "android",
+          "children": [
+            {
+              "label": "Physical Devices",
+              "to": "android/devices"
+            },
+            {
+              "label": "Release Builds",
+              "to": "android/release-builds"
             }
           ]
         },
@@ -814,6 +844,95 @@
             {
               "label": "Assets",
               "to": "swift/tools#assets"
+            }
+          ]
+        },
+        {
+          "label": "android",
+          "children": [
+            {
+              "label": "Ask Buoy",
+              "to": "android/tools#ask-buoy"
+            },
+            {
+              "label": "Network Monitor",
+              "to": "android/tools#network"
+            },
+            {
+              "label": "Console",
+              "to": "android/tools#console"
+            },
+            {
+              "label": "Storage Explorer",
+              "to": "android/tools#storage"
+            },
+            {
+              "label": "Environment Inspector",
+              "to": "android/tools#env"
+            },
+            {
+              "label": "Impersonate Tool",
+              "to": "android/tools#impersonate"
+            },
+            {
+              "label": "Image Overlay",
+              "to": "android/tools#image-overlay"
+            },
+            {
+              "label": "Images",
+              "to": "android/tools#images"
+            },
+            {
+              "label": "Push Notifications",
+              "to": "android/tools#notifications"
+            },
+            {
+              "label": "Route Inspector",
+              "to": "android/tools#routes"
+            },
+            {
+              "label": "Scenarios",
+              "to": "android/tools#scenarios"
+            },
+            {
+              "label": "Time Machine",
+              "to": "android/tools#time-machine"
+            },
+            {
+              "label": "Events Timeline",
+              "to": "android/tools#events"
+            },
+            {
+              "label": "Assets",
+              "to": "android/tools#assets"
+            },
+            {
+              "label": "Clock",
+              "to": "android/tools#clock"
+            },
+            {
+              "label": "Lifecycle",
+              "to": "android/tools#lifecycle"
+            },
+            {
+              "label": "Location",
+              "to": "android/tools#location"
+            },
+            {
+              "label": "Permissions",
+              "to": "android/tools#permissions"
+            },
+            {
+              "label": "Bench",
+              "to": "android/tools#bench"
+            },
+            {
+              "label": "Highlight Updates",
+              "to": "android/tools#highlight"
+            },
+            {
+              "label": "Debug Borders",
+              "to": "android/tools#debug-borders"
             }
           ]
         },

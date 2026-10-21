@@ -32,6 +32,10 @@ It adds a little code that keeps a few calls working the normal way:
 
 To tell "blocked" from "never asked", the no-op keeps a small `gg.buoy.permissions` preferences file.
 
+The real SDK adds the `INTERNET` and `POST_NOTIFICATIONS` permissions. The no-op adds none.
+If your app posts its own notifications, put `POST_NOTIFICATIONS` in your own manifest.
+Otherwise it works in debug and fails in release.
+
 ## Code that only debug builds have
 
 The no-op only covers setup calls.

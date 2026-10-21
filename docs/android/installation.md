@@ -7,7 +7,7 @@ description: "Install Buoy for Android with Gradle, add your account key, and se
 
 ## What you need
 
-- An app with `minSdk` 24 or higher and `compileSdk` 35 or higher.
+- An app with `minSdk` 23 or higher and `compileSdk` 35 or higher. Debug builds need `minSdk` 24.
 - Kotlin 2.0 or newer, if the app uses Kotlin.
 - Android Gradle Plugin 8.8 or newer.
 - A Free or Pro Buoy account key. Get one in your [Buoy account](https://buoy.gg).
@@ -18,6 +18,23 @@ It also adds two permissions to builds that use it.
 `INTERNET` lets it reach Desktop and check your account.
 `POST_NOTIFICATIONS` lets the Notifications tool send test alerts.
 The no-op adds no permissions.
+
+Is your app's `minSdk` 23?
+Then raise it to 24 in each build that uses Buoy.
+This keeps release at 23:
+
+```kotlin
+androidComponents {
+    beforeVariants(selector().all()) { if (it.buildType != "release") it.minSdk = 24 }
+}
+```
+
+In a Groovy `build.gradle`, the same lines work as they are.
+Your release build can stay at 23.
+The no-op works on 23.
+Java code on 23 can't use the `Supplier` form of `BuoyBench.configure`.
+That type needs API 24.
+Use the other form, or turn on core library desugaring.
 
 ## Add the package
 
@@ -38,6 +55,32 @@ See [Release Builds](./release-builds).
 
 While Buoy is 0.x, a new minor version can break things.
 Pin the version you test with.
+
+### If your build checks licenses
+
+Some apps check the license of every package they use.
+One common tool for this is Licensee.
+Buoy is not open source, so its license is a link to our terms.
+Add that link to your allowed list:
+
+```kotlin
+licensee {
+    allowUrl("https://buoy.gg/terms")
+}
+```
+
+### If your build checks package hashes
+
+Some apps list a hash for every package they trust.
+Gradle calls this dependency verification.
+Add Buoy's packages to that list when you add Buoy.
+
+### If your app ships its own copy of AndroidX
+
+Buoy uses AndroidX.
+Some apps bundle their own copy of AndroidX parts under the same names.
+Then the build fails with "Duplicate class androidx...".
+Leave out your copy in debug builds, where Buoy runs.
 
 ## Account key
 

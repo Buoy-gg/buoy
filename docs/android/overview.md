@@ -53,7 +53,7 @@ Sentry is not on Android yet.
 
 ## What you need
 
-- An app with `minSdk` 24 or higher and `compileSdk` 35 or higher.
+- An app with `minSdk` 23 or higher and `compileSdk` 35 or higher. Debug builds need `minSdk` 24.
 - Kotlin 2.0 or newer, if the app uses Kotlin.
 - A Free or Pro Buoy account key.
 - A debug build for the first setup.
