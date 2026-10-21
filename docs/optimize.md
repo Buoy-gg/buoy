@@ -33,7 +33,7 @@ On a Mac, the agent can use the [Sim Farm](./tools/sim-farm). Ask for it in your
 Use buoy optimize and the sim farm on our slow feed screen.
 ```
 
-The farm runs many slim iOS sims at once. Each idea gets its own sim. The agent opens each one to check how it looks. Each app acts like a real iPhone SE, so an idea that uses too much memory shows up early.
+The farm runs many slim iOS sims or Android phones at once. Each idea gets its own sim. The agent opens each one to check how it looks. Each app acts like a real phone (an iPhone SE, or a 3 GB Android phone), so an idea that uses too much memory shows up early.
 
 Speed is timed on one quiet sim, since all sims share the Mac's CPU. The farm checks if the Mac was too busy during a run. If it was, the agent runs it again.
 
@@ -65,7 +65,7 @@ The winning version stopped recomputing every light on the JavaScript thread. Th
 - [Bench](./tools/perf-monitor): the benchmark runner Buoy Optimize drives
 - [AI / MCP Server](./mcp): set up the server and the skill
 - [Render Highlighter](./tools/highlight-updates): see which components re-render
-- [Sim Farm](./tools/sim-farm): many iOS sims on one Mac
+- [Sim Farm](./tools/sim-farm): many iOS sims and Android phones on one Mac
 
 ## FAQ
 

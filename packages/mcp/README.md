@@ -54,13 +54,13 @@ Pass `real: true` to make each tap a real touch.
 
 ## Many sims at once
 
-The `sim_farm_*` tools run many slim iOS sims on one Mac. They make Buoy Optimize faster. Ask your agent:
+The `sim_farm_*` tools run many slim iOS sims and Android phones on one Mac. They make Buoy Optimize faster. Ask your agent:
 
 ```text
 Use buoy optimize and the sim farm on our slow feed screen.
 ```
 
-The agent finds as many ideas as it can and tests them all. Each idea gets its own sim. The agent checks how each one looks and how much memory it uses. Each app acts like a real iPhone SE, so an idea that uses too much memory is out. Then the best ideas are timed on one quiet sim. You can run the farm yourself too:
+The agent finds as many ideas as it can and tests them all. Each idea gets its own sim. The agent checks how each one looks and how much memory it uses. Each app acts like a real phone (an iPhone SE, or a 3 GB Android phone), so an idea that uses too much memory is out. Then the best ideas are timed on one quiet sim. You can run the farm yourself too:
 
 ```bash
 npx -y @buoy-gg/mcp@latest farm status
