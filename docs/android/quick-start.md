@@ -10,8 +10,20 @@ Then it checks that a web call shows up.
 
 ## 1. Add the package
 
-Buoy is on Maven Central.
-Add it to your app module's `build.gradle.kts`:
+Buoy has its own Maven server at `maven.buoy.gg`.
+Add it to the repositories in `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://maven.buoy.gg") { content { includeGroup("gg.buoy") } }
+    }
+}
+```
+
+Then add Buoy to your app module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {

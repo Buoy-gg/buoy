@@ -38,8 +38,32 @@ Use the other form, or turn on core library desugaring.
 
 ## Add the package
 
-Buoy is on Maven Central.
-Make sure `mavenCentral()` is in your repositories.
+Buoy has its own Maven server at `maven.buoy.gg`.
+Add it to your repositories in `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://maven.buoy.gg") { content { includeGroup("gg.buoy") } }
+    }
+}
+```
+
+In a Groovy `settings.gradle`, use this line instead:
+
+```groovy
+maven { url 'https://maven.buoy.gg'; content { includeGroup 'gg.buoy' } }
+```
+
+The `includeGroup` part means Gradle asks our server for Buoy and nothing else.
+Does your app list repositories in its root `build.gradle` instead?
+Then add the same line there.
+
+Version 0.1.0 is also on Maven Central.
+New versions come out on `maven.buoy.gg` only.
+
 Then add Buoy to your app module:
 
 ```kotlin
