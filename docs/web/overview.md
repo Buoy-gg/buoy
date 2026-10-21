@@ -12,6 +12,9 @@ It has its own [AI install prompt](./angular#start-here).
 For Solid, use the [Solid guide](./solid).
 It has its own [AI install prompt](./solid#start-here).
 
+For Vue or Nuxt, use the [Vue guide](./vue).
+It has its own [AI install prompt](./vue#start-here).
+
 For 3D apps, use the [three.js (Beta) guide](./three).
 
 Use the [phone app guide](../capacitor) for Capacitor / Ionic (Beta).

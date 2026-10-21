@@ -26,11 +26,7 @@ Copy this prompt into Claude Code, Cursor or Codex. Your AI runs the setup and t
 
 ## Get the extension
 
-The extension is waiting for review in the Chrome Web Store. Until then, use the test build:
-
-1. Download [buoy-web-extension-0.1.0.zip](https://buoy.gg/downloads/buoy-web-extension-0.1.0.zip) and unzip it.
-2. Go to `chrome://extensions` and turn on **Developer mode**.
-3. Click **Load unpacked** and pick the `extension` folder.
+Get Buoy Web from the [Chrome Web Store](https://chromewebstore.google.com/detail/buoy-web/cfolfiajhlenfifknbomdogooagnlamf). Click **Add to Chrome**.
 
 ## Ask Buoy in Chrome
 

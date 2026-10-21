@@ -17,6 +17,7 @@ Buoy puts a floating menu in your app. Use it to check web calls, storage and qu
 Flutter has its own [setup for debug builds](https://buoy.gg/buoy/latest/docs/flutter/quick-start).
 [Capacitor / Ionic (Beta)](https://buoy.gg/buoy/latest/docs/capacitor) uses the web tools on iOS and Android.
 [Solid (Beta)](https://buoy.gg/buoy/latest/docs/web/solid) works in Solid 1.9 apps built with Vite.
+[Vue and Nuxt (Beta)](https://buoy.gg/buoy/latest/docs/web/vue) works in Vue 3.3 and up built with Vite, and in Nuxt 4.
 [Three.js (Beta)](https://buoy.gg/buoy/latest/docs/web/three) works with R3F and plain apps.
 Use Scene to see and edit 3D objects.
 

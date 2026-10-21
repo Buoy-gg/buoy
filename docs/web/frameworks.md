@@ -28,6 +28,14 @@ Add `buoy()` to your Vite plugins and `<Buoy />` to your router's root.
 Then run `npx buoy login` and start your app.
 The guide covers Solid Router, Solid Query and Solid stores.
 
+## Vue and Nuxt (Beta)
+
+Use the [Vue guide](./vue).
+Add `buoy()` to your Vite plugins and `app.use(buoy)` to your app.
+In Nuxt, add `'@buoy-gg/vue/nuxt'` to `modules` instead.
+Then run `npx buoy login` and start your app.
+The guide covers Vue Router, Pinia and Vue Query.
+
 ## Vite + React
 
 The `buoy()` plugin does both for you:

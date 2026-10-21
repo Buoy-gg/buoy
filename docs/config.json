@@ -89,6 +89,10 @@
               "to": "web/solid"
             },
             {
+              "label": "Vue and Nuxt (Beta)",
+              "to": "web/vue"
+            },
+            {
               "label": "Three.js (Beta)",
               "to": "web/three"
             }
@@ -168,6 +172,19 @@
             {
               "label": "AI install prompt",
               "to": "web/solid#start-here"
+            }
+          ]
+        },
+        {
+          "label": "vue",
+          "children": [
+            {
+              "label": "Vue and Nuxt (Beta)",
+              "to": "web/vue"
+            },
+            {
+              "label": "AI install prompt",
+              "to": "web/vue#start-here"
             }
           ]
         }
@@ -331,6 +348,35 @@
             {
               "label": "QA builds",
               "to": "web/solid#qa-builds"
+            },
+            {
+              "label": "Sign in with Buoy",
+              "to": "sign-in"
+            },
+            {
+              "label": "Telemetry",
+              "to": "telemetry"
+            }
+          ]
+        },
+        {
+          "label": "vue",
+          "children": [
+            {
+              "label": "Routes",
+              "to": "web/vue#routes"
+            },
+            {
+              "label": "Pinia",
+              "to": "web/vue#pinia"
+            },
+            {
+              "label": "Nuxt",
+              "to": "web/vue#nuxt"
+            },
+            {
+              "label": "QA builds",
+              "to": "web/vue#qa-builds"
             },
             {
               "label": "Sign in with Buoy",
@@ -1084,6 +1130,109 @@
         },
         {
           "label": "solid",
+          "children": [
+            {
+              "label": "Ask Buoy",
+              "to": "tools/ask-buoy",
+              "subpages": [
+                {
+                  "label": "Teach it your app",
+                  "to": "tools/ask-buoy/teach-it-your-app"
+                },
+                {
+                  "label": "In the chat",
+                  "to": "tools/ask-buoy/in-the-chat"
+                }
+              ]
+            },
+            {
+              "label": "Environment Inspector",
+              "to": "tools/env"
+            },
+            {
+              "label": "Events Timeline",
+              "to": "tools/events"
+            },
+            {
+              "label": "Console",
+              "to": "tools/console"
+            },
+            {
+              "label": "Network Monitor",
+              "to": "tools/network"
+            },
+            {
+              "label": "Storage Explorer",
+              "to": "tools/storage"
+            },
+            {
+              "label": "Time Machine",
+              "to": "tools/time-machine"
+            },
+            {
+              "label": "Clock",
+              "to": "tools/clock"
+            },
+            {
+              "label": "Lifecycle",
+              "to": "tools/lifecycle"
+            },
+            {
+              "label": "Location",
+              "to": "tools/location"
+            },
+            {
+              "label": "Permissions",
+              "to": "tools/permissions"
+            },
+            {
+              "label": "Route Inspector",
+              "to": "tools/routes"
+            },
+            {
+              "label": "Highlight Updates",
+              "to": "tools/highlight-updates"
+            },
+            {
+              "label": "Bench",
+              "to": "tools/perf-monitor"
+            },
+            {
+              "label": "JS Top",
+              "to": "tools/js-top"
+            },
+            {
+              "label": "React Query DevTools",
+              "to": "tools/react-query"
+            },
+            {
+              "label": "Redux DevTools",
+              "to": "tools/redux"
+            },
+            {
+              "label": "Zustand DevTools",
+              "to": "tools/zustand"
+            },
+            {
+              "label": "Jotai DevTools",
+              "to": "tools/jotai"
+            },
+            {
+              "label": "Assets",
+              "to": "tools/assets"
+            },
+            {
+              "label": "Impersonate Tool",
+              "to": "tools/impersonate"
+            },
+            {
+              "label": "Image Overlay",
+              "to": "tools/image-overlay"
+            }
+          ]
+        },
+        {
+          "label": "vue",
           "children": [
             {
               "label": "Ask Buoy",
