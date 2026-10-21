@@ -84,7 +84,9 @@ Forward the APNs registration callback to `BuoyNotifications.observeDeviceToken(
 
 ## Routes
 
-Supply route patterns and navigation callbacks with `BuoyRoutes.configure`, and mark screens with `.buoyRoute(...)`.
+A UIKit app gets Routes with no setup. Buoy reads the screens you can see from your view controllers. That covers the selected tab, the navigation stack and anything shown on top. Each screen is named after its class, so `ArticleViewController` reads as `/article`. Its title comes along as a `title` param. Going back and going to the first screen work. Opening a path like `/user/42` needs your own setup, below. To turn this off, set `BuoyRoutes.trackUIKitScreens = false` before `Buoy.start`.
+
+For your own route names, or a SwiftUI app, supply route patterns and navigation callbacks with `BuoyRoutes.configure`, and mark screens with `.buoyRoute(...)`. Once you do either, Buoy stops reading your view controllers.
 
 For accurate duplicate pushes and pops, pass `stack:` to `BuoyRoutes.configure`. Return `[RouteStackItem]` from root to top, with a stable, unique `key` for each entry, and call `BuoyRoutes.refreshStack()` whenever that navigation state changes. Tracking screen appearance alone cannot reliably tell apart two stack entries with the same path.
 
