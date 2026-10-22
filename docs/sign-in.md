@@ -123,12 +123,17 @@ Business teams are run from the [Team page](https://buoy.gg/dashboard/team). A t
 
 - invite people by email, up to the seats you bought;
 - give each person a role, like dev or qa;
+- pick which Buoy tools each role sees;
 - remove people, which frees their seat;
 - list the team's live sites, which every member then uses;
 - list web calls to hide for the whole team;
 - list React Query queries to hide, or the only ones to show.
 
 Team lists add to each person's own lists. In the app, team items show a TEAM badge.
+
+A role can see all tools, or just the tools on its list. A hidden tool only leaves the menu. It is not locked. Your app's own tools always show. When Buoy adds a new tool, it starts off for a role with a list.
+
+People get a tool change at their next refresh, within 12 hours. To get it now, sign out and sign back in.
 
 ## Keys still work
 
