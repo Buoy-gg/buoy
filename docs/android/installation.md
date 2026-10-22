@@ -68,8 +68,8 @@ Then add Buoy to your app module:
 
 ```kotlin
 dependencies {
-    debugImplementation("gg.buoy:buoy-android:0.1.0")
-    releaseImplementation("gg.buoy:buoy-android-noop:0.1.0")
+    debugImplementation("gg.buoy:buoy-android:0.1.1")
+    releaseImplementation("gg.buoy:buoy-android-noop:0.1.1")
 }
 ```
 
