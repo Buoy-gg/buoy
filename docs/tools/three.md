@@ -11,9 +11,9 @@ See the tree of objects in your 3D app. Pick a node to draw a box around it. Hid
 
 ## Set it up
 
-Three.js support is in Beta. Use the `beta` tag once it ships.
-Keep all Buoy packages on the same beta release.
-Install `@buoy-gg/three@beta` with `three` in your web app. Add its module to Buoy's `modules` map.
+Three.js support is in Beta.
+Keep all Buoy packages on the same version.
+Install `@buoy-gg/three` with `three` in your web app. Add its module to Buoy's `modules` map.
 
 ```tsx
 import * as threeTools from '@buoy-gg/three/web';

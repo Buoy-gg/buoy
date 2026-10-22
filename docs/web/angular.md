@@ -33,7 +33,7 @@ Keep all Buoy packages on the same release.
 ### 2. Sign in
 
 ```sh
-npx buoy login
+npx --package=@buoy-gg/core buoy login
 ```
 
 Sign in with a Free or Pro account.

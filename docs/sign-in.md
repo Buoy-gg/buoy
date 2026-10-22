@@ -1,3 +1,8 @@
+---
+title: Sign in with Buoy
+id: sign-in
+---
+
 # Sign in with Buoy
 
 <!-- ::tool-film id="sign-in" -->

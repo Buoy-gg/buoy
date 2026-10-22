@@ -35,7 +35,7 @@ Make its package entry Debug-only as shown in [Release builds](./release-builds)
 Run this in the same app folder.
 
 ```sh
-npx buoy login
+npx --package=@buoy-gg/core buoy login
 ```
 
 Sign in with your Free or Pro account.

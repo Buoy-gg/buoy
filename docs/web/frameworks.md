@@ -17,7 +17,7 @@ Where each one goes depends on the framework. Each setup below comes from a test
 ## Angular (Beta)
 
 Use the [Angular guide](./angular) and its [AI install prompt](./angular#start-here).
-Run `ng add @buoy-gg/angular`, then `npx buoy login`.
+Run `ng add @buoy-gg/angular`, then `npx --package=@buoy-gg/core buoy login`.
 Start your app with `ng serve`.
 The guide covers NgRx, NGXS, QA, and custom builders.
 
@@ -25,7 +25,7 @@ The guide covers NgRx, NGXS, QA, and custom builders.
 
 Use the [Solid guide](./solid).
 Add `buoy()` to your Vite plugins and `<Buoy />` to your router's root.
-Then run `npx buoy login` and start your app.
+Then run `npx --package=@buoy-gg/core buoy login` and start your app.
 The guide covers Solid Router, Solid Query and Solid stores.
 
 ## Vue and Nuxt (Beta)
@@ -33,7 +33,7 @@ The guide covers Solid Router, Solid Query and Solid stores.
 Use the [Vue guide](./vue).
 Add `buoy()` to your Vite plugins and `app.use(buoy)` to your app.
 In Nuxt, add `'@buoy-gg/vue/nuxt'` to `modules` instead.
-Then run `npx buoy login` and start your app.
+Then run `npx --package=@buoy-gg/core buoy login` and start your app.
 The guide covers Vue Router, Pinia and Vue Query.
 
 ## Vite + React

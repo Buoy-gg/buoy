@@ -1,3 +1,8 @@
+---
+title: Push Notifications
+id: tools-push-notifications
+---
+
 # Push Notifications
 
 Send APNs payloads to an installed iOS simulator app from Buoy Desktop. Inspect notification callbacks, presentation decisions, responses and device tokens from an Expo app with capture installed.

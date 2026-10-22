@@ -47,7 +47,7 @@ Guard that entry with the [release guide](./release-builds).
 Run this beside the app's `.csproj`.
 
 ```sh
-npx buoy login
+npx --package=@buoy-gg/core buoy login
 ```
 
 A Free key goes in `.env.development.local`.

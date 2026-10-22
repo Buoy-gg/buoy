@@ -28,7 +28,7 @@ function App() {
 
 Pass in the dev token that `npx --package=@buoy-gg/core buoy login` writes, or your account key. Then install the tools you need. Keep `FloatingDevTools` inside the providers those tools use. See [Sign in with Buoy](./sign-in).
 
-Without a verified account, the launcher shows **Sign in**. Open it to copy `npx buoy login`, run the command in your project, then reload your app. **Check connection** retries verification and shows feedback if your account is still disconnected. The sign-in card and launcher share their design across native and web.
+Without a verified account, the launcher shows **Sign in**. Open it to copy `npx --package=@buoy-gg/core buoy login`, run the command in your project, then reload your app. **Check connection** retries verification and shows feedback if your account is still disconnected. The sign-in card and launcher share their design across native and web.
 
 ## Environment Badge
 

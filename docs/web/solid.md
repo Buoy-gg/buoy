@@ -85,7 +85,7 @@ Then Routes shows plain URLs only.
 ### 4. Sign in
 
 ```sh
-npx buoy login
+npx --package=@buoy-gg/core buoy login
 ```
 
 Sign in with a Free or Pro account.

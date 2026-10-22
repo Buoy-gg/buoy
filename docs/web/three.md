@@ -12,13 +12,12 @@ Start with a dev build. Check the limits below.
 
 ## Install
 
-Use the `beta` tag once the beta ships.
-Keep all Buoy packages on the same beta release.
+Keep all Buoy packages on the same version.
 Keep the React version your app and R3F use.
 Plain apps need React too, for Buoy's own UI.
 
 ```sh
-npm install -D @buoy-gg/core@beta @buoy-gg/three@beta @buoy-gg/perf-monitor@beta @buoy-gg/assets@beta @buoy-gg/events@beta @buoy-gg/external-sync@beta
+npm install -D @buoy-gg/core @buoy-gg/three @buoy-gg/perf-monitor @buoy-gg/assets @buoy-gg/events @buoy-gg/external-sync
 npm install -D react react-dom react-native-web@^0.21
 npm install three
 ```
