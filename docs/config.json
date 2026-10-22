@@ -508,6 +508,10 @@
               "to": "tools/time-machine"
             },
             {
+              "label": "Scenarios",
+              "to": "tools/scenarios"
+            },
+            {
               "label": "Clock",
               "to": "tools/clock"
             },
@@ -727,6 +731,10 @@
             {
               "label": "Time Machine",
               "to": "tools/time-machine"
+            },
+            {
+              "label": "Scenarios",
+              "to": "tools/scenarios"
             },
             {
               "label": "Clock",

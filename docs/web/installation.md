@@ -161,7 +161,8 @@ Each tool's own page is shared with React Native. This is what changes in the br
 | [Routes](../tools/routes) | History API and hash navigation. List known paths with `registerBrowserRoutes(paths)` and connect your router with `registerBrowserRouter(adapter)`, shown below. |
 | [Env](../tools/env) | Pass public values with `setRemoteEnv(values)` and required keys through the host's `requiredEnvVars`. Buoy can't list values a bundler replaced at build time. |
 | [Console](../tools/console), [Events](../tools/events) | Browser JavaScript logs, and events from the registered tools. |
-| [Sentry](../tools/sentry) | Pass `sentryGetClient={Sentry.getClient}` from the app's browser SDK. Buoy observes outgoing envelopes and supported diagnostic hooks. The Sentry package isn't on npm yet. |
+| [Sentry](../tools/sentry) | Pass `sentryGetClient={Sentry.getClient}` from the app's browser SDK. Buoy observes outgoing envelopes and supported diagnostic hooks. |
+| [Scenarios](../tools/scenarios) | Register `@buoy-gg/scenarios/web` as `scenarios`. Same panels and actions as native. |
 | [Time Machine](../tools/time-machine) | The same snapshots, restore actions and recording as native. Only registered sources take part. |
 | [Ask Buoy](../tools/ask-buoy) | The shared agent, using the registered tools' actions. Configure the model endpoint and account access as on native. |
 | [Impersonate](../tools/impersonate) | Use `createImpersonateTool` with the app's user-search callback. The page's `fetch` and XHR calls get the configured header. |

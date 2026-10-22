@@ -198,9 +198,9 @@ After `run` resolves, assert the expected app state before driving the flow. A c
 
 Scenarios shipped in code with `defineScenario()` don't count toward the device limit.
 
-## Web support (unreleased)
+## Web support
 
-Register this package’s /web namespace in FloatingDevTools modules to use its shared panels and actions in a browser app. The browser build is available in this checkout and has not been published yet. See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+Scenarios works in browser apps too. Add `@buoy-gg/scenarios/web` to the `modules` you pass to `FloatingDevTools`, under the key `scenarios`. You get the same panels and actions. [Web installation](../web/installation#tool-setup) shows how to set it up. It also lists what else to install and what a browser can't do.
 
 ## Swift
 

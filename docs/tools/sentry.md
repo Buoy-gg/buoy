@@ -99,6 +99,6 @@ A transaction can contain several spans. The Cost tab counts observed units to e
 
 Not yet. Native crashes, release-health sessions and Session Replay uploads are sent by the native SDK and never pass through the JavaScript layer this tool observes.
 
-## Web support (unreleased)
+## Web support
 
-Pass the existing browser SDK’s getClient through the host’s sentryGetClient prop. Envelope capture and diagnostic panels use the shared implementation. The browser build is available in this checkout and has not been published yet. See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+Pass your browser SDK's `getClient` to the `sentryGetClient` prop on `FloatingDevTools`. Envelope capture and the panels use the same code as on React Native. [Web installation](../web/installation#tool-setup) shows how to set it up. It also lists what else to install and what a browser can't do.
