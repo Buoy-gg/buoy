@@ -69,6 +69,17 @@ npx -y @buoy-gg/mcp@latest farm phone use off
 
 See the [Sim Farm guide](https://buoy.gg/buoy/latest/docs/tools/sim-farm).
 
+## Many Chromes at once
+
+The `chrome_farm_*` tools run many slim Chromes on one computer. Each one runs your web app with its own storage and its own debugging address. Your tests and your agent can drive them all at once:
+
+```bash
+npx -y @buoy-gg/mcp@latest farm chrome up 8 --url http://localhost:3000
+npx -y @buoy-gg/mcp@latest farm chrome run 8 --url http://localhost:3000 -- node my-test.mjs
+```
+
+See the [Chrome Farm guide](https://buoy.gg/buoy/latest/docs/tools/chrome-farm).
+
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>

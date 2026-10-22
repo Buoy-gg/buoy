@@ -447,6 +447,10 @@
         {
           "label": "Sim Farm",
           "to": "tools/sim-farm"
+        },
+        {
+          "label": "Chrome Farm",
+          "to": "tools/chrome-farm"
         }
       ]
     },

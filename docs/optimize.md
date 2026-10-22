@@ -37,6 +37,14 @@ The farm runs many slim iOS sims or Android phones at once. Each idea gets its o
 
 Speed is timed on one quiet sim, since all sims share the Mac's CPU. The farm checks if the Mac was too busy during a run. If it was, the agent runs it again.
 
+For a web app, the agent can use the [Chrome Farm](./tools/chrome-farm):
+
+```text
+Use buoy optimize and the chrome farm on our slow lights page.
+```
+
+Each idea opens in its own slim Chrome, side by side. Each one draws with the Mac's GPU, like your own Chrome. The agent snaps each Chrome, and you check the looks. Speed is timed in a quiet window. The farm pauses the other Chromes, so one idea runs alone. Never compare speed while they all run. They fight over the Mac.
+
 ## What you need
 
 - [Bench](./tools/perf-monitor) (`@buoy-gg/perf-monitor`) in a React Native development build. Bench's native dependencies don't run in Expo Go.
@@ -66,6 +74,7 @@ The winning version stopped recomputing every light on the JavaScript thread. Th
 - [AI / MCP Server](./mcp): set up the server and the skill
 - [Render Highlighter](./tools/highlight-updates): see which components re-render
 - [Sim Farm](./tools/sim-farm): many iOS sims and Android phones on one Mac
+- [Chrome Farm](./tools/chrome-farm): many slim Chromes on one Mac
 
 ## FAQ
 
