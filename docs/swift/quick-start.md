@@ -26,13 +26,23 @@ https://github.com/Buoy-gg/Buoy-Swift.git
 
 Use the dependency rule **Up to Next Minor Version** from `0.1.0` and add the **Buoy** library to your app target.
 
-## 2. Add your account key
+## 2. Sign in
 
-In your app's Xcode Run scheme, add a `BUOY_LICENSE_KEY` environment variable containing your account key. Xcode passes it to the app only when it launches the app from that scheme.
+Sign in from your project folder:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+Your browser opens. Click Allow. Then the command writes a dev token to `.env.local` as `BUOY_LICENSE_KEY`.
+
+In Xcode, open **Product > Scheme > Edit Scheme > Run > Arguments**. Add `BUOY_LICENSE_KEY` there, under Environment Variables. Its value is in `.env.local`. Buoy reads it by itself. Xcode passes it only when it runs the app from that scheme. Leave **Shared** off for the scheme, so the token stays out of git.
+
+The token works in dev builds for 30 days. For TestFlight builds, see [Test builds](./installation#test-builds).
 
 ## 3. Start Buoy
 
-Start Buoy in the app's initializer and add the overlay to your root view. Both are behind `#if DEBUG`, so Release builds never run Buoy:
+Start Buoy in your app's `init()`. Keep it behind `#if DEBUG`, so Release builds never run Buoy. Buoy adds its own window over your app, so you don't add a view for it:
 
 ```swift
 import Foundation
@@ -46,18 +56,13 @@ struct BuoyDemoApp: App {
         #if DEBUG
         var config = BuoyConfig()
         config.deviceName = "Swift demo"
-        config.licenseKey = ProcessInfo.processInfo.environment["BUOY_LICENSE_KEY"]
         Buoy.start(config)
         #endif
     }
 
     var body: some Scene {
         WindowGroup {
-            #if DEBUG
-            RequestCheckView().buoyDevTools()
-            #else
             RequestCheckView()
-            #endif
         }
     }
 }
@@ -94,7 +99,9 @@ struct RequestCheckView: View {
 }
 ```
 
-In an existing app, keep your root view and add `.buoyDevTools()` to it. Start Buoy before you create networking singletons or state objects that create URLSessions; sessions created before `Buoy.start` are not captured.
+In an existing app, add the `init()` to your `App`. Start Buoy before your app makes its URLSessions, such as in shared clients or state objects. Buoy can't see a session made before `Buoy.start`.
+
+To set options like `userRole`, add `.buoyDevTools(userRole: .internal)` to your root view. For no Buoy UI on the device at all, set `config.headless = true`. Desktop and the MCP still see the app.
 
 ## 4. Check the first request
 

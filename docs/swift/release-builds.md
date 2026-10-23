@@ -9,9 +9,21 @@ Your app decides whether Buoy runs, through the guards you put around `Buoy.star
 
 ## Guard both calls
 
-Put `Buoy.start` and `.buoyDevTools()` (or `Buoy.install(in:)`) behind `#if DEBUG` or your own internal-build flag. An environment or user-role badge is presentation, not access control; apply your app's own authorization checks for users who can inspect or change its data.
+Put `Buoy.start`, and any `.buoyDevTools()` or `Buoy.install(in:)`, behind `#if DEBUG` or your own internal-build flag. An environment or user-role badge is presentation, not access control; apply your app's own authorization checks for users who can inspect or change its data.
 
 TestFlight builds use the Release configuration, so a `DEBUG` guard normally excludes Buoy there. If you want Buoy in an internal TestFlight build, make that opt-in deliberate.
+
+## Sign in on TestFlight
+
+A `buoy login` dev token opens nothing in a TestFlight build. Testers sign in with a code, so no key goes in the app:
+
+```swift
+var config = BuoyConfig()
+config.signIn = BuoySignInConfig()
+Buoy.start(config)
+```
+
+First, add `app:` and your bundle id at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites). Buoy in a TestFlight build needs a Pro or Business plan. A Pro key passed in with `config.licenseKey` works there too. See [Test builds](./installation#test-builds).
 
 ## What ships in Release
 

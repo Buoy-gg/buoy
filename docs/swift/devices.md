@@ -15,7 +15,6 @@ To set it in code instead, do so before calling `Buoy.start`:
 
 ```swift
 var config = BuoyConfig()
-config.licenseKey = ProcessInfo.processInfo.environment["BUOY_LICENSE_KEY"]
 if let brokerURL = URL(string: "http://192.168.1.20:42831") {
     config.socketURL = brokerURL
 }
@@ -23,6 +22,10 @@ Buoy.start(config)
 ```
 
 Replace the example IP address with your computer's address, and keep your app's startup guard around this code.
+
+## Sign in on a device
+
+Your `buoy login` token works on an iPhone or iPad too, when Xcode runs a dev build. The Run scheme passes `BUOY_LICENSE_KEY` to the device. An ad hoc, TestFlight or App Store build turns the token down. Those builds sign in with a code. See [Test builds](./installation#test-builds).
 
 ## Info.plist entries
 

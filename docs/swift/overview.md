@@ -52,7 +52,7 @@ Tools for JavaScript stores, such as React Query, Redux, Zustand and Jotai, are 
 ## Requirements
 
 - An iOS app targeting iOS 16 or later, built with Xcode 16 or later. Apps can use Swift 5 or Swift 6 language mode.
-- A Free or Pro Buoy account key.
+- A Free or Pro Buoy account.
 - A development build for the first setup.
 
 Buoy runs on iOS devices and the iOS Simulator. Mac Catalyst and macOS are not supported.
@@ -60,6 +60,6 @@ Buoy runs on iOS devices and the iOS Simulator. Mac Catalyst and macOS are not s
 ## Next steps
 
 - [Quick Start](./quick-start): add the package and check your first captured request.
-- [Installation](./installation): package versions, account keys and UIKit setup.
+- [Installation](./installation): package versions, sign-in and UIKit setup.
 - [Physical Devices](./devices): connect an iPhone or iPad to Buoy Desktop.
 - [Release Builds](./release-builds): keep Buoy out of the builds you ship.
