@@ -116,7 +116,30 @@ A test alert set for later is lost if the app is killed first.
 
 ## Routes
 
-Give Buoy your routes and your navigation:
+Routes works with no setup.
+Buoy reads the screens your app has open.
+Each activity counts. So does the fragment that fills it.
+A `NavHostFragment` gives its whole back stack.
+Each screen gets its name from its class.
+So `ArticleActivity` shows as `/article`.
+A Navigation screen uses its route.
+So `pokemon/{name}` shows as `/pokemon/pikachu`.
+The title comes along as a `title` param.
+Back and "go to the first screen" both work.
+To open a path like `/user/42`, use the setup below.
+
+Do you use a Compose `NavHost`? Add one line:
+
+```kotlin
+import gg.buoy.routes.track
+
+val nav = rememberNavController()
+LaunchedEffect(nav) { BuoyRoutes.track(nav) }
+```
+
+To turn this off, set `BuoyRoutes.trackAndroidScreens = false` before `Buoy.start`.
+
+For your own route names, give Buoy your routes and your navigation:
 
 ```kotlin
 BuoyRoutes.configure(
@@ -130,6 +153,7 @@ BuoyRoutes.configure(
 `navigate` returns `true` when it moved the app.
 Call `BuoyRoutes.refreshStack()` when your stack changes.
 With no stack to hand over, call `BuoyRoutes.screenAppeared(path)` on each screen.
+Once you call either one, Buoy stops reading your screens.
 
 ## Scenarios
 
@@ -141,6 +165,11 @@ BuoyScenarios.defineAll(assets.open("scenarios.json").reader().readText())
 ```
 
 Recording a new scenario is not on Android yet.
+
+On a Business team, you can share a scenario with your whole team.
+See [Share with your team](../tools/scenarios#share-with-your-team).
+Buoy keeps a team list for each app.
+It uses your package name, or the `appId` in `BuoyConfig.signIn`.
 
 ## Time Machine
 

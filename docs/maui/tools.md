@@ -8,6 +8,10 @@ description: "Set up each MAUI tool. See what it reads and where it differs from
 Each tool has its own page.
 It shows the setup call and what the tool can and can't see.
 
+`builder.UseBuoy()` turns on most tools by itself.
+Routes, Scenarios, Impersonate, Notifications, Sentry and Ask Buoy need their own call.
+Call a tool's setup before `UseBuoy()` to give it options.
+
 - [Network](./tools/network): See web calls, headers, bodies, status, and timing.
 - [Env](./tools/env): See app values and check them against your rules.
 - [Storage](./tools/storage): Read, edit, and check known app keys.

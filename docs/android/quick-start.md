@@ -27,8 +27,8 @@ Then add Buoy to your app module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    debugImplementation("gg.buoy:buoy-android:0.1.2")
-    releaseImplementation("gg.buoy:buoy-android-noop:0.1.2")
+    debugImplementation("gg.buoy:buoy-android:0.1.3")
+    releaseImplementation("gg.buoy:buoy-android-noop:0.1.3")
 }
 ```
 
@@ -36,9 +36,22 @@ Debug builds get the real tools.
 Release builds get a no-op copy that does nothing.
 See [Release Builds](./release-builds) for why.
 
-## 2. Add your account key
+## 2. Sign in
 
-Put your key in `local.properties`. Keep that file out of git.
+Sign in from your project folder:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+Your browser opens. Click Allow.
+Then the command puts a dev token in `local.properties` as `buoy.key`.
+Git leaves that file out.
+The token works in debug builds for 30 days.
+
+No Node on this computer?
+Copy your account key from [buoy.gg/dashboard/licenses](https://buoy.gg/dashboard/licenses).
+Add the line by hand:
 
 ```properties
 buoy.key=YOUR-KEY
@@ -78,6 +91,9 @@ class MyApp : Application() {
     }
 }
 ```
+
+QA builds sign in with a code instead.
+See [Test builds](./installation#test-builds).
 
 Name the class in your manifest with `android:name=".MyApp"`.
 Buoy draws its button over every screen by itself.
@@ -145,11 +161,6 @@ If the call is missing, check three things:
 ## 7. Open it in Buoy Desktop
 
 Open [Buoy Desktop](../desktop) on your computer and sign in.
-Then run this once for the emulator:
-
-```bash
-adb reverse tcp:42831 tcp:42831
-```
-
+The emulator finds it at `10.0.2.2`, which is your computer.
 The app shows up in Desktop.
 For a real phone, see [Physical Devices](./devices).

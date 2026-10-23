@@ -30,7 +30,7 @@ This also brings in `Buoy.Core`.
 Keep the resolved version in your project file.
 Make its package entry Debug-only as shown in [Release builds](./release-builds).
 
-## 2. Add your key
+## 2. Sign in
 
 Run this in the same app folder.
 
@@ -38,8 +38,9 @@ Run this in the same app folder.
 npx --package=@buoy-gg/core buoy login
 ```
 
-Sign in with your Free or Pro account.
-The command writes a key to a local env file.
+Your browser opens.
+Sign in with your Free or Pro account, then click Allow.
+The command writes a dev token to a local env file.
 Buoy reads that file when the app builds.
 Keep that file out of source control.
 
@@ -53,29 +54,21 @@ Call `UseBuoy` just once, before `Build`.
 #if DEBUG
 using Buoy.Maui;
 #endif
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = MauiApp.CreateBuilder().UseMauiApp<App>();
 
 #if DEBUG
-builder.UseBuoyNetwork();
 builder.UseBuoy();
-builder.Services.AddSingleton<HttpClient>(services =>
-    services.CreateNetworkClient());
-#else
-builder.Services.AddSingleton<HttpClient>(_ => new HttpClient());
 #endif
 
 return builder.Build();
 ```
 
+`UseBuoy` turns on each tool that needs nothing from your app.
 Buoy adds its own view to your app window.
 You do not need to wrap or replace pages.
-If your app has an HTTP client, keep its setup.
-Clients from `AddHttpClient` need no change.
-Buoy sees them on its own.
+Clients from `AddHttpClient` show in Network on their own.
 For other clients, see the [Network guide](./tools/network).
-Do not add a second client your app never uses.
 
 ## 4. Check a web call
 
@@ -92,6 +85,8 @@ The package alone does not prove calls are captured.
 
 ## 5. Add more tools
 
-Use the [tool guide](./tools) to add each source.
+A few tools need your app's input, like Routes and Scenarios.
+The [tool guide](./tools) shows how to add each one.
+To give any tool options, call its setup before `UseBuoy`.
 For in-app chat, see [Ask Buoy](./ask-buoy).
 To link your phone, see [Devices and Desktop](./devices).

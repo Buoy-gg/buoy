@@ -5,13 +5,17 @@ id: android-devices
 description: "Point a native Android app on a real phone at Buoy Desktop: adb reverse over USB, or your computer's address over Wi-Fi, plus the network security config Android needs."
 ---
 
-The emulator and a phone on USB can both reach Buoy Desktop through `adb reverse`.
+The emulator reaches Buoy Desktop at `10.0.2.2` by itself.
+A phone on USB reaches it through `adb reverse`.
 A phone on Wi-Fi needs your computer's address.
 
 ## Over USB
 
 Plug in the phone and turn on USB debugging.
-Then run:
+With Buoy Desktop open, that's all.
+Desktop runs `adb reverse` for each phone on USB.
+
+Using the MCP without Desktop? Then run it yourself:
 
 ```bash
 adb reverse tcp:42831 tcp:42831

@@ -55,7 +55,7 @@ Sentry is not on Android yet.
 
 - An app with `minSdk` 23 or higher and `compileSdk` 35 or higher. Debug builds need `minSdk` 24.
 - Kotlin 2.0 or newer, if the app uses Kotlin.
-- A Free or Pro Buoy account key.
+- A Free or Pro Buoy account.
 - A debug build for the first setup.
 
 Buoy runs on phones, tablets and the emulator.
@@ -63,6 +63,6 @@ Buoy runs on phones, tablets and the emulator.
 ## Next steps
 
 - [Quick Start](./quick-start): add the package and check your first web call.
-- [Installation](./installation): versions, account keys and every setup option.
+- [Installation](./installation): versions, sign-in and every setup option.
 - [Physical Devices](./devices): connect a phone to Buoy Desktop.
 - [Release Builds](./release-builds): keep Buoy out of the builds you ship.
