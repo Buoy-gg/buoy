@@ -5,7 +5,7 @@ id: flutter-quick-start
 description: "Get Buoy's floating in-app devtools menu running in your Flutter app in minutes, then reach the same tools from desktop or an AI agent."
 ---
 
-Open Buoy in a Flutter debug build, then inspect a request. You need a Free or Pro account key. Profile and release builds do not show the widget or start its tools.
+Open Buoy in a Flutter debug build, then inspect a request. You need a Free or Pro Buoy account. Profile and release builds do not show the widget or start its tools.
 
 ## Let your agent do it
 
@@ -34,8 +34,6 @@ import 'package:buoy/buoy.dart';
 
 MaterialApp(
   builder: (context, child) => BuoyDevTools(
-    deviceName: 'My App',
-    licenseKey: const String.fromEnvironment('BUOY_KEY'),
     child: child ?? const SizedBox.shrink(),
   ),
 )
@@ -43,7 +41,21 @@ MaterialApp(
 
 A floating button appears in the corner of your app. Tap it to open the menu.
 
-Get a key from your Buoy account and run `flutter run --dart-define=BUOY_KEY=YOUR_LICENSE_KEY`. See [Installation](./installation) for a complete app example and SDK requirements.
+Sign in from your app folder. Your browser opens, and you click Allow. This writes a dev token to `.env.local`:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+Then run the app with that file. `BuoyDevTools` reads the token by itself:
+
+```bash
+flutter run --dart-define-from-file=.env.local
+```
+
+The token works for 30 days. Then run `buoy login` again.
+
+See [Installation](./installation) for a complete app example and SDK requirements.
 
 ## 3. Add tools
 
@@ -123,4 +135,4 @@ Run `flutter pub add buoy`, then wrap your app in `BuoyDevTools` via `MaterialAp
 
 ### Do I need a license key to try it?
 
-Use a Free or Pro account key. Pro enables paid capabilities such as the full MCP, but does not enable the Flutter widget in profile or release mode.
+No. Sign in with a Free or Pro account, using `buoy login`. A key still works if you have one. Pro adds paid features, like the full MCP. It does not turn on the Flutter widget in profile or release mode.

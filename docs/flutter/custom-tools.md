@@ -5,7 +5,7 @@ id: flutter-custom-tools
 description: "Extend Buoy with your own debugging tools — register any Flutter widget in your app's floating devtools menu in just a few lines."
 ---
 
-Add a custom widget with `BuoyTool`. The basic example mounts a counter so you can verify the tool opens and responds to input. Complete [Installation](./installation) first, including your account key and debug-mode widget setup.
+Add your own widget to Buoy with `BuoyTool`. The basic example shows a counter. Use it to check that the tool opens and works. First, finish [Installation](./installation), with sign-in and the debug-only widget.
 
 ## Basic Custom Tool
 
@@ -16,7 +16,6 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     builder: (context, child) => BuoyDevTools(
-      licenseKey: const String.fromEnvironment('BUOY_KEY'),
       tools: [
         BuoyTool(
           id: 'counter',
@@ -66,7 +65,7 @@ class _CounterDebuggerState extends State<CounterDebugger> {
 }
 ```
 
-Run with `flutter run --dart-define=BUOY_KEY=YOUR_LICENSE_KEY`. Open Counter, increment it, then reset it to zero. Later sections are integration sketches for your own stores and widgets.
+Run it with `flutter run --dart-define-from-file=.env.local`. Open Counter. Tap Increment, then tap Reset to go back to zero. The later sections are sketches for your own stores and widgets.
 
 ## Register Before Mount
 

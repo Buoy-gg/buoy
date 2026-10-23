@@ -27,6 +27,19 @@ R3F apps also need `@react-three/fiber`.
 Each Buoy tool uses its `/web` entry.
 See [web setup](./installation) to add more tools.
 
+## Sign in
+
+Run this in your app's folder:
+
+```sh
+npx --package=@buoy-gg/core buoy login
+```
+
+Your browser opens buoy.gg. Click Allow.
+The CLI writes `VITE_BUOY_KEY` to `.env.development.local`.
+It is a dev token. It works in dev builds for 30 days.
+Both examples below pass it to Buoy as `licenseKey`.
+
 ## Load register first
 
 Point your HTML entry at this small boot file:
@@ -108,7 +121,8 @@ function App() {
         <SceneLink />
       </Canvas>
       {import.meta.env.DEV && (
-        <FloatingDevTools modules={modules} signIn />
+        <FloatingDevTools modules={modules}
+          licenseKey={import.meta.env.VITE_BUOY_KEY} />
       )}
     </div>
   );
@@ -151,7 +165,8 @@ scene.add(new Mesh(geometry, material));
 const stopScene = import.meta.env.DEV
   ? registerThree({ renderer, scene, camera }) : () => {};
 const unmount = import.meta.env.DEV
-  ? mountBuoy({ modules, signIn: true }) : () => {};
+  ? mountBuoy({ modules, licenseKey: import.meta.env.VITE_BUOY_KEY })
+  : () => {};
 renderer.setAnimationLoop(() => renderer.render(scene, camera));
 
 function stop() {
@@ -177,6 +192,8 @@ Zustand can watch a vanilla store you pass in.
 These examples gate the UI in dev builds.
 They still import tools at the top of each file.
 To keep them out of your public bundle, load them lazily.
+On a live site, pass `signIn` in place of the dev token.
+Your own team then signs in with Buoy.
 See [build rules](./frameworks#production-builds) for release access.
 
 ## Full screen and pointer lock

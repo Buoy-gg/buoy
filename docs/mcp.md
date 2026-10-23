@@ -15,7 +15,7 @@ Want your AI to use websites in Chrome instead? That's [Buoy Web](./buoy-web). I
 
 ## Requirements
 
-- **A Buoy account** on the app and on the MCP process. Free works. Pro unlocks every tool (see [Free and Pro](#free-and-pro)). Device discovery is still subject to broker admission.
+- **A Buoy account**, signed in on the app and on this computer. `buoy login` does both. Free works. Pro unlocks every tool (see [Free and Pro](#free-and-pro)). Device discovery is still subject to broker admission.
 - **Node.js 18+** on the machine running your editor.
 - **A running app** with Buoy devtools open on a device or simulator (React Native or Flutter).
 - **macOS + Xcode, or adb** — only for tools that work the simulator or phone from your computer: screenshots, real touches and app control. iOS needs Xcode. Android needs adb. Camera and TV input have their own needs; check their tool pages.
@@ -59,7 +59,15 @@ Every Saturday and Sunday, a free account gets everything Pro does. This is the 
 
 ## Install
 
-Run setup from the app project. Configure the MCP process with your account key through its supported environment configuration; a device key does not sign the MCP process in. Use a trusted development network for the broker.
+First, sign in. Run this in your app's folder:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+Your browser opens buoy.gg. Click Allow. This signs in your computer, and the MCP uses that sign-in. You don't need a key for the MCP. If this computer isn't signed in, the MCP looks for a key in the env files of the folder it runs in. That is the backup. See [Sign in with Buoy](./sign-in#desktop-and-the-mcp).
+
+Run setup from the app project. Use a trusted development network for the broker.
 
 > Installed Buoy with the [agent prompt](./quick-start)? Ask the same agent for "the Desktop and MCP step" — the install instructions it followed cover `@buoy-gg/external-sync` and `npx @buoy-gg/mcp init`.
 
@@ -73,8 +81,8 @@ Setup writes `.mcp.json` and `.cursor/mcp.json`, and updates `.vscode/mcp.json` 
 
 Then restart your editor (or reconnect the MCP server) and open your app with Buoy devtools running:
 
-- **React Native** — install `@buoy-gg/external-sync`, restart Metro, and mount `<FloatingDevTools />` with your account key (broker address is derived from Metro; physical devices usually need no config). Profiling a **release build**? Sync is off there unless you opt in — see [release builds](./desktop#release-builds).
-- **Flutter** — run a debug build and mount `BuoyDevTools` with your account key (simulators auto-connect; physical devices pass `socketUrl: 'http://<lan-ip>:42831'`).
+- **React Native:** install `@buoy-gg/external-sync`, restart Metro, and mount `<FloatingDevTools />`. The dev token from `buoy login` opens it. Buoy gets the broker address from Metro, so a real phone usually finds it on its own. Profiling a **release build**? Sync is off there unless you opt in. See [release builds](./desktop#release-builds).
+- **Flutter:** mount `BuoyDevTools` and run a debug build with `--dart-define-from-file=.env.local`. That passes in the dev token from `buoy login`. Sims connect on their own. A real phone passes `socketUrl: 'http://<lan-ip>:42831'`.
 
 The generated npx entry launches `@buoy-gg/mcp@latest` and may need registry access. Review package updates and verify the connected device after restarting your editor.
 
@@ -234,7 +242,7 @@ React Native and Flutter devices appear together in `list_devices`.
 
 ### How do I let Claude Code or Cursor debug my React Native app?
 
-Run `npx -y @buoy-gg/mcp@latest init` from the app project, review the configuration changes described above, and restart the editor. Configure account access, app integrations and the broker connection, then inspect `list_devices`. Configuration alone does not establish a working app connection.
+Run `npx -y @buoy-gg/mcp@latest init` from the app project, review the configuration changes described above, and restart the editor. Sign in with `npx --package=@buoy-gg/core buoy login`. Then set up app integrations and the broker connection, and inspect `list_devices`. Configuration alone does not establish a working app connection.
 
 ### Do I need Buoy Pro for the MCP server?
 

@@ -33,7 +33,7 @@ Then sign in to your Buoy account:
 npx --package=@buoy-gg/core buoy login
 ```
 
-The command opens your browser, writes a dev token to an env file and adds that file to `.gitignore`. In Expo, it goes to `.env.development.local` as `EXPO_PUBLIC_BUOY_KEY`. React Native CLI apps get `BUOY_KEY` in `.env.local`. The token works in dev builds for 30 days. [Installation](./installation#sign-in-from-your-project) has the details.
+The command opens your browser, writes a dev token to an env file and adds that file to `.gitignore`. In Expo, it goes to `.env.development.local` as `EXPO_PUBLIC_BUOY_KEY`, and Buoy reads it by itself. React Native CLI apps get `BUOY_KEY` in `.env.local`. The token works in dev builds for 30 days. [Installation](./installation#sign-in-from-your-project) has the details.
 
 ## 2. Mount the menu
 
@@ -47,9 +47,7 @@ Add Buoy to your root layout, `app/_layout.tsx` (or `src/app/_layout.tsx`). This
 
 ```tsx
 import { Stack } from "expo-router";
-import { Buoy, FloatingDevTools } from "@buoy-gg/core";
-
-Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+import { FloatingDevTools } from "@buoy-gg/core";
 
 export default function RootLayout() {
   return (
@@ -66,9 +64,7 @@ export default function RootLayout() {
 Render `FloatingDevTools` next to your existing `App` content, inside any providers.
 
 ```tsx
-import { Buoy, FloatingDevTools } from "@buoy-gg/core";
-
-Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+import { FloatingDevTools } from "@buoy-gg/core";
 
 export default function App() {
   return (
@@ -108,7 +104,7 @@ Restart the dev server so Metro picks up the new packages. In Expo:
 npx expo start --clear
 ```
 
-Open the app and tap the floating button. If Buoy asks you to set up an account, check that your key reached `Buoy.init`.
+Open the app and tap the floating button. If Buoy asks you to set up an account, restart with `npx expo start --clear`. On React Native CLI, check that your key reached `Buoy.init`.
 
 ## 3. See your first request
 
@@ -127,7 +123,7 @@ A few tools need to be pointed at your app's data:
 
 ## Control who sees devtools
 
-Render `FloatingDevTools` only for the users who should inspect your app. Use your app's existing authorization checks for internal users, QA, or support. A Buoy account key controls Buoy access; your app decides which users can reach the menu.
+Render `FloatingDevTools` only for the users who should inspect your app. Use your app's existing authorization checks for internal users, QA, or support. Buoy sign-in controls Buoy access. Your app decides which users can reach the menu.
 
 Start in development. Before enabling access in a shipped app, review the [component reference](./floating-devtools) and your plan's production restrictions.
 
@@ -147,7 +143,7 @@ No. You need a Free or Pro Buoy account. Run `npx --package=@buoy-gg/core buoy l
 
 ### Does Buoy phone home?
 
-Buoy makes account and license requests. Development telemetry is described in [Telemetry](./telemetry); disable that telemetry with `Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY, telemetry: false })`. Disabling telemetry does not disable account validation or connections you configure for Desktop, MCP, or Ask Buoy.
+Buoy makes account and license requests. Development telemetry is described in [Telemetry](./telemetry); disable that telemetry with `Buoy.init({ telemetry: false })`. Disabling telemetry does not disable account validation or connections you configure for Desktop, MCP, or Ask Buoy.
 
 ### How do I add a tool to the menu?
 

@@ -2,7 +2,7 @@
 title: Installation
 seoTitle: "Install React Native TV DevTools — Buoy setup for Apple TV & Android TV"
 id: tv-installation
-description: "Full install guide for Buoy on React Native TV: requirements, packages, headless mount, host tooling (adb and idb), device connection, and license keys."
+description: "Full install guide for Buoy on React Native TV: requirements, packages, headless mount, host tooling (adb and idb), device connection, and sign-in."
 ---
 
 Buoy on TV is the ordinary React Native install with one prop changed. This page is the complete
@@ -40,7 +40,7 @@ For plain Markdown readers, the command is:
 npm install @buoy-gg/core @buoy-gg/external-sync
 ```
 
-Configure a Free or Pro key with `npx --package=@buoy-gg/core buoy login`. The examples use Expo's `EXPO_PUBLIC_BUOY_KEY`; React Native CLI apps must supply the key through their own environment configuration.
+Sign in with `npx --package=@buoy-gg/core buoy login`. It writes a dev token. On Expo, Buoy reads it by itself in dev builds. React Native CLI apps pass it in with the `licenseKey` prop, from their own env setup.
 
 
 The two TV-specific tools:
@@ -64,7 +64,6 @@ export default function App() {
       {/* your app */}
       <FloatingDevTools
         headless
-        licenseKey={process.env.EXPO_PUBLIC_BUOY_KEY}
         externalSync={{ deviceName: "Living Room Apple TV" }}
       />
     </>
@@ -108,12 +107,14 @@ is disabled and the panel says so rather than failing silently.
 
 Recording needs none of this — capture is pure JavaScript and works on retail hardware.
 
-## License keys
+## Sign in
 
 A verified Free or Pro account is required. Desktop is free to use. Production access requires Pro. Free has the basic MCP, and Pro adds the full MCP.
 
-**Headless has no license entry UI** — there is no on-device screen to type into. On TV a key can
-be supplied through initialization or the `licenseKey` prop, typically from your environment configuration. The desktop dashboard works at the
-free tier; the [MCP server](../mcp) needs an account and will refuse a TV device with no admitted account.
+**Headless has no sign-in screen.** So sign in before you run the app. Run `npx --package=@buoy-gg/core buoy login` in your app's folder. It writes a dev token for dev builds. On Expo, Buoy reads it by itself. React Native CLI apps pass it with `Buoy.init` or the `licenseKey` prop.
 
-Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+A release build can't use a dev token. Headless can't show a sign-in code either. So a headless release build needs a Pro key, passed the same way.
+
+The desktop dashboard works at the free tier. The [MCP server](../mcp) needs an account too. It refuses a TV device with no admitted account.
+
+Plans are at [buoy.gg/pricing](https://buoy.gg/pricing).

@@ -20,15 +20,29 @@ function App() {
   return (
     <>
       <YourApp />
-      <FloatingDevTools licenseKey="YOUR_LICENSE_KEY" />
+      <FloatingDevTools />
     </>
   );
 }
 ```
 
-Pass in the dev token that `npx --package=@buoy-gg/core buoy login` writes, or your account key. Then install the tools you need. Keep `FloatingDevTools` inside the providers those tools use. See [Sign in with Buoy](./sign-in).
+First, sign in. Run `npx --package=@buoy-gg/core buoy login` in your app's folder. It writes a dev token for dev builds. On Expo, Buoy reads it by itself. Other apps pass it in with the `licenseKey` prop. Your account key works there too, as a backup. Then install the tools you need. Keep `FloatingDevTools` inside the providers those tools use. See [Sign in with Buoy](./sign-in).
 
 Without a verified account, the launcher shows **Sign in**. Open it to copy `npx --package=@buoy-gg/core buoy login`, run the command in your project, then reload your app. **Check connection** retries verification and shows feedback if your account is still disconnected. The sign-in card and launcher share their design across native and web.
+
+## Sign in with a code
+
+TestFlight, QA and store builds have no dev token. Pass `signIn` so your testers can sign in with a code:
+
+```tsx
+<FloatingDevTools signIn />
+```
+
+When Buoy isn't open, it shows **Sign in**. Tap it to see a QR code and a short code. Then a person signed in to buoy.gg allows it at buoy.gg/activate.
+
+Buoy reads the app id from your Expo config. If it can't, pass it in: `signIn={{ appId: "com.acme.shop" }}`. Add `app:` and that id at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites). Only show `FloatingDevTools` to your own admins and testers.
+
+On a live web site, `signIn` shows a Sign in button instead. See [Sign in with Buoy](./sign-in).
 
 ## Environment Badge
 
@@ -105,7 +119,7 @@ For builds that ship to non-developers — field or associate builds where the d
 <FloatingDevTools headless />
 ```
 
-`headless` keeps every tool's sync adapter and route tracking running (so Buoy Desktop and the MCP server see the full session) but renders no floating button, dial, or overlays. Headless mode still requires a verified account. Supply the key through initialization or `licenseKey`; it has no on-device account entry screen. `requireLicense: false` does not bypass account admission. Sync still follows the same rule as any other build: on in dev, and in a release build only with [`externalSync.enableInRelease`](./desktop#release-builds) plus a Pro license — which is exactly what a field build wants.
+`headless` keeps every tool's sync adapter and route tracking running (so Buoy Desktop and the MCP server see the full session) but renders no floating button, dial, or overlays. Headless mode still requires a verified account. It shows no sign-in screen, so run `buoy login` first. On Expo, Buoy reads the dev token by itself in dev builds. Other apps pass a token or key with `Buoy.init` or `licenseKey`. `requireLicense: false` does not bypass account admission. Sync still follows the same rule as any other build: on in dev, and in a release build only with [`externalSync.enableInRelease`](./desktop#release-builds) plus a Pro license, which is what a field build wants.
 
 ## Next Steps
 

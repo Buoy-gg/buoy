@@ -38,7 +38,7 @@ npx --package=@buoy-gg/core buoy login
 
 Sign in with a Free or Pro account.
 In a workspace, add `--project <app-name>` here too.
-The CLI writes a key file that Git ignores.
+The CLI writes a dev token to a file that Git ignores.
 The builder reads it. Do not paste keys in code.
 
 ### 3. Run your app
@@ -146,8 +146,19 @@ To keep Buoy in a QA build, set this build option:
 "buoy": { "release": true }
 ```
 
-This skips the prod swap. Account and plan rules still apply.
-Free dev keys stay out of prod code.
+This skips the prod swap.
+Dev tokens and free keys stay out of prod code.
+So let your team sign in with Buoy.
+Add your site at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites).
+Then pass `signIn`:
+
+```ts
+provideBuoy({ signIn: true }),
+```
+
+Buoy shows a Sign in button there.
+It needs a Pro or Business plan.
+A Pro key works too, as a backup.
 Desktop sync also needs `externalSync: { enableInRelease: true }`.
 NgRx, NGXS, and Highlight still need Angular dev mode.
 

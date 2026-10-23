@@ -13,7 +13,7 @@ React Native and Flutter devices speak the **same protocol**, so they show up si
 
 ## Requirements
 
-- A verified Buoy account in Desktop and in the app. A connected device does not sign Desktop in.
+- A Buoy account, signed in on Desktop and in the app. In Desktop, click **Sign in with buoy.gg**. For the app, run `npx --package=@buoy-gg/core buoy login` in its folder. A connected device does not sign Desktop in. Desktop takes a key too, under **Already have a key?**
 - **A running app** with Buoy devtools installed and open on a device or simulator (React Native or Flutter).
 - **React Native:** the `@buoy-gg/external-sync` package installed in the app — it's the sync client, and it ships separately from the tools (see below).
 - The app and the desktop dashboard on the **same machine or local network**.
@@ -29,6 +29,8 @@ Buoy tools sync to a local broker on **port 42831**. Launch Buoy Desktop first; 
 ### Who can connect
 
 The broker listens on your local network, so phones on the same Wi-Fi reach it without setup. Only Buoy Desktop and the Buoy MCP server on your machine can read app data or send actions to an app. They prove it with a token the broker writes when it starts, to `~/.buoy/broker-token` (`%APPDATA%\Buoy\broker-token` on Windows), a file only your user account can read. Anything else that connects is treated as an app: it can send its own data and receive actions addressed to it, and can't see or control anything else.
+
+Each app has a device id. One machine can hold an id on many sockets. A second machine that shows up with an id already in use is refused, and the Desktop log says which address tried. If you pin `externalSync.deviceId`, give each device its own.
 
 Web apps served from your machine or your local network connect as usual. When a page from any other site tries to connect, such as your production site with Buoy turned on for admins, Buoy Desktop asks whether to allow that site. It remembers an Allow; a Don't Allow lasts until Desktop restarts.
 

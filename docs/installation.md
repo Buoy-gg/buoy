@@ -47,14 +47,12 @@ npx --package=@buoy-gg/core buoy login
 
 This opens your browser and signs you in. Then it writes a dev token to an env file. It adds that file to `.gitignore` too, if it isn't there yet. On Expo the name is `EXPO_PUBLIC_BUOY_KEY`. On bare React Native it is `BUOY_KEY`. Keep the prefix: Expo only puts `EXPO_PUBLIC_` names in your app.
 
-A dev token works in dev builds and sims for 30 days. Then run `buoy login` again. On Expo it goes in `.env.development.local`. Expo reads that file for `expo start` only. Bare React Native gets `.env.local`. A dev token opens nothing in a TestFlight, QA or store build. For those, use your account key from [buoy.gg/dashboard/licenses](https://buoy.gg/dashboard/licenses), or a bot key. See [Sign in with Buoy](./sign-in).
+A dev token works in dev builds and sims for 30 days. Then run `buoy login` again. On Expo it goes in `.env.development.local`. Expo reads that file for `expo start` only. Bare React Native gets `.env.local`. A dev token opens nothing in a TestFlight, QA or store build. For those, your testers sign in with a code. See [Test builds](#test-builds).
 
-Read the key in your app and keep the menu inside the same providers as your screens. In React Native CLI, use your app's env loader to read `BUOY_KEY`, because writing an env file doesn't put it in `process.env`.
+On Expo, Buoy reads `EXPO_PUBLIC_BUOY_KEY` by itself in dev builds. You only mount the menu. Keep it inside the same providers as your screens.
 
 ```tsx
-import { Buoy, FloatingDevTools } from "@buoy-gg/core";
-
-Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+import { FloatingDevTools } from "@buoy-gg/core";
 
 export default function App() {
   return (
@@ -65,6 +63,29 @@ export default function App() {
   );
 }
 ```
+
+Two cases pass the value in with `Buoy.init`. React Native CLI doesn't load env files into `process.env`. So read `BUOY_KEY` with your app's env loader. A key in an Expo TestFlight or store build needs it too. Buoy only finds a key by itself in dev builds.
+
+```tsx
+import { Buoy } from "@buoy-gg/core";
+
+Buoy.init({ licenseKey: process.env.EXPO_PUBLIC_BUOY_KEY });
+```
+
+A key you pass in always wins over the one Buoy finds.
+
+### Test builds
+
+TestFlight, QA and store builds can't use a dev token. Your testers sign in with a code instead.
+
+1. Add your app at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites). Type `app:` and then its bundle id, like `app:com.acme.shop`.
+2. Pass `signIn` to `FloatingDevTools`:
+
+```tsx
+<FloatingDevTools signIn />
+```
+
+A tester taps Sign in. Then they allow the code on buoy.gg, and Buoy opens. Only show `FloatingDevTools` to your own testers. Buoy in a test or store build needs Pro or Business. See [Phones and test builds](./sign-in#phones-and-test-builds).
 
 ### Keys still work
 
@@ -118,7 +139,7 @@ npx expo start --clear
 
 ### Buoy asks for account setup
 
-Your key didn't reach `Buoy.init`. On Expo, check the variable starts with `EXPO_PUBLIC_` and reload the app after changing it. On React Native CLI, check your env loader passes `BUOY_KEY` through.
+Buoy didn't get your dev token or key. Run `npx --package=@buoy-gg/core buoy login` in your app's folder. On Expo, check that the name starts with `EXPO_PUBLIC_`. Then restart with `npx expo start --clear`. On React Native CLI, check that your env loader passes `BUOY_KEY` to `Buoy.init`.
 
 ### An Android device over USB can't reach Desktop
 

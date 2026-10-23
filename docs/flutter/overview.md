@@ -52,13 +52,12 @@ import 'package:buoy/buoy.dart';
 
 MaterialApp(
   builder: (context, child) => BuoyDevTools(
-    licenseKey: 'YOUR_LICENSE_KEY',
     child: child ?? const SizedBox.shrink(),
   ),
 )
 ```
 
-The umbrella registers its bundled tools. Individual packages require explicit registration. Get your license key at [buoy.gg/pricing](https://buoy.gg/pricing).
+The umbrella registers its bundled tools. If you add tools one by one, call each one's register function. Sign in with `npx --package=@buoy-gg/core buoy login`. Then run `flutter run --dart-define-from-file=.env.local`. See [Sign In](./installation#sign-in).
 
 ## Build Your Own Tools
 

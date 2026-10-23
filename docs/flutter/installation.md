@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: (context, child) => BuoyDevTools(
-        licenseKey: const String.fromEnvironment('BUOY_KEY'),
         child: child ?? const SizedBox.shrink(),
       ),
       home: const Scaffold(
@@ -57,10 +56,10 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-Get your account key as described below, then start a debug build:
+Sign in from your app folder, as shown below. Then start a debug build:
 
 ```bash
-flutter run --dart-define=BUOY_KEY=YOUR_LICENSE_KEY
+flutter run --dart-define-from-file=.env.local
 ```
 
 Tap the floating button. Confirm that the menu opens and includes Network. To check capture, perform an action in your app that makes a new HTTP request, then open Network and inspect it. The minimal app above opens the menu but does not make a request.
@@ -96,11 +95,44 @@ void main() {
 
 Individual tool packages need their registration calls. Adding a dependency alone does not register it with the core widget.
 
-## Register Your License Key
+## Sign In
 
-Use a Free or Pro Buoy account key. Visit [pricing](https://buoy.gg/pricing) for account options and plan limits. Pass the key through `--dart-define=BUOY_KEY=...` as shown above; the widget reads it with `String.fromEnvironment`.
+Use a Free or Pro Buoy account. See [pricing](https://buoy.gg/pricing) for what each plan has. Sign in from your app folder:
 
-If the widget shows account setup, confirm that the build received the key and complete the prompt. A Pro key does not enable this widget in profile or release mode.
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+Your browser opens buoy.gg. Click Allow. Then the command writes a dev token to `.env.local` as `BUOY_KEY`. It adds that file to your `.gitignore`, if you have one. Pass the file to `flutter run`:
+
+```bash
+flutter run --dart-define-from-file=.env.local
+```
+
+Add the same flag to your IDE's run setup. The widget reads `BUOY_KEY` by itself. The token works in debug builds for 30 days. Then run `buoy login` again. To use a new token, stop the app and run it again.
+
+### Sign in with a code
+
+You can also skip `buoy login` and sign in with a code. Pass `signIn` to the widget:
+
+```dart
+BuoyDevTools(
+  signIn: const BuoySignIn(appId: 'com.acme.shop'),
+  child: child ?? const SizedBox.shrink(),
+)
+```
+
+Use your iOS bundle id or Android package name as `appId`. First, add it at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites) as `app:com.acme.shop`. In the app, tap **Sign in**. Scan the QR code with a phone that is signed in to buoy.gg. Or go to buoy.gg/activate and type the code.
+
+The widget only runs in debug builds. So code sign-in is for debug builds too. It doesn't turn Buoy on in a TestFlight or store build.
+
+### Keys still work
+
+You don't have to sign in. Your account key from [buoy.gg/dashboard/licenses](https://buoy.gg/dashboard/licenses) still works. Run `flutter run --dart-define=BUOY_KEY=YOUR_LICENSE_KEY`, or pass `licenseKey` to the widget.
+
+If the widget shows account setup, check that the build got the token or key. Then finish the prompt. A Pro key does not turn on this widget in profile or release mode.
+
+For CI and test runs, use a bot key. A team admin makes one on the Team page. Pass it where a key goes: `--dart-define=BUOY_KEY=bsk1_…`. See [Keys for bots and CI](../sign-in#keys-for-bots-and-ci).
 
 ## Desktop & AI (optional)
 

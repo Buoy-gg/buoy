@@ -197,7 +197,18 @@ buoy({ enableInRelease: true })
 <Buoy enableInRelease />
 ```
 
-Account and plan rules still apply.
+A QA build has no dev token in it.
+So let your team sign in with Buoy.
+Add your site at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites).
+Then pass `signIn`:
+
+```tsx
+<Buoy enableInRelease signIn />
+```
+
+Buoy shows a Sign in button there.
+It needs a Pro or Business plan.
+A Pro key in `licenseKey` works too, as a backup.
 
 ## Without the Vite plugin
 

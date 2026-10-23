@@ -17,11 +17,25 @@ Run this in your app's folder:
 npx --package=@buoy-gg/core buoy login
 ```
 
-Your browser opens buoy.gg. Click Allow. The CLI then writes a dev token to your env file, under the same name a key used to have, such as `EXPO_PUBLIC_BUOY_KEY` or `VITE_BUOY_KEY`. Pass it to Buoy as you would a key.
+Your browser opens buoy.gg. Click Allow. The CLI then writes a dev token to your project. It uses the name a key used to have.
 
 A dev token only works in dev builds and sims. If one ends up in a shipped app, it opens nothing there. It lasts 30 days. After that, Buoy asks you to run `buoy login` again.
 
-On Expo, Vite and Next.js, the token goes in `.env.development.local`. Other projects get `.env.local`.
+Where the token goes depends on your project:
+
+| Project | Where it goes | What you do next |
+|---|---|---|
+| Expo | `EXPO_PUBLIC_BUOY_KEY` in `.env.development.local` | Nothing. Buoy reads it in dev builds. |
+| Next.js | `NEXT_PUBLIC_BUOY_KEY` in `.env.development.local` | Restart `next dev`. Buoy reads it. |
+| Vite | `VITE_BUOY_KEY` in `.env.development.local` | `BuoyDevTools`, Vue and Solid read it. `FloatingDevTools` needs `licenseKey={import.meta.env.VITE_BUOY_KEY}`. |
+| Angular | `BUOY_KEY` in `.env.development.local` and `src/environments/buoy.ts` | Restart `ng serve`. The builder reads it. |
+| .NET MAUI | `BUOY_KEY` in `.env.development.local` | Rebuild. The build reads it. |
+| Flutter | `BUOY_KEY` in `.env.local` | Run with `--dart-define-from-file=.env.local`. |
+| Xcode | `BUOY_LICENSE_KEY` in `.env.local` | Add it to your Run scheme. |
+| Android | `buoy.key` in `local.properties` | Pass it in as `BuildConfig.BUOY_LICENSE_KEY`. |
+| Other | `BUOY_KEY` in `.env.local` | Pass it in with your own env loader. |
+
+The CLI prints the next step for your project too.
 
 Two more commands:
 
@@ -101,6 +115,25 @@ Buoy.start(config)
 
 Swift reads the app id from your bundle id.
 
+### Android
+
+```kotlin
+Buoy.start(this, BuoyConfig(signIn = BuoySignInConfig()))
+```
+
+Android reads the app id from your package name.
+
+### .NET MAUI
+
+```csharp
+builder.UseBuoy(options =>
+{
+    options.SignIn = new BuoySignInOptions();
+});
+```
+
+MAUI reads the app id from your bundle id or package name.
+
 ## How long you stay in
 
 You stay signed in as long as you use Buoy at least once every 60 days. Buoy renews your sign-in in the background.
@@ -124,6 +157,7 @@ Business teams are run from the [Team page](https://buoy.gg/dashboard/team). A t
 - invite people by email, up to the seats you bought;
 - give each person a role, like dev or qa;
 - pick which Buoy tools each role sees;
+- see and remove the scenarios people shared with the team;
 - remove people, which frees their seat;
 - list the team's live sites, which every member then uses;
 - list web calls to hide for the whole team;

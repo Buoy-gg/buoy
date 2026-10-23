@@ -66,13 +66,14 @@ export function App() {
   return (
     <>
       {/* your app */}
-      <BuoyDevTools licenseKey={import.meta.env.VITE_BUOY_KEY} />
+      <BuoyDevTools />
     </>
   );
 }
 ```
 
-`BuoyDevTools` shows Buoy in dev builds.
+`BuoyDevTools` reads the `VITE_BUOY_KEY` that `buoy login` wrote.
+It shows Buoy in dev builds.
 Release builds don't load Buoy's tools or menu.
 They still load the early hook.
 It stays off unless Buoy ran in that browser in the last week.

@@ -94,7 +94,7 @@ export function App() {
   return (
     <>
       {/* your app */}
-      <BuoyDevTools licenseKey={import.meta.env.VITE_BUOY_KEY} />
+      <BuoyDevTools />
     </>
   );
 }
@@ -144,7 +144,7 @@ A Free or Pro account is required. For Vite, run this from the app directory and
 npx --package=@buoy-gg/core buoy login
 ```
 
-The CLI writes a dev token as `VITE_BUOY_KEY` in `.env.development.local`. Restart the dev server. Then pass `licenseKey={import.meta.env.VITE_BUOY_KEY}`. Other tools set it in their own env setup. The token works in dev builds for 30 days. A live site uses [Sign in with Buoy](../sign-in#your-live-site) instead, with no key in the build. Account checks and plan limits still apply. Keys still work if you'd rather use one.
+The CLI writes a dev token as `VITE_BUOY_KEY` in `.env.development.local`. Restart the dev server. `BuoyDevTools` reads that key by itself. In Next.js, the name is `NEXT_PUBLIC_BUOY_KEY`, and `FloatingDevTools` reads it too. With `FloatingDevTools` in a Vite app, pass `licenseKey={import.meta.env.VITE_BUOY_KEY}`. Other tools set it in their own env setup. The token works in dev builds for 30 days. A live site uses [Sign in with Buoy](../sign-in#your-live-site) instead, with no key in the build. Account checks and plan limits still apply. Keys still work if you'd rather use one.
 
 ## Tool setup
 

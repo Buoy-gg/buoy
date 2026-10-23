@@ -18,7 +18,7 @@ Record a short navigation sequence, replay it, and inspect each event result alo
 
 ## Installation
 
-Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, your account key, and a working Desktop connection. Then add this tool.
+Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, `buoy login`, and a working Desktop connection. Then add this tool.
 
 <!-- ::PM npm="npm install @buoy-gg/tv-remote" yarn="yarn add @buoy-gg/tv-remote" pnpm="pnpm add @buoy-gg/tv-remote" bun="bun add @buoy-gg/tv-remote" -->
 

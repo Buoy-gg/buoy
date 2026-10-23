@@ -41,7 +41,7 @@ To install by hand, follow the [Quick Start](./quick-start).
 
 - React and React DOM, plus `react-native-web` 0.21. You don't need React Native or Expo.
 - The state libraries your tools inspect, such as Zustand, Jotai, Redux or TanStack Query.
-- A Free or Pro Buoy account key.
+- A Free or Pro Buoy account. Sign in with `npx --package=@buoy-gg/core buoy login`.
 
 ## What works in the browser
 

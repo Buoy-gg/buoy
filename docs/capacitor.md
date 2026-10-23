@@ -183,9 +183,13 @@ npm install @buoy-gg/ask-buoy
 <BuoyDevTools signIn askBuoy="hosted" />
 ```
 
-You can also use a dev key for other tools.
+You can also use a dev token for other tools.
 Run `npx --package=@buoy-gg/core buoy login` in your app folder.
-Pass `licenseKey={import.meta.env.VITE_BUOY_KEY}` to the host.
+It writes the token to `.env.development.local` as `VITE_BUOY_KEY`.
+`BuoyDevTools` reads it when your app runs from the Vite dev server.
+That is the browser, or the phone with live reload.
+A `vite build` leaves that file out, so a phone build from it has no key.
+Use `signIn` for those builds.
 Plan limits still apply to each tool and action.
 
 ## Desktop and MCP
@@ -193,7 +197,7 @@ Plan limits still apply to each tool and action.
 Install `@buoy-gg/external-sync`, as in the install step.
 Open [Buoy Desktop](./desktop) and sign in there too.
 Set up [MCP](./mcp) for your editor if you need it.
-MCP needs its own account. Free has the basic MCP and Buoy Optimize. Pro adds the full MCP.
+MCP uses the sign-in from `buoy login` on your computer. Free has the basic MCP and Buoy Optimize. Pro adds the full MCP.
 Run `list_devices` and pick your app before using tools.
 It shows as `ios` or `android` with a saved device ID.
 

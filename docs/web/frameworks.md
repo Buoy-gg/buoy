@@ -58,7 +58,7 @@ export function App() {
   return (
     <Providers>
       {/* your app */}
-      <BuoyDevTools licenseKey={import.meta.env.VITE_BUOY_KEY} />
+      <BuoyDevTools />
     </Providers>
   );
 }
@@ -122,7 +122,7 @@ const DevTools =
     : () => null;
 
 export function BuoyDevTools() {
-  return <DevTools licenseKey={process.env.NEXT_PUBLIC_BUOY_KEY} />;
+  return <DevTools />;
 }
 ```
 
@@ -400,7 +400,7 @@ Buoy's DOM tools cannot read objects drawn in WebGL. DOM overlays do not show in
 
 Buoy also works in production builds, for example for admins, developers or QA testers using the live site. Two things change:
 
-- **Access.** Outside development, `FloatingDevTools` needs Pro or Business. Use a Pro key, or [Sign in with Buoy](../sign-in#your-live-site) with no key in the build.
+- **Access.** Outside development, `FloatingDevTools` needs Pro or Business. Your team signs in with Buoy. No key goes in the build. Add your site at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites). Then pass `signIn`. Your `DevTools` component hands it on to `FloatingDevTools`. See [Sign in with Buoy](../sign-in#your-live-site). A Pro key in `licenseKey` works too, as a backup.
 - **Who sees it.** Load the host for the users who should have it, instead of behind a development check. Buoy doesn't know your roles, so the check is yours:
 
   ```tsx
@@ -411,7 +411,7 @@ Buoy also works in production builds, for example for admins, developers or QA t
     if (!user?.isAdmin) return null;
     return (
       <Suspense fallback={null}>
-        <DevTools licenseKey={import.meta.env.VITE_BUOY_KEY} />
+        <DevTools signIn />
       </Suspense>
     );
   }
@@ -423,7 +423,9 @@ The Desktop connection has its own production switch: pass `externalSync={{ enab
 
 ## Account key variable
 
-Pass the dev token or key through a variable your framework exposes to the browser: `VITE_BUOY_KEY` in Vite, React Router and TanStack Start, and `NEXT_PUBLIC_BUOY_KEY` in Next.js. `buoy login` picks the right one from your `package.json`.
+`buoy login` writes the dev token to a variable your framework shows to the browser. It picks the name from your `package.json`. Vite, React Router and TanStack Start use `VITE_BUOY_KEY`. Next.js uses `NEXT_PUBLIC_BUOY_KEY`.
+
+`BuoyDevTools` reads either one by itself. In Next.js, `FloatingDevTools` reads `NEXT_PUBLIC_BUOY_KEY` by itself too. A Vite app that uses `FloatingDevTools` passes `licenseKey={import.meta.env.VITE_BUOY_KEY}`.
 
 ## Other frameworks
 

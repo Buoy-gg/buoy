@@ -26,7 +26,7 @@ For plain Markdown readers, the command is:
 npm install @buoy-gg/core @buoy-gg/external-sync
 ```
 
-Configure a Free or Pro key with `npx --package=@buoy-gg/core buoy login`. The examples use Expo's `EXPO_PUBLIC_BUOY_KEY`; React Native CLI apps must supply the key through their own environment configuration.
+Sign in with `npx --package=@buoy-gg/core buoy login`. It writes a dev token. On Expo, Buoy reads it by itself in dev builds. React Native CLI apps pass it in with the `licenseKey` prop, from their own env setup.
 
 
 ## 2. Mount it headless
@@ -38,7 +38,7 @@ export default function App() {
   return (
     <>
       {/* your app */}
-      <FloatingDevTools headless licenseKey={process.env.EXPO_PUBLIC_BUOY_KEY} />  {/* TV apps run headless — no bubble */}
+      <FloatingDevTools headless />  {/* TV apps run headless — no bubble */}
     </>
   );
 }
@@ -96,7 +96,7 @@ Then open **Focus** and drive the app: reported focus moves can be compared with
 
 - `react-native-tvos` and the New Architecture (Fabric).
 - Restart Metro after adding JavaScript tools. Your TV runtime and host input tools have separate setup requirements.
-- Headless has **no license entry UI**. Configure your Free or Pro account key before mounting the headless tools. The
+- Headless has **no sign-in screen**. Run `buoy login` before you mount the headless tools. The
   desktop dashboard works at the free tier; the basic MCP server is free. Pro adds the full MCP.
 
 More detail in [Installation](./installation).

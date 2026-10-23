@@ -129,6 +129,26 @@ Device review lets the tester inspect the proposed changes before adding the sce
 
 ---
 
+## Share with your team
+
+On a Business team, one person sets up a scenario, and the whole team gets it.
+
+1. Open a scenario saved on your device.
+2. Tap **Share with team**.
+3. Your teammates open Scenarios in the same app. It shows under **Shared with your team**, marked Team, with who shared it.
+
+How it works:
+
+- A team scenario only shows in the app it came from. Buoy uses the bundle id on a phone, and the site's address on the web.
+- Your teammates can run it, but they can't change it. **Make an editable copy** saves their own copy.
+- The person who shared it can take it off the list with **Remove from team**. So can a team admin, here or on the [Team page](https://buoy.gg/dashboard/team).
+- Scenarios pulls the list each time you open it. **Refresh** pulls it now. A copy stays on the device, so the list shows offline too.
+- Only a person can share. The MCP, Desktop and Ask Buoy can run a team scenario, but they can't share or remove one.
+- You need a Buoy sign-in on the team: `buoy login`, or sign in with a code. A plain license key or a bot key gets no team list.
+- Each scenario can be up to 128 KB, and each app holds up to 200 team scenarios.
+
+---
+
 ## Durability, honestly
 
 Different steps last for different lengths of time, and the UI never softens the difference.

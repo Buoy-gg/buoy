@@ -190,7 +190,19 @@ app.use(buoy, { enableInRelease: true })
 ```
 
 The Vite plugin also keeps Vue's dev hook in that build, so Highlight still works.
-Account and plan rules still apply.
+
+A QA build has no dev token in it.
+So let your team sign in with Buoy.
+Add your site at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites).
+Then pass `signIn`:
+
+```ts
+app.use(buoy, { enableInRelease: true, signIn: true })
+```
+
+Buoy shows a Sign in button there.
+It needs a Pro or Business plan.
+A Pro key in `licenseKey` works too, as a backup.
 
 ## Nuxt
 
@@ -246,6 +258,7 @@ A `useFetch` that runs on the server is not in the list.
 The browser gets its answer inside the page.
 
 For a QA build, set `buoy: { enableInRelease: true }`.
+Add `signIn: true` under `options` so your team can sign in.
 
 ## Without the Vite plugin
 

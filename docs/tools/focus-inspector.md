@@ -15,7 +15,7 @@ Treat flags as diagnostic evidence. Confirm a suspected bug with the same remote
 
 ## Installation
 
-Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, your account key, and a working Desktop connection. Then add this tool.
+Complete [TV Quick Start](../tv/quick-start) first, including core, `@buoy-gg/external-sync`, `buoy login`, and a working Desktop connection. Then add this tool.
 
 <!-- ::PM npm="npm install @buoy-gg/focus-inspector" yarn="yarn add @buoy-gg/focus-inspector" pnpm="pnpm add @buoy-gg/focus-inspector" bun="bun add @buoy-gg/focus-inspector" -->
 

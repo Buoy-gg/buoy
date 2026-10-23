@@ -16,13 +16,12 @@ import 'package:buoy/buoy.dart';
 
 MaterialApp(
   builder: (context, child) => BuoyDevTools(
-    licenseKey: 'YOUR_LICENSE_KEY',
     child: child ?? const SizedBox.shrink(),
   ),
 )
 ```
 
-The [`buoy` umbrella](./installation) explicitly registers its bundled tools on mount. Don't have a key yet? Grab one at [buoy.gg/pricing](https://buoy.gg/pricing).
+The [`buoy` umbrella](./installation) registers its bundled tools when it mounts. To sign in, run `npx --package=@buoy-gg/core buoy login`. Then run the app with `flutter run --dart-define-from-file=.env.local`. The widget reads the token by itself. See [Sign In](./installation#sign-in).
 
 Mount it from `MaterialApp.builder` (or `MaterialApp.router`) so it sits above your Navigator and survives every route change.
 
@@ -31,7 +30,8 @@ Mount it from `MaterialApp.builder` (or `MaterialApp.router`) so it sits above y
 | Prop | Type | Default | Notes |
 |------|------|---------|-------|
 | `child` | `Widget` | required | Your app (usually the `MaterialApp` builder child) |
-| `licenseKey` | `String?` | `null` | Free or Pro account key; widget remains debug-only |
+| `licenseKey` | `String?` | `BUOY_KEY` dart-define | Leave unset to use the `buoy login` token. Or pass your account key. Widget stays debug-only |
+| `signIn` | `BuoySignIn?` | `null` | Sign in with a code instead: `BuoySignIn(appId: 'com.acme.shop')`. Debug builds only |
 | `deviceName` | `String?` | auto | Label in Buoy Desktop / MCP. Default: `'Flutter App (ios · 2c1d)'` — the app, the platform, and the last 4 of the install id |
 | `deviceId` | `String?` | auto | Leave unset: each install mints `flutter-app-ios-<8 hex>` once and keeps it. If you pin one it MUST be unique per device — two devices under one id look like one device to the broker |
 | `socketUrl` | `String?` | auto | LAN broker URL for physical devices |
