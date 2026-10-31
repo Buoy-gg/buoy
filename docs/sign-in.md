@@ -27,7 +27,7 @@ Where the token goes depends on your project:
 |---|---|---|
 | Expo | `EXPO_PUBLIC_BUOY_KEY` in `.env.development.local` | Nothing. Buoy reads it in dev builds. |
 | Next.js | `NEXT_PUBLIC_BUOY_KEY` in `.env.development.local` | Restart `next dev`. Buoy reads it. |
-| Vite | `VITE_BUOY_KEY` in `.env.development.local` | `BuoyDevTools`, Vue and Solid read it. `FloatingDevTools` needs `licenseKey={import.meta.env.VITE_BUOY_KEY}`. |
+| Vite | `VITE_BUOY_KEY` in `.env.development.local` | `BuoyDevTools`, `FloatingDevTools` from `@buoy-gg/core/web`, Vue and Solid read it. |
 | Angular | `BUOY_KEY` in `.env.development.local` and `src/environments/buoy.ts` | Restart `ng serve`. The builder reads it. |
 | .NET MAUI | `BUOY_KEY` in `.env.development.local` | Rebuild. The build reads it. |
 | Flutter | `BUOY_KEY` in `.env.local` | Run with `--dart-define-from-file=.env.local`. |
