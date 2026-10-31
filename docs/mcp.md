@@ -134,6 +134,7 @@ Ask your assistant to start with `list_devices` to see connected devices and the
 
 - **Inspect runtime** — `get_events` (network, state changes, route changes, storage writes, …), `get_snapshot`, and per-tool readers. Available sources depend on which packages the app installed (Flutter includes Riverpod; React Native includes Redux/Zustand/Jotai/React Query/renders when those packages are present).
 - **Work a single HTTP request** — `get_network_requests` lists requests *with their ids* and marks which are pinned/saved. `get_network_request` reads one in full: status, headers and the whole body. `network_action` pins or saves one (see below).
+- **Work a WebSocket** *(React Native)* — `get_sockets` lists each socket and its messages. It also lists the problems Buoy found, like a request with no reply. `socket_action` pushes a fake server message into the app. It can also drop, freeze or block the socket. Then the agent sees what the app does. See [Sockets](./tools/network#sockets).
 - **Take the app offline, or slow it down** *(React Native, development builds)* — `network_conditions` applies offline or added latency to the whole device; [response overrides](./tools/network) cover one specific URL (see below).
 - **Take actions** — navigate routes, edit storage, and more via `call_action` or the tool-specific wrappers. React Native also exposes dispatch Redux / set Zustand/Jotai / invalidate React Query when those tools are installed.
 - **Drive the UI** *(React Native)* — `describe_screen` and `tap_element` let the agent read what's on screen and interact with it, no screenshots (see below). `run_flow` runs several steps in one call. Pass `save` to keep a passing flow in `.buoy/flows`, and `flow` to replay it later. A flow tap with no app handler, like a native tab, gets a real touch. Pass `real: true` to make every tap a real touch. A `swipe` step with `untilEnd: true` scrolls to the end of a list. For real touches, `native_tap`, `native_type` and `native_swipe` press native-only controls (like native tab bars), type on the keyboard and swipe. They work on the iOS Simulator, a physical iPhone and Android. On iOS, Buoy taps the way Xcode does. Old Xcode uses [idb](https://fbidb.io) instead. Android needs adb. A real tap won't go through a Buoy panel by mistake. If Buoy's panel covers the spot, the tap stops and tells you. `list_devices` shows where each app runs and which of these work there.
@@ -251,3 +252,7 @@ No. A free account gets the basic MCP: reading the screen, taps, flows, screensh
 ### Does the MCP server work with Flutter?
 
 Yes — React Native and Flutter apps connect to the same broker and the same server. A few capabilities are React Native–only today, and those are called out inline in the docs.
+
+## Memory checks
+
+`memory_check` starts or stops a route loop. `get_memory_leaks` reads the report. Checks need Pro and a native dev build. Start returns a `runId` at once. Poll for suspects and byte growth. Missing reads stay `null`. An empty list without GC proof does not prove clean. See [Memory Leaks](./tools/memory-leaks) for fields and setup.

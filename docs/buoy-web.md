@@ -36,6 +36,14 @@ Get Buoy Web from the [Chrome Web Store](https://chromewebstore.google.com/detai
 
 Now ask it to do something, like "Find the weather in Provo this weekend." It works in that tab and tells you what it found. Its tabs sit in a green "Buoy" tab group. The page glows green while it works.
 
+The group's name shows what Ask Buoy is doing. You can see it from any tab. It says "⌛ Buoy" while it works, "🔔 Buoy" when it needs you and "✅ Buoy" when it's done.
+
+More ways to ask:
+
+- **Right-click:** pick some text or a link, right-click it, and choose **Ask Buoy about this**. The panel opens with it in the message box.
+- **@ a tab:** type @ in the message box and pick one of your tabs. Buoy reads that tab once, when you send.
+- **Shortcut:** press Alt+Shift+B to open the panel. You can change it at `chrome://extensions/shortcuts`.
+
 The first time it clicks or types on a site in a chat, it asks you. Pick **Always allow** for sites you trust. It also asks before it clicks a button with a word like Buy, Pay, Send, Post or Delete. It finds those buttons by their words, so it can miss some. Watch what it does on sites where it can spend money.
 
 ### Your rules
@@ -69,17 +77,22 @@ No extension? Buoy Web still works with your AI tool. It opens its own Chrome wi
 
 Each step is a real mouse click or key press. The reply says what changed on the page. So the AI rarely needs to read the page again. That's what makes it fast.
 
-The tools are `open`, `read`, `click`, `type`, `key`, `wait`, `scroll`, `drag`, `hover`, `select`, `tabs` and `dialog`. Your AI coding tool also gets `upload` and `screenshot`.
+The tools are `open`, `read`, `click`, `type`, `key`, `wait`, `scroll`, `drag`, `hover`, `select`, `tabs`, `dialog` and `logs`. Your AI coding tool also gets `upload` and `screenshot`.
+
+`logs` shows the page's console errors and its web calls that failed. The AI uses it to find out why a page is broken. It hides the secret parts of links, like tokens and keys.
 
 ## Safety
 
-- Ask Buoy only uses the tab you opened it on, plus tabs that tab opens. Your AI coding tool only uses tabs it opened. Neither one can see, switch to or close your other tabs.
+- Ask Buoy only uses the tab you opened it on, plus tabs that tab opens. Your AI coding tool only uses tabs it opened. Neither one can see, switch to or close your other tabs. The one exception is a tab you share with @. Ask Buoy reads it once, when you send, and doesn't act on it.
 - Buoy's tabs use your Chrome profile, so they have your sign-ins. The AI can act on sites you're signed in to.
-- It never types into password boxes. It also skips code and card boxes when the site marks them. It won't send a form while one of those is empty. The AI asks you to type it on the page.
+- It never types into password boxes. It also skips code and card boxes when the site marks them. It won't send a form while one of those is empty. The AI asks you to type it on the page. Once you type one, the AI only sees that the box is filled. It can't see what you typed.
+- Sometimes a page goes to another site by itself. Then Buoy shows the AI the new page before it clicks or types there.
 - It treats page text as words to read, never as orders.
 - The extension only allows the Chrome calls Buoy needs. It refuses cookies, site storage and other tabs.
 - `upload` only sends files inside your project folder. It never sends secret files like `.env` or keys.
 - With your AI coding tool, your AI never waits on a step forever. After 60 seconds it stops waiting and says why.
+
+While Buoy works, a tag at the bottom of the page says "Buoy is working". It has a **Stop** button. Press it and Buoy stops. With your AI coding tool, Buoy then refuses its next click or key. It tells the AI that you pressed Stop.
 
 Chrome shows a "started debugging this browser" bar while Buoy works. That's Chrome's rule for this kind of extension. If you click Cancel, Buoy stops. The AI asks before it tries again.
 

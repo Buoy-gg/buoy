@@ -14,6 +14,16 @@ Connect an MCP client to supported Buoy tools in a running app. Read captured st
 
 ## Install
 
+Sign in first. Run this in your app's folder:
+
+```bash
+npx --package=@buoy-gg/core buoy login
+```
+
+Your browser opens buoy.gg. Click Allow. This signs in your computer. The MCP uses that sign-in, so it needs no key. As a backup, it reads a key from the env files in the folder it runs in.
+
+Then set up the MCP:
+
 ```bash
 npx -y @buoy-gg/mcp@latest init
 ```
@@ -83,3 +93,13 @@ See the [Chrome Farm guide](https://buoy.gg/buoy/latest/docs/tools/chrome-farm).
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
+
+### Native Profiler
+
+Use `native_profile` to start, stop, or take a timed iOS Simulator or Android trace. Use `get_native_profile` to read it by ID. Start a trace, run a flow, then stop in a `finally` step. Needs a Buoy Pro app. iOS needs Xcode on macOS. Android needs adb on Mac or Linux. The report shows hot functions, hot threads, and busy spans. Each span names its source. RSS and frame counts stay unknown when absent. Under 30 frames means too few to judge. Samples cannot find sleeping hangs. [Read the guide](https://buoy.gg/buoy/latest/docs/tools/native-profiler).
+
+### Memory checks
+
+`memory_check` starts or stops a route loop. `get_memory_leaks` reads its report. Checks need Pro and a native dev build with `@buoy-gg/memory-leaks`. Clock is optional for timer counts. Routes needs a mounted `RouteTracker` for loops.
+
+Start returns a `runId`. Poll for results. The report shows suspects, GC proof and byte growth. A suspect is a clue. An empty list without GC proof does not prove clean. See the [Memory Leaks guide](https://buoy.gg/buoy/latest/docs/tools/memory-leaks).

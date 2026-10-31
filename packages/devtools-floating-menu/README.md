@@ -22,7 +22,7 @@ npm install @buoy-gg/core @buoy-gg/network
 npx --package=@buoy-gg/core buoy login
 ```
 
-Call `Buoy.init` with your key and render `<FloatingDevTools />` inside your existing providers. The login command writes the Expo key to `.env.local`; React Native CLI apps load the key through their own environment config.
+Put `<FloatingDevTools />` inside your app's providers. The login command signs you in. It writes a dev token for dev builds. On Expo, the token goes in `.env.development.local`. Buoy reads it by itself. React Native CLI apps get `BUOY_KEY` in `.env.local`. Pass it to `Buoy.init` with your own env setup. A key from buoy.gg still works as a backup.
 
 The [Quick start](https://buoy.gg/buoy/latest/docs/quick-start) walks through the full setup, and [every tool](https://buoy.gg/buoy/latest/docs/overview) has its own guide.
 

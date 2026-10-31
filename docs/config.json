@@ -480,6 +480,10 @@
               "to": "tools/camera"
             },
             {
+              "label": "Native Profiler",
+              "to": "tools/native-profiler"
+            },
+            {
               "label": "Environment Inspector",
               "to": "tools/env"
             },
@@ -512,12 +516,24 @@
               "to": "tools/scenarios"
             },
             {
+              "label": "Bug Links",
+              "to": "tools/bug-links"
+            },
+            {
+              "label": "Memory Leaks",
+              "to": "tools/memory-leaks"
+            },
+            {
               "label": "Clock",
               "to": "tools/clock"
             },
             {
               "label": "Lifecycle",
               "to": "tools/lifecycle"
+            },
+            {
+              "label": "OTA Update Inspector",
+              "to": "tools/ota-update-inspector"
             },
             {
               "label": "Location",
@@ -737,12 +753,24 @@
               "to": "tools/scenarios"
             },
             {
+              "label": "Bug Links",
+              "to": "tools/bug-links"
+            },
+            {
+              "label": "Memory Leaks",
+              "to": "tools/memory-leaks"
+            },
+            {
               "label": "Clock",
               "to": "tools/clock"
             },
             {
               "label": "Lifecycle",
               "to": "tools/lifecycle"
+            },
+            {
+              "label": "OTA Update Inspector",
+              "to": "tools/ota-update-inspector"
             },
             {
               "label": "Location",

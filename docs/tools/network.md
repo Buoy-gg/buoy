@@ -73,7 +73,7 @@ A rule created from a request matches its endpoint, with the query string replac
 
 Patterns use `*` globs against the full URL. For example, `*/v1/users*` matches that path on any host. A pattern that starts with `/` is a path on any host: `/v1/users` matches `https://api.example.com/v1/users`, and `/v1/users*` also matches it with a query string. The first enabled rule matching the URL and method wins. Selecting `POST` matches POST requests; it does not change the request method or outgoing body.
 
-Rules persist across app restarts. If they remain armed and untouched across three launches, Buoy pauses them and offers a control to resume them. The master switch disables overrides while retaining the rules.
+Rules persist across app restarts. If they remain armed and untouched across three launches, Buoy pauses them and offers a control to resume them. In a browser, each new tab counts as a launch and reloading the same tab doesn't, so rules keep working while you reload. The master switch disables overrides while retaining the rules.
 
 Overridden requests appear in an `OVERRIDDEN` group and carry a flask icon. The toolbar shows an active-rule count.
 
@@ -103,6 +103,75 @@ Large bodies can be truncated in stored snapshots, and storage budgeting can rem
 Desktop changes pins and saves on the connected device. Saving there uses the device's snapshot, with the same storage limits.
 
 
+## Sockets
+
+Buoy shows each WebSocket your app opens. That covers chat, live updates and any other socket. Open **Sockets** from the ⋯ menu. A button also shows up in the bar once your app opens a socket. It turns green while one is open.
+
+### What you see
+
+- A card for each open socket. It says how long it has been up. If it came after failed tries, it says which try this is. With no socket open, you see the last one that closed.
+- Each message, newest first. ↑ means your app sent it. ↓ means your app got it.
+- Open and close lines between the messages. You can see where a socket dropped and came back.
+- Pings and pongs fold into one heartbeat count on the card. Tap the count to show them.
+- A socket that never opened and closed with 1006 says "couldn't connect". One that opened first says "lost connection".
+- Three or more fast repeats fold into one row, like `chat.typing ×18`. Tap the row to see each one.
+- A chat row shows its text first, like `"hey!"`.
+
+Tap a message to see all of it. If it was a request, its reply shows below it, with the time the reply took.
+
+Buoy reads each message's name from `type`, `event`, `op`, `action` or `method`. It pairs a request with its reply by `requestId`, `id` or `ref`. It reads socket.io and Phoenix Channels messages too.
+
+Socket opens and closes also show in [Events](./events). Desktop shows the same Sockets screen for the device you pick.
+
+### Problems Buoy finds
+
+Rows with a problem turn red. Problems from the last 2 minutes also show in a red bar at the top, with the time.
+
+- **No reply.** A request got no reply in 10 seconds. Buoy only checks message types that got a reply before. So a message the server never answers, like typing, is never flagged. If the socket closes first, the close row tells you why.
+- **Reconnect storm.** A socket opened more than 3 times in 15 seconds.
+- **Sign-in loop.** Sign-in failed 3 times in 2 minutes. That means a close with code 1008, or a message like `auth.expired`.
+- **Can't connect.** 3 tries in a row closed before they opened. The server may be down.
+- **Two sockets.** Two sockets are open to the same URL at once.
+- **Sent while closed.** Your app sent a message on a socket that was not open.
+
+### Tricks
+
+Tricks break the socket on purpose. Your app's real code handles each one. Tricks need Pro.
+
+- **Push to app** hands your app a message as if the server sent it. Try `{"type":"auth.expired"}`.
+- **Send to server** sends a message on the socket.
+- **Drop it** closes with code 1006, like lost signal. On iOS, a real lost link often closes as 1001 instead. So check for both.
+- **Kick out** closes with code 1008, like a bad token.
+- **Server going away** closes with code 1001, like a deploy.
+- **Freeze** keeps the socket looking open, but nothing gets through. It tests your ping check.
+- **Block** drops open sockets, and each new one fails. It tests your backoff.
+
+Buoy marks every fake message. **Reset all** turns Freeze and Block off. Network's offline mode drops sockets too.
+
+### Secrets
+
+Buoy hides secrets before it keeps a message. That means fields like `token` and `password`, any JWT, and the payload of a sign-in message. They show as `[hidden]`. If you send that message again, `[hidden]` is what goes out.
+
+### Limits
+
+- Buoy sees sockets made after the Network tool loads. In dev builds, that is at app start.
+- It keeps the last 1,000 messages. A message over 64 KB is cut.
+- It watches the JavaScript `WebSocket`. Sockets made in native code are not seen.
+- The real ping and pong frames never reach JavaScript. Buoy sees only your app's own ping messages.
+- Metro, React DevTools and Buoy's own sockets are left out.
+
+### Use MCP
+
+`get_sockets` lists the open sockets, the last few closed ones, the problems and the last 50 messages. Add `type: "chat.*"` or `problems: true` to narrow it down. `includeBodies: true` shows up to 4,000 characters of each message. For one whole message, pass its `frameId`.
+
+`socket_action` runs the tricks:
+
+```json
+{ "action": "inject", "data": { "type": "auth.expired" } }
+```
+
+The actions are `inject`, `send`, `close`, `freeze`, `unfreeze`, `block`, `unblock`, `reset` and `clear`. When one socket is open, you can leave out `socketId`.
+
 ## What's Next
 
 - [Storage Inspector](./storage): inspect AsyncStorage and registered MMKV instances
@@ -119,19 +188,35 @@ Install Buoy's core and Network packages, configure your account, and open Netwo
 
 It captures requests from Axios and HTTP-based GraphQL clients when they use the instrumented fetch or XHR APIs. Supported GraphQL payloads include operation names and variables. Other transports may bypass capture.
 
+### Does it show WebSockets?
+
+Yes. Open **Sockets** from the ⋯ menu. It shows each socket, its messages and the problems Buoy finds. See [Sockets](#sockets).
+
 ### Can I inspect network traffic in a production build?
 
 Production access requires Pro and an app that deliberately exposes the tool to authorized users. Test capture in your target build. Response overrides remain development-only.
 
 ## Network conditions (development preview)
 
-The React Native Network tool has four conditions: Normal, Offline (requests), Slow (+500 ms), and Very slow (+2000 ms). An admitted Free or Pro account can select them in a development build. Open **⋯ → Network throttling** to minimize the Network tool and show a compact floating controller. Tap the signal icon to cycle through No throttling, Slow, Very slow and Offline. Changes apply immediately; the icon and delay show the applied profile. The profile text is a label and can be dragged to move the strip. Close restores Normal and dismisses the strip. Drag the background, delay label or grip to move the strip. Buttons keep their tap actions. In React Native development builds, an open strip returns after reload at its saved position, including when hidden at the edge. Close keeps it closed across reloads. The condition resets to No throttling. Tap the grip to hide and restore. Hiding keeps conditions active.
+Use **⋯ → Network throttling** to open the small strip.
+Tap its signal icon to cycle through the four old modes.
+These are No throttling, Slow, Very slow, and Offline.
+Use **⋯ → Speed and link state** for the new modes.
+The strip opens with the full controls shown.
+Tap Done to hide the controls. Tap Edit to show them.
+The strip shows the active speed. Drag it to move it.
+On Android, drag by the grip while you edit.
+Close clears both controls. Hide keeps them on.
+The strip keeps its place on reload. The speed resets.
 
-These affect new HTTP(S) calls through global fetch and React Native XHR. Offline rejects them before dispatch; latency adds a wait before dispatch. Conditions do not disconnect Wi-Fi, change NetInfo, or throttle bandwidth. Imported native transports, images and WebSockets may bypass the hooks.
-
-Pending calls retain their starting profile. Offline takes precedence over authored override rules; latency adds to their delay. During active simulation, a finite XHR timeout starts at `send()` and includes artificial waits. Normal keeps the platform's timeout semantics.
-
-Closing the panel, pausing its list, clearing requests or filtering them keeps conditions active. Select No throttling to clear them. A full JS reload or loss of account access resets them automatically. Native simulator and device validation is still pending for this preview.
+Calls keep the speed that was set when they began.
+Offline wins over mock rules. Speed waits add to rule waits.
+With a speed set, XHR timeouts count from `send()`.
+This includes the wait and all paced byte reads.
+Normal keeps the app's own timeout rules.
+Pause, clear, and filter keep the test state on.
+Loss of account access clears both controls.
+See [Test a slow link](#test-a-slow-link) for scope.
 
 ## Web support
 
@@ -144,3 +229,91 @@ The capture control reads “Pause network capture” while capture is enabled a
 Network Monitor is also part of [Buoy for Swift](../swift/overview) for SwiftUI and UIKit apps. Setup and what the Swift version covers are in the [Swift tools guide](../swift/tools#network).
 
 Buoy keeps its own web calls out of this view. App calls still show when they use the same files.
+
+## Test a slow link
+
+Use a dev build. Sign in with your account.
+Use the app, Desktop, or MCP to set them.
+App reload clears them. No throttling adds no byte wrapper or cap timer.
+Normal capture still has its own cost. No throttling clears both controls.
+The chip stays on while a test state is set.
+
+| Speed | Added wait | Down bytes/s | Up bytes/s |
+| --- | --- | ---: | ---: |
+| Slow 3G | 2000 ms | 50000 | 50000 |
+| Slow 4G | 562.5 ms | 180000 | 84375 |
+| Fast 4G | 165 ms | 1012500 | 168750 |
+
+Down caps pace byte reads to the app in JS.
+Up caps wait before send, based on body bytes.
+For gzip, down caps count unpacked body bytes.
+Upload time is simulated. The socket is not paced.
+XHR upload progress shows that simulated wait where supported.
+Each call has its own cap. Slow and Very slow only add waits.
+Text, bytes and Blob uploads work with the speed caps.
+FormData adds a wait for the parts we can size.
+This includes text, bytes, Blob, and files with a `size`.
+Parts with no known size pass through with latency only.
+Multipart headers and boundaries are not counted.
+Streams pass through with latency only, without being read first.
+The list, detail, and MCP show each cap gap.
+They say `upload cap partial: size unknown` when some bytes count.
+With no known bytes, they say `upload cap not applied: size unknown`.
+
+| Path | What changes |
+| --- | --- |
+| Global fetch | Offline, waits, and paced JS body reads. |
+| RN XHR and Axios XHR | Offline, waits, progress, and timed final load. |
+| FormData uploads | Wait for known parts; mark the cap as partial. |
+| Upload streams or files with no known size | Latency only for those bytes; show the cap gap. |
+| Browser XHR | Offline and waits. RN byte hooks are needed for caps. |
+| WebSocket | Nothing. |
+| Native images, SDKs and file transfers | Nothing. |
+| Direct `expo/fetch` or saved native fetch refs | May bypass the hooks. |
+| NetInfo and Expo Network | App link state, with the early hook. |
+
+Native code may hold bytes before the app reads them.
+This tool does not model packet loss or change radios.
+Cached app data may still show when calls fail.
+
+### Change what the app thinks
+
+In the dev entry, load the peer's hook before app imports:
+
+```ts
+import '@buoy-gg/network/netinfo';
+// Use this too if the app uses Expo Network:
+import '@buoy-gg/network/expo-network';
+```
+
+Use only hooks whose peers are already in the app.
+Tested peers are NetInfo 12 and Expo Network 56.
+These hooks add no native code. No app rebuild is needed.
+Late setup shows a gap. Fix the order, then reload.
+
+Choose Real link, Offline, Wi-Fi, Cellular, or No internet.
+No internet means Wi-Fi with no internet access.
+Follow speed uses Offline when the speed is Offline.
+Otherwise it uses the real state. Web calls stay separate.
+Restore emits the latest real state, even if still offline.
+
+NetInfo covers `fetch`, `refresh`, `addEventListener`, and `useNetInfo`.
+Isolated `useNetInfoInstance` is outside the tested scope.
+Expo covers `getNetworkStateAsync`, `addNetworkStateListener`, and `useNetworkState`.
+IP and airplane-mode reads stay real.
+
+### Use MCP
+
+```json
+{ "action": "set", "profile": "slow3g", "connection": "cellular" }
+```
+
+Send this to `network_conditions`. Read with `action: "get"`.
+Use `deviceId` to choose a device when needed.
+Set needs at least one of `profile` and `connection`.
+Profiles are `normal`, `offline`, `slow`, `verySlow`, `slow3g`, `slow4g`, `fast4g`.
+Link states are `auto`, `real`, `offline`, `wifi`, `cellular`, `noInternet`.
+A profile-only `normal` clears both controls for old clients.
+An explicit link state can be set with `normal`.
+The device sends its state and rates. It shows hook support and scope too.
+Desktop uses that same state and checks it on reconnect.
