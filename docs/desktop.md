@@ -22,6 +22,8 @@ React Native and Flutter devices speak the **same protocol**, so they show up si
 
 The download button above grabs the right build for your machine automatically; every build for macOS, Windows, and Linux is on the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). It auto-updates, so you stay on the latest build. Buoy Desktop is free to use — a [Buoy Pro license](https://buoy.gg/pricing) unlocks full history and unlimited capture, See pricing for current plan allowances.
 
+On a Mac, the download is a `.dmg`. Open it and drag Buoy into Applications. If you open Buoy from somewhere else, it offers to move itself there, because it updates itself from Applications.
+
 ## Connect your app
 
 Buoy tools sync to a local broker on **port 42831**. Launch Buoy Desktop first; it starts the broker and auto-detects connected devices. Use the device switcher in the title bar to choose which device every tool inspects — every install of your app is its own entry, named after the app and hardware (`Acme App (iPhone 17 Pro · 2c1d)`). If no device appears, the dashboard shows a troubleshooting panel with your machine's exact URLs and a test you can run from the phone's browser.

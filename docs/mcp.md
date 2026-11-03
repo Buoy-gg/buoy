@@ -32,6 +32,7 @@ A free account gets the basic MCP. Your AI can use the app the way a person does
 - Read logs: `get_console`
 - See web calls: `get_network_requests` (the list, not the bodies)
 - Get a quick summary: `get_triage` (storage key names, not values)
+- Find out why Buoy itself is not working: `buoy_doctor`. It reads the Desktop log and versions, and works even before you sign in. In Buoy Desktop, **Report a problem** copies a prompt that asks your AI to run it.
 
 Free also gets [Buoy Optimize](./optimize), with no cap on speed tests or sims. Free shows what is faster. Pro shows why.
 
