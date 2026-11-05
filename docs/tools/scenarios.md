@@ -141,7 +141,8 @@ How it works:
 
 - A team scenario only shows in the app it came from. Buoy uses the bundle id on a phone, and the site's address on the web.
 - Your teammates can run it, but they can't change it. **Make an editable copy** saves their own copy.
-- The person who shared it can take it off the list with **Remove from team**. So can a team admin, here or on the [Team page](https://buoy.gg/dashboard/team).
+- The person who shared it can take it off the list with **Remove from team**. So can a team admin, here or on the [Scenarios page](https://buoy.gg/dashboard/scenarios).
+- You can choose who sees it. On the [Scenarios page](https://buoy.gg/dashboard/scenarios), tap a role such as support to turn it off. The person who shared it or a team admin can do this. They always see it. A role that is off won't get it the next time Scenarios pulls the list.
 - Scenarios pulls the list each time you open it. **Refresh** pulls it now. A copy stays on the device, so the list shows offline too.
 - Only a person can share. The MCP, Desktop and Ask Buoy can run a team scenario, but they can't share or remove one.
 - You need a Buoy sign-in on the team: `buoy login`, or sign in with a code. A plain license key or a bot key gets no team list.
