@@ -173,6 +173,8 @@ People get a tool change at their next refresh, within 12 hours. To get it now, 
 
 You don't have to switch. A key you already use keeps working everywhere, and keys are staying. Use one if you'd rather not sign in, or for a build where no one can sign in.
 
+To change accounts on a phone, open the dial's settings and go to the Pro tab. Tap Sign out. This ends your sign-in on this device, and it turns off any key too. A key built into the app stays off, even after a restart. Then sign in with a code, or tap "Use the Buoy key again". The code sign-in needs `app:` plus your app's id at buoy.gg/dashboard/sites.
+
 ## Keys for bots and CI
 
 Bots and CI can't click a sign-in button. On the Team page, a team admin can make a bot key. It starts with `bsk1_`. You see it once, so copy it right away.

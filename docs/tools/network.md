@@ -5,7 +5,7 @@ id: tools-network
 description: "Inspect HTTP requests from supported clients in your React Native app — URLs, headers, timing, and errors — live on the device, no Flipper or proxy required."
 ---
 
-Inspect HTTP requests on your device: URLs, headers, request and response bodies, timing, and errors. Use development-only overrides to check how your app handles failures without changing the server.
+Inspect HTTP requests on your device: URLs, headers, request and response bodies, timing, and errors. Use overrides to check how your app handles failures without changing the server.
 
 <!-- ::platform-badge platform="both" -->
 
@@ -47,7 +47,7 @@ Use the status code and error text alongside the row color to distinguish succes
 
 ## Override Responses
 
-To check an error state in a development build:
+To check an error state:
 
 1. Make a request and open its details.
 2. Tap **Override** and choose **Server error 500**.
@@ -77,7 +77,7 @@ Rules persist across app restarts. If they remain armed and untouched across thr
 
 Overridden requests appear in an `OVERRIDDEN` group and carry a flask icon. The toolbar shows an active-rule count.
 
-Overrides run only in development, skip `OPTIONS` preflights, and exclude Buoy's own license requests. Custom response statuses must be between 200 and 599. A directly imported `expo/fetch` can bypass the global fetch hook. Binary response handling depends on the transport and response type; verify the result in your app before relying on an override for a download.
+Overrides skip `OPTIONS` preflights, and exclude Buoy's own license requests. A release build needs a paid plan and the Buoy menu on screen. Custom response statuses must be between 200 and 599. A directly imported `expo/fetch` can bypass the global fetch hook. Binary response handling depends on the transport and response type; verify the result in your app before relying on an override for a download.
 
 Free access allows one active override; adding another replaces it. Pro allows up to 50. You can also manage device rules from Desktop or through the `network_override` MCP tool, subject to the connection's account and plan requirements.
 
@@ -194,9 +194,17 @@ Yes. Open **Sockets** from the ⋯ menu. It shows each socket, its messages and 
 
 ### Can I inspect network traffic in a production build?
 
-Production access requires Pro and an app that deliberately exposes the tool to authorized users. Test capture in your target build. Response overrides remain development-only.
+Production access requires Pro and an app that deliberately exposes the tool to authorized users. Test capture in your target build.
 
-## Network conditions (development preview)
+### Do overrides work in a release build?
+
+Yes, in React Native. Overrides and slow or offline modes work with a paid plan while the Buoy menu is on screen. An amber FAKE NETWORK pill shows the whole time. Press and hold it to stop.
+
+Nothing is faked with no paid plan, or with no menu, as in headless mode. A web call that a rule matches waits up to 3 seconds for the menu when the app starts. A direct `XMLHttpRequest` at that moment does not wait, so it goes out for real.
+
+Offline also reaches sockets in a release build. New ones fail. One that Buoy already watches closes. One opened before Buoy started watching stays open.
+
+## Network conditions (preview)
 
 Use **⋯ → Network throttling** to open the small strip.
 Tap its signal icon to cycle through the four old modes.
@@ -232,7 +240,7 @@ Buoy keeps its own web calls out of this view. App calls still show when they us
 
 ## Test a slow link
 
-Use a dev build. Sign in with your account.
+Use a dev build, or a release build with a paid plan and the Buoy menu on screen. Sign in with your account.
 Use the app, Desktop, or MCP to set them.
 App reload clears them. No throttling adds no byte wrapper or cap timer.
 Normal capture still has its own cost. No throttling clears both controls.
@@ -267,7 +275,7 @@ With no known bytes, they say `upload cap not applied: size unknown`.
 | FormData uploads | Wait for known parts; mark the cap as partial. |
 | Upload streams or files with no known size | Latency only for those bytes; show the cap gap. |
 | Browser XHR | Offline and waits. RN byte hooks are needed for caps. |
-| WebSocket | Nothing. |
+| WebSocket | Nothing, except in Offline. |
 | Native images, SDKs and file transfers | Nothing. |
 | Direct `expo/fetch` or saved native fetch refs | May bypass the hooks. |
 | NetInfo and Expo Network | App link state, with the early hook. |

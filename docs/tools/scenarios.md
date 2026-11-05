@@ -204,7 +204,7 @@ After `run` resolves, assert the expected app state before driving the flow. A c
 
 ## Safety
 
-- **Development builds only.** The runner refuses to execute when `__DEV__` is false, with a release-lane test proving it. Scenario definitions in a shipped app are inert data.
+- **Release builds need a paid plan.** In a React Native release build, a scenario runs only with a paid plan and the Buoy menu on screen. If either goes away, the run stops before its next step. With neither, a saved scenario does nothing. Swift, Android and MAUI still run scenarios in development builds only.
 - **The banner is not optional.** It can be collapsed to a small amber pill; it cannot be turned off while a scenario is active.
 - **A scenario can't run a scenario.** Recursion is refused in pre-flight.
 - **Your own traffic is protected.** Override steps flow through the shipped engine, so its exclusions (license checks, the broker, Metro) and its `OPTIONS` skip apply automatically.

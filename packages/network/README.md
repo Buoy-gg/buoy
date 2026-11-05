@@ -32,7 +32,7 @@ Open **⋯ → Sockets** to see each WebSocket your app opens. You see each mess
 
 The MCP tools are `get_sockets` and `socket_action`. See the [Sockets guide](https://buoy.gg/buoy/latest/docs/tools/network#sockets).
 
-## Slow links in dev builds
+## Slow links
 
 Open **⋯ → Speed and link state** in Network.
 The floating strip stays on while you test.
@@ -54,14 +54,14 @@ The count skips headers and the bytes between fields.
 Streams use just that wait. We do not read them first.
 The list, detail, and MCP show each cap gap.
 
-WebSocket, native images, native SDKs and file transfers stay real.
+Native images, native SDKs and file transfers stay real. WebSocket stays real too, except in Offline.
 Direct `expo/fetch` imports and saved fetch refs may bypass hooks.
 Local file reads and Buoy's own web calls stay real.
 
 The chip stays on when you close the tool.
 No throttling clears both speed and app link state.
 App reload clears them too. No throttling adds no byte wrapper or cap timer.
-Normal capture still has its own cost. These controls stay off in a release build.
+Normal capture still has its own cost. In a release build, these controls need a paid plan and the Buoy menu on screen.
 
 ### App link state
 

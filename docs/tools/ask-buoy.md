@@ -28,7 +28,7 @@ A few things people ask:
 - **Plan.** Pro, Business or a trial. See [pricing](https://buoy.gg/pricing).
 - **Tools.** Ask Buoy can only use tools you installed. Set those up first.
 - **Versions.** Keep all Buoy packages on the same version. Hosted AI needs 7.0.54 or later. Check with `npm ls @buoy-gg/license`.
-- **Build.** Use a dev build for fake web calls and for tapping through screens. Some of those actions only work when `__DEV__` is true. A release build can still read data, sign in as a test user and change screens. Ask Buoy refuses what can't work in your build, and says why.
+- **Build.** Use a dev build for tapping through screens. Some of those actions only work when `__DEV__` is true. A release build can still read data, sign in as a test user and change screens. With a paid plan, it can also fake web calls. Ask Buoy refuses what can't work in your build, and says why.
 - **Web.** Import from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup).
 
 ## Installation

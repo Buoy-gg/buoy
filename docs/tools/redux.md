@@ -215,7 +215,7 @@ JUMP is also disabled on older actions whose raw state has been released. Buoy k
 
 ## Web support
 
-Use the app’s existing Redux provider. The browser host mounts capture and exposes the shared state and action panels. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
+Use the app’s existing Redux provider. On the web, it needs `react-redux` 8.1 or newer. The browser host mounts capture and exposes the shared state and action panels. Import it from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup) for registration, dependencies, and browser boundaries.
 
 ## Angular
 

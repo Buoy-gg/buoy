@@ -88,7 +88,7 @@ Open the link in a browser. You'll see the steps, the screen, the errors and the
 
 ## Load a bug in your app
 
-This is the best part. Load the bug into your own dev build, and the bug shows up there:
+This is the best part. Load the bug into your own build, and the bug shows up there:
 
 - From Claude Code or Codex: on the bug page, tap **Copy link for Claude Code**. Then say "Load the bug link on my clipboard in my sim." Buoy's `load_bug_case` tool reads the link from your clipboard. So the key never goes in the chat.
 - On a phone: open Bug Links, paste the link, and tap **Load this bug here**.
@@ -107,7 +107,13 @@ Some bugs need the reporter's phone, not just their data. If your app version, l
 
 Some apps read a value only when they start, like a feature flag. Turn on **Restart after loading**. Buoy restarts the app, then loads the bug again.
 
-Loading needs a dev build. Release builds never fake web calls.
+In a React Native release build, loading needs a paid plan and the Buoy menu on screen. Other platforms still need a dev build.
+
+A release build can't load a bug's state into a plain Redux store. To change that, wrap your root reducer in `withBuoyDevTools()`. Restore still works. If the bug's screens saved data in that store, restart the app to clear it.
+
+If your plan or sign-in ends while a bug is loaded in a release build, the recorded replies stop. Every web call stays blocked, so the bug's data can't reach real servers. A pill says so. Sign in to restore your app.
+
+You can also tap the pill to read a warning, then press and hold it to use real calls. The bug's data stays in the app, and it can reach real servers. If no one does either, the block ends by itself after 24 hours.
 
 ## FAQ
 
