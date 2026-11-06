@@ -8,7 +8,7 @@ description: "Meet Buoy for Flutter — in-app devtools for network, state, stor
 
 Buoy provides tools for inspecting Flutter apps: network requests, storage, state, navigation, and performance. Use the in-app menu or connect the app to [Buoy Desktop](../desktop). An AI editor can access supported tools through the [MCP server](../mcp). Free has the basic MCP. Pro adds the full MCP.
 
-Flutter support is in beta. `BuoyDevTools` runs in debug mode; it does not enable tools in profile or release builds.
+Flutter support is in beta. `BuoyDevTools` runs in debug mode. To run it in a release build, see [Release builds](./buoy-devtools#release-builds).
 
 ## Start here
 

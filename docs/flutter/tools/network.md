@@ -36,12 +36,12 @@ Everything riding `dart:io`'s `HttpClient` is captured automatically:
 Using the [`buoy` umbrella](../installation)? It's already included — the Network Monitor self-registers when you wrap your app in `BuoyDevTools`. Standalone, add one call before `runApp`:
 
 ```dart
-import 'package:flutter/foundation.dart';
+import 'package:buoy_core/buoy_core.dart' show buoyCompiledIn;
 import 'package:flutter/widgets.dart';
 import 'package:buoy_network/buoy_network.dart';
 
 void main() {
-  if (kDebugMode) registerBuoyNetwork(); // installs the HTTP hook + registers the tool
+  if (buoyCompiledIn) registerBuoyNetwork(); // installs the HTTP hook + registers the tool
   runApp(const MyApp());
 }
 ```
@@ -106,7 +106,7 @@ Pick an outcome from one grid: `500`, `401`, `404`, `403`, `429`, `503`, `400`, 
 
 Overridden requests pin to the top of the list under an **OVERRIDDEN** heading and carry a flask mark next to their status — a 500 you invented has to be distinguishable from a 500 your backend returned.
 
-**Safety.** Overrides only run in debug builds, never touch Buoy's own licence traffic, and skip `OPTIONS` preflights. One master switch turns everything off without losing your rules.
+**Safety.** Overrides run in debug builds. A release build must [opt in](../buoy-devtools#release-builds), and needs a paid plan and the Buoy menu on screen. An amber FAKE NETWORK pill shows the whole time. Press and hold it to stop. Overrides never touch Buoy's own licence traffic, and skip `OPTIONS` preflights. One master switch turns everything off without losing your rules.
 
 Rules can also be driven from Buoy Desktop and from the `network_override` MCP tool — same rules, same device.
 

@@ -107,7 +107,7 @@ Some bugs need the reporter's phone, not just their data. If your app version, l
 
 Some apps read a value only when they start, like a feature flag. Turn on **Restart after loading**. Buoy restarts the app, then loads the bug again.
 
-In a React Native, Swift, Android or .NET MAUI release build, loading needs a paid plan and the Buoy menu on screen. Other platforms still need a dev build.
+In a React Native, Swift, Android, .NET MAUI or Flutter release build, loading needs a paid plan and the Buoy menu on screen. Flutter must [opt in](../flutter/buoy-devtools#release-builds). Other platforms still need a dev build.
 
 A release build can't load a bug's state into a plain Redux store. To change that, wrap your root reducer in `withBuoyDevTools()`. Restore still works. If the bug's screens saved data in that store, restart the app to clear it.
 

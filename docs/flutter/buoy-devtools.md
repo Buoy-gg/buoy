@@ -99,16 +99,40 @@ BuoyDevTools(
 
 The current sync target and connection state show up in the menu's Settings tab under desktop sync.
 
-## Debug builds only
+## Debug builds by default
 
-`BuoyDevTools` renders your child and nothing else outside a debug build — no button, no dial, no sync, no capture. There is no flag to change that on Flutter yet, This describes initialization managed by the widget; separately initialized code has its own behavior.
+`BuoyDevTools` renders your child and nothing else outside a debug build — no button, no dial, no sync, no capture. [Release builds](#release-builds) has the flag to change that. This describes initialization managed by the widget; separately initialized code has its own behavior.
 
 Two React Native options have no Flutter counterpart today:
 
 - **`environment`** — the RN floating button prints an environment badge (`local`, `dev`, `staging`, `qa`, `prod`). The Flutter bubble doesn't.
-- **`headless` and release-build sync** — RN can mount sync-only with no on-device UI, and can opt a release build into sync with `externalSync.enableInRelease` plus a Pro license. Flutter's debug-only gate means neither applies yet.
+- **`headless`** — RN can mount sync-only with no on-device UI.
 
 Both are on the Flutter roadmap.
+
+## Release builds
+
+A release build has no Buoy tools by default. To keep them in a test build, add this flag:
+
+```bash
+flutter build apk --release --dart-define=BUOY_ENABLE_IN_RELEASE=true
+```
+
+Without the flag, Buoy's tools are left out of your app.
+
+That build needs a Pro or Business plan. A `buoy login` dev token won't work there, so testers sign in with a code:
+
+```dart
+BuoyDevTools(signIn: const BuoySignIn(appId: 'com.acme.shop'), child: child)
+```
+
+First, add `app:` and your app id at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites).
+
+If you guard your own Buoy setup with `kDebugMode`, use `buoyCompiledIn` instead. It is true in debug builds, and in release builds with the flag.
+
+Network rules, slow and offline modes, and Bug Links loading also need the Buoy menu on screen. With no paid plan or no menu, saved rules do nothing. An amber FAKE NETWORK pill shows while a rule or a speed setting is on. Press and hold it to stop.
+
+Keep the flag out of your store build. Android also needs the `INTERNET` permission in your main manifest, which a real app that makes web calls already has.
 
 ## Next Steps
 

@@ -5,7 +5,7 @@ id: flutter-installation
 description: "Step-by-step guide to installing Buoy devtools in a Flutter app — requirements, umbrella or à-la-carte packages, and picking your first tools."
 ---
 
-Install Buoy in an existing Flutter app and open its floating tool menu. The `BuoyDevTools` widget runs in debug mode; in profile and release builds it returns only your app's child widget.
+Install Buoy in an existing Flutter app and open its floating tool menu. The `BuoyDevTools` widget runs in debug mode; in profile and release builds it returns only your app's child widget. To opt in, see [Release builds](./buoy-devtools#release-builds).
 
 ## Requirements
 

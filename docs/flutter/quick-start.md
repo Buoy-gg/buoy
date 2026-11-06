@@ -5,7 +5,7 @@ id: flutter-quick-start
 description: "Get Buoy's floating in-app devtools menu running in your Flutter app in minutes, then reach the same tools from desktop or an AI agent."
 ---
 
-Open Buoy in a Flutter debug build, then inspect a request. You need a Free or Pro Buoy account. Profile and release builds do not show the widget or start its tools.
+Open Buoy in a Flutter debug build, then inspect a request. You need a Free or Pro Buoy account. Profile and release builds do not show the widget or start its tools, unless you [opt in](./buoy-devtools#release-builds).
 
 ## Let your agent do it
 
