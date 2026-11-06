@@ -198,7 +198,7 @@ Production access requires Pro and an app that deliberately exposes the tool to 
 
 ### Do overrides work in a release build?
 
-Yes, in React Native. Overrides and slow or offline modes work with a paid plan while the Buoy menu is on screen. An amber FAKE NETWORK pill shows the whole time. Press and hold it to stop.
+Yes, in React Native, Swift, Android and .NET MAUI. Overrides and slow or offline modes work with a paid plan while the Buoy menu is on screen. An amber FAKE NETWORK pill shows the whole time. Press and hold it to stop.
 
 Nothing is faked with no paid plan, or with no menu, as in headless mode. A web call that a rule matches waits up to 3 seconds for the menu when the app starts. A direct `XMLHttpRequest` at that moment does not wait, so it goes out for real.
 

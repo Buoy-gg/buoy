@@ -101,6 +101,10 @@ We did not try a Windows build.
 
 Release access needs a paid plan.
 Desktop sync also needs `EnableSyncInRelease = true`.
-Network capture and traffic changes stay Debug-only.
+Network capture works with a paid plan.
+Scenarios, Network rules, slow and offline modes, and Bug Links loading also need the Buoy menu on screen.
+With no paid plan or no menu, saved rules and scenarios do nothing.
+An amber FAKE NETWORK pill shows while a rule or a speed setting is on.
+Press and hold it to stop.
 Those runtime rules do not remove the package.
 Use the guards above when you want Buoy left out.

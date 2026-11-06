@@ -44,11 +44,11 @@ Then those calls are hidden here too.
 They show a TEAM badge in Filters.
 Only a team admin can change them, on buoy.gg.
 
-Buoy only sees calls in Debug builds.
+Buoy sees calls in Debug builds, and in Release builds with a paid plan.
 A plain `new HttpClient()` skips Buoy.
 Native SDK calls and web views skip it too.
 You need account access to capture or change calls.
 Some rules need Pro.
-Release builds do not capture or change traffic.
+A Release build needs a paid plan to capture calls. To change them, it also needs the Buoy menu on screen.
 
 See [all MAUI tools](../tools).

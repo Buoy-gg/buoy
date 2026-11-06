@@ -34,7 +34,7 @@ One `import Buoy` brings in every tool:
 | [Images](./tools#images) | Loading, failure, retry, blank and replacement states for `BuoyAsyncImage` |
 | [Notifications](./tools#notifications) | Received notifications, responses, permissions and local test delivery |
 | [Routes](./tools#routes) | Screens, route patterns and navigation |
-| [Scenarios](./tools#scenarios) | Reviewed, repeatable app setups, with recording in development builds |
+| [Scenarios](./tools#scenarios) | Reviewed, repeatable app setups. Recording needs a development build |
 | [Time Machine](./tools#time-machine) | Snapshots and live restore of UserDefaults and MMKV |
 | [Events](./tools#events) | One timeline of network, storage and route activity |
 | [Assets](./tools#assets) | Bundle resource sizes, duplicates and baselines |

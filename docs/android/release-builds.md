@@ -12,8 +12,8 @@ Most apps use the real SDK in debug builds and the no-op in release builds.
 
 ```kotlin
 dependencies {
-    debugImplementation("gg.buoy:buoy-android:0.1.4")
-    releaseImplementation("gg.buoy:buoy-android-noop:0.1.4")
+    debugImplementation("gg.buoy:buoy-android:0.1.5")
+    releaseImplementation("gg.buoy:buoy-android-noop:0.1.5")
 }
 ```
 
@@ -56,9 +56,9 @@ Give that build type its own line, so it gets the real SDK and not the no-op:
 
 ```kotlin
 dependencies {
-    debugImplementation("gg.buoy:buoy-android:0.1.4")
-    "qaImplementation"("gg.buoy:buoy-android:0.1.4")
-    releaseImplementation("gg.buoy:buoy-android-noop:0.1.4")
+    debugImplementation("gg.buoy:buoy-android:0.1.5")
+    "qaImplementation"("gg.buoy:buoy-android:0.1.5")
+    releaseImplementation("gg.buoy:buoy-android-noop:0.1.5")
 }
 ```
 
@@ -74,6 +74,17 @@ Buoy.start(this, BuoyConfig(signIn = BuoySignInConfig()))
 
 First, add `app:` and your package name at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites).
 See [Test builds](./installation#test-builds).
+
+In that build, three tools can fake app state:
+
+- Scenarios
+- Network rules, with slow and offline modes
+- Bug Links loading
+
+They need a paid plan and the Buoy menu on screen.
+With no paid plan or no menu, saved rules and scenarios do nothing.
+An amber FAKE NETWORK pill shows while a rule or a speed setting is on.
+Press and hold it to stop.
 
 If that build turns on R8, keep your `BuildConfig` fields, or the Env tool shows nothing:
 

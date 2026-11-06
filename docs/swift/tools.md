@@ -96,7 +96,7 @@ For accurate duplicate pushes and pops, pass `stack:` to `BuoyRoutes.configure`.
 
 **Record a flow** captures supported taps and text in your app, adds waits for observed navigation, and opens a review before saving. Buoy's own controls and secure text fields are excluded. It also records long presses, switches and sliders. Scroll gestures and state-store shortcuts are not supported.
 
-Running and recording scenarios only work in development builds; see [Release Builds](./release-builds#development-only-features).
+In a release build, running a scenario needs a paid plan and the Buoy menu on screen. Recording needs a development build. See [Release Builds](./release-builds#tools-in-a-release-build).
 
 ## Time Machine
 

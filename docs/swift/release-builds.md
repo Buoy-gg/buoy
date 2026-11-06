@@ -31,12 +31,19 @@ Swift packages cannot be linked only in Debug, so the Buoy framework is embedded
 
 Buoy 0.1.0 adds about 9 MB to an uncompressed arm64 Release build, measured before App Store thinning and compression.
 
+## Tools in a release build
+
+If you start Buoy in a release build, three tools can fake app state:
+
+- Scenarios
+- Network rules, with slow and offline modes
+- Bug Links loading
+
+They need a paid plan and the Buoy menu on screen. With no paid plan or no menu, saved rules and scenarios do nothing. An amber FAKE NETWORK pill shows while a rule or a speed setting is on. Press and hold it to stop.
+
 ## Development-only features
 
-Two features also check the build at runtime, even if Buoy is started:
-
-- Running scenarios is disabled in production builds.
-- UI recording (Scenarios' **Record a flow**) needs a development build.
+UI recording (Scenarios' **Record a flow**) needs a development build.
 
 Buoy treats the simulator and apps signed with a development provisioning profile as development builds. Ad hoc, enterprise, TestFlight and App Store builds are not.
 
