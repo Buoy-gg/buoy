@@ -12,8 +12,8 @@ Most apps use the real SDK in debug builds and the no-op in release builds.
 
 ```kotlin
 dependencies {
-    debugImplementation("gg.buoy:buoy-android:0.1.5")
-    releaseImplementation("gg.buoy:buoy-android-noop:0.1.5")
+    debugImplementation("gg.buoy:buoy-android:0.1.6")
+    releaseImplementation("gg.buoy:buoy-android-noop:0.1.6")
 }
 ```
 
@@ -56,9 +56,9 @@ Give that build type its own line, so it gets the real SDK and not the no-op:
 
 ```kotlin
 dependencies {
-    debugImplementation("gg.buoy:buoy-android:0.1.5")
-    "qaImplementation"("gg.buoy:buoy-android:0.1.5")
-    releaseImplementation("gg.buoy:buoy-android-noop:0.1.5")
+    debugImplementation("gg.buoy:buoy-android:0.1.6")
+    "qaImplementation"("gg.buoy:buoy-android:0.1.6")
+    releaseImplementation("gg.buoy:buoy-android-noop:0.1.6")
 }
 ```
 

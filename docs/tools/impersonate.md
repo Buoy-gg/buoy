@@ -67,6 +67,8 @@ x-impersonate-user-id: user_123
 
 Your backend checks for this header and returns data for the specified user instead of the authenticated admin.
 
+A release build sends the header only with a paid plan and the Buoy menu on screen.
+
 > **Security Note:** Your backend should validate that the authenticated user has admin/impersonation permissions before honoring this header.
 
 ---
