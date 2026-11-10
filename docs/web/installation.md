@@ -232,7 +232,7 @@ Install `@buoy-gg/external-sync` and add `'external-sync': externalSync` to `mod
 
 In development the default broker is the page's hostname on port 42831, which is your machine even when you open the page from a phone on the same Wi-Fi. For another host, pass `externalSync={{ socketURL: 'http://192.168.1.20:42831' }}`. `externalSync={false}` turns the connection off. `headless` keeps capture and remote actions running without the floating menu.
 
-Production builds connect only with a real Pro license and `externalSync.enableInRelease`, and default to `http://localhost:42831`, the Buoy Desktop on the admin's own machine. The first time a page from your production site connects, Buoy Desktop asks whether to allow that site. Production builds refuse plain `http://` to another machine unless you also set `allowInsecureNetwork`, and they refuse Impersonate's user search and start actions unless you pass `releaseActions: ['impersonate']`. See [Release builds](../desktop#release-builds).
+Production builds connect only with a real Pro license and `externalSync.enableInRelease`, and default to `http://localhost:42831`, the Buoy Desktop on the admin's own machine. The first time a page from your production site connects, Buoy Desktop asks whether to allow that site. Production builds refuse plain `http://` to another machine unless you also set `allowInsecureNetwork`, and they refuse every action that changes the app unless you list the tool in `releaseActions`, or pass `releaseActions: ['all']`. Impersonate needs its own name: `releaseActions: ['all', 'impersonate']`. See [Release builds](../desktop#release-builds).
 
 ## Browser boundaries
 

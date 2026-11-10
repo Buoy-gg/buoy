@@ -82,17 +82,36 @@ Release sync carries real user data, such as session tokens in network captures.
 />
 ```
 
-Most tools work the same in a release build — network capture, storage, console, the state tools, routes, images, assets, the performance HUD, and remote actions. Three things stay off, by design and not by choice:
+Most tools work the same in a release build. That means network capture, storage, console, the state tools, routes, images, assets and the performance HUD. Two things stay off:
 
-- **Highlight Updates** (render counts, and the MCP `describe_screen` / `tap_element` / `measure_renders` calls) needs React's DevTools hook, which React only installs in dev builds.
-- **Network response overrides** stay disabled — a shipped build must not be able to mock its own responses.
-- **Reload** falls back to `expo-updates`; without that package installed, `reload_app` reports that it has no mechanism instead of reloading.
+- **Highlight Updates** needs React's DevTools hook. React only installs it in dev builds. This also turns off the MCP `describe_screen`, `tap_element` and `measure_renders` calls.
+- **Reload** falls back to `expo-updates`. Without that package, `reload_app` says it has no way to reload.
 
-Impersonate's remote actions that search users or start an impersonation are also refused in release builds, because they run with the signed-in user's credentials. Stopping an impersonation still works. To allow them from Desktop and the MCP, list the tool:
+#### Release builds are read-only from Desktop and the MCP
+
+A release build runs for real people on real accounts. So Buoy Desktop and the MCP can read each tool, but they can't change the app. A storage write, a response override, a tap or a restore is refused. The error says how to allow it. The tools on the device itself work as before.
+
+To let Desktop and the MCP change one tool, list it:
 
 ```tsx
 <FloatingDevTools
-  externalSync={{ enableInRelease: true, releaseActions: ["impersonate"] }}
+  externalSync={{ enableInRelease: true, releaseActions: ["storage", "network"] }}
+/>
+```
+
+To allow every tool, pass `"all"`:
+
+```tsx
+<FloatingDevTools
+  externalSync={{ enableInRelease: true, releaseActions: ["all"] }}
+/>
+```
+
+Impersonate and the OTA inspector need their own name, even with `"all"`. Impersonate acts as another person, and the OTA inspector changes the code the app runs. Stopping an impersonation always works.
+
+```tsx
+<FloatingDevTools
+  externalSync={{ enableInRelease: true, releaseActions: ["all", "impersonate"] }}
 />
 ```
 
