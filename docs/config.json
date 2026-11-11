@@ -231,6 +231,10 @@
               "to": "telemetry"
             },
             {
+              "label": "Security",
+              "to": "security"
+            },
+            {
               "label": "Sign in with Buoy",
               "to": "sign-in"
             }
@@ -259,6 +263,10 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            },
+            {
+              "label": "Security",
+              "to": "security"
             }
           ]
         },
@@ -276,6 +284,10 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            },
+            {
+              "label": "Security",
+              "to": "security"
             },
             {
               "label": "Sign in with Buoy",
@@ -342,6 +354,10 @@
               "to": "telemetry"
             },
             {
+              "label": "Security",
+              "to": "security"
+            },
+            {
               "label": "Sign in with Buoy",
               "to": "sign-in"
             }
@@ -365,6 +381,10 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            },
+            {
+              "label": "Security",
+              "to": "security"
             }
           ]
         },
@@ -386,6 +406,10 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            },
+            {
+              "label": "Security",
+              "to": "security"
             }
           ]
         },
@@ -415,6 +439,10 @@
             {
               "label": "Telemetry",
               "to": "telemetry"
+            },
+            {
+              "label": "Security",
+              "to": "security"
             }
           ]
         }

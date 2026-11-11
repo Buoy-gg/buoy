@@ -36,7 +36,42 @@ Each app has a device id. One machine can hold an id on many sockets. A second m
 
 Web apps served from your machine or your local network connect as usual. When a page from any other site tries to connect, such as your production site with Buoy turned on for admins, Buoy Desktop asks whether to allow that site. It remembers an Allow; a Don't Allow lasts until Desktop restarts.
 
-To accept connections from this machine only, create `broker-settings.json` containing `{ "allowNetworkDevices": false }` in Buoy Desktop's data folder (`~/Library/Application Support/Buoy` on macOS, `%APPDATA%\Buoy` on Windows, `~/.config/Buoy` on Linux) and restart Desktop, or launch it with `BUOY_BROKER_HOST=127.0.0.1`. Simulators, emulators and Android over USB keep working; phones on Wi-Fi can't connect.
+#### Turn off phones on Wi-Fi
+
+Click the Wi-Fi button at the bottom of Buoy Desktop. Then turn off **Phones on Wi-Fi**.
+
+Now only this Mac or PC can connect. Sims and USB phones still work. A phone on Wi-Fi can't get in.
+
+Your apps come back in a few seconds. Desktop keeps your choice the next time it starts.
+
+You can also start Desktop with `BUOY_BROKER_HOST=127.0.0.1`. Then the switch is locked.
+
+#### Lock it for a whole company
+
+An admin can set rules for every Buoy on a Mac or PC. Put a file named `policy.json` in a folder that only an admin can change.
+
+| System | File |
+|---|---|
+| macOS | `/Library/Application Support/Buoy/policy.json` |
+| Windows | `C:\ProgramData\Buoy\policy.json` |
+| Linux | `/etc/buoy/policy.json` |
+
+```json
+{ "allowNetworkDevices": false, "allowShowSecrets": false }
+```
+
+- `allowNetworkDevices: false` means Buoy only hears this Mac or PC. No one can turn **Phones on Wi-Fi** back on.
+- `allowShowSecrets: false` means no one can turn on **Show secrets**.
+
+A rule you leave out stays allowed. Buoy Desktop and the MCP both read this file.
+
+If the file has a typo, Buoy turns both rules off. They stay off until you fix it. Desktop shows a note.
+
+A tool like Jamf can copy this file to each Mac or PC.
+
+On Windows, make the `Buoy` folder as an admin first. Set it so only admins can write to it.
+
+Buoy checks the file every 30 seconds. A new rule takes hold while Desktop is open.
 
 Traffic between a phone and your machine isn't encrypted, so connect over a network you trust.
 
@@ -144,8 +179,11 @@ It also turns off on its own:
 
 Some more things to know:
 
-- The MCP hides secrets too, even when Desktop shows them. Set `BUOY_SHOW_SECRETS=1` where the MCP runs to turn that off.
+- The MCP never gets real secrets, even when Desktop shows them.
 - An AI agent can't turn the switch on. Only a person in Desktop can.
+- The broker checks this too. Only Buoy Desktop's own window can turn it on. A script that reads `~/.buoy/broker-token` can't.
+- While secrets are shown, only Buoy Desktop's window gets them. Every other program on the broker still gets `[hidden by Buoy]`.
+- A company can turn the switch off for good. See [Lock it for a whole company](#lock-it-for-a-whole-company).
 - Buoy will not write a hidden value back to your app. An edit with `[hidden by Buoy]` in it is refused. Type the real value to change it.
 - A release build keeps secrets hidden. In React Native and web you can allow the switch with `"secrets"`:
 
