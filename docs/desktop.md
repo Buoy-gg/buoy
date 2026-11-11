@@ -115,6 +115,48 @@ Impersonate and the OTA inspector need their own name, even with `"all"`. Impers
 />
 ```
 
+#### Secrets are hidden before they leave the app
+
+Your app covers login tokens, cookies and keys first. Then it sends its data. Buoy Desktop and the MCP see `[hidden by Buoy]` where a secret was. By default, a real token does not reach an AI model or the Wi-Fi.
+
+This works the same in React Native, web, Swift, Flutter, Android and MAUI.
+
+What gets hidden:
+
+- Auth headers and cookies. `Bearer abc123` turns into `Bearer [hidden by Buoy]`.
+- Values under names like `password`, `accessToken` or `apiKey`.
+- Values that look like a token, such as a JWT or a Stripe key.
+- Passwords and tokens inside links.
+- A token Buoy has seen once. It stays hidden in every other tool too.
+
+Names, emails and other user data are not hidden.
+
+No filter is perfect. A secret under a plain name like `v` can get through until Buoy has seen it in a header.
+
+Need the real value? Click **Secrets hidden** at the bottom of Buoy Desktop. The app then sends real values, and the chip says **Secrets shown**. Click it again to hide them.
+
+It also turns off on its own:
+
+- when you pick another device
+- when you close Desktop
+- when the app restarts
+- after 10 minutes with Desktop closed or frozen
+
+Some more things to know:
+
+- The MCP hides secrets too, even when Desktop shows them. Set `BUOY_SHOW_SECRETS=1` where the MCP runs to turn that off.
+- An AI agent can't turn the switch on. Only a person in Desktop can.
+- Buoy will not write a hidden value back to your app. An edit with `[hidden by Buoy]` in it is refused. Type the real value to change it.
+- A release build keeps secrets hidden. In React Native and web you can allow the switch with `"secrets"`:
+
+```tsx
+<FloatingDevTools
+  externalSync={{ enableInRelease: true, releaseActions: ["secrets"] }}
+/>
+```
+
+In Swift, Flutter, Android and MAUI, a release build always hides secrets.
+
 ### Flutter
 
 Run a debug build with `BuoyDevTools` mounted and your account configured. Flutter's widget does not enable this connection in profile or release mode.
