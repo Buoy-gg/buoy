@@ -40,7 +40,7 @@ Let your AI use the web in its own Chrome tabs. It's free and needs no account.
 npx -y @buoy-gg/mcp@latest init --web
 ```
 
-This adds a `buoy-web` server for all your projects. Then add the Buoy Web Chrome extension and restart your editor. It only uses tabs it opened, and it never types passwords or card numbers. See the [Buoy Web guide](https://buoy.gg/buoy/latest/docs/buoy-web).
+This adds a `buoy-web` server for all your projects. Then add the Buoy Web Chrome extension and restart your editor. It only uses tabs it opened. It only types a password or card number that you set up for it as a secret. See the [Buoy Web guide](https://buoy.gg/buoy/latest/docs/buoy-web).
 
 
 ## Read screens

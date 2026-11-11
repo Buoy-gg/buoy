@@ -107,8 +107,8 @@ Buoy Desktop and the MCP both follow this file.
 
 ## How we ship Buoy
 
-- Our npm packages do not run code when you install them. One does: `@buoy-gg/shared-ui` runs a short script that picks your clipboard library.
-- A check runs before each release. It stops any other package that would run code at install.
+- Our npm packages do not run code when you install them.
+- A check runs before each release. It stops any package that would run code at install.
 - We wait 3 days before we take a new version of code we did not write. Most bad releases are caught in that time.
 - Our build steps on GitHub are pinned to exact versions, so they can't change under us.
 - Buoy Desktop for Mac is signed, and Apple checks it before you get it.

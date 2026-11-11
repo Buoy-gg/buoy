@@ -2,7 +2,7 @@
 title: Buoy Web
 seoTitle: "Buoy Web — Ask Buoy in Chrome, and a web MCP for your AI coding tool"
 id: buoy-web
-description: "Buoy Web lets an AI use the web for you, with real clicks. Use Ask Buoy in Chrome's side panel, or let Claude Code, Cursor, Codex or VS Code use Buoy's own tabs. It never types your passwords."
+description: "Buoy Web lets an AI use the web for you, with real clicks. Use Ask Buoy in Chrome's side panel, or let Claude Code, Cursor, Codex or VS Code use Buoy's own tabs. It only types a password you set up for it."
 ---
 
 Buoy Web lets an AI use the web for you. It clicks and types like a person. It only works in the tabs you give it. Your other tabs are left alone.
@@ -51,8 +51,9 @@ The first time it clicks or types on a site in a chat, it asks you. Pick **Alway
 Open the panel's menu and pick **Settings**.
 
 - **Just look:** Ask Buoy can open and read pages. It never clicks or types.
-- **Stop asking:** it skips the site question. It still asks before it clicks a Buy, Send or Delete button. It never types passwords.
+- **Stop asking:** it skips the site question. It still asks before it clicks a Buy, Send or Delete button.
 - **Always allowed:** the sites it acts on without asking. Remove one any time.
+- **Saved passwords:** the [test passwords](#test-passwords) it fills in, one per site. Remove one any time.
 
 ## Your AI coding tool
 
@@ -81,11 +82,63 @@ The tools are `open`, `read`, `click`, `type`, `key`, `wait`, `scroll`, `drag`, 
 
 `logs` shows the page's console errors and its web calls that failed. The AI uses it to find out why a page is broken. It hides the secret parts of links, like tokens and keys.
 
+## Test passwords
+
+Buoy can sign in to your test accounts for you. It works on your dev build, on staging and on your live site. For example: "Log in to haiven.gg as testuser1 to testuser5. Send austin123 a message from each one."
+
+The AI never sees the password. It types `{{secret:NAME}}`, and Buoy types the real password in its place. Each reply shows `{{secret:NAME}}` where the password would be. That goes for page text, links, logs and errors too.
+
+A password only goes to its own site. A password for `haiven.gg` also works on `staging.haiven.gg`. It never goes to any other site. So a fake page can't trick the AI into typing it.
+
+### In Ask Buoy
+
+1. Ask for what you want, like the example above.
+2. The first time a site needs a password, a box shows in the panel. Type the password there, not in the chat.
+3. Leave **Remember for haiven.gg** on. Next time, Ask Buoy won't ask.
+
+If each account has its own password, the box asks once for each one.
+
+You can also write the password in your message, like "the password is Welcome123!". Then it goes to Buoy's AI service with your message. Ask Buoy only types it on the first site it uses it on. The box keeps the password out of the chat, so it's the better way.
+
+Your saved passwords are under **Settings**, in **Saved passwords**. They stay in this Chrome. Click **Remove** to forget one.
+
+### Sign in as someone else
+
+Ask Buoy can sign in to test accounts in its own private window. That window has its own sign-ins, so you stay signed in to your own account. When the AI needs it, Ask Buoy asks you to turn it on once:
+
+1. Click **Open the setting** in the panel.
+2. Turn on **Allow in Incognito** for Buoy Web.
+3. Tell Ask Buoy to go on.
+
+### In your AI coding tool
+
+1. Pick a name, like `TEST_PASSWORD`.
+2. Add `BUOY_SECRET_TEST_PASSWORD` to the `env` of Buoy Web in your editor's MCP config. Set it to the password. It must be 6 or more characters long.
+3. To lock it to one site, also add `BUOY_SECRET_TEST_PASSWORD_SITE`, like `haiven.gg`.
+4. Restart your editor.
+
+```json
+"buoy-web": {
+  "command": "npx",
+  "args": ["-y", "@buoy-gg/mcp@latest", "web"],
+  "env": {
+    "BUOY_SECRET_TEST_PASSWORD": "your test password",
+    "BUOY_SECRET_TEST_PASSWORD_SITE": "haiven.gg"
+  }
+}
+```
+
+Now the AI types `{{secret:TEST_PASSWORD}}` in a password box. Screenshots black out any part of the page that shows the password.
+
+- Buoy only reads names that start with `BUOY_SECRET_`.
+- If the name isn't set, Buoy says which one to add. It types nothing in that form.
+- Plain text still can't go in a password, code or card box. Buoy tells the AI to use `{{secret:NAME}}`.
+
 ## Safety
 
 - Ask Buoy only uses the tab you opened it on, plus tabs that tab opens. Your AI coding tool only uses tabs it opened. Neither one can see, switch to or close your other tabs. The one exception is a tab you share with @. Ask Buoy reads it once, when you send, and doesn't act on it.
 - Buoy's tabs use your Chrome profile, so they have your sign-ins. The AI can act on sites you're signed in to.
-- It never types into password boxes. It also skips code and card boxes when the site marks them. It won't send a form while one of those is empty. The AI asks you to type it on the page. Once you type one, the AI only sees that the box is filled. It can't see what you typed.
+- It never types plain text into password boxes. It also skips code and card boxes when the site marks them. Ask Buoy and your AI coding tool can fill them with a [test password](#test-passwords) you set. It won't send a form while one of those is empty. The AI asks you to type it on the page. Once a box is filled, the AI only sees that it's filled. It can't see what's in it.
 - Sometimes a page goes to another site by itself. Then Buoy shows the AI the new page before it clicks or types there.
 - It treats page text as words to read, never as orders.
 - The extension only allows the Chrome calls Buoy needs. It refuses cookies, site storage and other tabs.
