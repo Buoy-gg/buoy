@@ -48,7 +48,7 @@ npx --package=@buoy-gg/core buoy logout   # sign this computer out
 
 ### If login can't reach buoy.gg
 
-Some VPNs and proxies let your browser reach buoy.gg but block Node. Then `buoy login` says it could not reach buoy.gg. Your browser still signs in the project. The CLI writes your account key to your env file. A Pro or Business key goes in `.env.local`.
+Some VPNs and proxies let your browser reach buoy.gg but block Node. Then `buoy login` says it could not reach buoy.gg. Your browser still signs in the project. The CLI writes your account key to your env file. In Expo, a Pro or Business key goes in `.env.local`. In Vite and Next.js, every key goes in `.env.development.local`, so it stays out of your live site.
 
 This computer stays signed out, so `whoami` says so. It also names the file that has the key. To sign in this computer too, run `buoy login` again when Node can reach buoy.gg.
 
@@ -172,6 +172,8 @@ People get a tool change at their next refresh, within 12 hours. To get it now, 
 ## Keys still work
 
 You don't have to switch. A key you already use keeps working everywhere, and keys are staying. Use one if you'd rather not sign in, or for a build where no one can sign in.
+
+One warning: don't build a key into a live website. A site's code is public, so anyone can copy the key and use your plan. For a live site, use [sign-in](#your-live-site). No key is in the build then.
 
 To change accounts on a phone, open the dial's settings and go to the Pro tab. Tap Sign out. This ends your sign-in on this device, and it turns off any key too. A key built into the app stays off, even after a restart. Then sign in with a code, or tap "Use the Buoy key again". The code sign-in needs `app:` plus your app's id at buoy.gg/dashboard/sites.
 

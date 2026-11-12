@@ -20,7 +20,7 @@ React Native and Flutter devices speak the **same protocol**, so they show up si
 
 ## Install
 
-The download button above grabs the right build for your machine automatically; every build for macOS, Windows, and Linux is on the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). It auto-updates, so you stay on the latest build. Buoy Desktop is free to use — a [Buoy Pro license](https://buoy.gg/pricing) unlocks full history and unlimited capture, See pricing for current plan allowances.
+The download button above grabs the right build for your machine automatically; every build for macOS, Windows, and Linux is on the [GitHub releases page](https://github.com/Buoy-gg/Buoy-Desktop/releases/latest). On Mac and Windows, Buoy tells you when a new build is out, and you pick when to install it. On Linux, it links you to the download page. A few updates are required, like a security fix. Buoy asks you to install those before you go on. Buoy Desktop is free to use — a [Buoy Pro license](https://buoy.gg/pricing) unlocks full history and unlimited capture, See pricing for current plan allowances.
 
 On a Mac, the download is a `.dmg`. Open it and drag Buoy into Applications. If you open Buoy from somewhere else, it offers to move itself there, because it updates itself from Applications.
 
