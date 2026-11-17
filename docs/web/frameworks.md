@@ -301,7 +301,7 @@ Add `@capacitor/app` and `@capacitor/device` if you can. Buoy reads your app's b
 Hosted Ask Buoy needs a real Buoy sign-in, not a key. Pass `signIn` to `BuoyDevTools`. In a Capacitor app, Buoy then shows a QR code and a short code. Open buoy.gg/activate on any device and allow it. Buoy uses your bundle id. To pick a different id, pass `signIn={{ appId: 'com.example.app' }}`.
 
 ```tsx
-<BuoyDevTools signIn askBuoy="hosted" />
+<BuoyDevTools signIn />
 ```
 
 Install `@buoy-gg/ask-buoy` first.

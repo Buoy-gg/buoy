@@ -18,7 +18,7 @@ An AI chat inside your React Native app. It can inspect and act through your ins
 npm install @buoy-gg/core @buoy-gg/ask-buoy
 ```
 
-Ask Buoy requires Pro and a model endpoint you configure, passed to `<FloatingDevTools />` through the `askBuoy` prop. It reports the actions it takes and offers undo where it can; some changes can't be undone.
+Ask Buoy requires Pro. It runs on Buoy's hosted AI by default. To use your own model, pass its endpoint to `<FloatingDevTools />` through the `askBuoy` prop. It reports the actions it takes and offers undo where it can; some changes can't be undone.
 
 The [Ask Buoy guide](https://buoy.gg/buoy/latest/docs/tools/ask-buoy) covers setup, what it captures and its limits. New to Buoy? Start with the [Quick start](https://buoy.gg/buoy/latest/docs/quick-start).
 

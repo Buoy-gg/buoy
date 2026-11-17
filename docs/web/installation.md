@@ -107,7 +107,7 @@ They still load the early hook.
 It stays off unless Buoy ran in that browser in the last week.
 Set `enabled` to choose for yourself.
 It takes the same props as `FloatingDevTools`.
-Pass `askBuoy="hosted"` for hosted Ask Buoy.
+Ask Buoy uses Buoy's AI unless you set your own.
 Mount it inside the providers your tools read.
 
 ### Without the Vite plugin

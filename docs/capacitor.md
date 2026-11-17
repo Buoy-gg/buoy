@@ -180,7 +180,7 @@ npm install @buoy-gg/ask-buoy
 ```
 
 ```tsx
-<BuoyDevTools signIn askBuoy="hosted" />
+<BuoyDevTools signIn />
 ```
 
 You can also use a dev token for other tools.

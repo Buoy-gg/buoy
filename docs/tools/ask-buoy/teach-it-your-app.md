@@ -162,11 +162,11 @@ The default lets it read and make normal changes right away. Big changes wait fo
 - `deny` wins over `allow`.
 - `secureReads: true` lets it read SecureStore values. They are off by default because they are secrets.
 
-The same `policy` works with `hostedAskBuoy({ policy })`.
+The same `policy` works on Buoy's AI. Pass `askBuoy={{ policy }}` with no `endpoint`.
 
 ## Configuration reference
 
-Everything the `askBuoy` prop takes. `hostedAskBuoy()` fills in `endpoint`, `protocol`, `model`, `headers` and `maxTokens` (8192) for you. You can pass it the rest, except `apiKey`, `anthropicVersion` and `requestOverrides`.
+Everything the `askBuoy` prop takes. With no `endpoint`, Ask Buoy uses Buoy's AI. It then fills in `endpoint`, `protocol`, `model`, `headers` and `maxTokens` (8192) for you. You can pass the rest, except `apiKey`, `anthropicVersion` and `requestOverrides`. Buoy drops those.
 
 | Option | Default | What it does |
 |---|---|---|

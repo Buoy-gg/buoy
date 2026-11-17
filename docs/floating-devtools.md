@@ -102,6 +102,40 @@ See [Custom Tools](./custom-tools) for more details on building your own debuggi
 
 The floating button can be dragged anywhere on screen. It remembers its position between sessions, so it stays where your team likes it.
 
+## Hide Buoy
+
+Need Buoy out of the way? Open the menu and tap Settings. Then find **Hide Buoy** and pick how long:
+
+- 5 minutes
+- 1 hour
+- Rest of today
+- Until I turn it back on
+
+Buoy hides on this device only. Your tools keep running, so Buoy Desktop and the MCP server still work.
+
+To bring Buoy back early, tap the top left corner 5 times. On the web you can also press `Alt+Shift+B`. In a dev build, React Native's own dev menu gets a **Show Buoy** item too.
+
+You can hide and show Buoy from code:
+
+```tsx
+import { hideBuoy, showBuoy } from "@buoy-gg/core";
+
+hideBuoy("1h"); // "5m", "1h", "today" or "forever"
+showBuoy();
+```
+
+### Hide Buoy in all your apps
+
+You can also hide Buoy from the web. Sign in at [buoy.gg](https://buoy.gg) and open **Dashboard**, then **Settings**. Turn **Show Buoy** off.
+
+Buoy then hides in every app you are signed in to. Each app picks this up when you open it again, or within 15 minutes. Your tools keep running.
+
+Turn the switch back on to show Buoy again. You can also bring it back inside an app with 5 taps in the top left corner. That turns the switch back on for all your apps.
+
+## Tips show once
+
+Buoy shows a few tips the first time you use it. When you close a tip, Buoy saves that to your account. The tip then stays closed on your other devices and apps. To turn every tip off, pass `disableHints`.
+
 ## Beyond the in-app menu
 
 `FloatingDevTools` is also the source of truth for Buoy's other surfaces. The same tools you see in the menu sync out over a local broker, after you install `@buoy-gg/external-sync` and configure the connection. You can then:

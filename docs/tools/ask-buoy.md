@@ -41,16 +41,27 @@ It shows up in the dial as **ASK BUOY**.
 
 ## Hosted Ask Buoy (beta)
 
-This is the easy way. You need no AI key and no server. Buoy runs the AI, and your plan comes with credits each week.
+This is the default. You need no AI key and no server. Buoy runs the AI, and your plan comes with credits each week.
+
+Install the package and add `signIn`. You don't import or set anything else.
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
-import { hostedAskBuoy } from "@buoy-gg/ask-buoy";
 
-<FloatingDevTools signIn askBuoy={hostedAskBuoy({ policy: { readOnly: true } })} />
+<FloatingDevTools signIn />
+```
+
+To set options, pass them in `askBuoy`. Leave out `endpoint`, and it stays on Buoy's AI.
+
+```tsx
+<FloatingDevTools signIn askBuoy={{ policy: { readOnly: true } }} />
 ```
 
 `readOnly` lets it look but not change things. Remove it once you trust what it does.
+
+Before the first ask, the chat says where the question goes. The person taps to agree.
+
+Older code that passes `hostedAskBuoy()` or `askBuoy="hosted"` still works.
 
 Each person signs in with Buoy in your app. They scan the QR code or type the code at buoy.gg/activate. That adds your app to your account's Sites list. On a team, only an admin can add it. See [Sign in with Buoy](../sign-in).
 
@@ -82,7 +93,7 @@ Each error shows a short code and a request id. Tap **Copy details** to copy the
 
 ## Use your own model
 
-Want your data to stay with your own AI company? Point Ask Buoy at your own server.
+Want your data to stay with your own AI company? Point Ask Buoy at your own server. Set `endpoint` and `model`. Then nothing goes to Buoy's AI.
 
 ```tsx
 import { FloatingDevTools } from "@buoy-gg/core";
