@@ -280,11 +280,30 @@ Borders show on views that have a test tag or a label.
 
 ## Ask Buoy
 
-Point Ask Buoy at your model endpoint:
+Ask Buoy runs on Buoy's AI by default.
+You don't set anything. `Buoy.start` turns it on.
+You need no AI key and no server.
+The person must be [signed in](./installation#sign-in) with Buoy.
+Before the first ask, the chat says where the question goes.
+The person taps **Got it** to agree.
+
+To set options, call `hostedAskBuoy`. It stays on Buoy's AI:
+
+```kotlin
+BuoyAskBuoy.configure(hostedAskBuoy(policy = AskBuoyPolicy(readOnly = true)))
+```
+
+It takes `context`, `policy`, `appName` and `maxTokens`.
+Older code that calls `hostedAskBuoy()` still works.
+
+Want to use your own AI? Set `endpoint` and `model`:
 
 ```kotlin
 BuoyAskBuoy.configure(AskBuoyConfig(endpoint = "https://ai.example.com/v1/messages", model = "your-model"))
 ```
+
+Then nothing goes to Buoy's AI.
+To go back to Buoy's AI, call `BuoyAskBuoy.configure(null)`.
 
 Ask Buoy can't take real files yet, on Android or React Native.
 Its "Choose a file" button sends a stand-in name.

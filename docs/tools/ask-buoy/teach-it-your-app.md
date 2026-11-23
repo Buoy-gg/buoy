@@ -24,12 +24,21 @@ context: {
     CartLine: "{ lineId: string; itemId: string; qty: number; unitPrice: number }",
     Offer: "{ code: string; status: 'active' | 'expired'; endsAt: string /* ISO */ }",
   },
+
+  // What each screen is for, by path. Say what it shows and what its menu calls it.
+  screens: {
+    "/store": "Game Store: browse and buy games",
+    "/games": "Game Library: the games you own",
+    "/studio/games": "Your studio's games (developers only)",
+  },
 }
 ```
 
 **Why `types` matters.** Ask Buoy trusts what it sees in the app over what you write. But an empty list has nothing to see. Say someone asks for the first cart line. Without a type, the AI guesses the fields. It might write `quantity` when your app wants `qty`, and your screen shows nothing.
 
 Redux slices and Jotai atoms only send their names. If your data lives there, `types` is how Ask Buoy learns its shape. Add a type for each object it may create, most of all for lists that can be empty.
+
+**Why `screens` matters.** A path alone can't tell screens that sound alike apart. In one app, "my game library" went to the store, and "social hub" went to a page that does not exist. With a note for each screen, Ask Buoy picks by what the screen is. A plain "open X" that fits one screen moves there right away, with no AI call. A web app only lists the pages you have visited, so `screens` also fills in the rest.
 
 Update these when your app changes. They guide the AI, but they don't check anything. Test the changes it makes.
 
@@ -179,7 +188,7 @@ Everything the `askBuoy` prop takes. With no `endpoint`, Ask Buoy uses Buoy's AI
 | `anthropicVersion` | — | The `anthropic-version` header. Not used with `"openai"`. |
 | `requestOverrides` | — | Extra fields added to every request body last, like `temperature`. |
 | `policy` | big changes ask | What it may do without asking. See [above](#rules-for-what-it-may-do). |
-| `context` | — | `{ notes, types, procedures }`. See [above](#teach-it-your-data). |
+| `context` | — | `{ notes, types, screens, procedures }`. See [above](#teach-it-your-data). Add `screenMatch: "off"` to turn off the quick screen pick. |
 | `appName` | the app name | Shown in the header and told to the AI. |
 | `peek` | `true` | When it taps or changes screens, the sheet shrinks for a moment so you see the app. `false` keeps it still. |
 | `persistTranscript` | `true` | Keep the chat after a reload, restart or crash. `false` keeps it in memory only. |

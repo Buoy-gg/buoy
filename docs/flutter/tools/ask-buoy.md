@@ -12,22 +12,34 @@ It can also make changes, like a fake web call.
 It needs Pro, Business or a trial.
 It is in beta.
 
-Use Buoy's hosted AI, or use your own model.
+It runs on Buoy's hosted AI by default.
+You can use your own model instead.
 
 ## Set up chat
 
-Pass `askBuoy` to the `BuoyDevTools` you already have.
-Hosted AI also needs `signIn`.
+Ask Buoy comes with the `BuoyDevTools` you already have.
+You do not need to pass `askBuoy`.
+Hosted AI needs `signIn`.
 
 ```dart
 MaterialApp(
   builder: (context, child) => BuoyDevTools(
     signIn: const BuoySignIn(appId: 'com.example.app'),
-    askBuoy: hostedAskBuoy(
-      policy: {'readOnly': true},
-    ),
     child: child ?? const SizedBox.shrink(),
   ),
+)
+```
+
+To set options, pass `hostedAskBuoy(...)` as `askBuoy`.
+It still uses Buoy's hosted AI.
+
+```dart
+BuoyDevTools(
+  signIn: const BuoySignIn(appId: 'com.example.app'),
+  askBuoy: hostedAskBuoy(
+    policy: {'readOnly': true},
+  ),
+  child: child ?? const SizedBox.shrink(),
 )
 ```
 
@@ -92,6 +104,8 @@ Settings also show your credits for the week.
 ## Use your own model
 
 Point Ask Buoy at your own server.
+Pass an `AskBuoyConfig` with your `endpoint` and `model`.
+Then the chat goes only to your server.
 
 ```dart
 BuoyDevTools(

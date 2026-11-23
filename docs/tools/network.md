@@ -198,7 +198,7 @@ Production access requires Pro and an app that deliberately exposes the tool to 
 
 ### Do overrides work in a release build?
 
-Yes, in React Native, Swift, Android, .NET MAUI and Flutter. Flutter must [opt in](../flutter/buoy-devtools#release-builds). Overrides and slow or offline modes work with a paid plan while the Buoy menu is on screen. An amber FAKE NETWORK pill shows the whole time. Press and hold it to stop.
+Yes, in React Native, on the web, and in Swift, Android, .NET MAUI and Flutter. Flutter must [opt in](../flutter/buoy-devtools#release-builds). Overrides and slow or offline modes work with a paid plan while the Buoy menu is on screen. An amber FAKE NETWORK pill shows the whole time. Press and hold it to stop. On the web, a call made before Buoy knows your plan goes out for real.
 
 Nothing is faked with no paid plan, or with no menu, as in headless mode. A web call that a rule matches waits up to 3 seconds for the menu when the app starts. A direct `XMLHttpRequest` at that moment does not wait, so it goes out for real.
 
@@ -274,11 +274,12 @@ With no known bytes, they say `upload cap not applied: size unknown`.
 | RN XHR and Axios XHR | Offline, waits, progress, and timed final load. |
 | FormData uploads | Wait for known parts; mark the cap as partial. |
 | Upload streams or files with no known size | Latency only for those bytes; show the cap gap. |
-| Browser XHR | Offline and waits. RN byte hooks are needed for caps. |
+| Browser XHR | Offline and waits. A speed cap adds its wait, with no byte pacing. A sync call is never faked. |
 | WebSocket | Nothing, except in Offline. |
 | Native images, SDKs and file transfers | Nothing. |
 | Direct `expo/fetch` or saved native fetch refs | May bypass the hooks. |
 | NetInfo and Expo Network | App link state, with the early hook. |
+| Browser `navigator.onLine` | App link state on a website. No hook to load. |
 
 Native code may hold bytes before the app reads them.
 This tool does not model packet loss or change radios.
@@ -299,7 +300,15 @@ Tested peers are NetInfo 12 and Expo Network 56.
 These hooks add no native code. No app rebuild is needed.
 Late setup shows a gap. Fix the order, then reload.
 
-Choose Real link, Offline, Wi-Fi, Cellular, or No internet.
+A website needs no hook. Buoy changes `navigator.onLine` there.
+Offline makes it read false.
+The page gets an `offline` event, if it was online.
+The page gets `online` when the fake ends, if the real link is up.
+A website can only fake Offline. It has no Wi-Fi or Cellular state.
+A page that locks `navigator.onLine` can't fake its link.
+A page listener set in the capture phase, before Buoy loads, still hears real link events.
+
+In an app, choose Real link, Offline, Wi-Fi, Cellular, or No internet.
 No internet means Wi-Fi with no internet access.
 Follow speed uses Offline when the speed is Offline.
 Otherwise it uses the real state. Web calls stay separate.

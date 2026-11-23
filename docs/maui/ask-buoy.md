@@ -9,12 +9,24 @@ Ask Buoy is a chat inside your MAUI app.
 It reads the live tools you have set up.
 It can help find faults and change test state.
 The chat needs Pro.
+It runs on Buoy's hosted AI by default.
 The hosted chat also needs you to sign in.
 
 ## Set up chat
 
+This is the shortest setup.
+It uses Buoy's hosted AI.
+
+```text
+builder.UseBuoyAskBuoy();
+```
+
+You do not set a host or a model.
+You do not need a model key.
+
 Add the tools your app needs before `Build`.
 Use this with your one `UseBuoy` call.
+You can set options and stay on hosted AI.
 
 ```text
 #if DEBUG
@@ -95,7 +107,9 @@ Read the approval card before you let it run.
 `GetContext` can return fresh notes on each turn.
 Keep model keys on your own server.
 
-The default host is `https://ai.buoy.gg/v1/chat/completions`.
+Hosted AI is the default.
+Its host is `https://ai.buoy.gg/v1/chat/completions`.
+`Context`, `Policy` and `AppName` work with hosted AI.
 For your own gateway, set these fields:
 
 ```text
@@ -112,6 +126,10 @@ builder.UseBuoyAskBuoy(options =>
 
 Supply `GetHeadersAsync` from your app's own auth flow.
 It runs for each web call.
+`Hosted = false` turns hosted AI off.
+Then no chat calls go to Buoy.
+`Headers` and `ApiKey` are for your own gateway.
+Buoy's hosted AI never gets them.
 Use `openai` for an OpenAI-style gateway instead.
 Tool data and chat text go to the chosen host.
 Secure store value reads are off by default.

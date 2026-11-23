@@ -479,6 +479,10 @@
         {
           "label": "Chrome Farm",
           "to": "tools/chrome-farm"
+        },
+        {
+          "label": "Lighthouse",
+          "to": "tools/lighthouse"
         }
       ]
     },

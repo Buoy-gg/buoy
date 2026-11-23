@@ -28,7 +28,7 @@ A few things people ask:
 - **Plan.** Pro, Business or a trial. See [pricing](https://buoy.gg/pricing).
 - **Tools.** Ask Buoy can only use tools you installed. Set those up first.
 - **Versions.** Keep all Buoy packages on the same version. Hosted AI needs 7.0.54 or later. Check with `npm ls @buoy-gg/license`.
-- **Build.** Use a dev build for tapping through screens. Some of those actions only work when `__DEV__` is true. A release build can still read data, sign in as a test user and change screens. With a paid plan, it can also fake web calls. Ask Buoy refuses what can't work in your build, and says why.
+- **Build.** A release build can read the screen, tap and type, read data, sign in as a test user and change screens. A tap there is a real action on real data. With a paid plan, it can also fake web calls. Tools that track renders still need a dev build. Ask Buoy refuses what can't work in your build, and says why.
 - **Web.** Import from the package's `/web` entry (7.0.41 or later). See [Web installation](../web/installation#tool-setup).
 
 ## Installation
@@ -84,7 +84,7 @@ Each error shows a short code and a request id. Tap **Copy details** to copy the
 | What you see | What it means |
 | --- | --- |
 | You used this week's credits | They come back on the date shown. |
-| Sign in to use hosted Ask Buoy | Sign in with Buoy in the app first. |
+| Sign in to use hosted Ask Buoy | Tap Sign in on the error. A key in the build is not a sign-in. |
 | Hosted AI is paused right now | We paused it for a short time. Try again later, or use your own model. |
 | Claude is busy right now, so Luna is answering | Claude is down for now. Luna answers until you start a new chat. |
 | Ask Buoy is down right now | Claude and Luna are both down. We get an alert and are working on it. Try again in a few minutes. |

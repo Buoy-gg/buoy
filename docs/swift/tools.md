@@ -116,6 +116,40 @@ Assets scans loose resources in your app bundle, measures their size, finds dupl
 
 Compiled `Assets.car` files appear as a single record each, and loaded status comes from `UIImage(named:)` and your `markLoaded` calls; a resource never marked as loaded is not necessarily unused. Read `scanStatus.coverage` and `warnings` before acting on the inventory.
 
+## Ask Buoy
+
+Ask Buoy is an AI chat inside your app. See [Ask Buoy](../tools/ask-buoy) for what it can do.
+
+It runs on Buoy's hosted AI by default. You do not pass an Ask Buoy config. You need no AI key and no server. Hosted AI needs `signIn`, so each person can sign in with Buoy.
+
+```swift
+#if DEBUG
+var config = BuoyConfig()
+config.signIn = BuoySignInConfig()
+Buoy.start(config)
+#endif
+```
+
+To set options, pass `hostedAskBuoy` with them. It stays on Buoy's AI.
+
+```swift
+Buoy.start(config, askBuoy: hostedAskBuoy(.init(policy: .init(readOnly: true))))
+```
+
+`readOnly` lets it look but not change things.
+
+To use your own model, set `endpoint` and `model`. Then nothing goes to Buoy's AI.
+
+```swift
+Buoy.start(config, askBuoy: AskBuoyConfig(
+    endpoint: "https://ai.acme.com/v1/messages",
+    protocol: .anthropic,
+    model: "YOUR_MODEL_ID"
+))
+```
+
+A config with no `endpoint` also runs on Buoy's AI. Buoy drops `apiKey`, `headers`, `requestOverrides` and `anthropicVersion` from it first. Older code that passes `hostedAskBuoy()` still works.
+
 ## MCP
 
 Follow the [MCP setup guide](../mcp) to connect your editor. Free includes the basic MCP. Pro adds the full MCP. Start with device discovery, then check the capabilities your Swift app advertises.

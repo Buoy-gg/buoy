@@ -127,6 +127,17 @@ To list every page in the sitemap, pass your routes:
 ```
 
 Without it, pages join the list as you visit them.
+With it, the list has every page.
+Then `navigate` won't go to a path that is not on it.
+It names the pages that are close instead.
+
+Tell Ask Buoy what a page is for with `info.about`:
+
+```tsx
+<Route path="/games" component={Library} info={{ about: 'Game Library: the games you own' }} />
+```
+
+If your routes are `<Route>` tags, pass the component that returns them, called once: `<Buoy routes={App()} />`.
 The Go button and the MCP `navigate` tool use Solid Router.
 
 ## Solid Query

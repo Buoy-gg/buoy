@@ -234,6 +234,23 @@ In development the default broker is the page's hostname on port 42831, which is
 
 Production builds connect only with a real Pro license and `externalSync.enableInRelease`, and default to `http://localhost:42831`, the Buoy Desktop on the admin's own machine. The first time a page from your production site connects, Buoy Desktop asks whether to allow that site. Production builds refuse plain `http://` to another machine unless you also set `allowInsecureNetwork`, and they refuse every action that changes the app unless you list the tool in `releaseActions`, or pass `releaseActions: ['all']`. Impersonate needs its own name: `releaseActions: ['all', 'impersonate']`. See [Release builds](../desktop#release-builds).
 
+## Sites with a Content Security Policy
+
+A strict policy blocks parts of Buoy until you allow them. Add these to the policy your site already sends:
+
+```text
+style-src 'unsafe-inline';
+img-src data:;
+connect-src https://buoy.gg https://ai.buoy.gg;
+```
+
+- `style-src 'unsafe-inline'` lets Buoy add its styles to the page.
+- `img-src data:` shows the tool icons in the menu.
+- `https://buoy.gg` is for sign-in and synced settings.
+- `https://ai.buoy.gg` is for Ask Buoy.
+
+If you use Buoy Desktop, add its address to `connect-src` too.
+
 ## Browser boundaries
 
 - Network capture covers the current page's `fetch` and XHR calls, starting when the early hook loads, or when the host mounts if you skip the hook. Other frames, workers, WebSockets and browser-internal traffic need separate collectors.

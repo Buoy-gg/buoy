@@ -107,11 +107,21 @@ Some bugs need the reporter's phone, not just their data. If your app version, l
 
 Some apps read a value only when they start, like a feature flag. Turn on **Restart after loading**. Buoy restarts the app, then loads the bug again.
 
-In a React Native, Swift, Android, .NET MAUI or Flutter release build, loading needs a paid plan and the Buoy menu on screen. Flutter must [opt in](../flutter/buoy-devtools#release-builds). Other platforms still need a dev build.
+In a React Native, web, Swift, Android, .NET MAUI or Flutter release build, loading needs a paid plan and the Buoy menu on screen. Flutter must [opt in](../flutter/buoy-devtools#release-builds).
 
 A release build can't load a bug's state into a plain Redux store. To change that, wrap your root reducer in `withBuoyDevTools()`. Restore still works. If the bug's screens saved data in that store, restart the app to clear it.
 
-If your plan or sign-in ends while a bug is loaded in a release build, the recorded replies stop. Every web call stays blocked, so the bug's data can't reach real servers. A pill says so. Sign in to restore your app.
+If your plan or sign-in ends while a bug is loaded in a release build, the recorded replies stop. Every web call stays blocked, so the bug's data can't reach real servers. A pill says so. Sign in to restore your app. On a live site, the block only holds while that pill is on screen. If the site takes Buoy off the page, real calls go out again. After a page reload, calls the app makes before Buoy loads go out for real.
+
+A loaded bug blocks every web call it has no saved reply for. If your site asks its server "is this person staff?" before it shows Buoy, name that call so it always goes out for real:
+
+```ts
+import { keepCallsReal } from '@buoy-gg/network';
+
+keepCallsReal(['*/api/me']);
+```
+
+Without it, a reload with a bug loaded can block that call. Then Buoy never shows, and the bug can't be undone from the page.
 
 You can also tap the pill to read a warning, then press and hold it to use real calls. The bug's data stays in the app, and it can reach real servers. If no one does either, the block ends by itself after 24 hours.
 

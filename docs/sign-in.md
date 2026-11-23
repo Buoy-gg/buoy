@@ -46,6 +46,14 @@ npx --package=@buoy-gg/core buoy logout   # sign this computer out
 
 `whoami` checks two things. It tells you if this computer is signed in. It also tells you which env file holds a key for this project.
 
+### Sign in from the page
+
+A web dev build can also sign in from the page. Click "Sign in" in the corner of your app. The card shows a link, a QR code and a short code. Click "Open buoy.gg", or scan the QR code with a phone. Then click Allow. Buoy opens on the page a few seconds later.
+
+Add your page's address at [buoy.gg/dashboard/sites](https://buoy.gg/dashboard/sites) first, like `http://localhost:5173`. The whole address has to match, with its port.
+
+The card needs an https page, or a page on `localhost` or `127.0.0.1`. Any other page shows the `buoy login` command. You can get to that command from the card too. Click "Set up with a key instead".
+
 ### If login can't reach buoy.gg
 
 Some VPNs and proxies let your browser reach buoy.gg but block Node. Then `buoy login` says it could not reach buoy.gg. Your browser still signs in the project. The CLI writes your account key to your env file. In Expo, a Pro or Business key goes in `.env.local`. In Vite and Next.js, every key goes in `.env.development.local`, so it stays out of your live site.
@@ -86,7 +94,7 @@ A phone app can't open a sign-in window. So it shows a code instead, as a QR cod
 <FloatingDevTools signIn />
 ```
 
-Tap "Sign in" in the corner. Scan the QR code with any phone that is signed in to buoy.gg. Or go to buoy.gg/activate and type the code. Check the code, then tap Allow. Buoy opens in the app a few seconds later.
+Tap "Sign in" in the corner. Tap "Open buoy.gg" to allow it on this phone. Or scan the QR code with any phone that is signed in to buoy.gg. Or go to buoy.gg/activate and type the code. Check the code, then tap Allow. Buoy opens in the app a few seconds later.
 
 Buoy reads the app id from your Expo config. If it can't, pass it in: `signIn={{ appId: "com.acme.shop" }}`.
 
@@ -175,7 +183,11 @@ You don't have to switch. A key you already use keeps working everywhere, and ke
 
 One warning: don't build a key into a live website. A site's code is public, so anyone can copy the key and use your plan. For a live site, use [sign-in](#your-live-site). No key is in the build then.
 
+A key turns Buoy on, but it does not say who you are. Some tools need to know. Ask Buoy on Buoy's AI needs your sign-in. So do Bug Links, team Scenarios and saved settings. In a build with a key, open the dial's settings and go to the Pro tab. Tap Sign in. You get a code, the same as in [Phones and test builds](#phones-and-test-builds). The key stays on. Buoy still opens for people who don't sign in.
+
 To change accounts on a phone, open the dial's settings and go to the Pro tab. Tap Sign out. This ends your sign-in on this device, and it turns off any key too. A key built into the app stays off, even after a restart. Then sign in with a code, or tap "Use the Buoy key again". The code sign-in needs `app:` plus your app's id at buoy.gg/dashboard/sites.
+
+The web works the same way. After you sign out, click "Sign in" in the corner of the page. Sign in there, or click "Use the Buoy key again".
 
 ## Keys for bots and CI
 
