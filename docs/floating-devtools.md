@@ -100,7 +100,13 @@ See [Custom Tools](./custom-tools) for more details on building your own debuggi
 
 ## Draggable Button
 
-The floating button can be dragged anywhere on screen. It remembers its position between sessions, so it stays where your team likes it.
+Buoy starts tucked at the right edge. Only a small grip shows. Tap the grip to bring Buoy out.
+
+Buoy stays tucked each time the app opens, until you tap or drag it. After that, it opens the way you left it. Leave it out and it starts out. Tuck it and it starts tucked.
+
+You can drag the button anywhere on screen. It remembers the spot.
+
+In a live build, the "Sign in to Buoy" button waits behind the same grip.
 
 ## Hide Buoy
 
@@ -134,7 +140,7 @@ Turn the switch back on to show Buoy again. You can also bring it back inside an
 
 ## Tips show once
 
-Buoy shows a few tips the first time you use it. When you close a tip, Buoy saves that to your account. The tip then stays closed on your other devices and apps. To turn every tip off, pass `disableHints`.
+Buoy shows a few tips the first time you use it. No tip shows while Buoy is tucked. The welcome tip waits until you bring Buoy out. When you close a tip, Buoy saves that to your account. The tip then stays closed on your other devices and apps. To turn every tip off, pass `disableHints`.
 
 ## Beyond the in-app menu
 
