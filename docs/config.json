@@ -481,6 +481,10 @@
           "to": "tools/chrome-farm"
         },
         {
+          "label": "Phone Control",
+          "to": "tools/phone-control"
+        },
+        {
           "label": "Lighthouse",
           "to": "tools/lighthouse"
         }

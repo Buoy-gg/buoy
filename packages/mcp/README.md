@@ -90,6 +90,16 @@ npx -y @buoy-gg/mcp@latest farm chrome run 8 --url http://localhost:3000 -- node
 
 See the [Chrome Farm guide](https://buoy.gg/buoy/latest/docs/tools/chrome-farm).
 
+## The whole phone
+
+Your agent can drive a whole test phone from your Mac. It can tap Apple's pop-ups, open Settings, unlock the phone and use other apps. It works with no Buoy app on the phone. Pair a phone once:
+
+```bash
+npx -y @buoy-gg/mcp@latest phone-pair <udid or serial>
+```
+
+See the [Phone Control guide](https://buoy.gg/buoy/latest/docs/tools/phone-control).
+
 ---
 
 <sub>Part of <a href="https://buoy.gg">Buoy</a>, developer tools that live inside your app. Proprietary software. © Buoy LLC. <a href="https://buoy.gg/terms">Terms</a></sub>
